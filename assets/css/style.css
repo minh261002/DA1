@@ -309,6 +309,10 @@ footer > .container {
   margin: 0 auto;
 }
 
+.err {
+  color: red;
+}
+
 /*sản phẩm chi tiết*/
 .breadcrumb p {
   font-size: 14px;

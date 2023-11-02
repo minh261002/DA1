@@ -1,7 +1,7 @@
 <main>
     <h2 class="text-center mt-5 mb-3 fw-bold">Đăng Nhập</h2>
     <div class="container form">
-        <form action="" method="POST">
+        <form action="" method="POST" id="loginForm">
             <div class="form-group mb-3">
                 <label for="username">Tên Đăng Nhập</label>
                 <input type="text" name="username" class="form-control py-2" id="username">
@@ -53,3 +53,16 @@
     </div>
     <div class="line2"></div>
 </main>
+
+<script src="assets/js/check-form.js"></script>
+
+<script>
+const loginForm = document.getElementById("loginForm");
+loginForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    if (validateLoginForm()) {
+        loginForm.onsubmit();
+    }
+});
+</script>

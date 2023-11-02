@@ -1,7 +1,13 @@
 <main>
     <h2 class="text-center mt-5 mb-3 fw-bold">Đăng Nhập</h2>
     <div class="container form">
-        <form action="" method="POST" id="loginForm">
+        <p class="err"><?php
+if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {
+    echo $_SESSION["message"];
+    unset($_SESSION["message"]);
+}
+?></p>
+        <form action="index.php?page=login-function" method="POST" id="loginForm">
             <div class="form-group mb-3">
                 <label for="username">Tên Đăng Nhập</label>
                 <input type="text" name="username" class="form-control py-2" id="username">
@@ -16,7 +22,7 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input class="btn-form" type="submit" value="Đăng Nhập">
+                <input class="btn-form" type="submit" value="Đăng Nhập" name="btn-login">
             </div>
         </form>
         <a href="" class="forgot">Quên Mật Khẩu ?</a>
@@ -54,7 +60,7 @@
     <div class="line2"></div>
 </main>
 
-<script src="assets/js/check-form.js"></script>
+<!-- <script src="assets/js/check-form.js"></script>
 
 <script>
 const loginForm = document.getElementById("loginForm");
@@ -65,4 +71,4 @@ loginForm.addEventListener("submit", function(e) {
         loginForm.onsubmit();
     }
 });
-</script>
+</script> -->

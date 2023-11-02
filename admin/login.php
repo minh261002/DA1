@@ -1,3 +1,30 @@
+<?php 
+    session_start();
+    ob_start();
+
+    require_once "../models/pdo.php";
+    require_once "../models/user.php";
+
+    if(isset($_POST["admin-login"]) && ($_POST["admin-login"])){
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        $admin = checkUser($username, $password);
+        if(isset($admin) && is_array($admin) && count($admin) > 0){
+            extract($admin);
+
+            if($role == 1){
+                $_SESSION["admin"] = $admin;
+                header('Location: index.php');
+            }else{
+                $message = "Bạn Không Có Quyền Đăng Nhập Trang Quản Trị";
+            }
+        }else{
+            $message = "Tài Khoản Này Không Tồn Tại";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

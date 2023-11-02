@@ -135,7 +135,7 @@ header {
 
 .sub-menu-user {
   position: absolute;
-  width: 150px;
+  width: 200px;
   background: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
@@ -166,6 +166,14 @@ header {
 
 .sub-menu-user li:hover {
   background: #c92027;
+}
+
+.sub-menu-user li:first-child:hover {
+  border-radius: 4px 4px 0 0;
+}
+
+.sub-menu-user li:last-child:hover {
+  border-radius: 0 0 4px 4px;
 }
 
 /*footer*/
@@ -311,6 +319,7 @@ footer > .container {
 
 .err {
   color: red;
+  margin: 6px 0;
 }
 
 /*sản phẩm chi tiết*/

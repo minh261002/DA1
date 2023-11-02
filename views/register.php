@@ -1,7 +1,14 @@
 <main>
     <h2 class="text-center mt-5 mb-3 fw-bold">Đăng Ký</h2>
     <div class="container form">
-        <form action="" method="POST" id="registerForm">
+
+        <p class="err"><?php
+if (isset($_SESSION["message_re"]) && $_SESSION["message_re"] != "") {
+    echo $_SESSION["message_re"];
+    unset($_SESSION["message_re"]);
+}
+?></p>
+        <form action="index.php?page=register-function" method="POST" id="registerForm">
             <div class="form-group mb-3">
                 <label for="username">Tên Đăng Nhập</label>
                 <input type="text" name="username" class="form-control py-2" id="username">
@@ -27,7 +34,7 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input class="btn-form" type="submit" value="Đăng Ký">
+                <input class="btn-form" type="submit" value="Đăng Ký" name="btn-register">
             </div>
         </form>
 
@@ -65,7 +72,7 @@
     <div class="line2"></div>
 </main>
 
-<script src="assets/js/check-form.js"></script>
+<!-- <script src="assets/js/check-form.js"></script>
 
 <script>
 const registerForm = document.getElementById("registerForm");
@@ -73,7 +80,7 @@ registerForm.addEventListener("submit", function(e) {
     e.preventDefault();
 
     if (validateRegisterForm()) {
-        alert("Biểu mẫu đăng ký hợp lệ, có thể xử lý.");
+        registerForm.submit();
     }
 });
-</script>
+</script> -->

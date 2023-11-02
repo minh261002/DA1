@@ -1,4 +1,22 @@
-<!doctype html>
+<?php
+    if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
+        extract($_SESSION["user"]);
+        $html_account = '
+            <li><a href="register">Xin chào, <span class="text-danger">' . $username . '</span></a></li>
+            <li><a href="profile_confirm">Thông Tin Cá Nhân</a></li>
+            <li><a href="register">Đơn Hàng</a></li>
+            <li><a href="register">Đổi Mật Khẩu</a></li>
+            <li><a class="btn btn-danger p-2 text-white" href="index.php?page=logout">Đăng Xuất</a></li>
+        ';
+    } else {
+        $html_account = '
+            <li><a href="index.php?page=register">Đăng Ký</a></li>
+            <li><a href="index.php?page=login">Đăng Nhập</a></li>
+        ';
+    }
+    ?>
+
+<!Doctype html>
 <html lang="en">
 
 <head>
@@ -65,8 +83,7 @@
                         </svg>
 
                         <ul class="sub-menu-user">
-                            <li><a href="index.php?page=login">Đăng Nhập</a></li>
-                            <li><a href="index.php?page=register">Đăng Ký</a></li>
+                            <?=$html_account?>
                         </ul>
                     </div>
 

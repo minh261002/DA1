@@ -85,9 +85,9 @@ function createMenu() {
                 </div>
 
                 <div class="header__box-search">
-                    <form action="" method="GET" class="flex form-search">
-                        <input type="search" name="search" id="search" placeholder="Tìm Kiếm ...">
-                        <button type="submit" class="icon_search">
+                    <form action="" method="GET" class="flex form-search" id="search-form">
+                        <input type="search" name="search" id="search" placeholder="Tìm Kiếm ..." autocomplete="off">
+                        <button type="submit" class="icon_search" name="btn-search">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g id="icon-wrapper" clip-path="url(#clip0_10988_132346)">
@@ -103,6 +103,10 @@ function createMenu() {
                             </svg>
                         </button>
                     </form>
+
+                    <div id="search-results"></div>
+
+                    <script src="assets/js/search.js"></script>
                 </div>
 
                 <div class="header__icon flex">

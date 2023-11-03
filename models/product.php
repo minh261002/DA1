@@ -33,6 +33,11 @@ function get_product_by_id($id){
     return pdo_query_one($sql, $id);
 }
 
+function search($search) {
+    $sql = "SELECT * FROM product WHERE name LIKE '%$search%'";
+    return pdo_query($sql);
+}
+
 // function hang_hoa_exist($ma_hh){
 //     $sql = "SELECT count(*) FROM hang_hoa WHERE ma_hh=?";
 //     return pdo_query_value($sql, $ma_hh) > 0;

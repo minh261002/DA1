@@ -153,19 +153,19 @@
 
                 require_once 'views/details.php';
                 break;
-                
-            default:
-                // http_response_code(404);
-                // require_once "views/404page.php";
-                require_once "views/home.php";
-                break;
-                
-        }
-    } else {
-            require_once 'views/home.php';
-    }
 
-    require_once "views/footer.php";
-    
-    ob_end_flush();
-?>
+            default:
+            // http_response_code(404);
+            // require_once "views/404page.php";
+            require_once "views/home.php";
+            break;
+
+            }
+            } else {
+            require_once 'views/home.php';
+            }
+
+            require_once "views/footer.php";
+
+            ob_end_flush();
+            ?>

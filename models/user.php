@@ -64,7 +64,7 @@ function user_insert($username, $email, $password)
 //     return pdo_query($sql, $vai_tro);
 // }
 
-// function khach_hang_change_password($ma_kh, $mat_khau_moi){
-//     $sql = "UPDATE khach_hang SET mat_khau=? WHERE ma_kh=?";
-//     pdo_execute($sql, $mat_khau_moi, $ma_kh);
-// }
+function user_change_password($id, $password_new){
+    $sql = "UPDATE user SET password=? WHERE id=?";
+    pdo_execute($sql, $password_new, $id);
+}

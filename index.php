@@ -6,6 +6,10 @@
     require_once "models/pdo.php";
     //user
     require_once "models/user.php";
+    //category
+    require_once 'models/category.php';
+    //product
+    require_once "models/product.php";
 
     require_once "views/header.php";
     
@@ -87,9 +91,66 @@
                 }
                 header('Location: index.php?page=login');
                 break;
+
+            //trang đổi mật khẩu
+            case 'changePassword':
+                require_once "views/changePassword.php";
+                break;
+
+            //chức năng đổi mật khẩu
+            case 'change-function':
+                if(isset($_POST["btn-change"]) && $_POST["btn-change"]){
+                    $password = $_POST["password"];
+                    $password_new = $_POST["password_new"];
+
+                    if (password_verify($password, $password_new)) {
+                        user_change_password($id, $password_new);
+
+                        $message = "Thay đổi mật khẩu thành công";
+                        $_SESSION["message"] = $message;
+                        header("location: index.php?page=changePassword");
+                    }else{
+                        $message = "Mật khẩu không chính xác";
+                        $_SESSION["message"] = $message;
+                        header("location: index.php?page=changePassword");
+                    }
+                }
+                break;
+
+            //trang sản phẩm
+            case 'product':
+                $categoryId = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
+                
+                $parentCategoryId = null;
+                $siblingsCategories = [];
+                $products = [];
+            
+                if ($categoryId) {
+                    $currentCategory = get_category($categoryId);
+                    
+                    if ($currentCategory && $currentCategory['parent_id'] != null) {
+                        $parentCategoryId = $currentCategory['parent_id'];
+                        $siblingsCategories = get_list_category($parentCategoryId);
+                        $products = get_products_by_category($categoryId);
+                    } else {
+                        $siblingsCategories = get_list_category($categoryId);
+                        $categoryIds = array_column($siblingsCategories, 'id');
+                        $categoryIds[] = $categoryId;
+                        $products = get_products_by_category_ids($categoryIds);
+                    }
+                }
+                require_once 'views/product.php';
+                break;
+            
                        
             //trang chi tiết sản phẩm
             case 'details':
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    product_view($id);
+                    $details = get_product_by_id($id);
+                }
+
                 require_once 'views/details.php';
                 break;
                 

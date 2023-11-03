@@ -1,1 +1,1 @@
-<h2 class="m-5">Trang Chủ</h2>
+<h3>Trang Chủ</h3>

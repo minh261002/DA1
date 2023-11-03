@@ -1,31 +1,35 @@
+<?php 
+extract($details);
+
+
+?>
+
 <main>
     <section class="breadcrumb my-3">
         <div class="container flex justify-content-start">
             <p>Trang chủ</p>
             <div class="coline"></div>
-            <p>Giảm Giá Nhiều Nhất - Trẻ Em</p>
-            <div class="coline"></div>
-            <p><strong>Áo Polo cổ dệt trơn C3POL004M</strong></p>
+            <p><strong><?=$name?></strong></p>
         </div>
     </section>
 
     <section class="product-info my-3">
         <div class="container">
-            <!-- ảnh sản phẩm -->
             <div class="product-img">
                 <div class="thumbnail-img">
-                    <img src="assets/img/4aa4cf61bdc445c09af0582617e7dd45_optimized_original_image.jpg" width="90%"
-                        onclick="changeImage(this)">
-                    <img src="assets/img/4ac928b9e8c84c94b45c5a9c8f5dcad8_optimized_original_image.jpg" width="90%"
-                        onclick="changeImage(this)">
-                    <img src="assets/img/f213487e42ec47ba8f6074fb5fc179a4_optimized_original_image.jpg" width="90%"
-                        onclick="changeImage(this)">
-                    <img src="assets/img/8e247a277e8b4726b4ecfc1a1703cdef_optimized_original_image.jpg" width="90%"
-                        onclick="changeImage(this)">
+
+                <?php 
+                    $images = json_decode($gallery);
+                    if (is_array($images)) {
+                        foreach ($images as $img) {
+                            echo '<img src="' . $img . '" width="100%" onclick="changeImage(this)" />';
+                        }
+                    }
+                ?>
                 </div>
 
                 <div class="large-img">
-                    <img src="assets/img/4aa4cf61bdc445c09af0582617e7dd45_optimized_original_image.jpg" width="100%"
+                    <img src="<?=$img?>" width="100%"
                         id="largeImage">
                 </div>
 
@@ -41,12 +45,24 @@
             <div class="product-info">
                 <div class="muibox">Bán Chạy</div>
 
-                <div class="product-name">Áo Polo cổ dệt trơn C3POL004M </div>
+                <div class="product-name"><?=$name?></div>
 
-                <div class="product-sku">SKU: C3POL004M-002</div>
+                <div class="product-sku">SKU: <?=$id?> </div>
 
                 <div class="product-price flex">
-                    <div class="price">199.000 đ <span>350.000 đ</span></div>
+
+                <?php 
+                    if (isset($sale) && $sale !== 0) {
+                        $discountAmount = $sale * $price / 100;
+                        $discountedPrice = $price - $discountAmount;
+
+                        echo '<div class="price"> '.number_format($discountedPrice, 0, ',', '.').'  đ <span> '.number_format($price, 0, ',', '.').' đ</span> </div>';
+                    } else {
+                        $discountedPrice = $price;
+                        echo '<div class="price"> '.number_format($discountedPrice, 0, ',', '.').' đ </div>';
+                    }
+                ?>
+                
                     <div class="status">
                         Còn Hàng<svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -63,46 +79,40 @@
 
                 <div class="color">
                     <p>Màu Sắc</p>
+                    
                     <div class="color-type flex">
-                        <div class="color-item">
-                            <input type="radio" name="color" id="red">
-                            <label for="red">Đỏ</label>
-                        </div>
-
-                        <div class="color-item">
-                            <input type="radio" name="color" id="blue">
-                            <label for="blue">Xanh</label>
-                        </div>
-
-                        <div class="color-item">
-                            <input type="radio" name="color" id="brown">
-                            <label for="brown">Nâu Sữa</label>
-                        </div>
+                    <?php 
+                        $colors = json_decode($color);
+                        if (is_array($colors)) {
+                            foreach ($colors as $cl) {
+                                echo '
+                                <div class="color-item">
+                                    <input type="radio" name="color" id="'.$cl.'">
+                                    <label for="'.$cl.'">'.$cl.'</label>
+                                </div>
+                                ';
+                            }
+                        }
+                    ?>
                     </div>
                 </div>
 
                 <div class="size">
                     <p>Kích Thước</p>
                     <div class="size-type flex">
-                        <div class="size-item">
-                            <input type="radio" name="size" id="extraLarge">
-                            <label for="extraLarge">XL</label>
-                        </div>
-
-                        <div class="size-item">
-                            <input type="radio" name="size" id="large">
-                            <label for="large">L</label>
-                        </div>
-
-                        <div class="size-item">
-                            <input type="radio" name="size" id="medium">
-                            <label for="medium">M</label>
-                        </div>
-
-                        <div class="size-item">
-                            <input type="radio" name="size" id="small">
-                            <label for="small">S</label>
-                        </div>
+                    <?php 
+                        $sizes = json_decode($size);
+                        if (is_array($sizes)) {
+                            foreach ($sizes as $sz) {
+                                echo '
+                                <div class="size-item">
+                                    <input type="radio" name="size" id="'.$sz.'">
+                                    <label for="'.$sz.'">'.$sz.'</label>
+                                </div>
+                                ';
+                            }
+                        }
+                    ?>
                     </div>
                 </div>
 
@@ -330,33 +340,7 @@
         <div class="container">
             <p class="title-pd my-3">Chi Tiết Sản Phẩm</p>
 
-            <ul>ĐẶC ĐIỂM NỔI BẬT
-                <li>- Được sản xuất từ vải Coolmax* rất nhẹ, hơn hẳn những loại vải thường khác như cotton hay
-                    cotton compact...</li>
-                <li>- Vải Coolmax giúp cơ thể khô thoáng ngay cả khi hoạt động mạnh như chơi thể thao, chạy bộ,..
-                </li>
-                <li>- Sợi vải cao cấp co giãn đa chiều, linh hoạt vận động.</li>
-                <li>- Độ bền vải và bền màu cao.</li>
-                <li>- Nhanh khô.</li>
-                <li>- Chất liệu vải thân thiện môi trường, an toàn cho da.</li>
-                <li>- Đa dạng màu sắc, phù hợp nhiều tone màu da, đa phong cách,</li>
-                <li>- Dễ kết hợp với quần âu, quần jean, quần short ngắn, váy ngắn,... phù hợp đa phong cách, ứng
-                    dụng cao.</li>
-            </ul>
-
-            <ul>CHẤT LIỆU
-                <li>95% Coolmax, 5% Spandex</li>
-            </ul>
-
-            <ul>
-                HƯỚNG DẪN SỬ DỤNG &amp; BẢO QUẢN
-                <li>- Giặt tay hoặc giặt máy nước mát ở 30 độ C</li>
-                <li>- Giặt riêng với các sản phẩm sáng màu</li>
-                <li>- Không sử dụng chất tẩy</li>
-                <li>- Không sấy khô</li>
-                <li>- Là ở nhiệt độ trung bình, không là lên chi tiết trang trí</li>
-                <li>- Phơi trong bóng mát, tránh ánh nắng mặt trời trực tiếp</li>
-            </ul>
+            <?=$info?>
         </div>
     </section>
 

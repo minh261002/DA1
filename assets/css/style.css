@@ -16,6 +16,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  padding-left: 0;
+}
+
 li {
   list-style: none;
 }
@@ -142,6 +146,19 @@ header {
   padding-left: 0;
   margin-top: 12px;
   display: none;
+  z-index: 99999;
+}
+
+.navbar {
+  z-index: 999;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown {
+  cursor: pointer;
 }
 
 .sub-menu-user:before {
@@ -176,6 +193,52 @@ header {
   border-radius: 0 0 4px 4px;
 }
 
+.parent_menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.parent_menu:hover .sub-menu {
+  display: block;
+}
+
+.sub-menu {
+  position: absolute;
+  margin-left: 0;
+  width: 200px;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  display: none;
+  margin-top: 12px;
+}
+
+.sub-menu li {
+  padding: 8px 12px;
+  transition: 0.3s all ease;
+}
+
+.sub-menu li:hover {
+  background: #c92027;
+}
+
+.sub-menu li a {
+  font-weight: 500;
+}
+
+.sub-menu li:hover a {
+  color: #fff;
+}
+
+.sub-menu:before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 3%;
+  border-width: 20px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
+}
 /*footer*/
 
 footer {
@@ -559,6 +622,32 @@ input[type="radio"]:checked + label {
   background: #f5f5f5;
   padding: 64px 0;
   margin-top: 24px;
+}
+
+.product-page {
+  margin: 32px 0;
+}
+
+.product-page > .container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 24px;
+}
+
+.product-page .category {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.product-page .category li {
+  padding: 10px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.product-page .category li a:hover {
+  color: #c92027;
+  transition: 0.3s all ease;
 }
 /*reakpoint cho điện thoại  */
 @media screen and (max-width: 767px) {

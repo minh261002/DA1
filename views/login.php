@@ -68,7 +68,7 @@ loginForm.addEventListener("submit", function(e) {
     e.preventDefault();
 
     if (validateLoginForm()) {
-        loginForm.onsubmit();
+        loginForm.submit();
     }
 });
 </script> -->

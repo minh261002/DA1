@@ -5,7 +5,7 @@
             <li><a href="register">Xin chào, <span class="text-danger">' . $username . '</span></a></li>
             <li><a href="profile_confirm">Thông Tin Cá Nhân</a></li>
             <li><a href="register">Đơn Hàng</a></li>
-            <li><a href="register">Đổi Mật Khẩu</a></li>
+            <li><a href="index.php?page=changePassword">Đổi Mật Khẩu</a></li>
             <li><a class="btn btn-danger p-2 text-white" href="index.php?page=logout">Đăng Xuất</a></li>
         ';
     } else {
@@ -14,7 +14,42 @@
             <li><a href="index.php?page=login">Đăng Nhập</a></li>
         ';
     }
-    ?>
+?>
+
+<!-- menu đa cấp -->
+<?php 
+function createMenu() {
+    $parentCategories = getParentCategories();
+    $menu = '';
+
+    foreach ($parentCategories as $parent) {
+        $parentId = $parent['id'];
+
+        $parentName = htmlspecialchars($parent['name']);
+        
+        $parentLink = 'index.php?page=product&id=' . $parentId;
+
+        $menu .= '<li class="parent_menu">';
+        $menu .= '<a href="'.$parentLink.'">' . $parentName . '</a>';
+
+        $childCategories = getChildCategories($parentId);
+        if ($childCategories) {
+            $menu .= '<ul class="sub-menu">';
+            foreach ($childCategories as $child) {
+                $childId = $child['id'];
+                $childName = htmlspecialchars($child['name']);
+                $childLink = 'index.php?page=product&id=' . $childId;
+                $menu .= '<li><a href="'.$childLink.'">' . $childName . '</a></li>';
+            }
+            $menu .= '</ul>';
+        }
+
+        $menu .= '</li>';
+    }
+
+    return $menu;
+}
+?>
 
 <!Doctype html>
 <html lang="en">
@@ -120,15 +155,9 @@
         <ul class="header__menu">
             <div class="container">
                 <div class="menu flex">
-                    <li><a href="index.html" class="active">Trang Chủ</a></li>
                     <li><a href=""> <img src="assets/img/icon-new.webp" width="30px">Hàng Mới Về</a></li>
                     <li><a href=""> <img src="assets/img/icon-new.webp" width="30px">Giảm Giá</a></li>
-                    <li><a href="">Nữ</a></li>
-                    <li><a href="">Nam</a></li>
-                    <li><a href="">Trẻ Em</a></li>
-                    <li class="hv"><a href="">Nhà Cửa - Đời Sống</a></li>
-                    <li><a href="">Sức Khỏe - Làm Đẹp</a></li>
-                    <li><a href="">Nhãn Hiệu</a></li>
+                    <?=createMenu()?>
                 </div>
             </div>
         </ul>

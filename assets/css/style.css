@@ -33,6 +33,7 @@ header {
   align-items: center;
   justify-content: center;
 }
+
 .header__top {
   text-align: center;
   padding: 6px 0;
@@ -54,7 +55,7 @@ header {
   padding: 12px 0;
 }
 
-.header__middle > .container {
+.header__middle>.container {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   align-items: center;
@@ -129,6 +130,7 @@ header {
   position: relative;
   cursor: pointer;
 }
+
 .icon-user:hover .sub-menu-user {
   display: block;
 }
@@ -182,7 +184,7 @@ footer {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-footer > .container {
+footer>.container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 2fr 2fr;
   padding-bottom: 24px;
@@ -334,7 +336,7 @@ footer > .container {
   background: #797979;
 }
 
-.product-info > .container {
+.product-info>.container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
@@ -436,7 +438,7 @@ input[type="radio"] {
   display: none;
 }
 
-input[type="radio"] + label {
+input[type="radio"]+label {
   display: inline-block;
   padding: 2px 22px;
   background-color: #fff;
@@ -446,7 +448,7 @@ input[type="radio"] + label {
   border-radius: 4px;
 }
 
-input[type="radio"]:checked + label {
+input[type="radio"]:checked+label {
   background-color: #000;
   border: 1px solid #000;
   color: #fff;
@@ -560,9 +562,10 @@ input[type="radio"]:checked + label {
   padding: 64px 0;
   margin-top: 24px;
 }
+
 /*reakpoint cho điện thoại  */
 @media screen and (max-width: 767px) {
-  footer > .container {
+  footer>.container {
     grid-template-columns: 1fr;
   }
 
@@ -581,7 +584,66 @@ input[type="radio"]:checked + label {
 
 /*  máy tính bảng */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  footer > .container {
+  footer>.container {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+
+
+
+
+/* HOME */
+.wrap-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.slide-show {
+  width: 100%;
+  padding-top: 40px;
+}
+
+.slide-home {
+  position: relative;
+}
+
+.slide-home .owl-nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 44px;
+  margin-top: none;
+  transform: translateY(calc(-100% - 10px));
+}
+
+.slide-home .owl-nav span {
+  font-size: 24px;
+}
+
+.slide-home .owl-dots {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.owl-prev {
+  width: 44px;
+  aspect-ratio: 1/1;
+  color: #fff;
+  background-color: #000;
+  opacity: 0.6;
+  position: absolute;
+  left: 0;
+}
+
+.owl-next {
+  width: 44px;
+  aspect-ratio: 1/1;
+  color: #fff;
+  background-color: #000;
+  opacity: 0.6;
+  position: absolute;
+  right: 0;
 }

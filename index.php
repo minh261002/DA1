@@ -2,6 +2,11 @@
     session_start(); 
     ob_start();
 
+    if (!isset($_SESSION["cart"])) {
+        $_SESSION["cart"] = [];
+        $_SESSION["total_order"] = 0;
+    }
+
     //connect db
     require_once "models/pdo.php";
     //user
@@ -154,18 +159,82 @@
                 require_once 'views/details.php';
                 break;
 
+            //thêm vào giỏ hàng
+            case 'addToCart':
+                if (isset($_POST['btn-addToCart'])) { 
+                    $product_id = $_POST['product-id'];
+                    $product_img = $_POST['product-img'];
+                    $product_name = $_POST['product-name'];
+                    $product_size = $_POST['size'];
+                    $product_color = $_POST['color'];
+                    $product_quantity = $_POST['quantity'];
+                    $product_price = $_POST['product-price'];
+                
+                    $pdCart = array(
+                        "id" => $product_id,
+                        "img" => $product_img,
+                        "name" => $product_name,
+                        "size" => $product_size, 
+                        "color" => $product_color,
+                        "quantity" => $product_quantity,
+                        "price" => $product_price
+                    );
+                
+                    if (!isset($_SESSION["cart"])) {
+                        $_SESSION["cart"] = array();
+                    }
+            
+                    // Kiểm tra nếu sản phẩm đã tồn tại trong giỏ hàng
+                    $product_exists = false;
+                    foreach ($_SESSION["cart"] as &$item) {
+                        if ($item["id"] == $product_id) {
+                            $item["quantity"] += $product_quantity;
+                            $product_exists = true;
+                            break;
+                        }
+                    }
+            
+                    if (!$product_exists) {
+                        // Nếu sản phẩm chưa tồn tại, thêm nó vào giỏ hàng
+                        array_push($_SESSION["cart"], $pdCart);
+                    }
+            
+                    header('Location: index.php?page=cart');
+                    exit;
+                }
+                break;
+            
+
+            case 'cart':
+                if (isset($_GET['act']) && $_GET['act'] == 'del1' && isset($_GET['id'])) {
+                    $product_id = $_GET['id'];
+                    foreach ($_SESSION["cart"] as $key => $pdCart) {
+                        if ($pdCart["id"] == $product_id) {
+                            unset($_SESSION["cart"][$key]);
+                        }
+                    }
+                }
+
+                if (isset($_GET['act']) && $_GET['act'] == 'del_all') {
+                    unset($_SESSION["cart"]);
+                    header('Location: index.php?page=home');
+                }
+
+                require_once "views/cart.php";
+                break;
+
             default:
             // http_response_code(404);
             // require_once "views/404page.php";
             require_once "views/home.php";
             break;
 
-            }
-            } else {
-            require_once 'views/home.php';
-            }
+        }
+    } else {
+        require_once 'views/home.php';
+    }
 
-            require_once "views/footer.php";
+require_once "views/footer.php";
 
-            ob_end_flush();
-            ?>
+ob_end_flush();
+?>

@@ -120,6 +120,7 @@ header {
 
 .icon_cart {
   position: relative;
+  cursor: pointer;
 }
 
 .cout_cart {
@@ -506,6 +507,13 @@ footer > .container {
   margin: 16px 0;
 }
 
+.line-dash {
+  width: 100%;
+  height: 1px;
+  border: 1px dashed #797979;
+  margin: 16px 0;
+}
+
 .color p,
 .size p,
 .quantity p {
@@ -674,6 +682,158 @@ input[type="radio"]:checked + label {
   transition: 0.3s all ease;
 }
 
+.header-cart-item,
+.bill-header {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.header-cart-item span {
+  font-size: 16px;
+  font-weight: normal;
+  color: #c92027;
+}
+
+.table-cart tbody {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.muibox-line {
+  width: 50px;
+  height: 1px;
+  border: 1px dashed #797979;
+  margin: 24px;
+}
+
+.box-cart {
+  margin-top: 16px;
+}
+
+.box-cart p {
+  font-size: 20px;
+  margin: 0 8px;
+  font-weight: 600;
+}
+
+.cart-container > .container {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  gap: 48px;
+}
+
+.cart-name p {
+  margin-bottom: 0;
+}
+
+.cart-name p:first-child {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.cart-name p:nth-child(2),
+.cart-name p:nth-child(3) {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.cart-name span {
+  font-weight: 600;
+}
+
+.cart-price {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cart-total {
+  font-weight: 600;
+  color: #c92027 !important;
+  text-align: center;
+}
+
+.cart-total p {
+  text-align: left;
+}
+
+.cart-quantity {
+  justify-content: start;
+}
+
+.cart-quantity button {
+  padding: 4px 10px;
+  border: 1px solid #797979;
+  background-color: #fff;
+}
+
+.cart-quantity button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.cart-quantity button:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.cart-quantity input {
+  border: 1px solid #797979;
+  outline: none;
+  padding: 4px 0;
+  text-align: center;
+}
+
+.voucher p:first-child {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.form-voucher {
+  justify-content: start;
+}
+
+.input-voucher {
+  border-right: none;
+}
+
+.form-voucher input {
+  border: 1px solid #333;
+  outline: none;
+  font-size: 16px;
+  padding: 8px 18px;
+}
+
+.form-voucher input:last-child {
+  background: #c92027;
+  border: 1px solid #c92027;
+  color: #f5f5f5;
+  font-weight: 600;
+}
+
+.transience,
+.total,
+.discount {
+  justify-content: space-between;
+}
+
+.bill-container p {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.total p:last-child {
+  font-size: 24px;
+  font-weight: 600;
+  color: #c92027;
+}
+
+.transience p:last-child,
+.discount p:last-child {
+  font-weight: 600;
+}
+
+.bill-container {
+  border: 1px solid #797979;
+  padding: 32px;
+}
 /*reakpoint cho điện thoại  */
 @media screen and (max-width: 767px) {
   footer > .container {

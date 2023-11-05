@@ -368,6 +368,14 @@ if (isset($sale) && $sale !== 0) {
             <div class="comment-ct text-center">
                 <img src="assets/img/EmtyReview.86be870e.svg">
                 <p>Sản phẩm này chưa có phản hồi</p>
+
+                <?php 
+                    if (isset($_SESSION['user'])) {
+                        echo '<button>Bình Luận</button>';
+                    }else{
+                        echo '<p>Vui Lòng Đăng Nhập Để Gửi Phản Hồi<a href="index.php?page=login">Đăng Nhập Ngay</a></p>';
+                    } 
+                ?>
             </div>
         </div>
     </section>

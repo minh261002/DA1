@@ -30,12 +30,32 @@ function get_products_by_category_ids(array $category_ids) {
     return $result;
 }
 
-function get_all_child_categories($parentCategoryId) {
-    $sql = "SELECT * FROM category WHERE parent_id=?";
-    return pdo_query($sql, $parentCategoryId);
- }
- 
+function set_home_category(){
+    $sql = "SELECT * FROM category WHERE home = 1";
+    return pdo_query($sql);
+}
 
+function show_category_home(){
+    $html_category = '';
+    $list_category = set_home_category();
+
+    foreach ($list_category as $category) {
+        extract($category);
+
+        if ($home == 1) {
+            $html_category .= '
+                <div class="category-item">
+                    <a href="index.php?page=product&id='.$id.'">
+                        <img src="assets/img/'.$avatar.'">
+                        <p>'.$name.'</p>
+                    </a>
+                </div>
+            ';
+        }
+    }
+
+    return $html_category;
+}
 // /**
 //  * Thêm loại mới
 //  * @param String $ten_loai là tên loại

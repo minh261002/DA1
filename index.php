@@ -44,6 +44,8 @@
                         $_SESSION["user"] = $result;
                         extract($result);
                         header('Location: index.php');
+                        exit();
+                        
                     } else {
                         // Đăng nhập không thành công, đặt thông báo lỗi
                         $error_message = "Tên đăng nhập hoặc mật khẩu không đúng.";
@@ -136,12 +138,12 @@
                     if ($currentCategory && $currentCategory['parent_id'] != null) {
                         $parentCategoryId = $currentCategory['parent_id'];
                         $siblingsCategories = get_list_category($parentCategoryId);
-                        $products = get_products_by_category($categoryId);
+                        $list_product = get_products_by_category($categoryId);
                     } else {
                         $siblingsCategories = get_list_category($categoryId);
                         $categoryIds = array_column($siblingsCategories, 'id');
                         $categoryIds[] = $categoryId;
-                        $products = get_products_by_category_ids($categoryIds);
+                        $list_product = get_products_by_category_ids($categoryIds);
                     }
                 }
                 require_once 'views/product.php';
@@ -213,10 +215,17 @@
                             unset($_SESSION["cart"][$key]);
                         }
                     }
+                
+                    $_SESSION["total_price"] = 0;
+                    foreach ($_SESSION["cart"] as $pdCart) {
+                        $_SESSION["total_price"] += $_SESSION["subtotal"];
+                    }
                 }
+                
 
                 if (isset($_GET['act']) && $_GET['act'] == 'del_all') {
                     unset($_SESSION["cart"]);
+                    $_SESSION["total_price"] = 0;
                     header('Location: index.php?page=home');
                 }
 

@@ -863,6 +863,7 @@ header.header__mobile {
   display: none;
   position: fixed;
   z-index: 100;
+  top: 0;
   width: 100%;
 }
 
@@ -902,10 +903,11 @@ header.header__mobile {
 .side__bar {
   position: absolute;
   width: 350px;
-  transform: translate(-100%, -47px);
+  transform: translateX(-100%);
   z-index: 1000;
   display: none;
   position: fixed;
+  top: 0;
 }
 
 .side__bar.active {

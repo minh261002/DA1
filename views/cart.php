@@ -38,7 +38,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
                 <td class="cart-price" data-price="'.$price.'">'.number_format($price, 0, ',', '.').' đ</td>
 
                 <td>
-                    <form action="index.php?page=cart&act=update_cart" class="cart-quantity flex" method="POST">
+                    <form action="" class="cart-quantity flex" method="POST">
                         <input type="hidden" name="productId" value="'.$id.'">
                         <button type="submit" class="decrement" name="decrement">-</button>
                         <input type="number" name="quantity" class="quantity" value="'.$quantity.'" min="1" max="10">

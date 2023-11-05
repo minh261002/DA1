@@ -52,7 +52,7 @@ header {
 .flex {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .header__top {
@@ -1835,6 +1835,96 @@ header.header__mobile {
   gap: 32px;
 }
 
+.header_admin > .container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__menu-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.header__admin-other {
+  font-weight: 600;
+  justify-content: center;
+  gap: 12px;
+}
+
+.header__admin-other span {
+  color: #c92027;
+}
+
+.info-admin > .sub-menu-user {
+  padding: 12px;
+}
+
+.counter {
+  gap: 32px;
+}
+
+.counter h2 {
+  font-weight: 600;
+}
+
+.counter-product {
+  background: #4caf50;
+  color: #fff;
+  justify-content: center;
+  gap: 24px;
+  border-radius: 8px;
+}
+
+.counter-category {
+  background: #1976d2;
+  color: #fff;
+  justify-content: center;
+  gap: 24px;
+  border-radius: 8px;
+}
+
+.counter-user {
+  background: #ef0303;
+  color: #fff;
+  justify-content: center;
+  gap: 24px;
+  border-radius: 8px;
+}
+
+.counter-bill {
+  background: rgb(54, 104, 117);
+  color: #fff;
+  justify-content: center;
+  gap: 24px;
+  border-radius: 8px;
+}
+
+.counter-product svg,
+.counter-category svg,
+.counter-user svg,
+.counter-bill svg {
+  width: 30%;
+}
+
+.chart-other {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 24px 0;
+}
+
+.box-counter {
+  text-align: center;
+}
+
+.box-counter p {
+  font-size: 24px;
+  font-weight: 600;
+}
 @media screen and (max-width: 1023.98px) {
   header.header__pc {
     display: none;

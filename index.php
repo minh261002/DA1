@@ -36,15 +36,13 @@
                 if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                     $username = $_POST["username"];
                     $password = $_POST["password"];
-    
+
                     // Xử lý kiểm tra đăng nhập
                     $result = checkUser($username, $password);
     
                     if (is_array($result) && count($result) > 0) {
                         $_SESSION["user"] = $result;
                         extract($result);
-                        header('Location: index.php');
-                        exit();
                         
                     } else {
                         // Đăng nhập không thành công, đặt thông báo lỗi

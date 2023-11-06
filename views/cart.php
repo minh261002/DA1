@@ -198,6 +198,6 @@ foreach ($_SESSION["cart"] as $pdCart) {
                 </div>
             </div>
     </section>
-    <!-- <script src="assets/js/cart.js"></script> -->
+    <script src="assets/js/cart.js"></script>
 
 </main>

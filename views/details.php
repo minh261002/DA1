@@ -55,7 +55,7 @@ if (isset($sale) && $sale !== 0) {
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <?php foreach ($images as $key => $img) { ?>
-                        <div class="swiper-slide"><img src="<?php echo $img ?>" alt=""></div>
+                        <div class="swiper-slide"><img src="Uploads/<?php echo $img ?>" alt=""></div>
                     <?php } ?>
                 </div>
                 <div class="swiper-pagination"></div>

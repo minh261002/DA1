@@ -140,7 +140,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
                 <?php foreach ($_SESSION["cart"] as $key => $cart) { ?>
 
                     <div class="cart-item-mb">
-                        <img src="<?php echo $cart['img'] ?>" alt="" class="img-item">
+                        <img src="Uploads/<?php echo $cart['img'] ?>" alt="" class="img-item">
                         <div class="cart-item-content">
                             <div class="title-box">
                                 <a class="title-item" href=""><?php echo $cart['name'] ?></a>

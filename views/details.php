@@ -17,7 +17,9 @@ if (isset($sale) && $sale !== 0) {
         <div class="container flex justify-content-start">
             <p>Trang chủ</p>
             <div class="coline"></div>
-            <p><strong><?= $name ?></strong></p>
+            <p><strong>
+                    <?= $name ?>
+                </strong></p>
         </div>
     </section>
 
@@ -31,15 +33,14 @@ if (isset($sale) && $sale !== 0) {
                     $images = json_decode($gallery);
                     if (is_array($images)) {
                         foreach ($images as $img) {
-                            echo '<img src="' . $img . '" width="100%" onclick="changeImage(this)" />';
+                            echo '<img src="uploads/' . $img . '" width="100%" onclick="changeImage(this)" />';
                         }
                     }
                     ?>
                 </div>
 
                 <div class="large-img">
-                    <?php ?>
-                    <img src="<?= $img ?>" width="100%" id="largeImage">
+                    <img src="uploads/<?= $img ?>" width="100%" id="largeImage">
                 </div>
 
                 <script>
@@ -65,9 +66,13 @@ if (isset($sale) && $sale !== 0) {
             <div class="product-info">
                 <div class="muibox">Bán Chạy</div>
 
-                <div class="product-name"><?= $name ?></div>
+                <div class="product-name">
+                    <?= $name ?>
+                </div>
 
-                <div class="product-sku">SKU: <?= $id ?> </div>
+                <div class="product-sku">SKU:
+                    <?= $id ?>
+                </div>
 
                 <div class="product-price flex">
 
@@ -85,6 +90,7 @@ if (isset($sale) && $sale !== 0) {
                                 <path id="Union" d="M8.60124 1.34619C4.9279 1.34619 1.93457 4.33952 1.93457 8.01286C1.93457 11.6862 4.9279 14.6795 8.60124 14.6795C12.2746 14.6795 15.2679 11.6862 15.2679 8.01286C15.2679 4.33952 12.2746 1.34619 8.60124 1.34619ZM11.7879 6.47952L8.0079 10.2595C7.91457 10.3529 7.7879 10.4062 7.65457 10.4062C7.52124 10.4062 7.39457 10.3529 7.30124 10.2595L5.41457 8.37286C5.22124 8.17952 5.22124 7.85952 5.41457 7.66619C5.6079 7.47286 5.9279 7.47286 6.12124 7.66619L7.65457 9.19952L11.0812 5.77286C11.2746 5.57952 11.5946 5.57952 11.7879 5.77286C11.9812 5.96619 11.9812 6.27952 11.7879 6.47952Z" fill="#00B578"></path>
                             </g>
                         </svg>
+
                     </div>
                 </div>
 
@@ -97,15 +103,19 @@ if (isset($sale) && $sale !== 0) {
 
                         <div class="color-type flex">
                             <?php
-                            $colors = json_decode($color);
-                            if (is_array($colors)) {
-                                foreach ($colors as $cl) {
+                            $currentColor = null;
+
+                            foreach ($variant as $va) {
+                                extract($va);
+
+                                if ($currentColor !== $color) {
                                     echo '
-                                <div class="color-item">
-                                    <input type="radio" name="color" id="' . $cl . '" value="' . $cl . '">
-                                    <label for="' . $cl . '">' . $cl . '</label>
-                                </div>
-                                ';
+                                            <div class="size-item">
+                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '">
+                                                <label for="' . $color . '">' . $color . '</label>
+                                            </div>
+                                        ';
+                                    $currentColor = $color;
                                 }
                             }
                             ?>
@@ -116,15 +126,19 @@ if (isset($sale) && $sale !== 0) {
                         <p>Kích Thước</p>
                         <div class="size-type flex">
                             <?php
-                            $sizes = json_decode($size);
-                            if (is_array($sizes)) {
-                                foreach ($sizes as $sz) {
+                            $currentSize = null;
+
+                            foreach ($variant as $va) {
+                                extract($va);
+
+                                if ($currentSize !== $size) {
                                     echo '
-                                <div class="size-item">
-                                    <input type="radio" name="size" id="' . $sz . '" value="' . $sz . '">
-                                    <label for="' . $sz . '">' . $sz . '</label>
-                                </div>
-                                ';
+                                        <div class="size-item">
+                                            <input type="radio" name="size" id="' . $size . '" value="' . $size . '">
+                                            <label for="' . $size . '">' . $size . '</label>
+                                        </div>
+                                        ';
+                                    $currentSize = $size;
                                 }
                             }
                             ?>
@@ -273,7 +287,7 @@ if (isset($sale) && $sale !== 0) {
         <div class="container">
             <p class="title-pd my-3">Chi Tiết Sản Phẩm</p>
 
-            <?= $info ?>
+            <?= '<pre> ' . $info . '</pre>' ?>
         </div>
     </section>
 
@@ -284,14 +298,6 @@ if (isset($sale) && $sale !== 0) {
             <div class="comment-ct text-center">
                 <img src="assets/img/EmtyReview.86be870e.svg">
                 <p>Sản phẩm này chưa có phản hồi</p>
-
-                <?php
-                if (isset($_SESSION['user'])) {
-                    echo '<button>Bình Luận</button>';
-                } else {
-                    echo '<p>Vui Lòng Đăng Nhập Để Gửi Phản Hồi<a href="index.php?page=login">Đăng Nhập Ngay</a></p>';
-                }
-                ?>
             </div>
         </div>
     </section>

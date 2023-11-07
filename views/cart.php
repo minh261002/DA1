@@ -16,18 +16,14 @@ foreach ($_SESSION["cart"] as $pdCart) {
     $quantity = $pdCart["quantity"];
 
     $subtotal = (float) $price * (float) $quantity;
-    $_SESSION['subtotal'] = $subtotal;
 
     $total_price += $subtotal;
-    $_SESSION['total_price'] = $total_price;
-
 
     $total_order += $quantity;
-    $_SESSION['total_order'] = $total_order;
 
     $html_cart .= '
         <tr class="cart-row">
-            <td> <img src="' . $img . '" width=" 50px"> </td>
+            <td> <img src="Uploads/' . $img . '" width=" 50px"> </td>
 
                 <td class="cart-name">
                     <p>' . $name . '</p>
@@ -47,7 +43,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
                 </td>
 
                 <td class="cart-total">
-                    <p id="sub-total">' . number_format($_SESSION['subtotal'], 0, ',', '.') . ' đ</p>
+                    <p id="sub-total">' . number_format($subtotal, 0, ',', '.') . ' đ</p>
                     <a href="index.php?page=cart&act=del1&id=' . $id . '">
                         <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -110,10 +106,12 @@ foreach ($_SESSION["cart"] as $pdCart) {
         <div class="container">
             <div class="cart-item">
                 <div class="header-cart-item mb-5">
-                    Giỏ Hàng <span>(<?php if (isset($_SESSION['total_order'])) {
-                                        echo $_SESSION['total_order'];
-                                    } ?> Sản
-                        Phẩm)</span>
+                    Giỏ Hàng <span>(
+                        <?php if ($total_order) {
+                            echo $total_order;
+                        } ?> Sản
+                        Phẩm)
+                    </span>
                 </div>
 
                 <table class="table">
@@ -184,10 +182,12 @@ foreach ($_SESSION["cart"] as $pdCart) {
                         <p>Mã Phiếu Giảm Giá</p>
 
                         <form action="" method="POST" class="form-voucher flex">
-                            <input type="hidden" name="voucher_total_price" value="<?= $_SESSION['total_price'] ?>">
+                            <input type="hidden" name="voucher_total_price" id="voucher_total_price" value="<?= $total_price ?>">
                             <input type="text" name="voucher" id="voucher" placeholder="Mã phiếu giảm giá" class="input-voucher">
                             <input type="submit" value="Áp Dụng">
                         </form>
+                        <span id="voucherErr" class="err"></span>
+
 
                     </div>
 
@@ -196,8 +196,8 @@ foreach ($_SESSION["cart"] as $pdCart) {
                     <div class="flex transience">
                         <p>Tạm Tính</p>
                         <p class="temporary">
-                            <?php if (isset($_SESSION['total_price'])) {
-                                echo number_format($_SESSION['total_price'], 0, ',', '.');
+                            <?php if (isset($total_price)) {
+                                echo number_format($total_price, 0, ',', '.');
                             } ?>
                             đ
                         </p>
@@ -205,7 +205,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
 
                     <div class="discount flex">
                         <p>Mã Giảm Giá</p>
-                        <p>0 đ</p>
+                        <p class="discounted">0 đ</p>
                     </div>
 
                     <div class="line-dash"></div>
@@ -213,8 +213,8 @@ foreach ($_SESSION["cart"] as $pdCart) {
                     <div class="total flex">
                         <p id="">Tổng</p>
                         <p class="total-price">
-                            <?php if (isset($_SESSION['total_price'])) {
-                                echo number_format($_SESSION['total_price'], 0, ',', '.');
+                            <?php if (isset($total_price)) {
+                                echo number_format($total_price, 0, ',', '.');
                             } ?>
                             đ
                         </p>
@@ -229,5 +229,6 @@ foreach ($_SESSION["cart"] as $pdCart) {
             </div>
     </section>
     <script src="assets/js/cart.js"></script>
+    <script src="assets/js/voucher.js"></script>
 
 </main>

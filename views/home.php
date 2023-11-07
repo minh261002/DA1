@@ -1,5 +1,71 @@
-<main>
+<?php
+$html_flash_sale = '';
 
+foreach ($flashSaleProducts as $pd) {
+    extract($pd);
+
+    if (isset($sale) && $sale > 0) {
+        $discountAmount = $sale * $price / 100;
+        $discountedPrice = $price - $discountAmount;
+
+        $boxPrice = '
+                <div class="product-price">
+                    <span class="product-origin">' . number_format($discountedPrice, 0, ',', '.') . ' đ</span>
+                    <span class="product-discount">' . number_format($price, 0, ',', '.') . ' đ</span>
+                </div>
+            ';
+
+        $boxSale = '
+                <div class="product-status">
+                    <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
+                        <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
+                            <img alt="" aria-hidden="true" src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg" style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
+                        </span>
+                        <img alt="" srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x" src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+                    </span>
+                    <span class="percent-discount"> -' . $sale . '%</span>
+                </div>';
+    } else {
+        $boxPrice = '
+                <div class="product-price">
+                    <span class="product-origin">' . number_format($price, 0, ',', '.') . ' đ</span>
+                </div>
+            ';
+
+        $boxSale = '';
+    }
+
+    if ($hot == 1) {
+        $hot = '
+                <div class="selling">
+                    <span>Bán chạy</span>
+                </div>
+            ';
+    } else {
+        $hot = '';
+    }
+
+    $link = "index.php?page=details&id=" . $id;
+
+    $html_flash_sale .= '
+            <div class="flashsale-item">
+                <a href="' . $link . '">
+                    <img class="product-image" src="uploads/' . $img . '" width="100%">
+                </a>
+                ' . $hot . '
+                <div class="product-content">
+                    <a href="' . $link . '" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
+                    ' . $boxPrice . '
+                </div>
+
+                ' . $boxSale . '
+            </div>
+        ';
+}
+
+?>
+
+<main>
     <section class="slide-show">
         <div class="owl-carousel owl-theme wrap-content slide-home ">
 
@@ -29,7 +95,7 @@
         <div class="wrap-content">
             <h3 class="category-heading">BẠN ĐANG TÌM GÌ?</h3>
             <div class="category-list">
-                <?=$html_category=show_category_home()?>
+                <?= $html_category = show_category_home() ?>
             </div>
         </div>
     </section>
@@ -111,6 +177,8 @@
                         </linearGradient>
                     </defs>
                 </svg>
+                <span class="flash-end"></span>
+
                 <div class="count_down">
                     <div class="hours">
                         <p>0</p>
@@ -124,133 +192,12 @@
                         <p>0</p>
                     </div>
                 </div>
-
-                <script>
-                const countDownDate = new Date("2023-11-5 00:00:00").getTime();
-
-                const x = setInterval(function() {
-                    const now = new Date().getTime();
-                    const distance = countDownDate - now;
-
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor(
-                        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-                    );
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    document.querySelector(".hours p").innerHTML = hours;
-                    document.querySelector(".minutes p").innerHTML = minutes;
-                    document.querySelector(".seconds p").innerHTML = seconds;
-
-                    if (distance < 0) {
-                        clearInterval(x);
-                        document.getElementsByClassName("count_down").innerHTML = "EXPIRED";
-                    }
-                }, 1000);
-                </script>
             </div>
 
             <div class="owl-carousel owl-theme owl-loaded owl-drag list-flashsale slide-flashsale">
-                <div class="flashsale-item">
-                    <a href="#">
-                        <img class="flashsale-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="flashsale-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flashsale-item">
-                    <a href="#">
-                        <img class="flashsale-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="flashsale-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flashsale-item">
-                    <a href="#">
-                        <img class="flashsale-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="flashsale-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flashsale-item">
-                    <a href="#">
-                        <img class="flashsale-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="flashsale-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flashsale-item">
-                    <a href="#">
-                        <img class="flashsale-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="flashsale-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flashsale-item">
-                    <a href="#">
-                        <img class="flashsale-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="flashsale-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flashsale-item">
-                    <a href="#">
-                        <img class="flashsale-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="flashsale-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-                </div>
+                <?= $html_flash_sale ?>
             </div>
+            <script src="assets/js/clock.js"></script>
         </div>
     </section>
 

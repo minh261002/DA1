@@ -28,12 +28,30 @@
 //     return pdo_query($sql);
 // }
 
-function get_product_by_id($id){
+function get_product_by_id($id)
+{
     $sql = "SELECT * FROM product WHERE id=?";
     return pdo_query_one($sql, $id);
 }
 
-function search($search) {
+function get_product_by_variant($id)
+{
+    $sql = "SELECT product.id, variant.* FROM product
+    INNER JOIN variant ON product.id = variant.id_product
+    WHERE product.id = ?";
+
+    return pdo_query($sql, $id);
+}
+
+function get_product_flash_sale()
+{
+    $sql = "SELECT * FROM product WHERE sale > 50";
+    return pdo_query($sql);
+}
+
+
+function search($search)
+{
     $sql = "SELECT * FROM product WHERE name LIKE '%$search%'";
     return pdo_query($sql);
 }
@@ -43,7 +61,8 @@ function search($search) {
 //     return pdo_query_value($sql, $ma_hh) > 0;
 // }
 
-function product_view($id){
+function product_view($id)
+{
     $sql = "UPDATE product SET view = view + 1 WHERE id=?";
     pdo_execute($sql, $id);
 }
@@ -59,20 +78,21 @@ function get_list_product($id, $limit)
     return pdo_query($sql);
 }
 
-function show_product($list_product){
-    $html_product='';
+function show_product($list_product)
+{
+    $html_product = '';
 
     foreach ($list_product as $pd) {
-        extract ($pd);
+        extract($pd);
 
-        if(isset($sale) && $sale > 0){
+        if (isset($sale) && $sale > 0) {
             $discountAmount = $sale * $price / 100;
             $discountedPrice = $price - $discountAmount;
 
-            $boxPrice='
+            $boxPrice = '
                 <div class="product-price">
-                    <span class="product-origin">'.number_format($discountedPrice,0,',','.').' đ</span>
-                    <span class="product-discount">'.number_format($price,0,',','.').' đ</span>
+                    <span class="product-origin">' . number_format($discountedPrice, 0, ',', '.') . ' đ</span>
+                    <span class="product-discount">' . number_format($price, 0, ',', '.') . ' đ</span>
                 </div>
             ';
 
@@ -84,42 +104,42 @@ function show_product($list_product){
                         </span>
                         <img alt="" srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x" src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic" style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                     </span>
-                    <span class="percent-discount"> -'.$sale.'%</span>
+                    <span class="percent-discount"> -' . $sale . '%</span>
                 </div>';
-        }else{
-            $boxPrice= '
+        } else {
+            $boxPrice = '
                 <div class="product-price">
-                    <span class="product-origin">'.number_format($price,0,',','.').' đ</span>
+                    <span class="product-origin">' . number_format($price, 0, ',', '.') . ' đ</span>
                 </div>
             ';
 
-            $boxSale='';
+            $boxSale = '';
         }
 
-        if($hot == 1){
+        if ($hot == 1) {
             $hot = '
                 <div class="selling">
                     <span>Bán chạy</span>
                 </div>
             ';
-        }else{
+        } else {
             $hot = '';
         }
 
-        $link = "index.php?page=details&id=".$id;
+        $link = "index.php?page=details&id=" . $id;
 
         $html_product .= '
             <div class="product-item">
-                <a href="'.$link.'">
-                    <img class="product-image" src="'.$img.'" width="100%">
+                <a href="' . $link . '">
+                    <img class="product-image" src="uploads/' . $img . '" width="100%">
                 </a>
-                '. $hot. '
+                ' . $hot . '
                 <div class="product-content">
-                    <a href="'.$link.'" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                    '.$boxPrice.'
+                    <a href="' . $link . '" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
+                    ' . $boxPrice . '
                 </div>
 
-                '. $boxSale .'
+                ' . $boxSale . '
             </div>
         ';
     }
@@ -136,7 +156,8 @@ function show_product($list_product){
 //     return pdo_query($sql);
 // }
 
-function get_products_by_category($categoryId){
+function get_products_by_category($categoryId)
+{
     $sql = "SELECT * FROM product WHERE id_category=?";
     return pdo_query($sql, $categoryId);
 }

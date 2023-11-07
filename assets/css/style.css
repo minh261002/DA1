@@ -732,6 +732,10 @@ input[type="radio"]:checked + label {
   margin-top: 16px;
 }
 
+.box-cart > .container {
+  justify-content: center;
+}
+
 .box-cart p {
   font-size: 20px;
   margin: 0 8px;
@@ -1924,6 +1928,18 @@ header.header__mobile {
 .box-counter p {
   font-size: 24px;
   font-weight: 600;
+}
+
+pre {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.flash-end {
+  font-size: 16px;
+  font-weight: 600;
+  color: #c92027;
 }
 @media screen and (max-width: 1023.98px) {
   header.header__pc {

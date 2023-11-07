@@ -1,41 +1,49 @@
 <?php
 // require_once 'pdo.php';
+
 // Lấy tất cả danh mục cha
-function getParentCategories(){
+function getParentCategories()
+{
     $sql = "SELECT * FROM category WHERE parent_id IS NULL";
     return pdo_query($sql);
 }
 
 // Lấy tất cả danh mục con dựa trên ID của danh mục cha
-function getChildCategories($parentId){
+function getChildCategories($parentId)
+{
     $sql = "SELECT * FROM category WHERE parent_id = ?";
     return pdo_query($sql, $parentId);
 }
 
-function get_list_category($id) {
+function get_list_category($id)
+{
     $sql = "SELECT * FROM category WHERE parent_id = ?";
     return pdo_query($sql, $id);
 }
 
-function get_category($id) {
+function get_category($id)
+{
     $sql = "SELECT * FROM category WHERE id = ?";
     return pdo_query_one($sql, $id);
 }
 
-function get_products_by_category_ids(array $category_ids) {
-    $in  = str_repeat('?,', count($category_ids) - 1) . '?';
+function get_products_by_category_ids(array $category_ids)
+{
+    $in = str_repeat('?,', count($category_ids) - 1) . '?';
     $sql = "SELECT * FROM product WHERE id_category IN ($in)";
     $result = pdo_query($sql, ...$category_ids);
-    
+
     return $result;
 }
 
-function set_home_category(){
+function set_home_category()
+{
     $sql = "SELECT * FROM category WHERE home = 1";
     return pdo_query($sql);
 }
 
-function show_category_home(){
+function show_category_home()
+{
     $html_category = '';
     $list_category = set_home_category();
 
@@ -45,9 +53,9 @@ function show_category_home(){
         if ($home == 1) {
             $html_category .= '
                 <div class="category-item">
-                    <a href="index.php?page=product&id='.$id.'">
-                        <img src="assets/img/'.$avatar.'">
-                        <p>'.$name.'</p>
+                    <a href="index.php?page=product&id=' . $id . '">
+                        <img src="assets/img/' . $avatar . '">
+                        <p>' . $name . '</p>
                     </a>
                 </div>
             ';

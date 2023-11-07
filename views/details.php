@@ -1,4 +1,4 @@
-<?php 
+<?php
 extract($details);
 
 $discountedPrice = '';
@@ -17,7 +17,9 @@ if (isset($sale) && $sale !== 0) {
         <div class="container flex justify-content-start">
             <p>Trang chủ</p>
             <div class="coline"></div>
-            <p><strong><?=$name?></strong></p>
+            <p><strong>
+                    <?= $name ?>
+                </strong></p>
         </div>
     </section>
 
@@ -26,25 +28,25 @@ if (isset($sale) && $sale !== 0) {
             <div class="product-img">
                 <div class="thumbnail-img">
 
-                    <?php 
+                    <?php
                     $images = json_decode($gallery);
                     if (is_array($images)) {
                         foreach ($images as $img) {
-                            echo '<img src="' . $img . '" width="100%" onclick="changeImage(this)" />';
+                            echo '<img src="uploads/' . $img . '" width="100%" onclick="changeImage(this)" />';
                         }
                     }
-                ?>
+                    ?>
                 </div>
 
                 <div class="large-img">
-                    <img src="<?=$img?>" width="100%" id="largeImage">
+                    <img src="uploads/<?= $img ?>" width="100%" id="largeImage">
                 </div>
 
                 <script>
-                function changeImage(thumbnail) {
-                    var largeImage = document.getElementById("largeImage");
-                    largeImage.src = thumbnail.src;
-                }
+                    function changeImage(thumbnail) {
+                        var largeImage = document.getElementById("largeImage");
+                        largeImage.src = thumbnail.src;
+                    }
                 </script>
             </div>
 
@@ -52,18 +54,22 @@ if (isset($sale) && $sale !== 0) {
             <div class="product-info">
                 <div class="muibox">Bán Chạy</div>
 
-                <div class="product-name"><?=$name?></div>
+                <div class="product-name">
+                    <?= $name ?>
+                </div>
 
-                <div class="product-sku">SKU: <?=$id?> </div>
+                <div class="product-sku">SKU:
+                    <?= $id ?>
+                </div>
 
                 <div class="product-price flex">
 
-                    <?php 
+                    <?php
                     if (isset($sale) && $sale !== 0) {
-                            echo '<div class="price"> '.number_format($discountedPrice, 0, ',', '.').'  đ <span> '.number_format($price, 0, ',', '.').' đ</span> </div>';
-                        } else {
-                            echo '<div class="price"> '.number_format($discountedPrice, 0, ',', '.').' đ </div>';
-                        }   
+                        echo '<div class="price"> ' . number_format($discountedPrice, 0, ',', '.') . '  đ <span> ' . number_format($price, 0, ',', '.') . ' đ</span> </div>';
+                    } else {
+                        echo '<div class="price"> ' . number_format($discountedPrice, 0, ',', '.') . ' đ </div>';
+                    }
                     ?>
                     <div class="status">
                         Còn Hàng
@@ -74,6 +80,7 @@ if (isset($sale) && $sale !== 0) {
                                     fill="#00B578"></path>
                             </g>
                         </svg>
+
                     </div>
                 </div>
 
@@ -85,38 +92,46 @@ if (isset($sale) && $sale !== 0) {
                         <p>Màu Sắc</p>
 
                         <div class="color-type flex">
-                            <?php 
-                        $colors = json_decode($color);
-                        if (is_array($colors)) {
-                            foreach ($colors as $cl) {
-                                echo '
-                                <div class="color-item">
-                                    <input type="radio" name="color" id="'.$cl.'" value="'.$cl.'">
-                                    <label for="'.$cl.'">'.$cl.'</label>
-                                </div>
-                                ';
+                            <?php
+                            $currentColor = null;
+
+                            foreach ($variant as $va) {
+                                extract($va);
+
+                                if ($currentColor !== $color) {
+                                    echo '
+                                            <div class="size-item">
+                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '">
+                                                <label for="' . $color . '">' . $color . '</label>
+                                            </div>
+                                        ';
+                                    $currentColor = $color;
+                                }
                             }
-                        }
-                    ?>
+                            ?>
                         </div>
                     </div>
 
                     <div class="size">
                         <p>Kích Thước</p>
                         <div class="size-type flex">
-                            <?php 
-                        $sizes = json_decode($size);
-                        if (is_array($sizes)) {
-                            foreach ($sizes as $sz) {
-                                echo '
-                                <div class="size-item">
-                                    <input type="radio" name="size" id="'.$sz.'" value="'.$sz.'">
-                                    <label for="'.$sz.'">'.$sz.'</label>
-                                </div>
-                                ';
+                            <?php
+                            $currentSize = null;
+
+                            foreach ($variant as $va) {
+                                extract($va);
+
+                                if ($currentSize !== $size) {
+                                    echo '
+                                        <div class="size-item">
+                                            <input type="radio" name="size" id="' . $size . '" value="' . $size . '">
+                                            <label for="' . $size . '">' . $size . '</label>
+                                        </div>
+                                        ';
+                                    $currentSize = $size;
+                                }
                             }
-                        }
-                    ?>
+                            ?>
                         </div>
                     </div>
 
@@ -129,23 +144,23 @@ if (isset($sale) && $sale !== 0) {
                         </div>
 
                         <script>
-                        var decrementButton = document.getElementById("decrement");
-                        var incrementButton = document.getElementById("increment");
-                        var quantityInput = document.getElementById("quantity");
+                            var decrementButton = document.getElementById("decrement");
+                            var incrementButton = document.getElementById("increment");
+                            var quantityInput = document.getElementById("quantity");
 
-                        decrementButton.addEventListener("click", function(e) {
-                            e.preventDefault();
-                            var currentQuantity = parseInt(quantityInput.value);
-                            if (currentQuantity > 1) {
-                                quantityInput.value = currentQuantity - 1;
-                            }
-                        });
+                            decrementButton.addEventListener("click", function (e) {
+                                e.preventDefault();
+                                var currentQuantity = parseInt(quantityInput.value);
+                                if (currentQuantity > 1) {
+                                    quantityInput.value = currentQuantity - 1;
+                                }
+                            });
 
-                        incrementButton.addEventListener("click", function(e) {
-                            e.preventDefault();
-                            var currentQuantity = parseInt(quantityInput.value);
-                            quantityInput.value = currentQuantity + 1;
-                        });
+                            incrementButton.addEventListener("click", function (e) {
+                                e.preventDefault();
+                                var currentQuantity = parseInt(quantityInput.value);
+                                quantityInput.value = currentQuantity + 1;
+                            });
                         </script>
                     </div>
 
@@ -171,10 +186,10 @@ if (isset($sale) && $sale !== 0) {
 
                     <div class="btn-group flex flex-column">
                         <div class="btn-cart flex">
-                            <input type="hidden" name="product-id" value="<?=$id?>">
-                            <input type="hidden" name="product-img" value="<?=$img?>">
-                            <input type="hidden" name="product-name" value="<?=$name?>">
-                            <input type="hidden" name="product-price" value="<?=$discountedPrice?>">
+                            <input type="hidden" name="product-id" value="<?= $id ?>">
+                            <input type="hidden" name="product-img" value="<?= $img ?>">
+                            <input type="hidden" name="product-name" value="<?= $name ?>">
+                            <input type="hidden" name="product-price" value="<?= $discountedPrice ?>">
                             <button class="add-to-cart" id="btn-addToCart" type="submit" name="btn-addToCart">
                                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -357,7 +372,7 @@ if (isset($sale) && $sale !== 0) {
         <div class="container">
             <p class="title-pd my-3">Chi Tiết Sản Phẩm</p>
 
-            <?=$info?>
+            <?= '<pre> ' . $info . '</pre>' ?>
         </div>
     </section>
 
@@ -368,14 +383,6 @@ if (isset($sale) && $sale !== 0) {
             <div class="comment-ct text-center">
                 <img src="assets/img/EmtyReview.86be870e.svg">
                 <p>Sản phẩm này chưa có phản hồi</p>
-
-                <?php 
-                    if (isset($_SESSION['user'])) {
-                        echo '<button>Bình Luận</button>';
-                    }else{
-                        echo '<p>Vui Lòng Đăng Nhập Để Gửi Phản Hồi<a href="index.php?page=login">Đăng Nhập Ngay</a></p>';
-                    } 
-                ?>
             </div>
         </div>
     </section>

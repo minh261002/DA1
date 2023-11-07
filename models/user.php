@@ -3,25 +3,25 @@
 
 function checkUser($username, $password)
 {
-    $sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+    $sql = "SELECT * FROM user WHERE username = ? AND password = ?";
     return pdo_query_one($sql, $username, $password);
 }
 
 function usernameExists($username) {
-    $sql = "SELECT * FROM users WHERE username = ?";
+    $sql = "SELECT * FROM user WHERE username = ?";
     $user = pdo_query_one($sql, $username);
     return $user ? true : false;
 }
 
 function emailExists($email) {
-    $sql = "SELECT * FROM users WHERE email = ?";
+    $sql = "SELECT * FROM user WHERE email = ?";
     $user = pdo_query_one($sql, $email);
     return $user ? true : false;
 }
 
 function user_insert($username, $email, $password)
 {
-    $sql = "INSERT INTO users(username, email, password, created_at) VALUES (?, ?, ?, NOW())";
+    $sql = "INSERT INTO user(username, email, password, created_at) VALUES (?, ?, ?, NOW())";
     pdo_execute($sql, $username, $email, $password);
 } 
 

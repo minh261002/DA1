@@ -1,5 +1,5 @@
-<?php 
-$html_cart ='';
+<?php
+$html_cart = '';
 
 $total_order = 0;
 $total_price = 0;
@@ -16,39 +16,35 @@ foreach ($_SESSION["cart"] as $pdCart) {
     $quantity = $pdCart["quantity"];
 
     $subtotal = (Float) $price * (Float) $quantity;
-    $_SESSION['subtotal'] = $subtotal; 
 
     $total_price += $subtotal;
-    $_SESSION['total_price'] = $total_price; 
 
-
-    $total_order+=$quantity;
-    $_SESSION['total_order'] = $total_order;
+    $total_order += $quantity;
 
     $html_cart .= '
         <tr class="cart-row">
-            <td> <img src="'.$img.'" width=" 50px"> </td>
+            <td> <img src="Uploads/' . $img . '" width=" 50px"> </td>
 
                 <td class="cart-name">
-                    <p>'.$name.'</p>
-                    <p>Kích Thước: <span>'.$size.'</span></p>
-                    <p>Màu Sắc: <span>'.$color.'</span></p>
+                    <p>' . $name . '</p>
+                    <p>Kích Thước: <span>' . $size . '</span></p>
+                    <p>Màu Sắc: <span>' . $color . '</span></p>
                 </td>
 
-                <td class="cart-price" data-price="'.$price.'">'.number_format($price, 0, ',', '.').' đ</td>
+                <td class="cart-price" data-price="' . $price . '">' . number_format($price, 0, ',', '.') . ' đ</td>
 
                 <td>
                     <form action="" class="cart-quantity flex" method="POST">
-                        <input type="hidden" name="productId" value="'.$id.'">
+                        <input type="hidden" name="productId" value="' . $id . '">
                         <button type="submit" class="decrement" name="decrement">-</button>
-                        <input type="number" name="quantity" class="quantity" value="'.$quantity.'" min="1" max="10">
+                        <input type="number" name="quantity" class="quantity" value="' . $quantity . '" min="1" max="10">
                         <button type="submit" class="increment" name="increment">+</button>
                     </form>
                 </td>
 
                 <td class="cart-total">
-                    <p id="sub-total">'.number_format($_SESSION['subtotal'],0,',','.').' đ</p>
-                    <a href="index.php?page=cart&act=del1&id='.$id.'">
+                    <p id="sub-total">' . number_format($subtotal, 0, ',', '.') . ' đ</p>
+                    <a href="index.php?page=cart&act=del1&id=' . $id . '">
                         <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M12.25 2H9.5V1.5C9.5 1.10218 9.34197 0.720644 9.06066 0.43934C8.77936 0.158035 8.39782 0 8 0L6 0C5.60218 0 5.22064 0.158035 4.93934 0.43934C4.65803 0.720644 4.5 1.10218 4.5 1.5V2H1.75C1.41856 2.00026 1.10077 2.13205 0.866409 2.36641C0.632046 2.60077 0.500265 2.91856 0.5 3.25V5C0.5 5.13261 0.552678 5.25979 0.646446 5.35355C0.740214 5.44732 0.867392 5.5 1 5.5H1.273L1.705 14.571C1.72322 14.9555 1.88858 15.3183 2.16686 15.5843C2.44514 15.8503 2.81504 15.9991 3.2 16H10.8C11.1858 16.0004 11.557 15.8522 11.8363 15.5861C12.1157 15.3199 12.2817 14.9564 12.3 14.571L12.727 5.5H13C13.1326 5.5 13.2598 5.44732 13.3536 5.35355C13.4473 5.25979 13.5 5.13261 13.5 5V3.25C13.4997 2.91856 13.368 2.60077 13.1336 2.36641C12.8992 2.13205 12.5814 2.00026 12.25 2ZM5.5 1.5C5.5 1.36739 5.55268 1.24021 5.64645 1.14645C5.74021 1.05268 5.86739 1 6 1H8C8.13261 1 8.25979 1.05268 8.35355 1.14645C8.44732 1.24021 8.5 1.36739 8.5 1.5V2H5.5V1.5ZM1.5 3.25C1.5 3.1837 1.52634 3.12011 1.57322 3.07322C1.62011 3.02634 1.6837 3 1.75 3H12.25C12.3163 3 12.3799 3.02634 12.4268 3.07322C12.4737 3.12011 12.5 3.1837 12.5 3.25V4.5H1.5V3.25ZM11.3 14.524C11.2938 14.6524 11.2384 14.7735 11.1453 14.8621C11.0522 14.9508 10.9286 15.0001 10.8 15H3.2C3.07145 15.0001 2.94778 14.9508 2.85467 14.8621C2.76156 14.7735 2.70617 14.6524 2.7 14.524L2.274 5.5H11.725L11.3 14.524Z"
@@ -66,8 +62,8 @@ foreach ($_SESSION["cart"] as $pdCart) {
                     </a>
                 </td>
         </tr>';
-        
-}?>
+
+} ?>
 
 <main class="mb-5">
     <section class="box-cart">
@@ -127,8 +123,12 @@ foreach ($_SESSION["cart"] as $pdCart) {
         <div class="container">
             <div class="cart-item">
                 <div class="header-cart-item mb-5">
-                    Giỏ Hàng <span>(<?php if(isset($_SESSION['total_order'])){echo $_SESSION['total_order'];}?> Sản
-                        Phẩm)</span>
+                    Giỏ Hàng <span>(
+                        <?php if ($total_order) {
+                            echo $total_order;
+                        } ?> Sản
+                        Phẩm)
+                    </span>
                 </div>
 
                 <table class="table">
@@ -143,7 +143,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
                     </thead>
 
                     <tbody>
-                        <?=$html_cart?>
+                        <?= $html_cart ?>
                     </tbody>
                 </table>
 
@@ -157,11 +157,14 @@ foreach ($_SESSION["cart"] as $pdCart) {
                         <p>Mã Phiếu Giảm Giá</p>
 
                         <form action="" method="POST" class="form-voucher flex">
-                            <input type="hidden" name="voucher_total_price" value="<?=$_SESSION['total_price']?>">
+                            <input type="hidden" name="voucher_total_price" id="voucher_total_price"
+                                value="<?= $total_price ?>">
                             <input type="text" name="voucher" id="voucher" placeholder="Mã phiếu giảm giá"
                                 class="input-voucher">
                             <input type="submit" value="Áp Dụng">
                         </form>
+                        <span id="voucherErr" class="err"></span>
+
 
                     </div>
 
@@ -170,14 +173,16 @@ foreach ($_SESSION["cart"] as $pdCart) {
                     <div class="flex transience">
                         <p>Tạm Tính</p>
                         <p class="temporary">
-                            <?php if(isset($_SESSION['total_price'])){ echo number_format($_SESSION['total_price'],0,',','.');}?>
+                            <?php if (isset($total_price)) {
+                                echo number_format($total_price, 0, ',', '.');
+                            } ?>
                             đ
                         </p>
                     </div>
 
                     <div class="discount flex">
                         <p>Mã Giảm Giá</p>
-                        <p>0 đ</p>
+                        <p class="discounted">0 đ</p>
                     </div>
 
                     <div class="line-dash"></div>
@@ -185,7 +190,9 @@ foreach ($_SESSION["cart"] as $pdCart) {
                     <div class="total flex">
                         <p id="">Tổng</p>
                         <p class="total-price">
-                            <?php if(isset($_SESSION['total_price'])){ echo number_format($_SESSION['total_price'],0,',','.');}?>
+                            <?php if (isset($total_price)) {
+                                echo number_format($total_price, 0, ',', '.');
+                            } ?>
                             đ
                         </p>
                     </div>
@@ -199,5 +206,6 @@ foreach ($_SESSION["cart"] as $pdCart) {
             </div>
     </section>
     <script src="assets/js/cart.js"></script>
+    <script src="assets/js/voucher.js"></script>
 
 </main>

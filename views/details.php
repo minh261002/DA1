@@ -31,8 +31,8 @@ if (isset($sale) && $sale !== 0) {
                     <?php
                     $images = json_decode($gallery);
                     if (is_array($images)) {
-                        foreach ($images as $img) {
-                            echo '<img src="uploads/' . $img . '" width="100%" onclick="changeImage(this)" />';
+                        foreach ($images as $image) {
+                            echo '<img src="uploads/' . $image . '" width="100%" onclick="changeImage(this)" />';
                         }
                     }
                     ?>
@@ -43,10 +43,10 @@ if (isset($sale) && $sale !== 0) {
                 </div>
 
                 <script>
-                    function changeImage(thumbnail) {
-                        var largeImage = document.getElementById("largeImage");
-                        largeImage.src = thumbnail.src;
-                    }
+                function changeImage(thumbnail) {
+                    var largeImage = document.getElementById("largeImage");
+                    largeImage.src = thumbnail.src;
+                }
                 </script>
             </div>
 
@@ -95,6 +95,10 @@ if (isset($sale) && $sale !== 0) {
                             <?php
                             $currentColor = null;
 
+                            usort($variant, function ($a, $b) {
+                                return strcmp($a['color'], $b['color']);
+                            });
+
                             foreach ($variant as $va) {
                                 extract($va);
 
@@ -118,15 +122,19 @@ if (isset($sale) && $sale !== 0) {
                             <?php
                             $currentSize = null;
 
+                            usort($variant, function ($a, $b) {
+                                return strcmp($a['size'], $b['size']);
+                            });
+
                             foreach ($variant as $va) {
                                 extract($va);
 
                                 if ($currentSize !== $size) {
                                     echo '
-                                        <div class="size-item">
-                                            <input type="radio" name="size" id="' . $size . '" value="' . $size . '">
-                                            <label for="' . $size . '">' . $size . '</label>
-                                        </div>
+                                            <div class="size-item">
+                                                <input type="radio" name="size" id="' . $size . '" value="' . $size . '">
+                                                <label for="' . $size . '">' . $size . '</label>
+                                            </div>
                                         ';
                                     $currentSize = $size;
                                 }
@@ -144,23 +152,23 @@ if (isset($sale) && $sale !== 0) {
                         </div>
 
                         <script>
-                            var decrementButton = document.getElementById("decrement");
-                            var incrementButton = document.getElementById("increment");
-                            var quantityInput = document.getElementById("quantity");
+                        var decrementButton = document.getElementById("decrement");
+                        var incrementButton = document.getElementById("increment");
+                        var quantityInput = document.getElementById("quantity");
 
-                            decrementButton.addEventListener("click", function (e) {
-                                e.preventDefault();
-                                var currentQuantity = parseInt(quantityInput.value);
-                                if (currentQuantity > 1) {
-                                    quantityInput.value = currentQuantity - 1;
-                                }
-                            });
+                        decrementButton.addEventListener("click", function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt(quantityInput.value);
+                            if (currentQuantity > 1) {
+                                quantityInput.value = currentQuantity - 1;
+                            }
+                        });
 
-                            incrementButton.addEventListener("click", function (e) {
-                                e.preventDefault();
-                                var currentQuantity = parseInt(quantityInput.value);
-                                quantityInput.value = currentQuantity + 1;
-                            });
+                        incrementButton.addEventListener("click", function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt(quantityInput.value);
+                            quantityInput.value = currentQuantity + 1;
+                        });
                         </script>
                     </div>
 

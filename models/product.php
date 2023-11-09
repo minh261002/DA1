@@ -28,6 +28,35 @@
 //     return pdo_query($sql);
 // }
 
+function get_new_product()
+{
+    $currentDateTime = date('Y-m-d H:i:s');
+    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-3 days', strtotime($currentDateTime)));
+
+    $sql = "SELECT * FROM product WHERE  created_at >= '$threeDaysAgo' ORDER BY id DESC LIMIT 7";
+    return pdo_query($sql);
+}
+
+function get_male_product()
+{
+    $currentDateTime = date('Y-m-d H:i:s');
+    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-3 days', strtotime($currentDateTime)));
+
+    $sql = "SELECT * FROM product WHERE id_category = 10 AND created_at >= '$threeDaysAgo'";
+    return pdo_query($sql);
+}
+
+function get_kid_product()
+{
+    $currentDateTime = date('Y-m-d H:i:s');
+    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-3 days', strtotime($currentDateTime)));
+
+    $sql = "SELECT * FROM product WHERE id_category = 8 AND created_at >= '$threeDaysAgo'";
+    return pdo_query($sql);
+}
+
+
+
 function get_product_by_id($id)
 {
     $sql = "SELECT * FROM product WHERE id=?";
@@ -49,6 +78,11 @@ function get_product_flash_sale()
     return pdo_query($sql);
 }
 
+function get_hot_product()
+{
+    $sql = "SELECT * FROM product WHERE hot = 1 LIMIT 10";
+    return pdo_query($sql);
+}
 
 function search($search)
 {
@@ -117,7 +151,7 @@ function show_product($list_product)
         }
 
         if ($hot == 1) {
-            $hot = '
+            $hot = '                    
                 <div class="selling">
                     <span>Bán chạy</span>
                 </div>
@@ -126,6 +160,24 @@ function show_product($list_product)
             $hot = '';
         }
 
+        $currentDateTime = date('Y-m-d H:i:s');
+
+        $createdDate = strtotime($created_at);
+
+        $currentDate = strtotime($currentDateTime);
+        $newProduct = strtotime('-3 days', $currentDate);
+
+        if ($createdDate >= $newProduct) {
+            $new = '
+                <div class="new-pd">
+                    <span>New</span>
+                </div>
+            ';
+        } else {
+            $new = '';
+        }
+
+        // liên kêts
         $link = "index.php?page=details&id=" . $id;
 
         $html_product .= '
@@ -133,9 +185,12 @@ function show_product($list_product)
                 <a href="' . $link . '">
                     <img class="product-image" src="uploads/' . $img . '" width="100%">
                 </a>
-                ' . $hot . '
+                <div class="box-title flex">
+                        ' . $hot . '
+                        ' . $new . '
+                </div>
                 <div class="product-content">
-                    <a href="' . $link . '" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
+                    <a href="' . $link . '" class="name-product">' . $name . '</a>
                     ' . $boxPrice . '
                 </div>
 

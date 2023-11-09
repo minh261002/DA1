@@ -1,4 +1,4 @@
-const targetTime = new Date("2023-11-07T20:18:00").getTime();
+const targetTime = new Date("2023-11-09T20:18:00").getTime();
 const x = setInterval(function () {
   const now = new Date().getTime();
   const timeRemaining = targetTime - now;

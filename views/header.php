@@ -3,8 +3,8 @@ if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
     extract($_SESSION["user"]);
     $html_account = '
             <li><a href="register">Xin chào, <span class="text-danger">' . $username . '</span></a></li>
-            <li><a href="profile_confirm">Thông Tin Cá Nhân</a></li>
-            <li><a href="register">Đơn Hàng</a></li>
+            <li><a href="index.php?page=profile&act=info">Thông Tin Cá Nhân</a></li>
+            <li><a href="index.php?page=profile&act=order">Đơn Hàng</a></li>
             <li><a href="index.php?page=changePassword">Đổi Mật Khẩu</a></li>
             <li><a class="btn btn-danger p-2 text-white" href="index.php?page=logout">Đăng Xuất</a></li>
         ';
@@ -68,6 +68,8 @@ function createMenu()
     <link rel="stylesheet" href="assets/owlcarousel/assets/owl.theme.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="assets/owlcarousel/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -170,8 +172,10 @@ function createMenu()
         <ul class="header__menu">
             <div class="container">
                 <div class="menu flex">
-                    <li><a href=""> <img src="assets/img/icon-new.webp" width="30px">Hàng Mới Về</a></li>
-                    <li><a href=""> <img src="assets/img/icon-new.webp" width="30px">Giảm Giá</a></li>
+                    <li><a href="index.php?page=option_product&act=new"> <img src="assets/img/icon-new.webp"
+                                width="30px">Hàng Mới Về</a></li>
+                    <li><a href="index.php?page=option_product&act=hot"> <img src="assets/img/icon-new.webp"
+                                width="30px">Giảm Giá</a></li>
                     <?= createMenu() ?>
                 </div>
             </div>

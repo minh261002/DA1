@@ -64,7 +64,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
         </tr>';
 } ?>
 
-<main class="mb-5">
+<main class="pb-60 background-bottom">
     <section class="box-cart">
         <div class="container flex">
             <div class="muibox-cart flex">
@@ -105,7 +105,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
     <section class="cart-container">
         <div class="container">
             <div class="cart-item">
-                <div class="header-cart-item mb-5">
+                <div class="header-cart-item">
                     Giỏ Hàng <span>(
                         <?php if ($total_order) {
                             echo $total_order;
@@ -176,7 +176,7 @@ foreach ($_SESSION["cart"] as $pdCart) {
 
 
             <div class="bill">
-                <div class="bill-header mb-5"> Đơn Hàng</div>
+                <div class="bill-header"> Đơn Hàng</div>
                 <div class="bill-container">
                     <div class="voucher">
                         <p>Mã Phiếu Giảm Giá</p>

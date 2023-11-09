@@ -63,6 +63,10 @@ foreach ($flashSaleProducts as $pd) {
         ';
 }
 
+$html_new_product = show_product($new_product);
+
+$html_hot_product = show_product($hot_product);
+
 ?>
 
 <main>
@@ -205,555 +209,59 @@ foreach ($flashSaleProducts as $pd) {
 
     <section class="product pb-60">
         <div class="wrap-content">
-            <div class="heading">TRANG PHỤC THU ĐÔNG - ƯU ĐÃI 50%++</div>
+            <div class="heading">Sản Phẩm Mới Ra Mắt</div>
             <div class="cate-bar">
-                <button class="cate-active">Nu</button>
-                <button>Nam</button>
-                <button>Tre em</button>
+                <button class="cate-active cate-button">Nữ</button>
+                <button class="cate-button">Nam</button>
+                <button class="cate-button">Trẻ Em</button>
             </div>
-            <div class="product-block">
+            <div class=" product-block">
                 <div class="image-cate">
-                    <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16978568861072614.jpg&w=1920&q=75"
-                        alt="">
+                    <img src="Uploads/bnn1.webp">
                 </div>
-                <div class="owl-carousel owl-theme owl-loaded owl-drag slide-product list-product">
-                    <div class="product-item">
-                        <a href="#">
-                            <img class="product-image"
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                                alt="" width="100%">
-                        </a>
-                        <div class="selling">
-                            <span>Bán chạy</span>
-                        </div>
-                        <div class="product-content">
-                            <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                            <div class="product-price">
-                                <span class="product-origin">147,000d</span>
-                                <span class="product-discount">100,000d</span>
-                            </div>
-                        </div>
-
-                        <div class="product-status">
-                            <span
-                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                                <span
-                                    style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                    <img alt="" aria-hidden="true"
-                                        src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                        style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                                </span>
-                                <img alt=""
-                                    srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                    src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async"
-                                    data-nimg="intrinsic"
-                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                            </span>
-                            <span class="percent-discount"> -70%</span>
-                        </div>
-                    </div>
-
-                    <div class="product-item">
-                        <a href="#">
-                            <img class="product-image"
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                                alt="" width="100%">
-                        </a>
-                        <div class="selling">
-                            <span>Bán chạy</span>
-                        </div>
-                        <div class="product-content">
-                            <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                            <div class="product-price">
-                                <span class="product-origin">147,000d</span>
-                                <span class="product-discount">100,000d</span>
-                            </div>
-                        </div>
-
-                        <div class="product-status">
-                            <span
-                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                                <span
-                                    style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                    <img alt="" aria-hidden="true"
-                                        src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                        style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                                </span>
-                                <img alt=""
-                                    srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                    src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async"
-                                    data-nimg="intrinsic"
-                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                            </span>
-                            <span class="percent-discount"> -70%</span>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <a href="#">
-                            <img class="product-image"
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                                alt="" width="100%">
-                        </a>
-                        <div class="selling">
-                            <span>Bán chạy</span>
-                        </div>
-                        <div class="product-content">
-                            <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                            <div class="product-price">
-                                <span class="product-origin">147,000d</span>
-                                <span class="product-discount">100,000d</span>
-                            </div>
-                        </div>
-
-                        <div class="product-status">
-                            <span
-                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                                <span
-                                    style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                    <img alt="" aria-hidden="true"
-                                        src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                        style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                                </span>
-                                <img alt=""
-                                    srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                    src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async"
-                                    data-nimg="intrinsic"
-                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                            </span>
-                            <span class="percent-discount"> -70%</span>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <a href="#">
-                            <img class="product-image"
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                                alt="" width="100%">
-                        </a>
-                        <div class="selling">
-                            <span>Bán chạy</span>
-                        </div>
-                        <div class="product-content">
-                            <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                            <div class="product-price">
-                                <span class="product-origin">147,000d</span>
-                                <span class="product-discount">100,000d</span>
-                            </div>
-                        </div>
-
-                        <div class="product-status">
-                            <span
-                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                                <span
-                                    style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                    <img alt="" aria-hidden="true"
-                                        src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                        style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                                </span>
-                                <img alt=""
-                                    srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                    src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async"
-                                    data-nimg="intrinsic"
-                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                            </span>
-                            <span class="percent-discount">-70%</span>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <a href="#">
-                            <img class="product-image"
-                                src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                                alt="" width="100%">
-                        </a>
-                        <div class="selling">
-                            <span>Bán chạy</span>
-                        </div>
-                        <div class="product-content">
-                            <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                            <div class="product-price">
-                                <span class="product-origin">147,000d</span>
-                                <span class="product-discount">100,000d</span>
-                            </div>
-                        </div>
-
-                        <div class="product-status">
-                            <span
-                                style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                                <span
-                                    style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                    <img alt="" aria-hidden="true"
-                                        src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                        style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                                </span>
-                                <img alt=""
-                                    srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                    src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async"
-                                    data-nimg="intrinsic"
-                                    style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                            </span>
-                            <span class="percent-discount">-70%</span>
-                        </div>
-                    </div>
+                <div class=" owl-carousel owl-theme owl-loaded owl-drag slide-product list-product ">
+                    <?= $html_new_product ?>
                 </div>
             </div>
             <div class="showall-cate">
-                <a href="#" class="showall-btn">Xem tất cả sản phẩm </a>
+                <a href="index.php?page=page_new_product" class="showall-btn">Xem tất cả sản phẩm </a>
             </div>
         </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.cate-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const category = button.getAttribute('data-category');
+
+                    tabButtons.forEach(function(btn) {
+                        btn.classList.remove('cate-active');
+                    });
+                    button.classList.add('cate-active');
+
+                    tabContents.forEach(function(content) {
+                        content.classList.remove('atv');
+                    });
+
+                    document.getElementById(category + '-product').classList.add('atv');
+                });
+            });
+        });
+        </script>
     </section>
-
-
-
-
 
     <!-- outstanding -->
     <section class="outstanding pb-60">
         <div class="wrap-content">
             <h3 class="heading">SẢN PHẨM NỔI BẬT</h3>
             <div class="list-outstanding">
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
-                <div class="product-item">
-                    <a href="#">
-                        <img class="product-image"
-                            src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.amazonaws.com%2Fcms%2Fproducts%2FG9SMT024J-002%2F45a6a25bf3ab431489e3f1c81c6a721f_thumbnail.jpg&w=1920&q=75"
-                            alt="" width="100%">
-                    </a>
-                    <div class="selling">
-                        <span>Bán chạy</span>
-                    </div>
-                    <div class="product-content">
-                        <a href="#" class="name-product">Áo giữ nhiệt WM Air Nữ cổ tròn G9SMT024J</a>
-                        <div class="product-price">
-                            <span class="product-origin">147,000d</span>
-                            <span class="product-discount">100,000d</span>
-                        </div>
-                    </div>
-
-                    <div class="product-status">
-                        <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                    src="https://tokyolife.vn/_next/static/media/tagsale.0850a4f6.svg"
-                                    style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt=""
-                                srcset="/_next/static/media/tagsale.0850a4f6.svg 1x, /_next/static/media/tagsale.0850a4f6.svg 2x"
-                                src="/_next/static/media/tagsale.0850a4f6.svg" decoding="async" data-nimg="intrinsic"
-                                style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                        </span>
-                        <span class="percent-discount"> -70%</span>
-                    </div>
-                </div>
+                <?= $html_hot_product ?>
             </div>
         </div>
         <div class="showall-cate">
-            <a href="#" class="showall-btn">Xem tất cả sản phẩm </a>
+            <a href="index.php?page=option_product&act=hot" class="showall-btn">Xem tất cả sản phẩm </a>
         </div>
     </section>
 

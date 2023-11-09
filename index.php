@@ -20,7 +20,8 @@ require_once "views/header.php";
 
 //data home page
 $flashSaleProducts = get_product_flash_sale();
-
+$new_product = get_new_product();
+$hot_product = get_hot_product();
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
@@ -149,6 +150,21 @@ if (isset($_GET['page'])) {
             require_once 'views/product.php';
             break;
 
+        case 'option_product':
+            if (isset($_GET['act']) && $_GET['act'] == 'new') {
+                $new_product = get_new_product();
+            }
+
+            if (isset($_GET['act']) && $_GET['act'] == 'hot') {
+                $hot_product = get_hot_product();
+            }
+
+            require_once "views/option_product.php";
+            break;
+
+        case 'profile':
+            require_once 'views/profile.php';
+            break;
 
             //trang chi tiết sản phẩm
         case 'details':

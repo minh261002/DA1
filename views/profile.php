@@ -6,6 +6,18 @@ if (isset($_SESSION["user"])) {
 
 $formattedDate = date('Y-m-d', strtotime($dateOfBirth));
 
+if (isset($address)) {
+    $addressData = json_decode($address, true);
+
+    if ($addressData !== null) {
+        $province = $addressData['province'];
+        $district = $addressData['district'];
+        $ward = $addressData['ward'];
+        $detail = $addressData['detail'];
+    } else {
+        echo "Có lỗi";
+    }
+}
 ?>
 
 <main style="background-color: #f5f5f5;" class="py-5">
@@ -111,10 +123,12 @@ $formattedDate = date('Y-m-d', strtotime($dateOfBirth));
                             <div class="form-group px-5 mb-4 ">
                                 <label for="gender">Giới Tính </label>
                                 <select name="gender" id="gender" class="form-control">
-                                    <option value="">Chọn Giới Tính</option>
-                                    <option value="0">Nam</option>
-                                    <option value="1">Nữ</option>
-                                    <option value="2">Khác</option>
+                                    <option value="0" <?php if ($gender == 0) {
+                                        echo 'selected';
+                                    } ?>>Nam</option>
+                                    <option value="1" <?php if ($gender == 1) {
+                                        echo 'selected';
+                                    } ?>>Nữ</option>
                                 </select>
                             </div>
 
@@ -134,19 +148,33 @@ $formattedDate = date('Y-m-d', strtotime($dateOfBirth));
 
                                 <div class="form-addess flex">
                                     <select class="form-select form-control " id="province">
-                                        <option value=""></option>
+                                        <option value="">
+                                            <?php if (isset($province)) {
+                                                echo $province;
+                                            } ?>
+                                        </option>
                                     </select>
 
                                     <select class="form-select form-control" id="district">
-                                        <option value="">Quận / Huyện</option>
+                                        <option value="">
+                                            <?php if (isset($district)) {
+                                                echo $district;
+                                            } ?>
+                                        </option>
                                     </select>
 
                                     <select class="form-select form-control" id="ward">
-                                        <option value="">Phường / Xã</option>
+                                        <option value="">
+                                            <?php if (isset($ward)) {
+                                                echo $ward;
+                                            } ?>
+                                        </option>
                                     </select>
                                 </div>
                                 <input type="text" name="address" id="address" class="form-control"
-                                    placeholder="Nhập Địa Chỉ Cụ Thể">
+                                    placeholder="Nhập Địa Chỉ Cụ Thể" value="<?php if (isset($detail)) {
+                                        echo $detail;
+                                    } ?>">
                             </div>
                             <div class="form-group px-5 mb-4">
                                 <button type="submit" class="btn-form"> Lưu Thay Đổi</button>

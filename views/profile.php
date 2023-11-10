@@ -3,8 +3,9 @@ if (isset($_SESSION["user"])) {
     $user = $_SESSION["user"];
     extract($user);
 }
-
-$formattedDate = date('Y-m-d', strtotime($dateOfBirth));
+if (isset($dateOfBirth)) {
+    $formattedDate = date('Y-m-d', strtotime($dateOfBirth));
+}
 
 if (isset($address)) {
     $addressData = json_decode($address, true);
@@ -110,8 +111,9 @@ if (isset($address)) {
                         <div class="info-user">
                             <div class="form-group px-5 mb-4 ">
                                 <label for="fullname">Họ Và Tên </label>
-                                <input type="text" name="fullname" id="fullname" class="form-control"
-                                    value="<?= $fullname ?>">
+                                <input type="text" name="fullname" id="fullname" class="form-control" value="<?php if (isset($fullname)) {
+                                    echo $fullname;
+                                } ?>">
                             </div>
 
                             <div class="form-group px-5 mb-4 ">
@@ -123,10 +125,11 @@ if (isset($address)) {
                             <div class="form-group px-5 mb-4 ">
                                 <label for="gender">Giới Tính </label>
                                 <select name="gender" id="gender" class="form-control">
-                                    <option value="0" <?php if ($gender == 0) {
+                                    <option value="">Chọn</option>
+                                    <option value="0" <?php if ((isset($gender) && ($gender == 0))) {
                                         echo 'selected';
                                     } ?>>Nam</option>
-                                    <option value="1" <?php if ($gender == 1) {
+                                    <option value="1" <?php if ((isset($gender) && ($gender == 1))) {
                                         echo 'selected';
                                     } ?>>Nữ</option>
                                 </select>
@@ -134,13 +137,16 @@ if (isset($address)) {
 
                             <div class="form-group px-5 mb-4 ">
                                 <label for="phone">Số Điện Thoại</label>
-                                <input type="number" name="phone" id="phone" class="form-control" value="<?= $phone ?>">
+                                <input type="number" name="phone" id="phone" class="form-control" value="<?php if (isset($phone)) {
+                                    echo $phone;
+                                } ?>">
                             </div>
 
                             <div class="form-group px-5 mb-4 ">
                                 <label for="email">Email </label>
-                                <input type="email" name="email" id="email" class="form-control" disabled
-                                    value="<?= $email ?>">
+                                <input type="email" name="email" id="email" class="form-control" disabled value="<?php if (isset($email)) {
+                                    echo $email;
+                                } ?>">
                             </div>
 
                             <div class="form-group px-5 mb-4 ">

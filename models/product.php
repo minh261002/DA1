@@ -67,7 +67,7 @@ function get_product_by_variant($id)
 {
     $sql = "SELECT product.id, variant.* FROM product
     INNER JOIN variant ON product.id = variant.id_product
-    WHERE product.id = ?";
+    WHERE product.id = ? AND quantity > 0";
 
     return pdo_query($sql, $id);
 }

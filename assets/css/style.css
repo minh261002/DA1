@@ -501,10 +501,15 @@ footer > .container {
 }
 
 .price {
-  font-size: 26px;
+  font-size: 26px !important;
   font-weight: 600;
   color: #c92027;
   margin-top: 12px;
+}
+
+.add-block {
+  background: #b3b3b3 !important;
+  color: #fff;
 }
 
 .price span {

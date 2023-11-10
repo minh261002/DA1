@@ -2,7 +2,7 @@ var decrementButtons = document.querySelectorAll(".decrement");
 var incrementButtons = document.querySelectorAll(".increment");
 var quantityInputs = document.querySelectorAll(".quantity");
 var subTotalElements = document.querySelectorAll("#sub-total");
-var temporaryElements = document.querySelectorAll(".temporary"); // Sử dụng .temporary thay vì temporary
+var temporaryElements = document.querySelectorAll(".temporary");
 var totalPriceElement = document.querySelector(".total-price");
 
 var priceElements = document.querySelectorAll(".cart-price");

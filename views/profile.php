@@ -111,14 +111,10 @@ if (isset($address)) {
                         <div class="info-user">
                             <div class="form-group px-5 mb-4 ">
                                 <label for="fullname">Họ Và Tên </label>
-                                <<<<<<< HEAD <input type="text" name="fullname" id="fullname" class="form-control"
-                                    value="<?php if (isset($fullname)) {
-                                        echo $fullname;
-                                    } ?>">
-                                    =======
-                                    <input type="text" name="fullname" id="fullname" class="form-control"
-                                        value="<?= $fullname ?>">
-                                    >>>>>>> 33f3c4525fb0e01727e93ae072fa3bcc7a4def34
+                                <input type="text" name="fullname" id="fullname" class="form-control" value="<?php if (isset($fullname)) {
+                                    echo $fullname;
+                                } ?>">
+
                             </div>
 
                             <div class="form-group px-5 mb-4 ">

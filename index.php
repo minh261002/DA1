@@ -178,6 +178,11 @@ if (isset($_GET['page'])) {
             require_once 'views/details.php';
             break;
 
+
+        case 'checkout':
+            require_once 'views/checkout.php';
+            break;
+
         //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {

@@ -60,8 +60,6 @@ function createMenu()
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tokyo Life</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-
-       
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.3/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -72,7 +70,6 @@ function createMenu()
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="assets/owlcarousel/owl.carousel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 </head>
 
 <body>
@@ -97,11 +94,11 @@ function createMenu()
                         <input type="search" name="search" id="search" placeholder="Tìm Kiếm ..." autocomplete="off">
                         <button type="submit" class="icon_search" name="btn-search">
 
-                                                           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
 
-                                       
-                                                                       <g id="icon-wrapper" clip-path="url(#clip0_10988_132346)">
+
+                                <g id="icon-wrapper" clip-path="url(#clip0_10988_132346)">
                                     <path id="Union" fill-rule="evenodd" clip-rule="evenodd"
                                         d="M0.832031 7.66536C0.832031 11.432 3.8987 14.4987 7.66536 14.4987C11.432 14.4987 14.4987 11.432 14.4987 7.66536C14.4987 3.8987 11.432 0.832031 7.66536 0.832031C3.8987 0.832031 0.832031 3.8987 0.832031 7.66536ZM1.83203 7.66536C1.83203 4.45203 4.44536 1.83203 7.66536 1.83203C10.8854 1.83203 13.4987 4.45203 13.4987 7.66536C13.4987 10.8787 10.8854 13.4987 7.66536 13.4987C4.44536 13.4987 1.83203 10.8787 1.83203 7.66536ZM14.312 15.019C14.412 15.119 14.5387 15.1657 14.6653 15.1657C14.792 15.1657 14.9187 15.119 15.0187 15.019C15.212 14.8257 15.212 14.5057 15.0187 14.3123L13.6853 12.979C13.492 12.7857 13.172 12.7857 12.9787 12.979C12.7853 13.1723 12.7853 13.4923 12.9787 13.6857L14.312 15.019Z"
                                         fill="white"></path>
@@ -125,8 +122,8 @@ function createMenu()
                         <img src="assets/img/news.gif">
                     </div>
 
-                               
-                               
+
+
                     <div class="icon-user">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -136,14 +133,14 @@ function createMenu()
 
                         <ul class="sub-menu-user">
                             <?= $html_account ?>
-                     
-                                  </ul>
+
+                        </ul>
                     </div>
 
-                                       
 
-                                       
-                                                           <div class="icon_cart">
+
+
+                    <div class="icon_cart">
                         <a href="index.php?page=cart">
                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -163,8 +160,8 @@ function createMenu()
                             </svg>
                             <span class="cout_cart">
 
-                               
-                                                               <?php if (isset($total_order)) {
+
+                                <?php if (isset($total_order)) {
                                                                    echo $total_order;
                                                                } else {
                                                                    echo '0';
@@ -200,10 +197,10 @@ function createMenu()
     <header class="header__mobile">
         <div class="header-middle">
             <div class="icon-menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill=
-                 "          none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="          none"
+                    xmlns="http://www.w3.org/2000/svg">
 
-                                               <path d="M3 7H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"></path>
+                    <path d="M3 7H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"></path>
                     <path d="M3 12H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"></path>
                     <path d="M3 17H21" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"></path>
                 </svg>
@@ -212,7 +209,7 @@ function createMenu()
                 <img src="https://tokyolife.vn/_next/static/media/logo-header-mobile.3a2
                 1                   670c.svg" alt="">
 
-                                               </div>
+            </div>
             <div class="header-group">
                 <div class="search-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
@@ -253,8 +250,8 @@ function createMenu()
                         d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
                     </path>
 
-                               
-                                               </svg>
+
+                </svg>
             </div>
             <div class="log_reg">
                 <a href="#" class="logo_user">
@@ -264,28 +261,27 @@ function createMenu()
                     <a href="">Đăng nhập</a> | <a href="">Đăng ký</a>
                 </div>
 
-                                       <div></div>
+                <div></div>
             </div>
             <div class="bar__top-bottom">
                 <a href="#" class="bill-btn">
-                    <span hre
-                          f ="#">Tra cứu vận đơn</span>
+                    <span hre f="#">Tra cứu vận đơn</span>
 
-                                               <div class="icon-next">
+                    <div class="icon-next">
                         <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
                             <path
                                 d="M7.49844 15.2248C7.3401 15.2248 7.18177 15.1664 7.05677 15.0414L1.62344 9.60811C0.740104 8.72477 0.740104 7.27477 1.62344 6.39144L7.05677 0.958105C7.29844 0.716439 7.69844 0.716439 7.9401 0.958105C8.18177 1.19977 8.18177 1.59977 7.9401 1.84144L2.50677 7.27477C2.10677 7.67477 2.10677 8.32477 2.50677 8.72477L7.9401 14.1581C8.18177 14.3998 8.18177 14.7998 7.9401 15.0414C7.8151 15.1581 7.65677 15.2248 7.49844 15.2248Z"
                                 fill="#292D32"></path>
                         </svg>
 
-                                           </div>
+                    </div>
                 </a>
             </div>
         </div>
         <div class="side__bar
 -                           bottom">
 
-                                       <div class="cate-item">
+            <div class="cate-item">
                 <div class="cate-item_left">
                     <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16963486069795189_512.png&w=640&q=75"
                         alt="" width="24ppx">
@@ -298,8 +294,8 @@ function createMenu()
                             fill="#292D32"></path>
                     </svg>
 
-                           
-                                           </div>
+
+                </div>
             </div>
             <div class="cate-item">
                 <div class="cate-item_left">
@@ -310,10 +306,8 @@ function createMenu()
                 <div class="cate-item_right">
                     <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
                         <path
-                            d
-                           ="M7.49844 15.2248C7.3401 15.2248 7.18177 15.1664 7.05677 15.0414L1.62344 9.60811C0.740104 8.72477 0.740104 7.27477 1.62344 6.39144L7.05677 0.958105C7.29844 0.716439 7.69844 0.716439 7.9401 0.958105C8.18177 1.19977 8.18177 1.59977 7.9401 1.84144L2.50677 7.27477C2.10677 7.67477 2.10677 8.32477 2.50677 8.72477L7.9401 14.1581C8.18177 14.3998 8.18177 14.7998 7.9401 15.0414C7.8151 15.1581 7.65677 15.2248 7.49844 15.2248Z"
-
-                                                       fill="#292D32"></path>
+                            d="M7.49844 15.2248C7.3401 15.2248 7.18177 15.1664 7.05677 15.0414L1.62344 9.60811C0.740104 8.72477 0.740104 7.27477 1.62344 6.39144L7.05677 0.958105C7.29844 0.716439 7.69844 0.716439 7.9401 0.958105C8.18177 1.19977 8.18177 1.59977 7.9401 1.84144L2.50677 7.27477C2.10677 7.67477 2.10677 8.32477 2.50677 8.72477L7.9401 14.1581C8.18177 14.3998 8.18177 14.7998 7.9401 15.0414C7.8151 15.1581 7.65677 15.2248 7.49844 15.2248Z"
+                            fill="#292D32"></path>
                     </svg>
                 </div>
             </div>

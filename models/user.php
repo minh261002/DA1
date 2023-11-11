@@ -7,13 +7,15 @@ function checkUser($username, $password)
     return pdo_query_one($sql, $username, $password);
 }
 
-function usernameExists($username) {
+function usernameExists($username)
+{
     $sql = "SELECT * FROM user WHERE username = ?";
     $user = pdo_query_one($sql, $username);
     return $user ? true : false;
 }
 
-function emailExists($email) {
+function emailExists($email)
+{
     $sql = "SELECT * FROM user WHERE email = ?";
     $user = pdo_query_one($sql, $email);
     return $user ? true : false;
@@ -23,14 +25,21 @@ function user_insert($username, $email, $password)
 {
     $sql = "INSERT INTO user(username, email, password, created_at) VALUES (?, ?, ?, NOW())";
     pdo_execute($sql, $username, $email, $password);
-} 
+}
 
 
+function update_user($id, $avatar, $fullname, $dateOfBirth, $gender, $phone, $email, $address)
+{
 
-// function khach_hang_update($ma_kh, $mat_khau, $ho_ten, $email, $hinh, $kich_hoat, $vai_tro){
-//     $sql = "UPDATE khach_hang SET mat_khau=?,ho_ten=?,email=?,hinh=?,kich_hoat=?,vai_tro=? WHERE ma_kh=?";
-//     pdo_execute($sql, $mat_khau, $ho_ten, $email, $hinh, $kich_hoat==1, $vai_tro==1, $ma_kh);
-// }
+    $sql = "UPDATE user SET avatar=?, fullname=?, dateOfBirth=?, gender=?, phone=?, email=?, address=?, updated_at=NOW() WHERE id=?";
+    pdo_execute($sql, $avatar, $fullname, $dateOfBirth, $gender, $phone, $email, json_encode($address), $id);
+}
+
+function getUpdatedUserInfo($id)
+{
+    $sql = "SELECT * FROM user WHERE id = ?";
+    return pdo_query_one($sql, $id);
+}
 
 // function khach_hang_delete($ma_kh){
 //     $sql = "DELETE FROM khach_hang  WHERE ma_kh=?";
@@ -64,7 +73,8 @@ function user_insert($username, $email, $password)
 //     return pdo_query($sql, $vai_tro);
 // }
 
-function user_change_password($id, $password_new){
+function user_change_password($id, $password_new)
+{
     $sql = "UPDATE user SET password=? WHERE id=?";
     pdo_execute($sql, $password_new, $id);
 }

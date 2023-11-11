@@ -2576,8 +2576,6 @@ input[type="email"]:disabled {
 
 .order {
   background-color: #FAF9F8;
-  padding-top: 32px;
-  padding-bottom: 32px;
 }
 
 .order-bar .order-tab {
@@ -2991,6 +2989,15 @@ input[type="email"]:disabled {
 }
 
 @media screen and (max-width: 767.98px) {
+  .content-info .upload-profile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-info .upload-profile .form-group {
+    padding: 0 !important;
+  }
+
   .checkout-container .cart-item-mb {
     padding: 8px;
   }

@@ -1,4 +1,4 @@
-<main>
+<main class="py-5">
     <section class="order">
         <div class="wrap-content">
             <div class="container-profile">

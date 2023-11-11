@@ -1,23 +1,26 @@
 <main>
     <h2 class="text-center mt-5 mb-3 fw-bold">Đăng Nhập</h2>
     <div class="container form">
-        <p class="err"><?php
-if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {
-    echo $_SESSION["message"];
-    unset($_SESSION["message"]);
-}
-?></p>
-        <form action="index.php?page=login-function" method="POST" id="loginForm">
+        <p class="err">
+            <?php
+            if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {
+                echo $_SESSION["message"];
+                unset($_SESSION["message"]);
+            }
+            ?>
+        </p>
+        <form action="index.php?page=login-function" method="POST" id="loginForm" onsubmit="return validateForm()">
             <div class="form-group mb-3">
                 <label for="username">Tên Đăng Nhập</label>
-                <input type="text" name="username" class="form-control py-2" id="username">
+                <input type="text" name="username" class="form-control py-2" id="username" autocomplete="username">
                 <span class="err" id="usernameErr"></span>
 
             </div>
 
             <div class="form-group mb-3">
                 <label for="password">Mật Khẩu</label>
-                <input type="password" name="password" class="form-control py-2" id="password">
+                <input type="password" name="password" class="form-control py-2" id="password"
+                    autocomplete="current-password">
                 <span class="err" id="passwordErr"></span>
             </div>
 
@@ -60,17 +63,28 @@ if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {
         </div>
     </div>
     <div class="line2"></div>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            var usernameErr = document.getElementById('usernameErr');
+            var passwordErr = document.getElementById('passwordErr');
+
+            usernameErr.innerHTML = "";
+            passwordErr.innerHTML = "";
+
+            if (username.trim() === "") {
+                usernameErr.innerHTML = "Vui lòng nhập tên đăng nhập.";
+                return false;
+            }
+
+            if (password.trim() === "") {
+                passwordErr.innerHTML = "Vui lòng nhập mật khẩu.";
+                return false;
+            }
+            return true;
+        }
+    </script>
 </main>
-
-<!-- <script src="assets/js/check-form.js"></script>
-
-<script>
-const loginForm = document.getElementById("loginForm");
-loginForm.addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    if (validateLoginForm()) {
-        loginForm.submit();
-    }
-});
-</script> -->

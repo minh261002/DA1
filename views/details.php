@@ -28,7 +28,6 @@ if (isset($sale) && $sale !== 0) {
             <!-- desktop -->
             <div class="product-img">
                 <div class="thumbnail-img">
-
                     <?php
                     $images = json_decode($gallery);
                     if (is_array($images)) {
@@ -54,8 +53,8 @@ if (isset($sale) && $sale !== 0) {
             <!-- mobile -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <?php foreach ($images as $key => $img) { ?>
-                    <div class="swiper-slide"><img src="Uploads/<?php echo $img ?>" alt=""></div>
+                    <?php foreach ($images as $key => $image) { ?>
+                    <div class="swiper-slide"><img src="Uploads/<?php echo $image ?>" alt=""></div>
                     <?php } ?>
                 </div>
                 <div class="swiper-pagination"></div>
@@ -64,7 +63,9 @@ if (isset($sale) && $sale !== 0) {
 
             <!-- thông tin sản phẩm -->
             <div class="product-info">
-                <div class="muibox">Bán Chạy</div>
+                <?php if (isset($hot) && $hot === 1) {
+                    echo '<div class="muibox">Bán Chạy</div>';
+                } ?>
 
                 <div class="product-name">
                     <?= $name ?>
@@ -98,7 +99,7 @@ if (isset($sale) && $sale !== 0) {
 
                 <div class="line-dotted"></div>
 
-                <form action="index.php?page=addToCart" method="POST">
+                <form action="index.php?page=addToCart" method="POST" id="form-cart">
 
                     <div class="color">
                         <p>Màu Sắc</p>
@@ -117,7 +118,7 @@ if (isset($sale) && $sale !== 0) {
                                 if ($currentColor !== $color) {
                                     echo '
                                             <div class="size-item">
-                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '">
+                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '" class="color">
                                                 <label for="' . $color . '" class="color-label" >' . $color . '</label>
                                             </div>
                                         ';
@@ -126,6 +127,7 @@ if (isset($sale) && $sale !== 0) {
                             }
                             ?>
                         </div>
+                        <span class="err" id="colorErr"></span>
                     </div>
 
                     <div class="size">
@@ -143,7 +145,7 @@ if (isset($sale) && $sale !== 0) {
 
                                 if ($currentSize !== $size) {
                                     echo '<div class="size-item">
-                                                    <input type="radio" name="size" id="' . $size . '" value="' . $size . '">
+                                                    <input type="radio" name="size" id="' . $size . '" value="' . $size . '" class="size">
                                                     <label for="' . $size . '" class="size-label">' . $size . '</label>
                                                 </div>
                                         ';
@@ -153,7 +155,10 @@ if (isset($sale) && $sale !== 0) {
                             ?>
 
                         </div>
+                        <span class="err" id="sizeErr"></span>
                     </div>
+
+                    <script src="assets/js/form-cart.js"></script>
 
                     <div class="quantity flex">
                         <p>Chọn Số Lượng</p>

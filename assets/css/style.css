@@ -2729,6 +2729,11 @@ input[type="email"]:disabled {
 
 @media screen and (max-width: 1023.98px) {
 
+  .product-page .products {
+    grid-template-columns: repeat(auto-fit, minmax(186px, 1fr));
+  }
+
+
   .order-product .cart-container-mobile+* {
     padding-top: 10px;
     border-top: 2px dotted #c9a5a6;
@@ -2989,6 +2994,18 @@ input[type="email"]:disabled {
 }
 
 @media screen and (max-width: 767.98px) {
+  .product-page .category {
+    display: none;
+  }
+
+  .product-page>.container {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .content-info .upload-profile {
     display: flex;
     flex-direction: column;
@@ -3139,6 +3156,14 @@ input[type="email"]:disabled {
 
   .swiper {
     display: block;
+  }
+
+  .login-google p {
+    font-size: 14px;
+  }
+
+  .login-fb p {
+    font-size: 14px;
   }
 }
 

@@ -9,10 +9,12 @@ $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 if ($conn->connect_error) {
     die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
 }
-
-$voucherCode = $_POST['voucher'];
-$total_price = $_POST['total_price'];
-
+if (isset($_POST['voucher'])) {
+    $voucherCode = $_POST['voucher'];
+}
+if (isset($_POST['total_price'])) {
+    $total_price = $_POST['total_price'];
+}
 $query = "SELECT * FROM voucher WHERE name = ?";
 if ($stmt = $conn->prepare($query)) {
     $stmt->bind_param("s", $voucherCode);

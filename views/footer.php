@@ -52,7 +52,7 @@
     </div>
 
     <div class="container">
-        <div class="social-icon">
+        <div class="social-icon plr-16">
             <p>Kết Nối Với TOKYOLIFE</p>
             <div class="icon flex" style="gap: 16px;">
                 <div>

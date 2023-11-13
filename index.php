@@ -15,6 +15,8 @@ require_once "models/user.php";
 require_once 'models/category.php';
 //product
 require_once "models/product.php";
+//cart
+require_once "models/cart.php";
 
 require_once "views/header.php";
 
@@ -178,6 +180,14 @@ if (isset($_GET['page'])) {
             require_once 'views/details.php';
             break;
 
+
+        case 'checkout':
+            require_once 'views/checkout.php';
+            break;
+        case 'order':
+            require_once 'views/order.php';
+            break;
+
             //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {
@@ -248,6 +258,49 @@ if (isset($_GET['page'])) {
             }
 
             require_once "views/cart.php";
+            break;
+
+        case 'update_user':
+            if (isset($_POST['btn_update_user'])) {
+                $id = $_SESSION['user']['id'];
+                $avatar = $_FILES['avatar']['name'];
+                $avatar_old = $_POST['avatar_old'];
+                $fullname = $_POST['fullname'];
+                $dateOfBirth = $_POST['dateOfBirth'];
+                $gender = $_POST['gender'];
+                $phone = $_POST['phone'];
+                $email = $_POST['email'];
+                //địa chỉ kiểu json
+                $province = $_POST['province'];
+                $district = $_POST['district'];
+                $ward = $_POST['ward'];
+                $address_detail = $_POST['detail'];
+                $address = array(
+                    'province' => $province,
+                    'district' => $district,
+                    'ward' => $ward,
+                    'detail' => $address_detail
+                );
+
+                $target_dir = "uploads/";
+                $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+
+
+                if ($avatar == null) update_user($id, $avatar_old, $fullname, $dateOfBirth, $gender, $phone, $email, $address);
+                else {
+                    move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file);
+                    update_user($id, $avatar, $fullname, $dateOfBirth, $gender, $phone, $email, $address);
+                }
+
+
+
+
+
+                $updatedUserInfo = getUpdatedUserInfo($id);
+                $_SESSION['user'] = $updatedUserInfo;
+
+                header("location: index.php?page=profile");
+            }
             break;
 
         default:

@@ -80,31 +80,31 @@ function checkcreateuser() {
 
   // Check if any field is empty
   if (name.value.trim() === "" || password.value.trim() === "" || phone.value.trim() === "" || email.value.trim() ===
-      "") {
-      alert("Vui lòng điền đầy đủ thông tin!");
-      return false;
+    "") {
+    alert("Vui lòng điền đầy đủ thông tin!");
+    return false;
   }
 
   // Check if the password has at least 6 characters
   if (password.value.length < 6) {
-      alert("Mật khẩu phải có ít nhất 6 ký tự.");
-      password.focus();
-      return false;
+    alert("Mật khẩu phải có ít nhất 6 ký tự.");
+    password.focus();
+    return false;
   }
 
   // Check if the phone number is numeric and 10 digits
   if (isNaN(phone.value) || phone.value.length !== 10) {
-      alert("Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số.");
-      phone.focus();
-      return false;
+    alert("Số điện thoại không hợp lệ. Vui lòng nhập 10 chữ số.");
+    phone.focus();
+    return false;
   }
 
   // Check if the email is in a valid format
   var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if (!emailPattern.test(email.value)) {
-      alert("Email không hợp lệ. Vui lòng nhập đúng định dạng.");
-      email.focus();
-      return false;
+    alert("Email không hợp lệ. Vui lòng nhập đúng định dạng.");
+    email.focus();
+    return false;
   }
 
   return true;

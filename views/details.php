@@ -28,7 +28,6 @@ if (isset($sale) && $sale !== 0) {
             <!-- desktop -->
             <div class="product-img">
                 <div class="thumbnail-img">
-
                     <?php
                     $images = json_decode($gallery);
                     if (is_array($images)) {
@@ -44,18 +43,18 @@ if (isset($sale) && $sale !== 0) {
                 </div>
 
                 <script>
-                    function changeImage(thumbnail) {
-                        var largeImage = document.getElementById("largeImage");
-                        largeImage.src = thumbnail.src;
-                    }
+                function changeImage(thumbnail) {
+                    var largeImage = document.getElementById("largeImage");
+                    largeImage.src = thumbnail.src;
+                }
                 </script>
             </div>
 
             <!-- mobile -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <?php foreach ($images as $key => $img) { ?>
-                        <div class="swiper-slide"><img src="Uploads/<?php echo $img ?>" alt=""></div>
+                    <?php foreach ($images as $key => $image) { ?>
+                    <div class="swiper-slide"><img src="Uploads/<?php echo $image ?>" alt=""></div>
                     <?php } ?>
                 </div>
                 <div class="swiper-pagination"></div>
@@ -64,7 +63,9 @@ if (isset($sale) && $sale !== 0) {
 
             <!-- thông tin sản phẩm -->
             <div class="product-info">
-                <div class="muibox">Bán Chạy</div>
+                <?php if (isset($hot) && $hot === 1) {
+                    echo '<div class="muibox">Bán Chạy</div>';
+                } ?>
 
                 <div class="product-name">
                     <?= $name ?>
@@ -98,7 +99,7 @@ if (isset($sale) && $sale !== 0) {
 
                 <div class="line-dotted"></div>
 
-                <form action="index.php?page=addToCart" method="POST">
+                <form action="index.php?page=addToCart" method="POST" id="form-cart">
 
                     <div class="color">
                         <p>Màu Sắc</p>
@@ -117,8 +118,8 @@ if (isset($sale) && $sale !== 0) {
                                 if ($currentColor !== $color) {
                                     echo '
                                             <div class="size-item">
-                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '">
-                                                <label for="' . $color . '">' . $color . '</label>
+                                                <input type="radio" name="color" id="' . $color . '" value="' . $color . '" class="color">
+                                                <label for="' . $color . '" class="color-label" >' . $color . '</label>
                                             </div>
                                         ';
                                     $currentColor = $color;
@@ -126,6 +127,7 @@ if (isset($sale) && $sale !== 0) {
                             }
                             ?>
                         </div>
+                        <span class="err" id="colorErr"></span>
                     </div>
 
                     <div class="size">
@@ -142,18 +144,21 @@ if (isset($sale) && $sale !== 0) {
                                 extract($va);
 
                                 if ($currentSize !== $size) {
-                                    echo '
-                                            <div class="size-item">
-                                                <input type="radio" name="size" id="' . $size . '" value="' . $size . '">
-                                                <label for="' . $size . '">' . $size . '</label>
-                                            </div>
+                                    echo '<div class="size-item">
+                                                    <input type="radio" name="size" id="' . $size . '" value="' . $size . '" class="size">
+                                                    <label for="' . $size . '" class="size-label">' . $size . '</label>
+                                                </div>
                                         ';
                                     $currentSize = $size;
                                 }
                             }
                             ?>
+
                         </div>
+                        <span class="err" id="sizeErr"></span>
                     </div>
+
+                    <script src="assets/js/form-cart.js"></script>
 
                     <div class="quantity flex">
                         <p>Chọn Số Lượng</p>
@@ -164,23 +169,23 @@ if (isset($sale) && $sale !== 0) {
                         </div>
 
                         <script>
-                            var decrementButton = document.getElementById("decrement");
-                            var incrementButton = document.getElementById("increment");
-                            var quantityInput = document.getElementById("quantity");
+                        var decrementButton = document.getElementById("decrement");
+                        var incrementButton = document.getElementById("increment");
+                        var quantityInput = document.getElementById("quantity");
 
-                            decrementButton.addEventListener("click", function (e) {
-                                e.preventDefault();
-                                var currentQuantity = parseInt(quantityInput.value);
-                                if (currentQuantity > 1) {
-                                    quantityInput.value = currentQuantity - 1;
-                                }
-                            });
+                        decrementButton.addEventListener("click", function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt(quantityInput.value);
+                            if (currentQuantity > 1) {
+                                quantityInput.value = currentQuantity - 1;
+                            }
+                        });
 
-                            incrementButton.addEventListener("click", function (e) {
-                                e.preventDefault();
-                                var currentQuantity = parseInt(quantityInput.value);
-                                quantityInput.value = currentQuantity + 1;
-                            });
+                        incrementButton.addEventListener("click", function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt(quantityInput.value);
+                            quantityInput.value = currentQuantity + 1;
+                        });
                         </script>
                     </div>
 
@@ -409,11 +414,11 @@ if (isset($sale) && $sale !== 0) {
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        var swiper = new Swiper(".mySwiper", {
-            pagination: {
-                el: ".swiper-pagination",
-                type: "fraction"
-            }
-        });
+    var swiper = new Swiper(".mySwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+            type: "fraction"
+        }
+    });
     </script>
 </main>

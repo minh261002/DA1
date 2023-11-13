@@ -2,13 +2,16 @@
     <h2 class="text-center mt-5 mb-3 fw-bold">Đăng Ký</h2>
     <div class="container form">
 
-        <p class="err"><?php
-if (isset($_SESSION["message_re"]) && $_SESSION["message_re"] != "") {
-    echo $_SESSION["message_re"];
-    unset($_SESSION["message_re"]);
-}
-?></p>
-        <form action="index.php?page=register-function" method="POST" id="registerForm">
+        <p class="err">
+            <?php
+            if (isset($_SESSION["message_re"]) && $_SESSION["message_re"] != "") {
+                echo $_SESSION["message_re"];
+                unset($_SESSION["message_re"]);
+            }
+            ?>
+        </p>
+        <form action="index.php?page=register-function" method="POST" id="registerForm"
+            onsubmit="return validateForm()">
             <div class="form-group mb-3">
                 <label for="username">Tên Đăng Nhập</label>
                 <input type="text" name="username" class="form-control py-2" id="username">
@@ -72,15 +75,49 @@ if (isset($_SESSION["message_re"]) && $_SESSION["message_re"] != "") {
     <div class="line2"></div>
 </main>
 
-<!-- <script src="assets/js/check-form.js"></script>
-
 <script>
-const registerForm = document.getElementById("registerForm");
-registerForm.addEventListener("submit", function(e) {
-    e.preventDefault();
+    function validateForm() {
+        var username = document.getElementById('username').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var confirm = document.getElementById('confirm').value;
 
-    if (validateRegisterForm()) {
-        registerForm.submit();
+        var usernameErr = document.getElementById('usernameErr');
+        var emailErr = document.getElementById('emailErr');
+        var passwordErr = document.getElementById('passwordErr');
+        var confirmErr = document.getElementById('confirmErr');
+
+        usernameErr.innerHTML = "";
+        emailErr.innerHTML = "";
+        passwordErr.innerHTML = "";
+        confirmErr.innerHTML = "";
+
+        if (username.trim() === "") {
+            usernameErr.innerHTML = "Vui lòng nhập tên đăng nhập.";
+            return false;
+        }
+
+        if (email.trim() === "") {
+            emailErr.innerHTML = "Vui lòng nhập địa chỉ email.";
+            return false;
+        }
+
+        if (password.trim() === "") {
+            passwordErr.innerHTML = "Vui lòng nhập mật khẩu.";
+            return false;
+        }
+
+        if (confirm.trim() === "") {
+            confirmErr.innerHTML = "Vui lòng nhập lại mật khẩu.";
+            return false;
+        }
+
+        if (password !== confirm) {
+            confirmErr.innerHTML = "Mật khẩu không khớp.";
+            return false;
+        }
+
+
+        return true;
     }
-});
-</script> -->
+</script>

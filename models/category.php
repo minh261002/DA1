@@ -64,6 +64,7 @@ function show_category_home()
 
     return $html_category;
 }
+
 // /**
 //  * Thêm loại mới
 //  * @param String $ten_loai là tên loại

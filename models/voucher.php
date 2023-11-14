@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once 'cart.php';
 require_once 'pdo.php';
 
@@ -17,9 +16,11 @@ if (isset($_POST['voucher'])) {
 
     if ($voucherRow) {
         $discountValue = $voucherRow['value'];
+
         $totalPrice = total_price();
 
         $discountAmount = ($discountValue / 100) * $totalPrice;
+
         $_SESSION['discounted'] = $discountAmount;
 
         $totalPrice -= $discountAmount;
@@ -33,7 +34,6 @@ if (isset($_POST['voucher'])) {
             'message' => 'Áp dụng voucher thành công!',
             'totalPrice' => number_format($totalPrice, 0, '.', ',') . ' đ',
             'discounted' => number_format($discountAmount, 0, '.', ',') . ' đ',
-
         ]);
     } else {
         echo json_encode([
@@ -42,5 +42,4 @@ if (isset($_POST['voucher'])) {
         ]);
     }
 }
-
 ?>

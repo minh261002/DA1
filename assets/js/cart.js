@@ -21,7 +21,7 @@ $(document).ready(function() {
             data: {productId: productId, quantity: quantity, action: action},
             success: function(response) {
                 var data = JSON.parse(response);
-                updateUI(data, productId); // Truyền productId vào hàm updateUI
+                updateUI(data, productId); 
             }
         });
     });

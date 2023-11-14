@@ -4,7 +4,7 @@ $html_cart = show_Cart();
 
 $total_price = $_SESSION['total_price'] ?? 0;
 $total_order = $_SESSION['total_order'] ?? 0;
-
+$temporary = $_SESSION['temporary'] ?? 0;
 ?>
 
 <main class="pb-60 background-bottom">
@@ -175,16 +175,27 @@ $total_order = $_SESSION['total_order'] ?? 0;
                     <div class="flex transience">
                         <p>Tạm Tính</p>
                         <p class="temporary">
-                            <?php if (isset($total_price)) {
-                                echo number_format($total_price, 0, ',', '.');
-                            } ?>
-                            đ
+                            <?php
+                            if (isset($temporary)) {
+                                echo number_format($temporary, 0, ',', '.') . ' đ';
+                            } else {
+                                echo '0 đ';
+                            }
+                            ?>
                         </p>
                     </div>
 
                     <div class="discount flex">
                         <p>Mã Giảm Giá</p>
-                        <p class="discounted">0 đ</p>
+                        <p class="discounted">
+                            <?php
+                            if (isset($_SESSION['discounted'])) {
+                                echo number_format($_SESSION['discounted'], 0, ',', '.') . ' đ';
+                            } else {
+                                echo '0 đ';
+                            }
+                            ?>
+                        </p>
                     </div>
 
                     <div class="line-dash"></div>
@@ -197,8 +208,6 @@ $total_order = $_SESSION['total_order'] ?? 0;
                             } ?>
                             đ
                         </p>
-
-                        <?= $total_price ?>
                     </div>
 
                     <div class="line-dash"></div>

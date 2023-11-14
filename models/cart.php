@@ -9,6 +9,25 @@ function subtotal($price, $quantity)
     return $subtotal;
 }
 
+function temporary()
+{
+    $temporary = 0;
+
+    foreach ($_SESSION['cart'] as $key => $item) {
+        $subtotal = subtotal($item["price"], $item["quantity"]);
+        $temporary += $subtotal;
+        $_SESSION['cart'][$key]['subtotal'] = $subtotal;
+    }
+
+    if (isset($_SESSION['discounted'])) {
+        $temporary -= $_SESSION['discounted'];
+    }
+
+    $_SESSION['temporary'] = $temporary;
+
+    return $temporary;
+}
+
 function total_price()
 {
     $total_price = 0;
@@ -19,10 +38,15 @@ function total_price()
         $_SESSION['cart'][$key]['subtotal'] = $subtotal;
     }
 
+    if (isset($_SESSION['discounted'])) {
+        $total_price -= $_SESSION['discounted'];
+    }
+
     $_SESSION['total_price'] = $total_price;
 
     return $total_price;
 }
+
 
 function total_order()
 {
@@ -80,4 +104,5 @@ function show_Cart()
 
 total_price();
 total_order();
+temporary();
 ?>

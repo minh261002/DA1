@@ -59,6 +59,7 @@ if (!empty($_SESSION["cart"]) && count($_SESSION["cart"]) > 0) {
 }
 $total_price = $_SESSION['total_price'] ?? 0;
 $total_order = $_SESSION['total_order'] ?? 0;
+$temporary = $_SESSION['temporary'] ?? 0;
 ?>
 
 <main>
@@ -282,7 +283,6 @@ $total_order = $_SESSION['total_order'] ?? 0;
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
 
@@ -367,9 +367,13 @@ $total_order = $_SESSION['total_order'] ?? 0;
                             <div class="flex transience">
                                 <p>Tạm Tính</p>
                                 <p class="temporary">
-                                    <?php if (isset($total_price)) {
-                                        echo number_format($total_price, 0, ',', '.') . ' đ';
-                                    } ?>
+                                    <?php
+                                    if (isset($temporary)) {
+                                        echo number_format($temporary, 0, ',', '.') . ' đ';
+                                    } else {
+                                        echo '0 đ';
+                                    }
+                                    ?>
                                 </p>
                             </div>
 
@@ -406,7 +410,6 @@ $total_order = $_SESSION['total_order'] ?? 0;
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </main>

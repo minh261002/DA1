@@ -255,6 +255,11 @@ if (isset($_GET['page'])) {
 
             if (isset($_GET['act']) && $_GET['act'] == 'del_all') {
                 unset($_SESSION["cart"]);
+                unset($_SESSION["total_order"]);
+                unset($_SESSION["total_price"]);
+                unset($_SESSION["subtotal"]);
+                unset($_SESSION["temporary"]);
+                unset($_SESSION["discounted"]);
                 $total_price = 0;
                 header('Location: index.php?page=home');
             }

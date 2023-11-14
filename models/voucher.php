@@ -26,6 +26,8 @@ if (isset($_POST['voucher'])) {
 
         $_SESSION['total_price'] = $totalPrice;
 
+        total_price();
+
         echo json_encode([
             'success' => true,
             'message' => 'Áp dụng voucher thành công!',

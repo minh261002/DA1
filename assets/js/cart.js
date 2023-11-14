@@ -1,11 +1,11 @@
 $(document).ready(function() {
     //cập nhật giao diện sau AJAX
-    function updateUI(data) {
+    function updateUI(data, productId) {
         $('.total-price').text(data.totalPrice);
         $('.total_order').text(data.totalOrder);
-        $('#sub-total-' + data.productId).text(data.subtotal);
+        $('.sub-total_' + productId).text(data.subtotal);
         $('.temporary').text(data.totalPrice);
-        $('.quantity').val(data.quantity);
+        $('#quantity_' + productId).val(data.quantity);
     }
   
     // click tăng giảm
@@ -21,9 +21,8 @@ $(document).ready(function() {
             data: {productId: productId, quantity: quantity, action: action},
             success: function(response) {
                 var data = JSON.parse(response);
-                updateUI(data);
+                updateUI(data, productId); // Truyền productId vào hàm updateUI
             }
         });
     });
-  });
-  
+});

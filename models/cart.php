@@ -1,7 +1,12 @@
 <?php
 function subtotal($price, $quantity)
 {
-    return (float) $price * (float) $quantity;
+    $subtotal = 0;
+    $subtotal = (float) $price * (float) $quantity;
+
+    $_SESSION['subtotal'] = $subtotal;
+
+    return $subtotal;
 }
 
 function total_price()
@@ -36,7 +41,7 @@ function show_Cart()
 
     if (!empty($_SESSION["cart"]) && count($_SESSION["cart"]) > 0) {
         foreach ($_SESSION["cart"] as $pdCart) {
-            // Truy cập trực tiếp từ mảng thay vì dùng extract()
+
             $id = $pdCart["id"];
             $img = $pdCart["img"];
             $name = $pdCart["name"];
@@ -44,7 +49,6 @@ function show_Cart()
             $color = $pdCart["color"];
             $price = $pdCart["price"];
             $quantity = $pdCart["quantity"];
-            $subtotal = subtotal($price, $quantity);
 
             $html_cart .= "<tr class='cart-row'>
                 <td> <img src='Uploads/{$img}' width='50px'> </td>
@@ -58,12 +62,12 @@ function show_Cart()
                     <form action='' class='cart-quantity flex' method='POST'>
                         <input type='hidden' name='productId' value='{$id}'>
                         <button type='submit' class='decrement' name='decrement'>-</button>
-                        <input type='number' name='quantity' class='quantity' value='{$quantity}' min='1' max='10'>
+                        <input type='number' name='quantity' id='quantity_{$id}' class='quantity' value='{$quantity}' min='1' max='10'>
                         <button type='submit' class='increment' name='increment'>+</button>
                     </form>
                 </td>
                 <td class='cart-total'>
-                    <p id='sub-total'>" . number_format($subtotal, 0, ',', '.') . " đ</p>
+                    <p class='sub-total_{$id}'>" . number_format(subtotal($price, $quantity), 0, ',', '.') . " đ</p>
                     <a href='index.php?page=cart&act=del1&id={$id}'>Xóa</a>
                 </td>
             </tr>";

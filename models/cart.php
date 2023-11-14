@@ -19,10 +19,6 @@ function temporary()
         $_SESSION['cart'][$key]['subtotal'] = $subtotal;
     }
 
-    if (isset($_SESSION['discounted'])) {
-        $temporary -= $_SESSION['discounted'];
-    }
-
     $_SESSION['temporary'] = $temporary;
 
     return $temporary;

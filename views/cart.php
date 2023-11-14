@@ -5,6 +5,7 @@ $html_cart = show_Cart();
 $total_price = $_SESSION['total_price'] ?? 0;
 $total_order = $_SESSION['total_order'] ?? 0;
 $temporary = $_SESSION['temporary'] ?? 0;
+
 ?>
 
 <main class="pb-60 background-bottom">

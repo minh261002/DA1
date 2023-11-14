@@ -52,6 +52,11 @@ p {
 header {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
 }
+.header__line{
+  width: 100%;
+  height: 1px;
+  background: #f5f5f5;
+}
 
 .flex {
   display: flex;
@@ -62,7 +67,7 @@ header {
 .header__top {
   text-align: center;
   padding: 6px 0;
-  background: #c92027;
+  background: #000;
 }
 
 .header__top p {
@@ -76,7 +81,6 @@ header {
 }
 
 .header__middle {
-  background: #f8f1e4;
   padding: 12px 0;
 }
 
@@ -114,7 +118,7 @@ header {
 
 .form-search input {
   width: 100%;
-  border: none;
+  border: 1px solid #e3e3e3;
   outline: none;
   padding: 8px 16px;
   border-radius: 6px 0 0 6px;
@@ -122,21 +126,15 @@ header {
 }
 
 .icon_search {
-  padding: 5px 12px;
+  padding: 7px 12px;
   border: none;
-  background: #c92027;
+  background: #000;
   border-radius: 0 6px 6px 0;
 }
 
 .header__icon {
   justify-content: center;
   gap: 20px;
-}
-
-.icon-new img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
 }
 
 .icon_cart {
@@ -149,7 +147,7 @@ header {
   font-weight: 400;
   text-transform: none;
   padding: 1px 4px;
-  background: rgb(255, 65, 28);
+  background: #333;
   border-radius: 100px;
   width: 26px;
   text-align: center;
@@ -164,6 +162,7 @@ header {
 .header__menu {
   padding: 14px 0;
   margin: 0;
+  background: #f5f5f5;
 }
 
 .menu {
@@ -1144,6 +1143,10 @@ header.header__mobile {
   right: 0;
   background-color: #bca4a42f;
   z-index: 10;
+}
+
+.bg-profile{
+  background: #c92027;
 }
 
 /*reakpoint cho điện thoại  */
@@ -2425,6 +2428,10 @@ pre {
   color: #fff;
 }
 
+.option-block:hover a{
+  color: #fff;
+}
+
 .option-block:hover .accordion-body a:hover {
   opacity: 0.8;
 }
@@ -2571,11 +2578,6 @@ input[type="email"]:disabled {
   width: 100%;
   background-color: rgb(255, 255, 255);
   min-height: 400px;
-}
-
-
-.order {
-  background-color: #FAF9F8;
 }
 
 .order-bar .order-tab {

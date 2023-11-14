@@ -1,6 +1,7 @@
 <?php
 $html_category = '';
 foreach ($siblingsCategories as $category) {
+    
     extract($category);
     $link = 'index.php?page=product&id=' . $id;
     $html_category .= '<li><a href="' . $link . '">' . htmlspecialchars($name) . '</a></li>';

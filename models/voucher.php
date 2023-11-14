@@ -1,48 +1,44 @@
 <?php
-$db_host = "localhost";
-$db_username = "root";
-$db_password = "";
-$db_name = "duan1";
+session_start();
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+require_once 'cart.php';
+require_once 'pdo.php';
 
-if ($conn->connect_error) {
-    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
-}
 if (isset($_POST['voucher'])) {
     $voucherCode = $_POST['voucher'];
-}
-if (isset($_POST['total_price'])) {
-    $total_price = $_POST['total_price'];
-}
-$query = "SELECT * FROM voucher WHERE name = ?";
-if ($stmt = $conn->prepare($query)) {
-    $stmt->bind_param("s", $voucherCode);
 
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            $voucher = $result->fetch_assoc();
-            $discountValue = $voucher['value'];
-            $discountAmount = $total_price * ($discountValue / 100);
-            $newTotal = $total_price - $discountAmount;
-
-            $response = array('success' => true, 'discount' => number_format($discountAmount, 0, ',', '.') . 'đ', 'newTotal' => number_format($newTotal, 0, ',', '.') . 'đ');
-        } else {
-            $response = array('success' => false, 'message' => 'Mã voucher không hợp lệ.');
-        }
-    } else {
-        $response = array('success' => false, 'message' => 'Đã xảy ra lỗi trong quá trình xử lý yêu cầu.');
+    function check_voucher($voucherCode)
+    {
+        $sql = "SELECT * FROM voucher WHERE name = ?";
+        return pdo_query_one($sql, $voucherCode);
     }
 
-    $stmt->close();
-} else {
-    $response = array('success' => false, 'message' => 'Đã xảy ra lỗi trong quá trình xử lý yêu cầu.');
+    $voucherRow = check_voucher($voucherCode);
+
+    if ($voucherRow) {
+        $discountValue = $voucherRow['value'];
+        $totalPrice = total_price();
+
+        $discountAmount = ($discountValue / 100) * $totalPrice;
+        $_SESSION['discounted'] = $discountAmount;
+
+        $totalPrice -= $discountAmount;
+
+        $_SESSION['total_price'] = $totalPrice;
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Áp dụng voucher thành công!',
+            'totalPrice' => number_format($totalPrice, 0, '.', ',') . ' đ',
+            'discounted' => number_format($discountAmount, 0, '.', ',') . ' đ',
+
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Mã voucher không hợp lệ.',
+        ]);
+    }
 }
 
-header('Content-Type: application/json');
-echo json_encode($response);
-
-$conn->close();
 ?>

@@ -228,27 +228,27 @@ $html_hot_product = show_product($hot_product);
             </div>
         </div>
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabButtons = document.querySelectorAll('.cate-button');
-            const tabContents = document.querySelectorAll('.tab-content');
+            document.addEventListener('DOMContentLoaded', function () {
+                const tabButtons = document.querySelectorAll('.cate-button');
+                const tabContents = document.querySelectorAll('.tab-content');
 
-            tabButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const category = button.getAttribute('data-category');
+                tabButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        const category = button.getAttribute('data-category');
 
-                    tabButtons.forEach(function(btn) {
-                        btn.classList.remove('cate-active');
+                        tabButtons.forEach(function (btn) {
+                            btn.classList.remove('cate-active');
+                        });
+                        button.classList.add('cate-active');
+
+                        tabContents.forEach(function (content) {
+                            content.classList.remove('atv');
+                        });
+
+                        document.getElementById(category + '-product').classList.add('atv');
                     });
-                    button.classList.add('cate-active');
-
-                    tabContents.forEach(function(content) {
-                        content.classList.remove('atv');
-                    });
-
-                    document.getElementById(category + '-product').classList.add('atv');
                 });
             });
-        });
         </script>
     </section>
 
@@ -519,7 +519,7 @@ $html_hot_product = show_product($hot_product);
 
     <section class="about_us">
         <div class="about-content">
-            <img src="https://tokyolife.vn/_next/static/media/tokyolife-logo.1bafb78d.svg" alt="">
+            <img src="uploads/logo_owenstore_ft.svg" alt="">
             <div class="about-desc">
                 <p>TokyoLife là cửa hàng bán lẻ đồ gia dụng, hóa mỹ phẩm, phụ kiện chính hãng các thương hiệu Nhật Bản:
                     Inomata, Ebisu, ORP Tokyo, Momotani, Naturie, Rohto (Hada Labo, Melano CC...), Kose (Dòng Softymo),
@@ -580,71 +580,71 @@ $html_hot_product = show_product($hot_product);
 
 
     <script>
-    $('.slide-home').owlCarousel({
-        center: true,
-        loop: true,
-        nav: true,
-        responsive: {
-            1024: {
-                items: 1
+        $('.slide-home').owlCarousel({
+            center: true,
+            loop: true,
+            nav: true,
+            responsive: {
+                1024: {
+                    items: 1
+                },
+                768: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                374.98: {
+                    items: 1
+                }
             },
-            768: {
-                items: 1
-            },
-            480: {
-                items: 1
-            },
-            374.98: {
-                items: 1
-            }
-        },
-        autoplay: true,
-        autoplayTimeout: 4000,
-    });
+            autoplay: true,
+            autoplayTimeout: 4000,
+        });
 
-    // flash sale
-    $('.slide-flashsale').owlCarousel({
-        loop: true,
-        nav: true,
-        margin: 30,
-        responsiveClass: true,
-        responsive: {
-            1024: {
-                items: 4,
+        // flash sale
+        $('.slide-flashsale').owlCarousel({
+            loop: true,
+            nav: true,
+            margin: 30,
+            responsiveClass: true,
+            responsive: {
+                1024: {
+                    items: 4,
+                },
+                768: {
+                    items: 3,
+                },
+                480: {
+                    items: 2,
+                },
+                374.98: {
+                    items: 2,
+                }
             },
-            768: {
-                items: 3,
-            },
-            480: {
-                items: 2,
-            },
-            374.98: {
-                items: 2,
-            }
-        },
-    })
+        })
 
 
-    // prouct
-    $('.list-product').owlCarousel({
-        nav: true,
-        loop: true,
-        margin: 30,
-        responsiveClass: true,
-        responsive: {
-            1024: {
-                items: 4,
+        // prouct
+        $('.list-product').owlCarousel({
+            nav: true,
+            loop: true,
+            margin: 30,
+            responsiveClass: true,
+            responsive: {
+                1024: {
+                    items: 4,
+                },
+                768: {
+                    items: 3,
+                },
+                480: {
+                    items: 2,
+                },
+                374.98: {
+                    items: 2,
+                }
             },
-            768: {
-                items: 3,
-            },
-            480: {
-                items: 2,
-            },
-            374.98: {
-                items: 2,
-            }
-        },
-    })
+        })
     </script>
 </main>

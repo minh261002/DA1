@@ -4,7 +4,7 @@ if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
     $html_account = '
             <li><a href="register">Xin chào, <span class="text-danger">' . $username . '</span></a></li>
             <li><a href="index.php?page=profile&act=info">Thông Tin Cá Nhân</a></li>
-            <li><a href="index.php?page=profile&act=order">Đơn Hàng</a></li>
+            <li><a href="index.php?page=order">Đơn Hàng</a></li>
             <li><a href="index.php?page=changePassword">Đổi Mật Khẩu</a></li>
             <li><a class="btn btn-danger p-2 text-white" href="index.php?page=logout">Đăng Xuất</a></li>
         ';
@@ -58,7 +58,7 @@ function createMenu()
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tokyo Life</title>
+    <title>OWEN STORE - Clothing & Accessories</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.3/swiper-bundle.min.css">
@@ -85,7 +85,7 @@ function createMenu()
             <div class="container">
                 <div class="header__logo" style="cursor:pointer">
                     <a href="index.php?page=home">
-                        <img src="https://tokyolife.vn/_next/static/media/tokyolife-logo.1bafb78d.svg" width="100%">
+                        <img src="uploads/logo_owenstore.svg">
                     </a>
                 </div>
 
@@ -118,12 +118,6 @@ function createMenu()
                 </div>
 
                 <div class="header__icon flex">
-                    <div class="icon-new">
-                        <img src="assets/img/news.gif">
-                    </div>
-
-
-
                     <div class="icon-user">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -133,12 +127,8 @@ function createMenu()
 
                         <ul class="sub-menu-user">
                             <?= $html_account ?>
-
                         </ul>
                     </div>
-
-
-
 
                     <div class="icon_cart">
                         <a href="index.php?page=cart">
@@ -159,13 +149,11 @@ function createMenu()
                                 </defs>
                             </svg>
                             <span class="cout_cart">
-
-
                                 <?php if (isset($total_order)) {
-                                                                   echo $total_order;
-                                                               } else {
-                                                                   echo '0';
-                                                               } ?>
+                                    echo $total_order;
+                                } else {
+                                    echo '0';
+                                } ?>
                             </span></a>
                     </div>
                     <div class="icon-tracking">
@@ -179,7 +167,7 @@ function createMenu()
                 </div>
             </div>
         </div>
-
+        <div class="header__line"></div>
         <ul class="header__menu">
             <div class="container">
                 <div class="menu flex">

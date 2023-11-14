@@ -30,9 +30,13 @@ function user_insert($username, $email, $password)
 
 function update_user($id, $avatar, $fullname, $dateOfBirth, $gender, $phone, $email, $address)
 {
-
-    $sql = "UPDATE user SET avatar=?, fullname=?, dateOfBirth=?, gender=?, phone=?, email=?, address=?, updated_at=NOW() WHERE id=?";
-    pdo_execute($sql, $avatar, $fullname, $dateOfBirth, $gender, $phone, $email, json_encode($address), $id);
+    if ($avatar != "") {
+        $sql = "UPDATE user SET avatar=?, fullname=?, dateOfBirth=?, gender=?, phone=?, email=?, address=?, updated_at=NOW() WHERE id=?";
+        pdo_execute($sql, $avatar, $fullname, $dateOfBirth, $gender, $phone, $email, json_encode($address), $id);
+    } else {
+        $sql = "UPDATE user SET fullname=?, dateOfBirth=?, gender=?, phone=?, email=?, address=?, updated_at=NOW() WHERE id=?";
+        pdo_execute($sql, $fullname, $dateOfBirth, $gender, $phone, $email, json_encode($address), $id);
+    }
 }
 
 function getUpdatedUserInfo($id)

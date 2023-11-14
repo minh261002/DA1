@@ -474,7 +474,7 @@ $html_hot_product = show_product($hot_product);
 
     <section class="about_us">
         <div class="about-content">
-            <img src="https://tokyolife.vn/_next/static/media/tokyolife-logo.1bafb78d.svg" alt="">
+            <img src="uploads/logo_owenstore_ft.svg" alt="">
             <div class="about-desc">
                 <p>TokyoLife là cửa hàng bán lẻ đồ gia dụng, hóa mỹ phẩm, phụ kiện chính hãng các thương hiệu Nhật Bản:
                     Inomata, Ebisu, ORP Tokyo, Momotani, Naturie, Rohto (Hada Labo, Melano CC...), Kose (Dòng Softymo),

@@ -31,7 +31,7 @@
 function get_new_product()
 {
     $currentDateTime = date('Y-m-d H:i:s');
-    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-3 days', strtotime($currentDateTime)));
+    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-10 days', strtotime($currentDateTime)));
 
     $sql = "SELECT * FROM product WHERE  created_at >= '$threeDaysAgo' ORDER BY id DESC LIMIT 7";
     return pdo_query($sql);

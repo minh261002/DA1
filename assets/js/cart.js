@@ -1,74 +1,28 @@
-var decrementButtons = document.querySelectorAll(".decrement");
-var incrementButtons = document.querySelectorAll(".increment");
-var quantityInputs = document.querySelectorAll(".quantity");
-var subTotalElements = document.querySelectorAll("#sub-total");
-var temporaryElements = document.querySelectorAll(".temporary");
-var totalPriceElement = document.querySelector(".total-price");
-
-var priceElements = document.querySelectorAll(".cart-price");
-
-function updateSubtotal(rowIndex) {
-  var quantity = parseInt(quantityInputs[rowIndex].value);
-  var price = parseFloat(priceElements[rowIndex].getAttribute("data-price"));
-  var subtotal = quantity * price;
-  subTotalElements[rowIndex].textContent = numberFormat(subtotal) + " đ";
-  return subtotal;
-}
-
-function numberFormat(number) {
-  return number.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-}
-
-decrementButtons.forEach(function (decrementButton, index) {
-  decrementButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    var currentQuantity = parseInt(quantityInputs[index].value);
-    if (currentQuantity > 1) {
-      quantityInputs[index].value = currentQuantity - 1;
-      var newSubtotal = updateSubtotal(index);
-      updateTemporaryAndTotal();
+$(document).ready(function() {
+    //cập nhật giao diện sau AJAX
+    function updateUI(data, productId) {
+        $('.total-price').text(data.totalPrice);
+        $('.total_order').text(data.totalOrder);
+        $('.sub-total_' + productId).text(data.subtotal);
+        $('.temporary').text(data.totalPrice);
+        $('#quantity_' + productId).val(data.quantity);
     }
-  });
+  
+    // click tăng giảm
+    $('.cart-quantity').on('click', '.decrement, .increment', function(e) {
+        e.preventDefault();
+        var productId = $(this).closest('.cart-quantity').find('input[name="productId"]').val();
+        var quantity = parseInt($(this).closest('.cart-quantity').find('.quantity').val());
+        var action = $(this).hasClass('decrement') ? 'decrement' : 'increment';
+  
+        $.ajax({
+            url: './models/update_cart.php',
+            type: 'POST',
+            data: {productId: productId, quantity: quantity, action: action},
+            success: function(response) {
+                var data = JSON.parse(response);
+                updateUI(data, productId); 
+            }
+        });
+    });
 });
-
-incrementButtons.forEach(function (incrementButton, index) {
-  incrementButton.addEventListener("click", function (e) {
-    e.preventDefault();
-    var currentQuantity = parseInt(quantityInputs[index].value);
-    if (currentQuantity < 10) {
-      // Giới hạn số lượng tối đa
-      quantityInputs[index].value = currentQuantity + 1;
-      var newSubtotal = updateSubtotal(index);
-      updateTemporaryAndTotal();
-    }
-  });
-});
-
-function updateTotalPrice() {
-  var subtotals = Array.from(subTotalElements).map(function (subtotalElement) {
-    return parseFloat(subtotalElement.textContent.replace(/\D/g, ""));
-  });
-  var total = subtotals.reduce(function (acc, subtotal) {
-    return acc + subtotal;
-  }, 0);
-  totalPriceElement.textContent = numberFormat(total) + " đ";
-}
-
-function updateTemporary() {
-  var subtotals = Array.from(subTotalElements).map(function (subtotalElement) {
-    return parseFloat(subtotalElement.textContent.replace(/\D/g, ""));
-  });
-  var temporary = subtotals.reduce(function (acc, subtotal) {
-    return acc + subtotal;
-  }, 0);
-  temporaryElements.forEach(function (element) {
-    element.textContent = numberFormat(temporary) + " đ";
-  });
-}
-
-function updateTemporaryAndTotal() {
-  updateTotalPrice();
-  updateTemporary();
-}
-
-updateTemporaryAndTotal();

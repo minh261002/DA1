@@ -4,19 +4,62 @@ if (isset($_SESSION['user'])) {
 }
 
 if (isset($address)) {
+
     $addressData = json_decode($address, true);
 
     if ($addressData !== null) {
+
         $province = $addressData['province'];
         $district = $addressData['district'];
         $ward = $addressData['ward'];
         $detail = $addressData['detail'];
+
     } else {
         echo "Có lỗi";
     }
 }
 
-$total_price = total_price();
+$html_cart_row = '';
+
+if (!empty($_SESSION["cart"]) && count($_SESSION["cart"]) > 0) {
+    foreach ($_SESSION["cart"] as $pdCart) {
+        $id = $pdCart["id"];
+        $img = $pdCart["img"];
+        $name = $pdCart["name"];
+        $size = $pdCart["size"];
+        $color = $pdCart["color"];
+        $price = $pdCart["price"];
+        $quantity = $pdCart["quantity"];
+        $subtotal = subtotal($price, $quantity);
+
+        $html_cart_row .= '
+            <tr class="cart-row">
+            <td> <img src="uploads/' . $img . '" width=" 50px"> </td>
+
+            <td class="cart-name">
+                <p>' . $name . '</p>
+                <p>Kích Thước: <span>' . $size . '</span></p>
+                <p>Màu Sắc: <span>' . $color . '</span></p>
+            </td>
+
+            <td class="cart-price" data-price="' . $price . ' ?>">
+                ' . number_format($price, 0, ',', '.') . ' đ
+            </td>
+
+            <td class="text-center fw-bold"> ' . $quantity . '</td>
+
+            <td class="cart-total">
+                <p id="sub-total">
+                ' . number_format($subtotal, 0, ',', '.') . ' đ
+                </p>
+            </td>
+            </tr>
+        ';
+    }
+}
+$total_price = $_SESSION['total_price'] ?? 0;
+$total_order = $_SESSION['total_order'] ?? 0;
+$temporary = $_SESSION['temporary'] ?? 0;
 ?>
 
 <main>
@@ -33,7 +76,7 @@ $total_price = total_price();
                                 d="M12.7541 8.65607V6.78107H14.5011V8.65607C14.5011 9.00107 14.1101 9.28107 13.6281 9.28107C13.1461 9.28107 12.7541 9.00107 12.7541 8.65607ZM2.62207 8.65607V6.78107H4.36907V8.65607C4.36907 9.00107 3.97807 9.28107 3.49507 9.28107C3.01207 9.28107 2.62207 9.00107 2.62207 8.65607Z"
                                 fill="white"></path>
                         </svg>
-                        <p>GIỎ HÀNG</p>
+                        <p onclick="window.location.replace('index.php?page=cart')">GIỎ HÀNG</p>
                     </div>
                     <div class="dotline"></div>
                     <div class="step-checkout">
@@ -240,7 +283,6 @@ $total_price = total_price();
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
 
@@ -294,10 +336,10 @@ $total_price = total_price();
                         <div class="cart-item">
                             <div class="header-cart-item">
                                 Giỏ Hàng <span>(
-                                    <!-- <?php if ($total_order) {
+                                    <?php if ($total_order) {
                                         echo $total_order;
-                                    } ?> -->
-                                    1 Sản Phẩm)
+                                    } ?>
+                                    Sản Phẩm)
                                 </span>
                             </div>
 
@@ -313,40 +355,11 @@ $total_price = total_price();
                                 </thead>
 
                                 <tbody>
-                                    <!-- <?= $html_cart ?> -->
-                                    <tr class="cart-row">
-                                        <td> <img
-                                                src="./assets/img/4ac928b9e8c84c94b45c5a9c8f5dcad8_optimized_original_image.jpg"
-                                                width=" 50px"> </td>
-
-                                        <td class="cart-name">
-                                            <p>Quan ao</p>
-                                            <p>Kích Thước: <span>M</span></p>
-                                            <p>Màu Sắc: <span>Mau red</span></p>
-                                        </td>
-
-                                        <td class="cart-price" data-price="' . $price . '">100d</td>
-
-                                        <td>
-                                            <form action="" class="cart-quantity flex" method="POST">
-                                                <input type="hidden" name="productId" value="' . $id . '">
-                                                <button type="submit" class="decrement" name="decrement">-</button>
-                                                <input type="number" name="quantity" class="quantity"
-                                                    value="' . $quantity . '" min="1" max="10">
-                                                <button type="submit" class="increment" name="increment">+</button>
-                                            </form>
-                                        </td>
-
-                                        <td class="cart-total">
-                                            <p id="sub-total">100d</p>
-                                        </td>
-                                    </tr>
+                                    <?= $html_cart_row ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-
 
                     <div class="bill">
                         <div class="bill-header"> Đơn Hàng</div>
@@ -354,15 +367,27 @@ $total_price = total_price();
                             <div class="flex transience">
                                 <p>Tạm Tính</p>
                                 <p class="temporary">
-                                    <?php if (isset($total_price)) {
-                                        echo number_format($total_price, 0, ',', '.');
-                                    } ?>
+                                    <?php
+                                    if (isset($temporary)) {
+                                        echo number_format($temporary, 0, ',', '.') . ' đ';
+                                    } else {
+                                        echo '0 đ';
+                                    }
+                                    ?>
                                 </p>
                             </div>
 
                             <div class="discount flex">
                                 <p>Mã Giảm Giá</p>
-                                <p class="discounted">0 đ</p>
+                                <p class="discounted">
+                                    <?php
+                                    if (isset($_SESSION['discounted'])) {
+                                        echo number_format($_SESSION['discounted'], 0, '.', ',') . ' đ';
+                                    } else {
+                                        echo '0 đ';
+                                    }
+                                    ?>
+                                </p>
                             </div>
 
                             <div class="line-dash"></div>
@@ -370,11 +395,9 @@ $total_price = total_price();
                             <div class="total flex">
                                 <p id="">Tổng</p>
                                 <p class="total-price">
-                                    10000d
-                                    <!-- <?php if (isset($total_price)) {
-                                        echo number_format($total_price, 0, ',', '.');
+                                    <?php if (isset($total_price)) {
+                                        echo number_format($total_price, 0, ',', '.') . ' đ';
                                     } ?>
-                                        đ -->
                                 </p>
                             </div>
 
@@ -387,7 +410,6 @@ $total_price = total_price();
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </main>

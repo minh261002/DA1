@@ -24,20 +24,21 @@ require_once "views/header.php";
 $flashSaleProducts = get_product_flash_sale();
 $new_product = get_new_product();
 $hot_product = get_hot_product();
+
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-            //trang chủ
+        //trang chủ
         case 'home':
             require_once 'views/home.php';
             break;
 
-            //trang đăng nhập
+        //trang đăng nhập
         case 'login':
             require_once 'views/login.php';
             break;
 
-            //chức năng đăng nhập
+        //chức năng đăng nhập
         case 'login-function':
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
@@ -59,12 +60,12 @@ if (isset($_GET['page'])) {
 
             break;
 
-            //trang đằng ký
+        //trang đằng ký
         case 'register':
             require_once 'views/register.php';
             break;
 
-            //chức năng đăng ký
+        //chức năng đăng ký
         case 'register-function':
 
             // kiểm tra tồn tại nút đăng kí và nút đăng ký đc nhấn
@@ -94,7 +95,7 @@ if (isset($_GET['page'])) {
 
             break;
 
-            //đăng xuất
+        //đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
                 session_destroy();
@@ -102,12 +103,12 @@ if (isset($_GET['page'])) {
             header('Location: index.php?page=login');
             break;
 
-            //trang đổi mật khẩu
+        //trang đổi mật khẩu
         case 'changePassword':
             require_once "views/changePassword.php";
             break;
 
-            //chức năng đổi mật khẩu
+        //chức năng đổi mật khẩu
         case 'change-function':
             if (isset($_POST["btn-change"]) && $_POST["btn-change"]) {
                 $password = $_POST["password"];
@@ -127,7 +128,7 @@ if (isset($_GET['page'])) {
             }
             break;
 
-            //trang sản phẩm
+        //trang sản phẩm
         case 'product':
             $categoryId = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
 
@@ -168,7 +169,7 @@ if (isset($_GET['page'])) {
             require_once 'views/profile.php';
             break;
 
-            //trang chi tiết sản phẩm
+        //trang chi tiết sản phẩm
         case 'details':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
@@ -184,11 +185,12 @@ if (isset($_GET['page'])) {
         case 'checkout':
             require_once 'views/checkout.php';
             break;
+
         case 'order':
             require_once 'views/order.php';
             break;
 
-            //thêm vào giỏ hàng
+        //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {
                 $product_id = $_POST['product-id'];
@@ -253,6 +255,11 @@ if (isset($_GET['page'])) {
 
             if (isset($_GET['act']) && $_GET['act'] == 'del_all') {
                 unset($_SESSION["cart"]);
+                unset($_SESSION["total_order"]);
+                unset($_SESSION["total_price"]);
+                unset($_SESSION["subtotal"]);
+                unset($_SESSION["temporary"]);
+                unset($_SESSION["discounted"]);
                 $total_price = 0;
                 header('Location: index.php?page=home');
             }
@@ -286,15 +293,12 @@ if (isset($_GET['page'])) {
                 $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 
 
-                if ($avatar == null) update_user($id, $avatar_old, $fullname, $dateOfBirth, $gender, $phone, $email, $address);
+                if ($avatar == null)
+                    update_user($id, $avatar_old, $fullname, $dateOfBirth, $gender, $phone, $email, $address);
                 else {
                     move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file);
                     update_user($id, $avatar, $fullname, $dateOfBirth, $gender, $phone, $email, $address);
                 }
-
-
-
-
 
                 $updatedUserInfo = getUpdatedUserInfo($id);
                 $_SESSION['user'] = $updatedUserInfo;

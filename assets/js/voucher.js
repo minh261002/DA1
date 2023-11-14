@@ -1,26 +1,53 @@
-$(document).ready(function () {
-  $("form.form-voucher").on("submit", function (e) {
-    e.preventDefault();
-
-    var voucherCode = $("#voucher").val();
-    var total_price = $("#voucher_total_price").val();
-
-    $.ajax({
-      type: "POST",
-      url: "models/voucher.php",
-      data: {
-        voucher: voucherCode,
-        total_price: total_price,
-      },
-      dataType: "json",
-      success: function (response) {
-        if (response.success) {
-          $(".total-price").text(response.newTotal);
-          $(".discounted").text(response.discount);
-        } else {
-          $("#voucherErr").text(response.message);
-        }
-      },
+// $(document).ready(function() {
+//     $('.form-voucher').on('submit', function(e) {
+//         e.preventDefault();
+  
+//         var voucherCode = $('#voucher').val();
+  
+//         $.ajax({
+//             url: 'models/voucher.php', 
+//             type: 'POST',
+//             data: { voucher: voucherCode },
+//             success: function(response) {
+//                 var data = JSON.parse(response);
+//                 if (data.success) {
+//                   $('#voucherErr').text(data.message);
+//                   $('.total-price').text(data.totalPrice);
+//                   $('.discounted').text(data.discounted);
+//                 } else {
+//                   $('#voucherErr').text(data.message); 
+//                 }
+//             },
+//             error: function() {
+//                 $('#voucherErr').text('Có lỗi xảy ra khi xử lý yêu cầu.'); 
+//             }
+//         });
+//     });
+//   });
+  
+$(document).ready(function() {
+    $('.form-voucher').on('submit', function(e) {
+        e.preventDefault();
+  
+        var voucherCode = $('#voucher').val();
+  
+        $.ajax({
+            url: 'models/voucher.php', 
+            type: 'POST',
+            data: { voucher: voucherCode },
+            success: function(response) {
+                var data = JSON.parse(response);
+                if (data.success) {
+                  $('#voucherErr').text(data.message);
+                  $('.total-price').text(data.totalPrice);
+                  $('.discounted').text(data.discounted);
+                } else {
+                  $('#voucherErr').text(data.message); n
+                }
+            },
+            error: function() {
+                $('#voucherErr').text('Có lỗi xảy ra khi xử lý yêu cầu.'); 
+            }
+        });
     });
   });
-});

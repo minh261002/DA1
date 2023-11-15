@@ -6,22 +6,22 @@
     }
     function  create_user($id,$avatar,$username, $password, $fullname,$dateOfBirth, $gender, $email,$phone,$address, $ban, $role){
         try{
-            $sql = "INSERT INTO user( avatar,username, password, fullname,dateOfBirth, gender,email,phone,address, ban, role) VALUES (?,?,?,?, ?, ?, ?, ?,?,?,?)";
-            pdo_execute($sql,$avatar,$username, $password, $fullname,$dateOfBirth, $gender,$email,$phone,$address, $ban, $role);
+            $sql = "INSERT INTO user( avatar,username, password, fullname,dateOfBirth, gender,email,phone,address, ban, role, created_at) VALUES (?,?,?,?, ?, ?, ?, ?,?,?,?, NOW())";
+            pdo_execute($sql,$avatar,$username, md5($password), $fullname,$dateOfBirth, $gender,$email,$phone,json_encode($address), $ban, $role);
             echo "Thêm user mới thành công";
         }catch (PDOException $e) {
             echo "Thêm thất bại! " . $e->getMessage();
         }
     }
-    function  update_user($id,$avatar,$username, $password, $fullname,$dateOfBirth, $gender, $email,$phone,$address, $ban, $role){
-        try{
-            $sql = "UPDATE user SET avatar=? username=?, password=?, fullname=?, dateOfBirth=?, gender=? email=?, address=?, ban=?, role=? WHERE id=?";
-            pdo_execute($sql,$avatar,$username, $password, $fullname,$dateOfBirth, $gender,$email,$phone,$address, $ban, $role);
+    function updateuser($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role) {
+        try {
+            $sql = "UPDATE user SET avatar=?, username=?, password=?, fullname=?, dateOfBirth=?, gender=?, email=?, phone=?, address=?, ban=?, role=?, created_at=NOW() WHERE id=?";
+            pdo_execute($sql, $avatar, $username, md5($password), $fullname, $dateOfBirth, $gender, $email, $phone, json_encode($address), $ban, $role, $id);
             echo "Update user thành công";
-        }catch (PDOException $e) {
-            echo "Thêm thất bại! " . $e->getMessage();
+        } catch (PDOException $e) {
+            echo "Update thất bại! " . $e->getMessage();
         }
-    }
+    }   
     function deluser($id){
         $sql = "DELETE FROM user  WHERE id=?";
         if(is_array($id)){

@@ -54,12 +54,22 @@ if (isset($_GET['page'])) {
                                     $gender = $_POST['gender'];
                                     $email =$_POST['email'];
                                     $phone =$_POST['phone'];
-                                    $address = $_POST['address'];
+                                    $city = $_POST['city'];
+                                    $district = $_POST['district'];
+                                    $ward = $_POST['ward'];
+                                    $fulladdress = $_POST['fulladdress'];
+                                    $address = array(
+                                        'city' => $city,
+                                        'district' => $district,
+                                        'ward' => $ward,
+                                        'fulladdress' => $fulladdress
+                                    );
+
                                     $ban =$_POST['ban'];
                                     $role =$_POST['role'];
                               
                                     // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
-                                  $target_dir = "./Uploads/";
+                                  $target_dir = "../Uploads/";
                                 
                                   $target_file = $target_dir . basename($_FILES['avatar']['name']);
 
@@ -84,22 +94,40 @@ if (isset($_GET['page'])) {
                                     break;
                                    
                                     case 'update-user':
+                                        if(isset($_GET['id'])){
+                                            $id=$_GET['id'];
+                                            $one=getoneuser($id);
+                                            // echo $id;
+                                            // print_r($one);
+                                        }
                                         if((isset($_POST['themmoi']))&&($_POST['themmoi'])){
-        
+
                                             $id =$_POST['id'];
                                             $username =$_POST['username'];
-                                            $password =$_POST['password'];
+                                            $password = $_POST['password'];
+                                    
+
                                             $fullname =$_POST['fullname'];
                                             $dateOfBirth = $_POST['dateOfBirth'];
                                             $gender = $_POST['gender'];
                                             $email =$_POST['email'];
                                             $phone =$_POST['phone'];
-                                            $address = $_POST['address'];
+                                            $city = $_POST['city'];
+                                            $district = $_POST['district'];
+                                            $ward = $_POST['ward'];
+                                            $fulladdress = $_POST['fulladdress'];
+                                            $address = array(
+                                                'city' => $city,
+                                                'district' => $district,
+                                                'ward' => $ward,
+                                                'fulladdress' => $fulladdress
+                                            );
+        
                                             $ban =$_POST['ban'];
                                             $role =$_POST['role'];
                                       
                                             // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
-                                          $target_dir = "./Uploads/";
+                                          $target_dir = "../Uploads/";
                                         
                                           $target_file = $target_dir . basename($_FILES['avatar']['name']);
         
@@ -111,7 +139,7 @@ if (isset($_GET['page'])) {
                                             $uploadOk = 0;
                                           }
                                           move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-                                          create_user($id, $avatar, $username, $password, $fullname,$dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+                                          updateuser($id,$avatar,$username, $password, $fullname,$dateOfBirth, $gender, $email,$phone,$address, $ban, $role);
         
         
                                         } 
@@ -122,6 +150,17 @@ if (isset($_GET['page'])) {
                                         $user= render_alluser();
                                         require_once 'views/updateuser.php';
                                             break;
+                                            case 'del-user':
+                                                if(isset($_GET['id'])){
+                                                    $id=$_GET['id'];
+                                                    deluser($id);
+                                                }
+                                                $kq = render_category();
+                                                // load all sp
+                                                $user= render_alluser();
+                                                // $user=getall_user();
+                                                require_once 'views/form-user.php';
+                                                break;   
             // case 'adddm':
             //     if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
             //         $tendm=$_POST['tendm'];

@@ -29,8 +29,8 @@
         <div class="form-group mb-3">
             <label for="">Giới Tính</label>
             <select name="gender" id="gender">
-                <option value="0">0</option>
-                <option value="1">1</option>
+                <option value="0">Nam</option>
+                <option value="1">Nữ</option>
             </select>
         </div>
 
@@ -43,29 +43,80 @@
             <input type="text" name="phone" id="phone" class="form-control">
         </div>
         <div class="form-group mb-3">
-            <label for="">Địa chỉ</label>
-            <input type="text" name="address" id="address" class="form-control">
+            <div class="group-checkout">
+                <label for="city">
+                    TỈNH / THÀNH PHỐ
+                    <span>*</span>
+                </label>
+                <select class="form-select" name="city" id="city">
+                    <option selected disabled hidden>
+                        <?php
+                                            if (isset($province)) {
+                                                echo $province;
+                                            } else {
+                                                echo 'Tỉnh / Thành Phố';
+                                            }
+                                            ?>
+                    </option>
+                </select>
+            </div>
+
+            <div class="group-checkout">
+                <label for="district">
+                    QUẬN / HUYỆN
+                    <span>*</span>
+                </label>
+                <select class="form-select" name="district" id="district">
+                    <option selected disabled hidden>
+                        <?php
+                                            if (isset($district)) {
+                                                echo $district;
+                                            } else {
+                                                echo 'Quận / Huyện';
+                                            }
+                                            ?>
+                    </option>
+                </select>
+            </div>
+
+            <div class="group-checkout">
+                <label for="ward">
+                    PHƯỜNG / XÃ
+                    <span>*</span>
+                </label>
+                <select class="form-select" name="ward" id="ward">
+                    <option selected disabled hidden>
+                        <?php
+                                            if (isset($ward)) {
+                                                echo $ward;
+                                            } else {
+                                                echo 'Quận / Huyện';
+                                            }
+                                            ?>
+                    </option>
+                </select>
+                <label for="">Địa chỉ</label>
+                <input type="text" name="fulladdress" id="address" class="form-control">
+            </div>
         </div>
+
         <div class="form-group mb-3">
             <label for="">Ban</label>
 
             <select name="ban" id="ban">
-                <option value="0">0</option>
-                <option value="1">1</option>
+                <option value="0">Bình thường</option>
+                <option value="1">Cấm</option>
             </select>
         </div>
         <div class="form-group mb-3">
             <label for="">Vai trò</label>
 
             <select name="role" id="role">
-                <option value="0">0</option>
-                <option value="1">1</option>
+                <option value="0">Quản Trị</option>
+                <option value="1">Người Dùng</option>
             </select>
         </div>
-        <div class="form-group mb-3">
-            <label for="">Ngày khởi tạo</label>
-            <input type="date" name="created_at" id="created_at" class="form-control">
-        </div>
+
         <input class="btn btn-primary" type="hidden" name="id" value="<?=$one[0]['id'] ?>">
         <button type="submit" class="btn btn-primary" name="themmoi" value=" Thêm Mới ">Sign in</button>
     </form>
@@ -92,16 +143,22 @@
         <tr>
 
             <td><?php echo $i?></td>
-            <td><?php echo $user['avatar']?></td>
+            <td><img src="../Uploads/<?php echo $user['avatar']?>" alt="" width="50px"></td>
             <td><?php echo $user['username']?></td>
             <td><?php echo $user['password']?></td>
             <td><?php echo $user['fullname']?></td>
             <td><?php echo $user['email']?></td>
             <td><?php echo $user['phone']?></td>
             <td><?php echo $user['address']?></td>
-            <td><?php echo $user['role']?></td>
-            <td><a href="index.php?page=update-user&id=<?php echo $i?>">sửa</a> | <a
-                    href="admin.php?act=del-user&<?php echo $i?>">Ẩn</a></td>
+            <td><?php 
+            if($user['role'] == 0){
+                echo 'Người Dùng';
+            }else{
+                echo 'Admin';
+            }
+        ?></td>
+            <td><a href="index.php?page=update-user&id=<?php echo $user['id']?>">sửa</a> | <a
+                    href="index.php?page=del-user&id=<?php echo $user['id']?>">Ẩn</a></td>
 
 
         </tr>
@@ -109,3 +166,59 @@
         <?php  }?>
     </tbody>
 </table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+var citis = document.getElementById("city");
+var districts = document.getElementById("district");
+var wards = document.getElementById("ward");
+var Parameter = {
+    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+    method: "GET",
+    responseType: "application/json",
+};
+var promise = axios(Parameter);
+promise.then(function(result) {
+    renderCity(result.data);
+});
+
+function renderCity(data) {
+    for (const x of data) {
+        var opt = document.createElement('option');
+        opt.value = x.Name;
+        opt.text = x.Name;
+        opt.setAttribute('data-id', x.Id);
+        citis.options.add(opt);
+    }
+    citis.onchange = function() {
+        district.length = 1;
+        ward.length = 1;
+        if (this.options[this.selectedIndex].dataset.id != "") {
+            const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
+
+            for (const k of result[0].Districts) {
+                var opt = document.createElement('option');
+                opt.value = k.Name;
+                opt.text = k.Name;
+                opt.setAttribute('data-id', k.Id);
+                district.options.add(opt);
+            }
+        }
+    };
+    district.onchange = function() {
+        ward.length = 1;
+        const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+        if (this.options[this.selectedIndex].dataset.id != "") {
+            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex].dataset
+                .id)[0].Wards;
+
+            for (const w of dataWards) {
+                var opt = document.createElement('option');
+                opt.value = w.Name;
+                opt.text = w.Name;
+                opt.setAttribute('data-id', w.Id);
+                wards.options.add(opt);
+            }
+        }
+    };
+}
+</script>

@@ -152,7 +152,7 @@ function show_product($list_product)
         if ($createdDate >= $newProduct) {
             $new = '
                 <div class="new-pd">
-                    <span>New</span>
+                    <img class="new-icon" src="uploads/new-icon.png" />
                 </div>
             ';
         } else {

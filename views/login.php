@@ -28,7 +28,7 @@
                 <input class="btn-form" type="submit" value="Đăng Nhập" name="btn-login">
             </div>
         </form>
-        <a href="" class="forgot">Quên Mật Khẩu ?</a>
+        <a href="index.php?page=forgot" class="forgot">Quên Mật Khẩu ?</a>
         <p class="no-acc">Bạn chưa có tài khoản ? <a href="index.php?page=register">Đăng Ký Ngay</a></p>
         <p class="text-center my-3 fw-bold fs-5">Hoặc</p>
         <div class="login-social mb-5">

@@ -82,3 +82,9 @@ function user_change_password($id, $password_new)
     $sql = "UPDATE user SET password=? WHERE id=?";
     pdo_execute($sql, $password_new, $id);
 }
+
+function get_user_password($id)
+{
+    $sql = "SELECT password FROM user WHERE id=?";
+    return pdo_query($sql, $id);
+}

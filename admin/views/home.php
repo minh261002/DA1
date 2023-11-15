@@ -1,3 +1,24 @@
+<?php
+$html_bill_unconfirmed = "";
+
+foreach ($bill_unconfirmed as $bill) {
+    extract($bill);
+
+    $total_quantity = 0;
+
+    $total_quantity += $quantity;
+    $html_bill_unconfirmed .=
+        '<tr>
+        <td>' . $id . '</td>
+        <td>' . $user_username . '</td>
+        <td>' . $total_quantity . '</td>
+        <td>' . number_format($totalPrice, 0, '.', ',') . 'đ</td>
+        <td>' . $created_at . '</td>
+        <td><a href="index.php?page=bill_detail&id=' . $id . '">Xem</a></td>
+        <td><a class="btn btn-outline-dark" href="index.php?page=confirm_bill&id=' . $id . '">Xác Nhận </a></td>';
+}
+?>
+
 <main>
     <section class="box-home my-5">
         <div class="container">
@@ -5,7 +26,7 @@
                 <a href="index.php?page=product">
                     <div class="counter-product flex">
                         <div class="box-counter ">
-                            <h2>Sản Phẩm</h2>
+                            <h3>Sản Phẩm</h3>
                             <p class="c-product">0</p>
                         </div>
 
@@ -19,7 +40,7 @@
                 <a href="index.php?page=category">
                     <div class="counter-category flex">
                         <div class="box-counter">
-                            <h2>Danh Mục</h2>
+                            <h3>Danh Mục</h3>
                             <p class="c-category">>0</p>
                         </div>
 
@@ -34,7 +55,7 @@
                 <a href="index.php?page=user">
                     <div class="counter-user flex">
                         <div class="box-counter">
-                            <h2>Tài Khoản</h2>
+                            <h3>Tài Khoản</h3>
                             <p class="c-user">>0</p>
                         </div>
 
@@ -49,7 +70,7 @@
 
                 <div class="counter-bill flex">
                     <div class="box-counter">
-                        <h2>Đơn Hàng</h2>
+                        <h3>Đơn Hàng</h3>
                         <p class="c-bill">0</p>
                     </div>
 
@@ -58,114 +79,40 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
                     </svg>
-
-
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="chart mb-5">
-        <div class="container">
-            <div class="chart-revenue">
-                <canvas id="myChart" style="width:100%; "></canvas>
-                <script>
-                const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+    <section class="admin-bill">
+        <h4 class="text-center mt-5 mb-3">Đơn Hàng Chưa Được Xác Nhận</h4>
 
-                new Chart("myChart", {
-                    type: "line",
-                    data: {
-                        labels: xValues,
-                        datasets: [{
-                            data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
-                            borderColor: "red",
-                            fill: false
-                        }, {
-                            data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
-                            borderColor: "green",
-                            fill: false
-                        }, {
-                            data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
-                            borderColor: "blue",
-                            fill: false
-                        }]
-                    },
-                    options: {
-                        legend: {
-                            display: false
-                        }
+        <div class="bill-container">
+            <div class="container">
+                <p class="err">
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
+                        unset($_SESSION['message']);
                     }
-                });
-                </script>
-            </div>
+                    ?>
+                </p>
+                <table class="table">
+                    <thead>
+                        <th>Mã Đơn Hàng</th>
+                        <th>Tài Khoản</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng Giá</th>
+                        <th>Ngày Đặt Hàng</th>
+                        <th colspan=2>Xem Chi Tiết</th>
+                    </thead>
 
-            <div class="chart-other">
-                <div class="chart-bar">
-                    <canvas id="chart-bar"></canvas>
-                    <script>
-                    const x = ["Italy", "France", "Spain", "USA", "Argentina"];
-                    const y = [55, 49, 44, 24, 15];
-                    const barColors = ["red", "green", "blue", "orange", "brown"];
-
-                    new Chart("chart-bar", {
-                        type: "bar",
-                        data: {
-                            labels: x,
-                            datasets: [{
-                                backgroundColor: barColors,
-                                data: y
-                            }]
-                        },
-                        options: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: "World Wine Production 2018"
-                            }
-                        }
-                    });
-                    </script>
-
-                </div>
-                <div class="chart-col">
-                    <canvas id="chart-col"></canvas>
-                    <script>
-                    const xValue = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-                    const yValue = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
-
-                    new Chart("chart-col", {
-                        type: "line",
-                        data: {
-                            labels: xValue,
-                            datasets: [{
-                                fill: false,
-                                lineTension: 0,
-                                backgroundColor: "rgba(0,0,255,1.0)",
-                                borderColor: "rgba(0,0,255,0.1)",
-                                data: yValue
-                            }]
-                        },
-                        options: {
-                            legend: {
-                                display: false
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        min: 6,
-                                        max: 16
-                                    }
-                                }],
-                            }
-                        }
-                    });
-                    </script>
-                </div>
+                    <tbody>
+                        <?= $html_bill_unconfirmed ?>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </section>
 
     <script src="../assets/js/counter.js"></script>

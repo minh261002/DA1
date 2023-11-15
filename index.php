@@ -27,11 +27,13 @@ $hot_product = get_hot_product();
 
 $list_category = get_category();
 
+
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
         //trang chủ
         case 'home':
+
             require_once 'views/home.php';
             break;
 
@@ -114,18 +116,21 @@ if (isset($_GET['page'])) {
         case 'change-function':
             if (isset($_POST["btn-change"]) && $_POST["btn-change"]) {
                 $password = $_POST["password"];
-                $password_new = $_POST["password_new"];
 
-                if (password_verify($password, $password_new)) {
+                $current_password_result = get_user_password($id);
+
+                if ($current_password_result === $password) {
+                    $password_new = $_POST["password_new"];
+
                     user_change_password($id, $password_new);
 
                     $message = "Thay đổi mật khẩu thành công";
                     $_SESSION["message"] = $message;
-                    header("location: index.php?page=changePassword");
+                    header('Location: index.php?page=changePassword');
                 } else {
-                    $message = "Mật khẩu không chính xác";
+                    $message = "Mật khẩu nhập vào không chính xác";
                     $_SESSION["message"] = $message;
-                    header("location: index.php?page=changePassword");
+                    header('Location: index.php?page=changePassword');
                 }
             }
             break;

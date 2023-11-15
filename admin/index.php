@@ -6,10 +6,19 @@ ob_start();
 require_once "../models/pdo.php";
 //user
 require_once "../models/user.php";
+
 require_once "../models/func-user.php";
+
 require_once "../models/category.php";
+
 require_once "../models/func-product.php";
+
 require_once "../models/product.php";
+
+require_once "../models/bill.php";
+
+
+$bill_unconfirmed = get_bill_unconfimred();
 
 //kiêm tra phiên đăng nhập admin
 if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSION["admin"]) > 0)) {
@@ -247,6 +256,24 @@ if (isset($_GET['page'])) {
             // $user=getall_user();
             require_once 'views/form-user.php';
             break;
+
+        //xác nhận đơn hàng
+
+
+        case 'confirm_bill';
+
+            if (isset($_GET['id'])) {
+                $bill_id = $_GET['id'];
+
+                confirm_bill($bill_id);
+
+                $message = "Xác nhận đơn hàng thành công!";
+                $_SESSION["message"] = $message;
+                header('Location: index.php');
+            }
+
+            break;
+
         // case 'adddm':
         //     if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
         //         $tendm=$_POST['tendm'];

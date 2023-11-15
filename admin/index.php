@@ -50,12 +50,12 @@ if (isset($_GET['page'])) {
                                     $username =$_POST['username'];
                                     $password =$_POST['password'];
                                     $fullname =$_POST['fullname'];
+                                    $dateOfBirth = $_POST['dateOfBirth'];
+                                    $gender = $_POST['gender'];
                                     $email =$_POST['email'];
                                     $phone =$_POST['phone'];
                                     $address = $_POST['address'];
-                                  
                                     $ban =$_POST['ban'];
-                                    
                                     $role =$_POST['role'];
                               
                                     // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
@@ -71,7 +71,7 @@ if (isset($_GET['page'])) {
                                     $uploadOk = 0;
                                   }
                                   move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-                                  create_user($id, $avatar, $username, $password, $fullname, $email, $phone, $address, $ban, $role);
+                                  create_user($id, $avatar, $username, $password, $fullname,$dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
 
 
                                 } 
@@ -82,6 +82,46 @@ if (isset($_GET['page'])) {
                                 $user= render_alluser();
                                 require_once 'views/form-user.php';
                                     break;
+                                   
+                                    case 'update-user':
+                                        if((isset($_POST['themmoi']))&&($_POST['themmoi'])){
+        
+                                            $id =$_POST['id'];
+                                            $username =$_POST['username'];
+                                            $password =$_POST['password'];
+                                            $fullname =$_POST['fullname'];
+                                            $dateOfBirth = $_POST['dateOfBirth'];
+                                            $gender = $_POST['gender'];
+                                            $email =$_POST['email'];
+                                            $phone =$_POST['phone'];
+                                            $address = $_POST['address'];
+                                            $ban =$_POST['ban'];
+                                            $role =$_POST['role'];
+                                      
+                                            // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
+                                          $target_dir = "./Uploads/";
+                                        
+                                          $target_file = $target_dir . basename($_FILES['avatar']['name']);
+        
+                                          $avatar=$target_file;
+                                          $uploadOk = 1;
+                                          $avatarFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                                          if($avatarFileType != "jpg" && $avatarFileType !="png" && $avatarFileType !="jpeg"
+                                          && $avatarFileType != "gif"){
+                                            $uploadOk = 0;
+                                          }
+                                          move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
+                                          create_user($id, $avatar, $username, $password, $fullname,$dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+        
+        
+                                        } 
+                                        
+                                        // load all danh mục 
+                                        $kq = render_category();
+                                        // load all sp
+                                        $user= render_alluser();
+                                        require_once 'views/updateuser.php';
+                                            break;
             // case 'adddm':
             //     if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
             //         $tendm=$_POST['tendm'];

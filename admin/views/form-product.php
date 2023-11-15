@@ -136,7 +136,7 @@ tr:hover {
             <th>' . $id_category.'</th> 
     
             <th>' . $name. '</th>
-            <th><img width="80px" height="100px" src="'.$img.'" alt=""></th>
+            <th><img width="80px" height="100px" src="../Uploads/'.$img.'" alt=""></th>
            
            
             <th>'. number_format($price, 0, ',', '.') .' VNĐ</th>

@@ -4,15 +4,15 @@
 }
 </style>
 <div class="container">
-    <form action="index.php?page=create-user" method="post" enctype="multipart/form-data">
-        <h1>Quản Lý Người Dùng</h1>
+    <form action="index.php?page=update-user" method="post" enctype="multipart/form-data">
+        <h1>Cập Nhật Thông Tin Người Dùng</h1>
         <div class="form-group mb3mb-3">
             <label for="">Ảnh Đại Diện</label>
             <input type="file" name="avatar" id="avatar" class="form-control file">
         </div>
         <div class="form-group mb-3">
             <label for="">Tên Đăng Nhập</label>
-            <input type="text" name="username" id="username" class="form-control">
+            <input type="text" name="username" id="username" class="form-control" value="<?= $one[0]['username'] ?>">
         </div>
         <div class="form-group mb-3">
             <label for="">Mật Khẩu</label>
@@ -73,7 +73,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">STT</th>
             <th scope="col">Ảnh Đại Diện</th>
             <th scope="col">Tên Đăng Nhập</th>
             <th scope="col">Mật Khẩu</th>
@@ -86,13 +85,10 @@
         </tr>
     </thead>
     <tbody>
-        <?php $i=1; foreach($user as $key => $user) {  
-            ?>
+        <?php foreach($user as $key => $user) {?>
 
         <tr>
-
-            <td><?php echo $i?></td>
-            <td><?php echo $user['avatar']?></td>
+            <th scope="row"></th>
             <td><?php echo $user['username']?></td>
             <td><?php echo $user['password']?></td>
             <td><?php echo $user['fullname']?></td>
@@ -100,12 +96,12 @@
             <td><?php echo $user['phone']?></td>
             <td><?php echo $user['address']?></td>
             <td><?php echo $user['role']?></td>
-            <td><a href="index.php?page=update-user&id=<?php echo $i?>">sửa</a> | <a
-                    href="admin.php?act=del-user&<?php echo $i?>">Ẩn</a></td>
+            <td><a href="admin.php?act=updateuser&id='.$value['id'].'">sửa</a> | <a
+                    href="admin.php?act=deluser&id='.$value['id'].'">Xóa</a></td>
 
 
         </tr>
-        <?php  $i++;?>
-        <?php  }?>
+
+        <?php }?>
     </tbody>
 </table>

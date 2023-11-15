@@ -25,20 +25,22 @@ $flashSaleProducts = get_product_flash_sale();
 $new_product = get_new_product();
 $hot_product = get_hot_product();
 
+$list_category = get_category();
+
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-            //trang chủ
+        //trang chủ
         case 'home':
             require_once 'views/home.php';
             break;
 
-            //trang đăng nhập
+        //trang đăng nhập
         case 'login':
             require_once 'views/login.php';
             break;
 
-            //chức năng đăng nhập
+        //chức năng đăng nhập
         case 'login-function':
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
@@ -60,12 +62,12 @@ if (isset($_GET['page'])) {
 
             break;
 
-            //trang đằng ký
+        //trang đằng ký
         case 'register':
             require_once 'views/register.php';
             break;
 
-            //chức năng đăng ký
+        //chức năng đăng ký
         case 'register-function':
 
             // kiểm tra tồn tại nút đăng kí và nút đăng ký đc nhấn
@@ -95,7 +97,7 @@ if (isset($_GET['page'])) {
 
             break;
 
-            //đăng xuất
+        //đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
                 session_destroy();
@@ -103,12 +105,12 @@ if (isset($_GET['page'])) {
             header('Location: index.php?page=login');
             break;
 
-            //trang đổi mật khẩu
+        //trang đổi mật khẩu
         case 'changePassword':
             require_once "views/changePassword.php";
             break;
 
-            //chức năng đổi mật khẩu
+        //chức năng đổi mật khẩu
         case 'change-function':
             if (isset($_POST["btn-change"]) && $_POST["btn-change"]) {
                 $password = $_POST["password"];
@@ -128,28 +130,18 @@ if (isset($_GET['page'])) {
             }
             break;
 
-            //trang sản phẩm
+        //trang sản phẩm
         case 'product':
-            $categoryId = isset($_GET["id"]) ? intval($_GET["id"]) : 0;
 
-            $parentCategoryId = null;
-            $siblingsCategories = [];
-            $products = [];
+            $list_category = get_category();
 
-            if ($categoryId) {
-                $currentCategory = get_category($categoryId);
-
-                if ($currentCategory && $currentCategory['parent_id'] != null) {
-                    $parentCategoryId = $currentCategory['parent_id'];
-                    $siblingsCategories = get_list_category($parentCategoryId);
-                    $list_product = get_products_by_category($categoryId);
-                } else {
-                    $siblingsCategories = get_list_category($categoryId);
-                    $categoryIds = array_column($siblingsCategories, 'id');
-                    $categoryIds[] = $categoryId;
-                    $list_product = get_products_by_category_ids($categoryIds);
-                }
+            if (!isset($_GET['id'])) {
+                $id = 0;
+            } else {
+                $id = $_GET['id'];
             }
+
+            $all_product = get_list_product($id);
             require_once 'views/product.php';
             break;
 
@@ -169,7 +161,7 @@ if (isset($_GET['page'])) {
             require_once 'views/profile.php';
             break;
 
-            //trang chi tiết sản phẩm
+        //trang chi tiết sản phẩm
         case 'details':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
@@ -190,7 +182,7 @@ if (isset($_GET['page'])) {
             require_once 'views/order.php';
             break;
 
-            //thêm vào giỏ hàng
+        //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {
                 $product_id = $_POST['product-id'];
@@ -278,6 +270,7 @@ if (isset($_GET['page'])) {
                 $phone = $_POST['phone'];
                 $email = $_POST['email'];
                 //địa chỉ kiểu json
+
                 $province = $_POST['province'];
                 $district = $_POST['district'];
                 $ward = $_POST['ward'];

@@ -39,7 +39,9 @@
                         fill="#292D32"></path>
                 </svg>
                 <div class="info-admin icon-user">
-                    <!-- <p>Xin Chào, <span><?=$username?></span></p> -->
+                    <p>Xin Chào, <span>
+                            <?= $username ?>
+                        </span></p>
                     <div class="sub-menu-user">
                         <a href="index.php?page=logout" class="btn btn-danger">Đăng Xuất</a>
                     </div>

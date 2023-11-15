@@ -37,24 +37,6 @@ function get_new_product()
     return pdo_query($sql);
 }
 
-function get_male_product()
-{
-    $currentDateTime = date('Y-m-d H:i:s');
-    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-3 days', strtotime($currentDateTime)));
-
-    $sql = "SELECT * FROM product WHERE id_category = 10 AND created_at >= '$threeDaysAgo'";
-    return pdo_query($sql);
-}
-
-function get_kid_product()
-{
-    $currentDateTime = date('Y-m-d H:i:s');
-    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-3 days', strtotime($currentDateTime)));
-
-    $sql = "SELECT * FROM product WHERE id_category = 8 AND created_at >= '$threeDaysAgo'";
-    return pdo_query($sql);
-}
-
 
 
 function get_product_by_id($id)
@@ -101,14 +83,14 @@ function product_view($id)
     pdo_execute($sql, $id);
 }
 
-function get_list_product($id, $limit)
+function get_list_product($id)
 {
     $sql = "SELECT * FROM product WHERE 1";
     if ($id > 0) {
         $sql .= " AND id_category= " . $id;
     }
 
-    $sql .= " ORDER BY id DESC LIMIT " . $limit;
+    $sql .= " ORDER BY id DESC";
     return pdo_query($sql);
 }
 
@@ -201,6 +183,14 @@ function show_product($list_product)
 
     return $html_product;
 }
+
+function category_has_products($category_id)
+{
+    $sql = "SELECT COUNT(*) FROM product WHERE id_category = ?";
+    return pdo_query($sql, $category_id);
+}
+
+
 // function hang_hoa_select_top10(){
 //     $sql = "SELECT * FROM hang_hoa WHERE so_luot_xem > 0 ORDER BY so_luot_xem DESC LIMIT 0, 10";
 //     return pdo_query($sql);

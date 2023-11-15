@@ -1,39 +1,16 @@
 <?php
 // require_once 'pdo.php';
 
-// Lấy tất cả danh mục cha
-function getParentCategories()
+function get_category()
 {
-    $sql = "SELECT * FROM category WHERE parent_id IS NULL";
+    $sql = "SELECT * FROM category WHERE home !=2";
     return pdo_query($sql);
 }
 
-// Lấy tất cả danh mục con dựa trên ID của danh mục cha
-function getChildCategories($parentId)
+function get_category_by_id($category_id)
 {
-    $sql = "SELECT * FROM category WHERE parent_id = ?";
-    return pdo_query($sql, $parentId);
-}
-
-function get_list_category($id)
-{
-    $sql = "SELECT * FROM category WHERE parent_id = ?";
-    return pdo_query($sql, $id);
-}
-
-function get_category($id)
-{
-    $sql = "SELECT * FROM category WHERE id = ?";
-    return pdo_query_one($sql, $id);
-}
-
-function get_products_by_category_ids(array $category_ids)
-{
-    $in = str_repeat('?,', count($category_ids) - 1) . '?';
-    $sql = "SELECT * FROM product WHERE id_category IN ($in)";
-    $result = pdo_query($sql, ...$category_ids);
-
-    return $result;
+    $sql = "SELECT * FROM category WHERE id=?";
+    return pdo_query_one($sql, $category_id);
 }
 
 function set_home_category()
@@ -65,41 +42,56 @@ function show_category_home()
     return $html_category;
 }
 
+function get_all_category()
+{
+    $sql = "SELECT * FROM category";
+    return pdo_query($sql);
+}
+
 // /**
 //  * Thêm loại mới
 //  * @param String $ten_loai là tên loại
 //  * @throws PDOException lỗi thêm mới
 //  */
-// function loai_insert($ten_loai){
-//     $sql = "INSERT INTO loai(ten_loai) VALUES(?)";
-//     pdo_execute($sql, $ten_loai);
-// }
+function category_insert($category_name, $category_img, $category_home)
+{
+    $sql = "INSERT INTO category(name, avatar, home) VALUES(?,?,?)";
+    pdo_execute($sql, $category_name, $category_img, $category_home);
+}
 // /**
 //  * Cập nhật tên loại
 //  * @param int $ma_loai là mã loại cần cập nhật
 //  * @param String $ten_loai là tên loại mới
 //  * @throws PDOException lỗi cập nhật
 //  */
-// function loai_update($ma_loai, $ten_loai){
-//     $sql = "UPDATE loai SET ten_loai=? WHERE ma_loai=?";
-//     pdo_execute($sql, $ten_loai, $ma_loai);
-// }
+function update_category($id, $category_img, $category_name, $category_home)
+{
+    if ($category_img != '') {
+        $sql = "UPDATE category SET name=?, avatar=?, home=? WHERE id=?";
+        pdo_execute($sql, $category_name, $category_img, $category_home, $id);
+    } else {
+        $sql = "UPDATE category SET name=?, home=? WHERE id=?";
+        pdo_execute($sql, $category_name, $category_home, $id);
+    }
+}
+
+
 // /**
 //  * Xóa một hoặc nhiều loại
 //  * @param mix $ma_loai là mã loại hoặc mảng mã loại
 //  * @throws PDOException lỗi xóa
 //  */
-// function loai_delete($ma_loai){
-//     $sql = "DELETE FROM loai WHERE ma_loai=?";
-//     if(is_array($ma_loai)){
-//         foreach ($ma_loai as $ma) {
-//             pdo_execute($sql, $ma);
-//         }
-//     }
-//     else{
-//         pdo_execute($sql, $ma_loai);
-//     }
-// }
+function category_delete($id)
+{
+    $sql = "DELETE FROM category WHERE id=?";
+    if (is_array($id)) {
+        foreach ($id as $ma) {
+            pdo_execute($sql, $ma);
+        }
+    } else {
+        pdo_execute($sql, $id);
+    }
+}
 // /**
 //  * Truy vấn tất cả các loại
 //  * @return array mảng loại truy vấn được

@@ -7,11 +7,7 @@ require_once "../models/pdo.php";
 //user
 require_once "../models/user.php";
 
-require_once "../models/func-user.php";
-
 require_once "../models/category.php";
-
-require_once "../models/func-product.php";
 
 require_once "../models/product.php";
 
@@ -28,17 +24,17 @@ if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSIO
     header('Location: login.php');
 }
 
-require_once 'views/header.php';
+require_once 'views/font-end/header.php';
 
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
         //dăng xuất
-        // case 'logout':
-        //     if (isset($_SESSION["admin"]) && count($_SESSION["admin"]) > 0) {
-        //         session_destroy();
-        //     }
-        //     header('Location: index.php');
-        //     break;
+        case 'logout':
+            if (isset($_SESSION["admin"]) && count($_SESSION["admin"]) > 0) {
+                session_destroy();
+            }
+            header('Location: index.php');
+            break;
 
         // CRUD danh mục
         case 'category':
@@ -125,14 +121,10 @@ if (isset($_GET['page'])) {
 
         case 'user':
             $user = render_alluser();
-            require_once 'views/form-user.php';
+            require_once 'views/users/show-user.php';
             break;
 
-        case 'product':
-            $kq = render_category();
-            $dssp = render_allproduct();
-            require_once 'views/form-product.php';
-            break;
+     
 
         case 'create-user':
             if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
@@ -180,10 +172,10 @@ if (isset($_GET['page'])) {
             }
 
             // load all danh mục 
-            $kq = render_category();
+        
             // load all sp
             $user = render_alluser();
-            require_once 'views/form-user.php';
+            require_once 'views/users/create-user.php';
             break;
 
         case 'update-user':
@@ -240,21 +232,21 @@ if (isset($_GET['page'])) {
             }
 
             // load all danh mục 
-            $kq = render_category();
+           
             // load all sp
             $user = render_alluser();
-            require_once 'views/updateuser.php';
+            require_once 'views/users/update-user.php';
             break;
         case 'del-user':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 deluser($id);
             }
-            $kq = render_category();
+         
             // load all sp
             $user = render_alluser();
             // $user=getall_user();
-            require_once 'views/form-user.php';
+            require_once 'views/users/show-user.php';
             break;
 
         //xác nhận đơn hàng
@@ -274,39 +266,83 @@ if (isset($_GET['page'])) {
 
             break;
 
-        // case 'adddm':
-        //     if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-        //         $tendm=$_POST['tendm'];
-        //         $uutien=$_POST['uutien'];
-        //         $hienthi=$_POST['hienthi'];
-        //         themdm($tendm,$uutien,$hienthi);
-        //     }
-        //     $kq=render_category();
-        //    include "view/danhmuc.php";
-        //         break;
-        // case 'updatedmform':
-        //     if(isset($_GET['id'])){
-        //         $id=$_GET['id'];
-        //         $kq1=getonedm($id);
-        //     }
-        //     if(isset($_POST['id'])){
-        //         $id=$_POST['id'];
-        //         $tendm=$_POST['tendm'];
-        //         $uutien=$_POST['uutien'];
-        //         $hienthi=$_POST['hienthi'];
-        //         updatedm($id,$tendm,$uutien,$hienthi);
-        //     }
-        //     $kq=getall_dm();
-        //     include "adminfunc/updatedmform.php";
-        //     break;
-        // case 'deldm':
-        //     if(isset($_GET['id'])){
-        //         $id=$_GET['id'];
-        //         deldm($id);
-        //     }
-        //     $kq=getall_dm();
-        //     include "view/danhmuc.php";
-        //     break;   
+            // CRUD sản phẩm 
+            // show sản phẩm
+            case 'product':
+              
+                $product= render_allproduct();
+                require_once 'views/product/show-product.php';
+                break;
+            // thêm sản phẩm
+            case 'add-product':
+              
+                if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
+    
+                
+                    $id_category = $_POST['id_category'];
+                    $name = $_POST['name'];
+                    $gallery = $_POST['gallery'];
+                    $info = $_POST['info'];
+                    $price = $_POST['price'];
+                    $sale = $_POST['sale'];
+                    $view = $_POST['view'];
+                    $hot = $_POST['hot'];
+                    $target_dir = "../Uploads/";
+    
+                    $target_file = $target_dir . basename($_FILES['img']['name']);
+    
+                    $img = $target_file;
+                    $uploadOk = 1;
+                    $imgFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    move_uploaded_file($_FILES['img']['tmp_name'], $target_file);
+                    add_product($id,$id_category, $name, $img,$gallery, $info, $price, $sale, $view, $hot);
+                }
+                $product= render_allproduct();
+                require_once 'views/product/add-product.php';
+                break;
+            
+            // Sửa Sản Phẩm
+            case 'update-product':
+                if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $one = getone_product($id);
+                    // echo $id;
+                    // print_r($one);
+                }
+                if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
+    
+                
+                    $id_category = $_POST['id_category'];
+                    $name = $_POST['name'];
+                    $gallery = $_POST['gallery'];
+                    $info = $_POST['info'];
+                    $price = $_POST['price'];
+                    $sale = $_POST['sale'];
+                    $view = $_POST['view'];
+                    $hot = $_POST['hot'];
+                    $target_dir = "../Uploads/";
+    
+                    $target_file = $target_dir . basename($_FILES['img']['name']);
+    
+                    $img = $target_file;
+                    $uploadOk = 1;
+                    $imgFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    move_uploaded_file($_FILES['img']['tmp_name'], $target_file);
+                    update_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot);
+                }
+                $product= render_allproduct();
+                require_once 'views/product/update-product.php';
+                break;
+       // Xóa sản phẩm
+                case 'del-product':
+                    if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        del_sp($id);
+                    }                
+                    $product= render_allproduct();
+                    require_once 'views/product/show-product.php';
+                    break;
+
         default:
             // http_response_code(404);
             // require_once "views/404page.php";
@@ -317,6 +353,6 @@ if (isset($_GET['page'])) {
     require_once 'views/home.php';
 }
 
-require_once 'views/footer.php';
+require_once 'views/font-end/footer.php';
 
 ob_end_flush();

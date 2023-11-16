@@ -24,9 +24,9 @@
             </div>
 
             <ul class="header__menu-admin">
-                <li><a href="">Danh Mục</a></li>
-                <li><a href="">Sản Phẩm</a></li>
-                <li><a href="">Tài Khoản</a></li>
+                <li><a href="index.php?page=category">Danh Mục</a></li>
+                <li><a href="index.php?page=product">Sản Phẩm</a></li>
+                <li><a href="index.php?page=user">Tài Khoản</a></li>
                 <li><a href="">Bình Luận</a></li>
                 <li><a href="">Thống Kê</a></li>
                 <li><a href="">Khác</a></li>

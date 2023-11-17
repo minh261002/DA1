@@ -7,7 +7,7 @@
 function add_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot) {
     try {
         $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
-        pdo_execute($sql, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot);
+        pdo_execute($sql, $id_category, $name, $img, json_encode($gallery, JSON_FORCE_OBJECT), $info, $price, $sale, $view, $hot);
         echo "Thêm thành công !";
     } catch (PDOException $e) {
         echo "Thêm thất bại: " . $e->getMessage();
@@ -23,7 +23,7 @@ function getone_product($id){
 function update_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot) {
     try {
         $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-        pdo_execute($sql, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot, $id);
+        pdo_execute($sql, $id_category, $name, $img, json_encode($gallery, JSON_FORCE_OBJECT), $info, $price, $sale, $view, $hot, $id);
         echo "Chỉnh sửa thành công";
     } catch (PDOException $e) {
         echo "Chỉnh Sửa thất bại! " . $e->getMessage();

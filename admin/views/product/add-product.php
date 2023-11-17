@@ -5,7 +5,17 @@
                enctype="multipart/form-data">
                <div class="form-group mb-3">
                    <label for="id_category">Tên Danh Mục</label>
-                   <input type="text" name="id_category" id="id_category" class="form-control" value="">
+
+                   <select class="form-control" name="id_category" id="id_category">
+                       <option value="0">Chọn Danh Mục</option>
+                       <?php
+            if(isset( $list_category )){
+                foreach($list_category  as $dm){
+                    echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
+                }
+            } 
+        ?>
+                   </select>
                </div>
 
                <div class="form-group mb-3">
@@ -20,7 +30,10 @@
 
                <div class="form-group mb-3">
                    <label for="gallery">Hình Ảnh Chi Tiết</label>
-                   <input type="file" name="gallery" id="gallery" class="form-control d-block">
+                   <input type="file" name="img1" id="img1" class="form-control d-block"  >
+                   <input type="file" name="img2" id="img2" class="form-control d-block">
+                   <input type="file" name="img3" id="img3" class="form-control d-block">
+                   <input type="file" name="img4" id="img4" class="form-control d-block">
                </div>
 
                <div class="form-group mb-3">
@@ -44,7 +57,11 @@
                </div>
                <div class="form-group mb-3">
                    <label for="hot">Hot</label>
-                   <input type="text" name="hot" id="hot" class="form-control">
+
+                   <select class="form-control" name="hot" id="hot">
+                       <option value="0">Bình Thường</option>
+                       <option value="1">Sản Phẩm Hot</option>
+                   </select>
                </div>
 
 
@@ -84,6 +101,7 @@
            <tr>
                <td><?php echo $i?></td>
                <td><?php echo $product['id_category'] ?></td>
+
                <td><?php echo $product['name'] ?></td>
                <td><img src="../Uploads/<?php echo $product['img']?>" alt="" width="50px"></td>
                <td><?php echo $product['gallery'] ?></td>

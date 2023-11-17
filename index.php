@@ -47,7 +47,7 @@ if (isset($_GET['page'])) {
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
                 $password = $_POST["password"];
-
+                
                 $result = checkUser($username, $password);
 
                 if (is_array($result) && count($result) > 0) {

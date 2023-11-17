@@ -281,12 +281,22 @@ if (isset($_GET['page'])) {
                 
                     $id_category = $_POST['id_category'];
                     $name = $_POST['name'];
-                    $gallery = $_POST['gallery'];
+                    
                     $info = $_POST['info'];
                     $price = $_POST['price'];
                     $sale = $_POST['sale'];
                     $view = $_POST['view'];
                     $hot = $_POST['hot'];
+                    $img1 = $_FILES['img1']['name'];
+                    $img2 = $_FILES['img2']['name'];
+                    $img3 = $_FILES['img3']['name'];
+                    $img4 = $_FILES['img4']['name'];
+                    $gallery = array(
+                        'img1'=> $img1,
+                        'img2'=> $img2,
+                        'img3'=> $img3,
+                        'img4'=> $img4,
+                    );
                     $target_dir = "../Uploads/";
     
                     $target_file = $target_dir . basename($_FILES['img']['name']);
@@ -297,6 +307,7 @@ if (isset($_GET['page'])) {
                     move_uploaded_file($_FILES['img']['tmp_name'], $target_file);
                     add_product($id,$id_category, $name, $img,$gallery, $info, $price, $sale, $view, $hot);
                 }
+                $list_category = get_category();
                 $product= render_allproduct();
                 require_once 'views/product/add-product.php';
                 break;
@@ -309,17 +320,27 @@ if (isset($_GET['page'])) {
                     // echo $id;
                     // print_r($one);
                 }
-                if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
+                if ((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
     
                 
                     $id_category = $_POST['id_category'];
                     $name = $_POST['name'];
-                    $gallery = $_POST['gallery'];
+                   
                     $info = $_POST['info'];
                     $price = $_POST['price'];
                     $sale = $_POST['sale'];
                     $view = $_POST['view'];
                     $hot = $_POST['hot'];
+                    $img1 = $_FILES['img1']['name'];
+                    $img2 = $_FILES['img2']['name'];
+                    $img3 = $_FILES['img3']['name'];
+                    $img4 = $_FILES['img4']['name'];
+                    $gallery = array(
+                        'img1'=> $img1,
+                        'img2'=> $img2,
+                        'img3'=> $img3,
+                        'img4'=> $img4,
+                    );
                     $target_dir = "../Uploads/";
     
                     $target_file = $target_dir . basename($_FILES['img']['name']);
@@ -329,7 +350,9 @@ if (isset($_GET['page'])) {
                     $imgFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                     move_uploaded_file($_FILES['img']['tmp_name'], $target_file);
                     update_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot);
+                    
                 }
+                $list_category = get_category();
                 $product= render_allproduct();
                 require_once 'views/product/update-product.php';
                 break;

@@ -40,7 +40,7 @@ function getoneuser($id){
 
 function checkUser($username, $password)
 {
-    $sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+    $sql = "SELECT * FROM user WHERE  username = ? AND password = ?";
     return pdo_query_one($sql, $username, $password);
 }
 
@@ -82,37 +82,7 @@ function getUpdatedUserInfo($id)
     return pdo_query_one($sql, $id);
 }
 
-// function khach_hang_delete($ma_kh){
-//     $sql = "DELETE FROM khach_hang  WHERE ma_kh=?";
-//     if(is_array($ma_kh)){
-//         foreach ($ma_kh as $ma) {
-//             pdo_execute($sql, $ma);
-//         }
-//     }
-//     else{
-//         pdo_execute($sql, $ma_kh);
-//     }
-// }
 
-// function khach_hang_select_all(){
-//     $sql = "SELECT * FROM khach_hang";
-//     return pdo_query($sql);
-// }
-
-// function khach_hang_select_by_id($ma_kh){
-//     $sql = "SELECT * FROM khach_hang WHERE ma_kh=?";
-//     return pdo_query_one($sql, $ma_kh);
-// }
-
-// function khach_hang_exist($ma_kh){
-//     $sql = "SELECT count(*) FROM khach_hang WHERE $ma_kh=?";
-//     return pdo_query_value($sql, $ma_kh) > 0;
-// }
-
-// function khach_hang_select_by_role($vai_tro){
-//     $sql = "SELECT * FROM khach_hang WHERE vai_tro=?";
-//     return pdo_query($sql, $vai_tro);
-// }
 
 function user_change_password($id, $password_new)
 {

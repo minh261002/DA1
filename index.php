@@ -17,6 +17,8 @@ require_once 'models/category.php';
 require_once "models/product.php";
 //cart
 require_once "models/cart.php";
+// checkout
+require_once "models/checkout.php";
 
 require_once "views/header.php";
 
@@ -31,18 +33,18 @@ $list_category = get_category();
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-        //trang chủ
+            //trang chủ
         case 'home':
 
             require_once 'views/home.php';
             break;
 
-        //trang đăng nhập
+            //trang đăng nhập
         case 'login':
             require_once 'views/login.php';
             break;
 
-        //chức năng đăng nhập
+            //chức năng đăng nhập
         case 'login-function':
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
@@ -64,12 +66,12 @@ if (isset($_GET['page'])) {
 
             break;
 
-        //trang đằng ký
+            //trang đằng ký
         case 'register':
             require_once 'views/register.php';
             break;
 
-        //chức năng đăng ký
+            //chức năng đăng ký
         case 'register-function':
 
             // kiểm tra tồn tại nút đăng kí và nút đăng ký đc nhấn
@@ -99,7 +101,7 @@ if (isset($_GET['page'])) {
 
             break;
 
-        //đăng xuất
+            //đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
                 session_destroy();
@@ -107,12 +109,12 @@ if (isset($_GET['page'])) {
             header('Location: index.php?page=login');
             break;
 
-        //trang đổi mật khẩu
+            //trang đổi mật khẩu
         case 'changePassword':
             require_once "views/changePassword.php";
             break;
 
-        //chức năng đổi mật khẩu
+            //chức năng đổi mật khẩu
         case 'change-function':
             if (isset($_POST["btn-change"]) && $_POST["btn-change"]) {
                 $password = $_POST["password"];
@@ -135,7 +137,7 @@ if (isset($_GET['page'])) {
             }
             break;
 
-        //trang sản phẩm
+            //trang sản phẩm
         case 'product':
 
             $list_category = get_category();
@@ -166,7 +168,7 @@ if (isset($_GET['page'])) {
             require_once 'views/profile.php';
             break;
 
-        //trang chi tiết sản phẩm
+            //trang chi tiết sản phẩm
         case 'details':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
@@ -180,6 +182,58 @@ if (isset($_GET['page'])) {
 
 
         case 'checkout':
+            var_dump($_SESSION);
+            if (isset($_POST['order'])) {
+                $fullname = $_POST['fullname'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $city = $_POST['city'];
+                $district = $_POST['district'];
+                $ward = $_POST['ward'];
+                $detailAddress = $_POST['detailAddress'];
+
+                $address = array(
+                    'city' => $city,
+                    'district' => $district,
+                    'ward' => $ward,
+                    'detail' => $detailAddress,
+                );
+
+                $notes = $_POST['notes'];
+                $transport = $_POST['transport'];
+                $payMethod = $_POST['method'];
+
+                if (isset($_SESSION['user'])) {
+                    $idUser = $_SESSION['user']['id'];
+                } else {
+                    $idUser = 0;
+                }
+
+
+                if ($payMethod == 1) {
+                    insert_bill($idUser, $fullname, $email, $phone, $address, $notes, $payMethod, $transport);
+
+                    if ($_SESSION['cart']) {
+                        $carts = $_SESSION['cart'];
+                        foreach ($carts as $product) {
+                            $idProduct = $product['id'];
+                            $img = $product['img'];
+                            $name = $product['name'];
+                            $size = $product['id'];
+                            $color = $product['color'];
+                            $quantity = $product['quantity'];
+                            $price = $product['price'];
+
+                            // insert_bill_detail($idProduct, $idbill, $name, $img, $price, $quantity, $size, $color);
+                        }
+                    }
+                } else {
+                    echo 'ti lam';
+                }
+            }
+
+
+
             require_once 'views/checkout.php';
             break;
 
@@ -187,7 +241,7 @@ if (isset($_GET['page'])) {
             require_once 'views/order.php';
             break;
 
-        //thêm vào giỏ hàng
+            //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {
                 $product_id = $_POST['product-id'];

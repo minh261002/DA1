@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Mở kết nối đến CSDL sử dụng PDO
  */

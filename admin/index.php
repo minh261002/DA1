@@ -32,22 +32,22 @@ require_once 'views/header.php';
 
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-        //dăng xuất
-        // case 'logout':
-        //     if (isset($_SESSION["admin"]) && count($_SESSION["admin"]) > 0) {
-        //         session_destroy();
-        //     }
-        //     header('Location: index.php');
-        //     break;
+            //dăng xuất
+            // case 'logout':
+            //     if (isset($_SESSION["admin"]) && count($_SESSION["admin"]) > 0) {
+            //         session_destroy();
+            //     }
+            //     header('Location: index.php');
+            //     break;
 
-        // CRUD danh mục
+            // CRUD danh mục
         case 'category':
             //show danh mục
             $list_category = get_category();
 
             require_once 'views/category/show-category.php';
             break;
-        //Thêm danh mục mới
+            //Thêm danh mục mới
         case 'addCategory':
             if (isset($_POST['addCategory']) && $_POST['addCategory']) {
                 $category_name = $_POST['category_name'];
@@ -71,7 +71,7 @@ if (isset($_GET['page'])) {
 
             require_once 'views/category/add-category.php';
             break;
-        //sửa danh mục
+            //sửa danh mục
         case 'updateCategory':
             if (isset($_POST['updateCategory']) && $_POST['updateCategory']) {
                 $category_id = $_POST['category_id'];
@@ -97,7 +97,7 @@ if (isset($_GET['page'])) {
 
             require_once 'views/category/update-category.php';
             break;
-        //xóa danh mục
+            //xóa danh mục
         case 'delCategory':
             if (isset($_GET["id"])) {
                 $category_id = $_GET["id"];
@@ -175,8 +175,6 @@ if (isset($_GET['page'])) {
                 }
                 move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
                 create_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
-
-
             }
 
             // load all danh mục 
@@ -235,8 +233,6 @@ if (isset($_GET['page'])) {
                 }
                 move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
                 updateuser($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
-
-
             }
 
             // load all danh mục 
@@ -257,11 +253,10 @@ if (isset($_GET['page'])) {
             require_once 'views/form-user.php';
             break;
 
-        //xác nhận đơn hàng
+            //xác nhận đơn hàng
 
 
-        case 'confirm_bill';
-
+        case 'confirm_bill':
             if (isset($_GET['id'])) {
                 $bill_id = $_GET['id'];
 
@@ -271,42 +266,42 @@ if (isset($_GET['page'])) {
                 $_SESSION["message"] = $message;
                 header('Location: index.php');
             }
-
             break;
 
-        // case 'adddm':
-        //     if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
-        //         $tendm=$_POST['tendm'];
-        //         $uutien=$_POST['uutien'];
-        //         $hienthi=$_POST['hienthi'];
-        //         themdm($tendm,$uutien,$hienthi);
-        //     }
-        //     $kq=render_category();
-        //    include "view/danhmuc.php";
-        //         break;
-        // case 'updatedmform':
-        //     if(isset($_GET['id'])){
-        //         $id=$_GET['id'];
-        //         $kq1=getonedm($id);
-        //     }
-        //     if(isset($_POST['id'])){
-        //         $id=$_POST['id'];
-        //         $tendm=$_POST['tendm'];
-        //         $uutien=$_POST['uutien'];
-        //         $hienthi=$_POST['hienthi'];
-        //         updatedm($id,$tendm,$uutien,$hienthi);
-        //     }
-        //     $kq=getall_dm();
-        //     include "adminfunc/updatedmform.php";
-        //     break;
-        // case 'deldm':
-        //     if(isset($_GET['id'])){
-        //         $id=$_GET['id'];
-        //         deldm($id);
-        //     }
-        //     $kq=getall_dm();
-        //     include "view/danhmuc.php";
-        //     break;   
+
+            // case 'adddm':
+            //     if(isset($_POST['themmoi'])&&($_POST['themmoi'])){
+            //         $tendm=$_POST['tendm'];
+            //         $uutien=$_POST['uutien'];
+            //         $hienthi=$_POST['hienthi'];
+            //         themdm($tendm,$uutien,$hienthi);
+            //     }
+            //     $kq=render_category();
+            //    include "view/danhmuc.php";
+            //         break;
+            // case 'updatedmform':
+            //     if(isset($_GET['id'])){
+            //         $id=$_GET['id'];
+            //         $kq1=getonedm($id);
+            //     }
+            //     if(isset($_POST['id'])){
+            //         $id=$_POST['id'];
+            //         $tendm=$_POST['tendm'];
+            //         $uutien=$_POST['uutien'];
+            //         $hienthi=$_POST['hienthi'];
+            //         updatedm($id,$tendm,$uutien,$hienthi);
+            //     }
+            //     $kq=getall_dm();
+            //     include "adminfunc/updatedmform.php";
+            //     break;
+            // case 'deldm':
+            //     if(isset($_GET['id'])){
+            //         $id=$_GET['id'];
+            //         deldm($id);
+            //     }
+            //     $kq=getall_dm();
+            //     include "view/danhmuc.php";
+            //     break;   
         default:
             // http_response_code(404);
             // require_once "views/404page.php";

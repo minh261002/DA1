@@ -2233,11 +2233,8 @@ pre {
   cursor: pointer;
 }
 
-.condition .step-cart p {
-  color: #000;
-}
 
-.condition .step-checkout p {
+.condition .active p {
   color: var(--primary-color);
   font-weight: 700;
 }
@@ -2797,6 +2794,81 @@ input[type="email"]:disabled {
   grid-template-columns: repeat(5, 1fr);
   gap: 32px;
 }
+
+
+
+/* Write page CSS here*/
+.message-box {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 100px;
+}
+
+.success-container {
+  background: white;
+  height: 480px;
+  width: 90%;
+  box-shadow: 5px 5px 10px grey;
+  text-align: center;
+}
+
+.confirm-green-box {
+  width: 100%;
+  height: 140px;
+  background: #d7f5da;
+}
+
+
+.monserrat-font {
+  letter-spacing: 2px;
+}
+
+.verticle-align {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 
 
 

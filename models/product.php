@@ -1,10 +1,12 @@
 <?php
-  function render_allproduct(){
+function render_allproduct()
+{
     $sql = "SELECT * FROM product";
-        return pdo_query($sql);
+    return pdo_query($sql);
 }
 
-function add_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot) {
+function add_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot)
+{
     try {
         $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
         pdo_execute($sql, $id_category, $name, $img, json_encode($gallery, JSON_FORCE_OBJECT), $info, $price, $sale, $view, $hot);
@@ -15,12 +17,26 @@ function add_product($id, $id_category, $name, $img, $gallery, $info, $price, $s
 }
 
 
-function getone_product($id){
+function getone_product($id)
+{
     $sql = "SELECT * FROM product WHERE id=?";
-    return pdo_query($sql,$id);
+    return pdo_query($sql, $id);
 }
 
-function update_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot) {
+function admin_show_product_by_category($category_id)
+{
+    $sql = "UPDATE product SET hide = 0 WHERE id_category=?";
+    return pdo_query($sql, $category_id);
+}
+
+function admin_hide_product_by_category($category_id)
+{
+    $sql = "UPDATE product SET hide = 1 WHERE id_category=?";
+    return pdo_query($sql, $category_id);
+}
+
+function update_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot)
+{
     try {
         $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
         pdo_execute($sql, $id_category, $name, $img, json_encode($gallery, JSON_FORCE_OBJECT), $info, $price, $sale, $view, $hot, $id);
@@ -30,14 +46,14 @@ function update_product($id, $id_category, $name, $img, $gallery, $info, $price,
     }
 }
 
-function del_sp($id){
+function del_sp($id)
+{
     $sql = "DELETE FROM product WHERE  id=?";
-    if(is_array($id)){
+    if (is_array($id)) {
         foreach ($id as $ma) {
             pdo_execute($sql, $ma);
         }
-    }
-    else{
+    } else {
         pdo_execute($sql, $id);
     }
 }
@@ -46,15 +62,13 @@ function get_new_product()
     $currentDateTime = date('Y-m-d H:i:s');
     $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-10 days', strtotime($currentDateTime)));
 
-    $sql = "SELECT * FROM product WHERE  created_at >= '$threeDaysAgo' ORDER BY id DESC LIMIT 7";
+    $sql = "SELECT * FROM product WHERE hide = 0 AND created_at >= '$threeDaysAgo' ORDER BY id DESC LIMIT 7";
     return pdo_query($sql);
 }
 
-
-
 function get_product_by_id($id)
 {
-    $sql = "SELECT * FROM product WHERE id=?";
+    $sql = "SELECT * FROM product WHERE hide = 0 AND id=?";
     return pdo_query_one($sql, $id);
 }
 
@@ -62,26 +76,26 @@ function get_product_by_variant($id)
 {
     $sql = "SELECT product.id, variant.* FROM product
     INNER JOIN variant ON product.id = variant.id_product
-    WHERE product.id = ? AND quantity > 0";
+    WHERE product.hide = 0 AND product.id = ? AND quantity > 0";
 
     return pdo_query($sql, $id);
 }
 
 function get_product_flash_sale()
 {
-    $sql = "SELECT * FROM product WHERE sale > 50";
+    $sql = "SELECT * FROM product WHERE hide = 0 AND sale > 50 ";
     return pdo_query($sql);
 }
 
 function get_hot_product()
 {
-    $sql = "SELECT * FROM product WHERE hot = 1 LIMIT 10";
+    $sql = "SELECT * FROM product WHERE hide = 0 AND hot = 1 LIMIT 10";
     return pdo_query($sql);
 }
 
 function search($search)
 {
-    $sql = "SELECT * FROM product WHERE name LIKE '%$search%'";
+    $sql = "SELECT * FROM product WHERE  hide = 0 AND name LIKE '%$search%'";
     return pdo_query($sql);
 }
 
@@ -92,13 +106,13 @@ function search($search)
 
 function product_view($id)
 {
-    $sql = "UPDATE product SET view = view + 1 WHERE id=?";
+    $sql = "UPDATE product SET view = view + 1 WHERE hide = 0 AND id=?";
     pdo_execute($sql, $id);
 }
 
 function get_list_product($id)
 {
-    $sql = "SELECT * FROM product WHERE 1";
+    $sql = "SELECT * FROM product WHERE hide = 0 AND 1";
     if ($id > 0) {
         $sql .= " AND id_category= " . $id;
     }
@@ -199,7 +213,7 @@ function show_product($list_product)
 
 function category_has_products($category_id)
 {
-    $sql = "SELECT COUNT(*) FROM product WHERE id_category = ?";
+    $sql = "SELECT COUNT(*) FROM product WHERE hide = 0 AND id_category = ?";
     return pdo_query($sql, $category_id);
 }
 
@@ -216,7 +230,7 @@ function category_has_products($category_id)
 
 function get_products_by_category($categoryId)
 {
-    $sql = "SELECT * FROM product WHERE id_category=?";
+    $sql = "SELECT * FROM product WHERE hide = 0 AND id_category=?";
     return pdo_query($sql, $categoryId);
 }
 

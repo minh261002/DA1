@@ -64,14 +64,14 @@ function category_insert($category_name, $category_img, $category_home)
 //  * @param String $ten_loai là tên loại mới
 //  * @throws PDOException lỗi cập nhật
 //  */
-function update_category($id, $category_img, $category_name, $category_home)
+function update_category($category_id, $category_img, $category_name, $category_home, $category_hide)
 {
     if ($category_img != '') {
-        $sql = "UPDATE category SET name=?, avatar=?, home=? WHERE id=?";
-        pdo_execute($sql, $category_name, $category_img, $category_home, $id);
+        $sql = "UPDATE category SET avatar=?, name=?, home=?, hide=? WHERE id=?";
+        pdo_execute($sql, $category_img, $category_name, $category_home, $category_hide, $category_id);
     } else {
-        $sql = "UPDATE category SET name=?, home=? WHERE id=?";
-        pdo_execute($sql, $category_name, $category_home, $id);
+        $sql = "UPDATE category SET name=?, home=?,hide =? WHERE id=?";
+        pdo_execute($sql, $category_name, $category_home, $category_hide, $category_id);
     }
 }
 

@@ -28,7 +28,7 @@ require_once 'views/font-end/header.php';
 
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-            //dăng xuất
+        //dăng xuất
         case 'logout':
             if (isset($_SESSION["admin"]) && count($_SESSION["admin"]) > 0) {
                 session_destroy();
@@ -36,14 +36,14 @@ if (isset($_GET['page'])) {
             header('Location: index.php');
             break;
 
-            // CRUD danh mục
+        // CRUD danh mục
         case 'category':
             //show danh mục
             $list_category = get_category();
 
             require_once 'views/category/show-category.php';
             break;
-            //Thêm danh mục mới
+        //Thêm danh mục mới
         case 'addCategory':
             if (isset($_POST['addCategory']) && $_POST['addCategory']) {
                 $category_name = $_POST['category_name'];
@@ -67,7 +67,7 @@ if (isset($_GET['page'])) {
 
             require_once 'views/category/add-category.php';
             break;
-            //sửa danh mục
+        //sửa danh mục
         case 'updateCategory':
             if (isset($_POST['updateCategory']) && $_POST['updateCategory']) {
                 $category_id = $_POST['category_id'];
@@ -75,15 +75,23 @@ if (isset($_GET['page'])) {
                 $category_home = $_POST['home'];
                 $category_img = $_FILES['category_img']['name'];
                 $category_img_old = $_POST['avatar_old'];
+                $category_hide = $_POST['hide'];
+
+                if ($category_hide == 1) {
+                    admin_hide_product_by_category($category_id);
+                }
+                if ($category_hide == 0) {
+                    admin_show_product_by_category($category_id);
+                }
 
                 $target_dir = "../uploads/";
                 $target_file = $target_dir . basename($_FILES["category_img"]["name"]);
 
                 if (!empty($category_img)) {
                     move_uploaded_file($_FILES["category_img"]["tmp_name"], $target_file);
-                    update_category($category_id, $category_img, $category_name, $category_home);
+                    update_category($category_id, $category_img, $category_name, $category_home, $category_hide);
                 } else {
-                    update_category($category_id, $category_img_old, $category_name, $category_home);
+                    update_category($category_id, $category_img_old, $category_name, $category_home, $category_hide);
                 }
 
                 $message = "Cập nhật danh mục thành công!";
@@ -93,7 +101,8 @@ if (isset($_GET['page'])) {
 
             require_once 'views/category/update-category.php';
             break;
-            //xóa danh mục
+
+        //xóa danh mục
         case 'delCategory':
             if (isset($_GET["id"])) {
                 $category_id = $_GET["id"];
@@ -245,7 +254,7 @@ if (isset($_GET['page'])) {
             require_once 'views/users/show-user.php';
             break;
 
-            //xác nhận đơn hàng
+        //xác nhận đơn hàng
 
 
         case 'confirm_bill':
@@ -260,14 +269,14 @@ if (isset($_GET['page'])) {
             }
             break;
 
-            // CRUD sản phẩm 
-            // show sản phẩm
+        // CRUD sản phẩm 
+        // show sản phẩm
         case 'product':
 
             $product = render_allproduct();
             require_once 'views/product/show-product.php';
             break;
-            // thêm sản phẩm
+        // thêm sản phẩm
         case 'add-product':
 
             if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
@@ -306,7 +315,7 @@ if (isset($_GET['page'])) {
             require_once 'views/product/add-product.php';
             break;
 
-            // Sửa Sản Phẩm
+        // Sửa Sản Phẩm
         case 'update-product':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
@@ -349,7 +358,7 @@ if (isset($_GET['page'])) {
             $product = render_allproduct();
             require_once 'views/product/update-product.php';
             break;
-            // Xóa sản phẩm
+        // Xóa sản phẩm
         case 'del-product':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];

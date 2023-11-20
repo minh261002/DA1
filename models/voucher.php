@@ -15,26 +15,36 @@ if (isset($_POST['voucher'])) {
     $voucherRow = check_voucher($voucherCode);
 
     if ($voucherRow) {
-        $discountValue = $voucherRow['value'];
+        $currentDate = date('Y-m-d'); // Ngày hiện tại
 
-        $totalPrice = total_price();
+        // Kiểm tra xem ngày hiện tại nằm trong khoảng thời gian của mã giảm giá
+        if ($currentDate >= $voucherRow['start'] && $currentDate <= $voucherRow['end']) {
+            $discountValue = $voucherRow['value'];
 
-        $discountAmount = ($discountValue / 100) * $totalPrice;
+            $totalPrice = total_price();
 
-        $_SESSION['discounted'] = $discountAmount;
+            $discountAmount = ($discountValue / 100) * $totalPrice;
 
-        $totalPrice -= $discountAmount;
+            $_SESSION['discounted'] = $discountAmount;
 
-        $_SESSION['total_price'] = $totalPrice;
+            $totalPrice -= $discountAmount;
 
-        total_price();
+            $_SESSION['total_price'] = $totalPrice;
 
-        echo json_encode([
-            'success' => true,
-            'message' => 'Áp dụng voucher thành công!',
-            'totalPrice' => number_format($totalPrice, 0, '.', ',') . ' đ',
-            'discounted' => number_format($discountAmount, 0, '.', ',') . ' đ',
-        ]);
+            total_price();
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'Áp dụng voucher thành công!',
+                'totalPrice' => number_format($totalPrice, 0, '.', ',') . ' đ',
+                'discounted' => number_format($discountAmount, 0, '.', ',') . ' đ',
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Mã voucher đã hết hạn.',
+            ]);
+        }
     } else {
         echo json_encode([
             'success' => false,
@@ -42,4 +52,5 @@ if (isset($_POST['voucher'])) {
         ]);
     }
 }
+
 ?>

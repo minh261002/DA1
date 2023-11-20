@@ -13,6 +13,8 @@ require_once "../models/product.php";
 
 require_once "../models/bill.php";
 
+require_once "../models/voucher_admin.php";
+
 
 $bill_unconfirmed = get_bill_unconfimred();
 
@@ -368,6 +370,59 @@ if (isset($_GET['page'])) {
             require_once 'views/product/show-product.php';
             break;
 
+        case 'voucher':
+
+            require_once 'views/voucher/show_voucher.php';
+            break;
+
+        case 'update_voucher':
+
+            if (isset($_POST['btn-update-voucher']) && $_POST['btn-update-voucher']) {
+                $id_voucher = $_POST['id_voucher'];
+                $name_voucher = $_POST['name_voucher'];
+                $value_voucher = $_POST['value_voucher'];
+                $start_voucher = $_POST['start_voucher'];
+                $end_voucher = $_POST['end_voucher'];
+
+                update_voucher($id_voucher, $name_voucher, $value_voucher, $start_voucher, $end_voucher);
+
+                $message = "Cập nhật mã giảm giá thành công!";
+                $_SESSION["message"] = $message;
+                header('Location: index.php?page=voucher');
+            }
+
+            require_once 'views/voucher/update_voucher.php';
+            break;
+
+        case 'delete_voucher':
+            if (isset($_GET['id'])) {
+                $id_voucher = $_GET['id'];
+
+                delete_voucher($id_voucher);
+
+                $message = "Xóa mã giảm giá thành công!";
+                $_SESSION["message"] = $message;
+                header('Location: index.php?page=voucher');
+            }
+            break;
+
+        case 'add_voucher':
+
+            if (isset($_POST['btn-add-voucher']) && $_POST['btn-add-voucher']) {
+                $name_voucher = $_POST['name_voucher'];
+                $value_voucher = $_POST['value_voucher'];
+                $start_voucher = $_POST['start_voucher'];
+                $end_voucher = $_POST['end_voucher'];
+
+                add_voucher($name_voucher, $value_voucher, $start_voucher, $end_voucher);
+
+                $message = "Thêm mã giảm giá thành công!";
+                $_SESSION["message"] = $message;
+                header('Location: index.php?page=voucher');
+            }
+
+            require_once 'views/voucher/add_voucher.php';
+            break;
         default:
             // http_response_code(404);
             // require_once "views/404page.php";

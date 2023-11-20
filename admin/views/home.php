@@ -35,7 +35,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-offer'></i>
                 <span class="text">Mã Giảm Giá</span>
             </a>

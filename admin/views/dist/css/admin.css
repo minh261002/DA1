@@ -46,7 +46,8 @@ body {
 	overflow-x: hidden;
 }
 
-.admin-category{
+.admin-category,
+.voucher-container{
 	margin-top: 32px;
 	background: #fff;
 	padding: 12px;

@@ -382,7 +382,7 @@ footer>.container {
   width: 100%;
   border: none;
   outline: none;
-  background: #c92027;
+  background: var(--primary-color);
   color: #fff;
   font-weight: 600;
   padding: 10px;

@@ -41,6 +41,24 @@ if (isset($_GET['id'])) {
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-offer'></i>
+                <span class="text">Mã Giảm Giá</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-slideshow'></i>
+                <span class="text">Slider Shows</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-analyse'></i>
+                <span class="text">Thống Kê</span>
+            </a>
+        </li>
     </ul>
     <ul class="side-menu">
         <li>

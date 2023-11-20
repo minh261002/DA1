@@ -34,6 +34,24 @@
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-offer'></i>
+                <span class="text">Mã Giảm Giá</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-slideshow'></i>
+                <span class="text">Slider Shows</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bxs-analyse'></i>
+                <span class="text">Thống Kê</span>
+            </a>
+        </li>
     </ul>
     <ul class="side-menu">
         <li>
@@ -97,10 +115,10 @@
                 </span>
             </li>
             <li>
-                <i class='bx bxs-dollar-circle'></i>
+                <i class='bx bxs-category'></i>
                 <span class="text">
-                    <h3>$2543</h3>
-                    <p>Total Sales</p>
+                    <h3>2543</h3>
+                    <p>Sản Phẩm</p>
                 </span>
             </li>
         </ul>
@@ -130,6 +148,7 @@
                             </td>
                             <td>01-10-2021</td>
                             <td><span class="status pending">Chưa Xác Nhận</span></td>
+                            <td><a href="">Xác Nhận</a></td>
                         </tr>
                         <tr>
                             <td>
@@ -138,6 +157,7 @@
                             </td>
                             <td>01-10-2021</td>
                             <td><span class="status pending">Chưa Xác Nhận</span></td>
+                            <td><a href="">Xác Nhận</a></td>
                         </tr>
                         <tr>
                             <td>
@@ -146,6 +166,7 @@
                             </td>
                             <td>01-10-2021</td>
                             <td><span class="status pending">Chưa Xác Nhận</span></td>
+                            <td><a href="">Xác Nhận</a></td>
                         </tr>
                         <tr>
                             <td>
@@ -154,6 +175,7 @@
                             </td>
                             <td>01-10-2021</td>
                             <td><span class="status pending">Chưa Xác Nhận</span></td>
+                            <td><a href="">Xác Nhận</a></td>
                         </tr>
                         <tr>
                             <td>
@@ -162,6 +184,7 @@
                             </td>
                             <td>01-10-2021</td>
                             <td><span class="status pending">Chưa Xác Nhận</span></td>
+                            <td><a href="">Xác Nhận</a></td>
                         </tr>
                     </tbody>
                 </table>

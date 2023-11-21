@@ -17,6 +17,8 @@ require_once 'models/category.php';
 require_once "models/product.php";
 //cart
 require_once "models/cart.php";
+//bill
+require_once "models/bill.php";
 // checkout
 require_once "models/checkout.php";
 require_once "models/config_vnpay.php";
@@ -462,6 +464,15 @@ if (isset($_GET['page'])) {
 
         case "search":
             require_once 'views/search.php';
+            break;
+
+        case 'search_bill':
+            if (isset($_POST['btn-search-bill'])) {
+                $id_bill = $_POST['id_bill'];
+                $bill = bill_search($id_bill);
+                $bill_details = bill_details($id_bill);
+            }
+            require_once 'views/search_bill.php';
             break;
 
         default:

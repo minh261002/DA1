@@ -23,4 +23,10 @@ function bill_details($id_bill)
     return pdo_query($sql, $id_bill);
 }
 
+function bill_search($id_bill)
+{
+    $sql = "SELECT * FROM bill WHERE id = ?";
+    return pdo_query_one($sql, $id_bill);
+}
+
 ?>

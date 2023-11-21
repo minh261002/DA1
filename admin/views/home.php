@@ -32,7 +32,7 @@ if (count($get_bill_unconfirm) > 0) {
 
 <!-- SIDEBAR -->
 <section id="sidebar">
-    <a href="#" class="brand">
+    <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">

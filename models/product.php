@@ -104,6 +104,11 @@ function search($search)
 //     return pdo_query_value($sql, $ma_hh) > 0;
 // }
 
+function sum_product()
+{
+    $sql = "SELECT SUM(quantity) AS sum_product FROM variant";
+    return pdo_query_value($sql);
+}
 function product_view($id)
 {
     $sql = "UPDATE product SET view = view + 1 WHERE hide = 0 AND id=?";

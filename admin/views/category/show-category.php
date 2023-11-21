@@ -12,8 +12,8 @@ foreach ($list_category as $ct) {
             <td>' . (($home == 0) ? "Mặc Định" : "Hiển Thị Trang Chủ") . '</td>
             <td>' . (($hide == 0) ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh") . '</td>
             <td>
-                <a href="index.php?page=updateCategory&id=' . $id . '">Sửa</a>
-                <a href="index.php?page=delCategory&id=' . $id . '">Xóa</a>
+                <a href="index.php?page=updateCategory&id=' . $id . '"><i class="bx bx-edit"></i></a>
+                <a href="index.php?page=delCategory&id=' . $id . '"><i class="bx bx-trash"></i></a>
             </td>
         </tr>
     ';

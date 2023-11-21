@@ -93,7 +93,7 @@ $temporary = $_SESSION['temporary'] ?? 0;
                     </tbody>
                 </table>
 
-                <a href="index.php?page=cart&act=del_all" class="d-block my-5 btn btn-danger">Xóa Tất Cả Sản Phẩm</a>
+                <a href="index.php?page=cart&act=del_all" class="d-block my-5 btn btn-dark">Xóa Tất Cả Sản Phẩm</a>
                 <a href="index.php?pahe=home">Quay Lại Trang Chủ</a>
             </div>
 

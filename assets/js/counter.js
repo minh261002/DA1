@@ -1,7 +1,6 @@
-const product = document.querySelector(".c-product");
-const category = document.querySelector(".c-category");
-const user = document.querySelector(".c-user");
-const bill = document.querySelector(".c-bill");
+const product = document.querySelector(".c-product h3");
+const user = document.querySelector(".c-user h3");
+const bill = document.querySelector(".c-bill h3");
 
 function counterUp(el, to) {
   let speed = 500;
@@ -19,6 +18,5 @@ function counterUp(el, to) {
 }
 
 counterUp(product, 3300);
-counterUp(category, 1000);
 counterUp(user, 9900);
 counterUp(bill, 12000);

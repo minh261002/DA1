@@ -230,13 +230,13 @@ $html_hot_product = show_product($hot_product);
         <div class="wrap-content">
             <div class="heading">Sản Phẩm Mới Ra Mắt</div>
             <div class="cate-bar">
-                <button class="cate-active cate-button">Nữ</button>
-                <button class="cate-button">Nam</button>
-                <button class="cate-button">Trẻ Em</button>
+                <button class="cate-active cate-button">Áo</button>
+                <button class="cate-button">Quần</button>
+                <button class="cate-button">Đầm - Chân Váy</button>
             </div>
             <div class=" product-block">
                 <div class="image-cate">
-                    <img src="Uploads/bnn1.webp">
+                    <img src="uploads/ads_1.png">
                 </div>
                 <div class=" owl-carousel owl-theme owl-loaded owl-drag slide-product list-product ">
                     <?= $html_new_product ?>

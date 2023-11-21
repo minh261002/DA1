@@ -1,3 +1,9 @@
+<?php
+$sum_product = pdo_query_value("SELECT SUM(quantity) AS sum_product FROM variant");
+$sum_account = pdo_query_value("SELECT COUNT(*) AS sum_account FROM user");
+$sum_bill = pdo_query_value("SELECT COUNT(*) AS sum_bill FROM bill");
+?>
+
 <!-- SIDEBAR -->
 <section id="sidebar">
     <a href="#" class="brand">
@@ -102,22 +108,22 @@
         <ul class="box-info">
             <li>
                 <i class='bx bxs-calendar-check'></i>
-                <span class="text">
-                    <h3>1020</h3>
+                <span class="text c-bill">
+                    <h3>0</h3>
                     <p>Đơn Hàng</p>
                 </span>
             </li>
             <li>
                 <i class='bx bxs-group'></i>
-                <span class="text">
-                    <h3>2834</h3>
+                <span class="text c-user">
+                    <h3>0</h3>
                     <p>Tài Khoản</p>
                 </span>
             </li>
             <li>
                 <i class='bx bxs-category'></i>
-                <span class="text">
-                    <h3>2543</h3>
+                <span class="text c-product">
+                    <h3>0</h3>
                     <p>Sản Phẩm</p>
                 </span>
             </li>
@@ -194,3 +200,29 @@
     <!-- MAIN -->
 </section>
 <!-- CONTENT -->
+
+<script>
+    const product = document.querySelector(".c-product h3");
+    const user = document.querySelector(".c-user h3");
+    const bill = document.querySelector(".c-bill h3");
+
+    function counterUp(el, to) {
+        let speed = 300;
+        let from = 0;
+        let step = to / speed;
+        const counter = setInterval(function () {
+            from += step;
+            if (from > to) {
+                clearInterval(counter);
+                el.innerText = to;
+            } else {
+                el.innerText = Math.ceil(from);
+            }
+        }, 0.5);
+    }
+
+    counterUp(product, <?php echo (int) $sum_product; ?>);
+    counterUp(user, <?php echo (int) $sum_account; ?>);
+    counterUp(bill, <?php echo (int) $sum_bill; ?>);
+
+</script>

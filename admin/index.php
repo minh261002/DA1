@@ -257,8 +257,6 @@ if (isset($_GET['page'])) {
             break;
 
         //xác nhận đơn hàng
-
-
         case 'confirm_bill':
             if (isset($_GET['id'])) {
                 $bill_id = $_GET['id'];
@@ -423,6 +421,21 @@ if (isset($_GET['page'])) {
 
             require_once 'views/voucher/add_voucher.php';
             break;
+
+        case 'bill':
+            $bills = get_all_bill();
+            require_once 'views/bill/show_bill.php';
+            break;
+
+        case 'bill_details':
+            if (isset($_GET['id'])) {
+                $id_bill = $_GET['id'];
+                $bill_details = bill_details($id_bill);
+            }
+
+            require_once 'views/bill/bill_details.php';
+            break;
+
         default:
             // http_response_code(404);
             // require_once "views/404page.php";

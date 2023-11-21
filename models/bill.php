@@ -1,12 +1,13 @@
 <?php
 function get_bill_unconfimred()
 {
-    $sql = "SELECT bill.*, bill_details.*, user.username AS user_username
-    FROM bill
-    LEFT JOIN bill_details ON bill.id = bill_details.id_bill
-    LEFT JOIN user ON bill.id_user = user.id
-    WHERE bill.status = 0";
+    $sql = 'SELECT * FROM bill WHERE status = 0';
+    return pdo_query($sql);
+}
 
+function get_all_bill()
+{
+    $sql = 'SELECT * FROM bill';
     return pdo_query($sql);
 }
 
@@ -14,6 +15,12 @@ function confirm_bill($bill_id)
 {
     $sql = "UPDATE bill SET status = 1 WHERE id = ?";
     pdo_execute($sql, $bill_id);
+}
+
+function bill_details($id_bill)
+{
+    $sql = "SELECT * FROM bill_details WHERE id_bill= ?";
+    return pdo_query($sql, $id_bill);
 }
 
 ?>

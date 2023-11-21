@@ -302,6 +302,9 @@ body {
 #content nav #switch-mode:checked + .switch-mode::before {
 	left: calc(100% - (25px - 4px) - 2px);
 }
+.bill_img{
+	border-radius: 0 !important;
+}
 /* NAVBAR */
 
 
@@ -477,11 +480,17 @@ body {
 	border-radius: 20px;
 	font-weight: 700;
 }
-#content main .table-data .order table tr td .status.completed {
-	background: var(--blue);
+#content main .table-data .order table tr td .status.success {
+	background: #28a745;
+}
+#content main .table-data .order table tr td .status.cancel {
+	background: #dc3545;
+}
+#content main .table-data .order table tr td .status.delivery {
+	background:  #007bff;
 }
 #content main .table-data .order table tr td .status.process {
-	background: var(--yellow);
+	background: #ffc107;
 }
 #content main .table-data .order table tr td .status.pending {
 	background: var(--orange);

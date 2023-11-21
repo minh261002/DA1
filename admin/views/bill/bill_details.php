@@ -1,33 +1,16 @@
 <?php
-$sum_product = pdo_query_value("SELECT SUM(quantity) AS sum_product FROM variant");
-$sum_account = pdo_query_value("SELECT COUNT(*) AS sum_account FROM user");
-$sum_bill = pdo_query_value("SELECT COUNT(*) AS sum_bill FROM bill");
-
-$get_bill_unconfirm = get_bill_unconfimred();
-
-$html_bill_unconfirm = "";
-
-if (count($get_bill_unconfirm) > 0) {
-    foreach ($get_bill_unconfirm as $bill_unconfirm) {
-        $html_bill_unconfirm .= '
-            <tr>
-                <td>' . $bill_unconfirm['fullname'] . '</td>
-                <td>' . $bill_unconfirm['created_at'] . '</td>
-                <td><span class="status pending">Chưa Xác Nhận</span></td>
-                <td><a href="index.php?page=confirm_bill&id=' . $bill_unconfirm['id'] . '">Xác Nhận Đơn Hàng</a></td>
-            </tr>
-        ';
-    }
-} else {
-    $html_bill_unconfirm = '
-    <tr>
-        <td colspan="4" class="text-center">       
-            <p class="text-center">Bạn Không Có Đơn Hàng Cần Xác Nhận</p>
-        </td>   
-    </tr>
-        ';
+$html_bill_details = '';
+foreach ($bill_details as $bill_detail) {
+    $html_bill_details .= '
+        <tr>
+            <td>' . $bill_detail['name'] . '</td>
+            <td><img class="bill_img" src="../uploads/' . $bill_detail['img'] . '"/></td>
+            <td>' . $bill_detail['quantity'] . '</td>
+            <td>' . number_format($bill_detail['price'], 0, ',', '.') . 'đ</td>
+            <td>' . number_format($bill_detail['price'] * $bill_detail['quantity'], 0, ',', '.') . 'đ</td>
+        </tr>
+    ';
 }
-
 ?>
 
 <!-- SIDEBAR -->
@@ -36,7 +19,7 @@ if (count($get_bill_unconfirm) > 0) {
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -54,7 +37,7 @@ if (count($get_bill_unconfirm) > 0) {
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
@@ -120,7 +103,7 @@ if (count($get_bill_unconfirm) > 0) {
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+            <img src="img/people.png">
         </a>
     </nav>
     <!-- NAVBAR -->
@@ -129,43 +112,16 @@ if (count($get_bill_unconfirm) > 0) {
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Quản Trị Viên</h1>
+                <h1>Đơn Hàng</h1>
             </div>
-            <a href="#" class="btn-download">
-                <i class='bx bxs-cloud-download'></i>
-                <span class="text">Download PDF</span>
-            </a>
         </div>
-
-        <ul class="box-info">
-            <li>
-                <i class='bx bxs-calendar-check'></i>
-                <span class="text c-bill">
-                    <h3>0</h3>
-                    <p>Đơn Hàng</p>
-                </span>
-            </li>
-            <li>
-                <i class='bx bxs-group'></i>
-                <span class="text c-user">
-                    <h3>0</h3>
-                    <p>Tài Khoản</p>
-                </span>
-            </li>
-            <li>
-                <i class='bx bxs-category'></i>
-                <span class="text c-product">
-                    <h3>0</h3>
-                    <p>Sản Phẩm</p>
-                </span>
-            </li>
-        </ul>
-
 
         <div class="table-data">
             <div class="order">
                 <div class="head">
-                    <h3>Đơn Hàng Chưa Được Xác Nhận</h3>
+                    <h3>Đơn Hàng #
+                        <?= $id_bill ?>
+                    </h3>
                     <i class='bx bx-search'></i>
                     <i class='bx bx-filter'></i>
                 </div>
@@ -178,45 +134,22 @@ if (count($get_bill_unconfirm) > 0) {
                 <table>
                     <thead>
                         <tr>
-                            <th>Khách Hàng</th>
-                            <th>Ngày Đặt Hàng</th>
-                            <th>Trạng Thái</th>
-                            <th>Thao Tác</th>
+                            <th>Sản Phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Số Lượng</th>
+                            <th>Giá</th>
+                            <th>Thành Tiền</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?= $html_bill_unconfirm ?>
+                        <?= $html_bill_details ?>
                     </tbody>
                 </table>
             </div>
+
         </div>
+
     </main>
     <!-- MAIN -->
 </section>
 <!-- CONTENT -->
-
-<script>
-    const product = document.querySelector(".c-product h3");
-    const user = document.querySelector(".c-user h3");
-    const bill = document.querySelector(".c-bill h3");
-
-    function counterUp(el, to) {
-        let speed = 300;
-        let from = 0;
-        let step = to / speed;
-        const counter = setInterval(function () {
-            from += step;
-            if (from > to) {
-                clearInterval(counter);
-                el.innerText = to;
-            } else {
-                el.innerText = Math.ceil(from);
-            }
-        }, 0.5);
-    }
-
-    counterUp(product, <?php echo (int) $sum_product; ?>);
-    counterUp(user, <?php echo (int) $sum_account; ?>);
-    counterUp(bill, <?php echo (int) $sum_bill; ?>);
-
-</script>

@@ -93,10 +93,10 @@ $html_hot_product = show_product($hot_product);
         <div class="owl-carousel owl-theme wrap-content slide-home ">
 
             <div class="item" style="width:100%">
-                <img src="assets/img/1698802318426883.webp">
+                <img src="https://theme.hstatic.net/200000537721/1000888604/14/slideshow_2.jpg?v=324">
             </div>
             <div class="item" style="width:100%">
-                <img src="assets/img/bn2.webp">
+                <img src="https://theme.hstatic.net/200000537721/1000888604/14/slideshow_1.jpg?v=324">
             </div>
             <div class="item" style="width:100%">
                 <img src="assets/img/bn3.webp">
@@ -236,7 +236,7 @@ $html_hot_product = show_product($hot_product);
             </div>
             <div class=" product-block">
                 <div class="image-cate">
-                    <img src="uploads/ads_1.png">
+                    <img src="uploads/psn.png">
                 </div>
                 <div class=" owl-carousel owl-theme owl-loaded owl-drag slide-product list-product ">
                     <?= $html_new_product ?>

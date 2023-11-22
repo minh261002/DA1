@@ -143,18 +143,27 @@ if (isset($_GET['page'])) {
 
         //trang sản phẩm
         case 'product':
-
             $list_category = get_category();
+            $all_product = [];
+            $showPagination = true; // Mặc định hiển thị phân trang
 
             if (!isset($_GET['id'])) {
                 $id = 0;
+                $all_product = product_select_page();
             } else {
-                $id = $_GET['id'];
+                $categoryId = $_GET['id'];
+                if ($categoryId === 'all') {
+                    $all_product = product_select_page();
+                } else {
+                    $all_product = get_products_by_category($categoryId);
+                    $showPagination = false;
+                }
             }
-
-            $all_product = get_list_product($id);
             require_once 'views/product.php';
             break;
+
+
+
 
         case 'option_product':
             if (isset($_GET['act']) && $_GET['act'] == 'new') {
@@ -405,7 +414,6 @@ if (isset($_GET['page'])) {
                     $total_price += $subtotal;
                 }
             }
-
 
             if (isset($_GET['act']) && $_GET['act'] == 'del_all') {
                 unset($_SESSION["cart"]);

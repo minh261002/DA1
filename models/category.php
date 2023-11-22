@@ -75,6 +75,11 @@ function update_category($category_id, $category_img, $category_name, $category_
     }
 }
 
+function get_name_category($id_category)
+{
+    $sql = "SELECT name FROM category WHERE id=?";
+    return pdo_query_one($sql, $id_category);
+}
 
 // /**
 //  * Xóa một hoặc nhiều loại

@@ -1,4 +1,7 @@
 <?php
+
+require_once 'pdo.php';
+
 function render_allproduct()
 {
     $sql = "SELECT * FROM product";
@@ -60,7 +63,7 @@ function del_sp($id)
 function get_new_product()
 {
     $currentDateTime = date('Y-m-d H:i:s');
-    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-10 days', strtotime($currentDateTime)));
+    $threeDaysAgo = date('Y-m-d H:i:s', strtotime('-50 days', strtotime($currentDateTime)));
 
     $sql = "SELECT * FROM product WHERE hide = 0 AND created_at >= '$threeDaysAgo' ORDER BY id DESC LIMIT 7";
     return pdo_query($sql);
@@ -171,7 +174,11 @@ function show_product($list_product)
                 </div>
             ';
         } else {
-            $hot = '';
+            $hot = '
+                <div class="selling" style="opacity:0">
+                    <span>Bán chạy</span>
+                </div>
+            ';
         }
 
         $currentDateTime = date('Y-m-d H:i:s');
@@ -246,23 +253,28 @@ function get_products_by_category($categoryId)
 //     return pdo_query($sql, '%'.$keyword.'%', '%'.$keyword.'%');
 // }
 
-// function hang_hoa_select_page(){
-//     if(!isset($_SESSION['page_no'])){
-//         $_SESSION['page_no'] = 0;
-//     }
-//     if(!isset($_SESSION['page_count'])){
-//         $row_count = pdo_query_value("SELECT count(*) FROM hang_hoa");
-//         $_SESSION['page_count'] = ceil($row_count/10.0);
-//     }
-//     if(exist_param("page_no")){
-//         $_SESSION['page_no'] = $_REQUEST['page_no'];
-//     }
-//     if($_SESSION['page_no'] < 0){
-//         $_SESSION['page_no'] = $_SESSION['page_count'] - 1;
-//     }
-//     if($_SESSION['page_no'] >= $_SESSION['page_count']){
-//         $_SESSION['page_no'] = 0;
-//     }
-//     $sql = "SELECT * FROM hang_hoa ORDER BY ma_hh LIMIT ".$_SESSION['page_no'].", 10";
-//     return pdo_query($sql);
-// }
+function product_select_page()
+{
+    if (!isset($_SESSION['page_no'])) {
+        $_SESSION['page_no'] = 0;
+    }
+    if (!isset($_SESSION['page_count'])) {
+        $row_count = pdo_query_value("SELECT count(*) FROM product");
+        $_SESSION['page_count'] = ceil((int) $row_count / 10.0);
+    }
+    if (isset($_REQUEST['page_no'])) {
+        $_SESSION['page_no'] = $_REQUEST['page_no'];
+    }
+    if ($_SESSION['page_no'] < 0) {
+        $_SESSION['page_no'] = $_SESSION['page_count'] - 1;
+    }
+    if ($_SESSION['page_no'] >= $_SESSION['page_count']) {
+        $_SESSION['page_no'] = 0;
+    }
+
+    $offset = $_SESSION['page_no'] * 10;
+
+    $sql = "SELECT * FROM product ORDER BY id LIMIT " . $offset . ", 10";
+
+    return pdo_query($sql);
+}

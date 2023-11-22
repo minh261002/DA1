@@ -240,6 +240,12 @@ function category_has_products($category_id)
 //     return pdo_query($sql);
 // }
 
+function get_view_product()
+{
+    $sql = "SELECT * FROM product WHERE hide = 0 ORDER BY view DESC LIMIT 5";
+    return pdo_query($sql);
+}
+
 function get_products_by_category($categoryId)
 {
     $sql = "SELECT * FROM product WHERE hide = 0 AND id_category=?";

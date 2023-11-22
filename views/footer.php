@@ -211,7 +211,7 @@
     </div>
 
     <div class="copyright">
-        <img src="uploads/logo_ft.svg" width="200px">
+        <img src="uploads/logo_ft.svg" width="150px">
         Copyright © 2014-2023 owenshop.vn All Rights Reserved.
     </div>
 </footer>

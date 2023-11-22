@@ -54,7 +54,6 @@ if (isset($_GET['id'])) {
                     echo '</div>';
                 }
                 ?>
-
             </div>
         </div>
     </section>

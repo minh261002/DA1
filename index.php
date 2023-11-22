@@ -30,6 +30,7 @@ require_once "views/header.php";
 $flashSaleProducts = get_product_flash_sale();
 $new_product = get_new_product();
 $hot_product = get_hot_product();
+$view_product = get_view_product();
 
 $list_category = get_category();
 

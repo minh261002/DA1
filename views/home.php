@@ -86,6 +86,8 @@ $html_new_product = show_product($new_product);
 
 $html_hot_product = show_product($hot_product);
 
+$html_view_product = show_product($view_product);
+
 ?>
 
 <main>
@@ -224,8 +226,6 @@ $html_hot_product = show_product($hot_product);
         </div>
     </section>
 
-
-
     <section class="product pb-60">
         <div class="wrap-content">
             <div class="heading">Sản Phẩm Mới Ra Mắt</div>
@@ -284,8 +284,17 @@ $html_hot_product = show_product($hot_product);
         </div>
     </section>
 
-
-
+    <section class="outstanding pb-60">
+        <div class="wrap-content">
+            <h3 class="heading">SẢN PHẨM NHIỀU LƯỢT XEM</h3>
+            <div class="list-outstanding">
+                <?= $html_view_product ?>
+            </div>
+        </div>
+        <div class="showall-cate">
+            <a href="index.php?page=option_product&act=hot" class="showall-btn">Xem tất cả sản phẩm </a>
+        </div>
+    </section>
 
     <section class="news pb-60">
         <div class="wrap-content">

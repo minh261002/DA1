@@ -476,11 +476,17 @@ if (isset($_GET['page'])) {
             break;
 
         case 'search_bill':
-            if (isset($_POST['btn-search-bill'])) {
-                $id_bill = $_POST['id_bill'];
+
+            if (isset($_POST['btn-search-bill']) && $_POST['btn-search-bill']) {
+                $id_bill = $_POST['search_bill'];
+
                 $bill = bill_search($id_bill);
-                $bill_details = bill_details($id_bill);
+
+                if (isset($bill['id'])) {
+                    $bill_detail = bill_detail_search($bill['id']);
+                }
             }
+
             require_once 'views/search_bill.php';
             break;
 

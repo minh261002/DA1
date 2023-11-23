@@ -17,7 +17,7 @@ function confirm_bill($bill_id)
     pdo_execute($sql, $bill_id);
 }
 
-function bill_details($id_bill)
+function bill_detail_search($id_bill)
 {
     $sql = "SELECT * FROM bill_details WHERE id_bill= ?";
     return pdo_query($sql, $id_bill);

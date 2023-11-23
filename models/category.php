@@ -64,6 +64,8 @@ function category_insert($category_name, $category_img, $category_home)
 //  * @param String $ten_loai là tên loại mới
 //  * @throws PDOException lỗi cập nhật
 //  */
+
+
 function update_category($category_id, $category_img, $category_name, $category_home, $category_hide)
 {
     if ($category_img != '') {

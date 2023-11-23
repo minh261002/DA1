@@ -59,7 +59,6 @@ if (isset($_GET['page'])) {
 
                 if (is_array($result) && count($result) > 0) {
                     $_SESSION["user"] = $result;
-                    extract($result);
                     header("Location: index.php");
                 } else {
                     // Đăng nhập không thành công, đặt thông báo lỗi
@@ -347,6 +346,14 @@ if (isset($_GET['page'])) {
             break;
 
         case 'order':
+            //check session user
+            if (isset($_SESSION['user'])) {
+
+                $st = isset($_GET['st']) ? $_GET['st'] : null;
+                $id_user = $_SESSION['user']['id'];
+
+                $bill_user = get_bill_user($id_user, $st);
+            }
             require_once 'views/order.php';
             break;
 

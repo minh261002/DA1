@@ -2520,27 +2520,40 @@ pre {
   transition: 0.3s all ease;
   cursor: pointer;
   border-radius: 4px;
+  border: 1px solid transparent;
 }
 
 .option-block:hover {
-  background: #e00222;
-  color: #fff;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
 }
 
 .option-block:hover svg {
-  stroke: #fff;
+  stroke: #000;
 }
 
 .option-block:hover .accordion-body a {
-  color: #fff;
+  color: #000;
 }
 
 .option-block:hover a {
-  color: #fff;
+  color: #000;
 }
 
 .option-block:hover .accordion-body a:hover {
   opacity: 0.8;
+}
+
+.info-bill-user{
+  background: #f5f5f5;
+  padding:4px 12px;
+  border-radius: 4px;
+}
+
+.info-bill-user h4{
+  padding: 0;
+  margin: 0;
 }
 
 .option-block svg {
@@ -2573,7 +2586,7 @@ pre {
 }
 
 .act {
-  background: #e00222;
+  background: var(--primary-color);
   color: #fff;
 }
 

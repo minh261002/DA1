@@ -50,6 +50,13 @@ if (isset($bill)) {
         $transport_price = 5000;
     }
 
+    $voucher = $bill['voucher'];
+    if ($voucher > 0) {
+        $voucher = number_format($voucher, 0, ',', '.');
+    } else {
+        $voucher = 0;
+    }
+
     foreach ($bill_detail as $dt) {
         $subtotal = $dt['price'] * $dt['quantity'];
         $total_price += $subtotal;
@@ -83,9 +90,9 @@ if (isset($bill)) {
         </div>
         <div class="info_bill">
             <p>Thành Tiền: ' . number_format($total_price, 0, ',', '.') . 'đ</p>
-            <p>Giảm Giá: ' . number_format($bill['voucher'], 0, ',', '.') . 'đ</p>
+            <p>Giảm Giá: ' . number_format($voucher, 0, ',', '.') . 'đ</p>
             <p>Vận Chuyển: ' . number_format($transport_price, 0, ',', '.') . 'đ</p>
-            <p>Tổng Thanh Toán: ' . number_format(($total_price - $bill['voucher'] + $transport_price), 0, ',', '.') . ' đ</p>
+            <p>Tổng Thanh Toán: ' . number_format(($total_price - $voucher + $transport_price), 0, ',', '.') . ' đ</p>
         </div>
     </div>
     <table class="table">

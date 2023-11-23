@@ -1,3 +1,92 @@
+<?php
+$html_bill = '';
+
+foreach ($bill_user as $bill) {
+    $total_price = 0; // Đặt lại tổng giá trị cho mỗi đơn hàng
+    $voucher = 0; // Đặt lại giảm giá cho mỗi đơn hàng
+
+    $status = $bill['status'];
+    if ($status == 0) {
+        $status = '<span class="text-warning fs-5 fw-bold">Chưa Xác Nhận</span>';
+    } else if ($status == 1) {
+        $status = '<span class="text-info fs-5 fw-bold">Đã Xác Nhận</span>';
+    } else if ($status == 2) {
+        $status = '<span class="text-secondary fs-5 fw-bold">Đang Giao Hàng</span>';
+    } else if ($status == 3) {
+        $status = '<span class="text-success fs-5 fw-bold">Đã Giao Hàng</span>';
+    } else if ($status == 4) {
+        $status = '<span class="text-danger fs-5 fw-bold">Đã Hủy</span>';
+    }
+
+    $transport = $bill['transport'];
+    if ($transport == 1) {
+        $transport_price = 15000;
+    } else if ($transport == 2) {
+        $transport_price = 10000;
+    } else if ($transport == 3) {
+        $transport_price = 5000;
+    }
+
+    $voucher = $bill['voucher'];
+
+    $id_bill = $bill['id'];
+
+    $product_bill = bill_detail_search($id_bill);
+    $html_product_bill = '';
+    foreach ($product_bill as $pd_b) {
+        $subtotal = $pd_b['price'] * $pd_b['quantity'];
+        $total_price += $subtotal;
+        $html_product_bill .= '
+        <tr class="cart-row">
+            <td> <img src="uploads/' . $pd_b['img'] . '" width="50px"> </td>
+
+            <td class="cart-name">
+                <p>' . $pd_b['name'] . '</p>
+                <p>Kích Thước: <span>' . $pd_b['size'] . '</span></p>
+                <p>Màu Sắc: <span>' . $pd_b['color'] . '</span></p>
+            </td>
+
+            <td>' . $pd_b['quantity'] . '</td>
+
+            <td class="cart-total">
+                <p id="sub-total">' . number_format($subtotal, 0, ',', '.') . 'đ</p>
+            </td>
+        </tr>
+        ';
+    }
+
+    $foot_table = '
+    <tfoot>
+        <td colspan="4" style="text-align: right;">
+            <p>Giảm Giá: <span style="color:red">' . number_format((float) $voucher, 0, ',', '.') . 'đ</span></p>
+            <p>Phí Vận Chuyển: <span style="color:red">' . number_format($transport_price, 0, ',', '.') . 'đ</span></p>
+            <p>Thành tiền: <span style="color:red">' . number_format($total_price - $voucher + $transport_price, 0, ',', '.') . 'đ</span></p>
+        </td>
+    </tfoot>
+    ';
+
+    $html_bill .= '
+    <div class="info-bill-user flex">
+        <h4>Đơn Hàng #' . $id_bill . '</h4>
+        <p>' . $status . '</p>
+    </div>
+    <table class="table">
+        <thead>
+            <th>Ảnh</th>
+            <th>Sản Phẩm</th>
+            <th>Số Lượng</th>
+            <th>Tạm Tính</th>
+        </thead>
+        <tbody>
+        ' . $html_product_bill . '
+        </tbody>
+        ' . $foot_table . '
+    </table>
+    ';
+}
+
+?>
+
 <main class="py-5" style="background-color: #f5f5f5;">
     <section class="order">
         <div class="wrap-content">
@@ -57,13 +146,13 @@
 
                     <div class="profile-order">
                         <div class="order-bar">
-                            <button class="order-tab order-bar_active">Tất cả đơn hàng</button>
-                            <button class="order-tab">Chờ thanh toán</button>
-                            <button class="order-tab">Đang xử lý</button>
-                            <button class="order-tab">Đang giao</button>
-                            <button class="order-tab">Đã giao</button>
-                            <button class="order-tab">Đã huỷ</button>
-                            <button class="order-tab">Hoàn hàng</button>
+                            <button class="order-tab order-bar_active"><a href="index.php?page=order">Tất cả đơn
+                                    hàng</a></button>
+                            <button class="order-tab"><a href="index.php?page=order&st=0">Chưa Xác Nhận</a></button>
+                            <button class="order-tab"><a href="index.php?page=order&st=1">Đã Xác Nhận</a></button>
+                            <button class="order-tab"><a href="index.php?page=order&st=2">Đang Giao Hàng</a></button>
+                            <button class="order-tab"><a href="index.php?page=order&st=3">Đã Giao Hàng</a></button>
+                            <button class="order-tab"><a href="index.php?page=order&st=4">Đã Hủy</a></button>
                         </div>
 
                         <!-- Sử lý đơn hàng trống bằng php -->
@@ -241,141 +330,13 @@
                                 </div>
                             </div>
 
-
-
                             <!-- desktop -->
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th style="color: var(--primary-color);">Mã đơn hàng: #1237821</th>
-                                        <th style="width: 40%;"></th>
-                                        <th colspan="2" style="color: #26AA99; text-align: right;">
-                                            Trạng thái: Đang giao</th>
-                                    </tr>
-                                </thead>
 
-                                <tbody>
-                                    <!-- <?= $html_cart ?> -->
-                                    <tr class="cart-row">
-                                        <td> <img
-                                                src="./assets/img/4ac928b9e8c84c94b45c5a9c8f5dcad8_optimized_original_image.jpg"
-                                                width=" 50px"> </td>
-
-                                        <td class="cart-name">
-                                            <p>Quan ao</p>
-                                            <p>Kích Thước: <span>M</span></p>
-                                            <p>Màu Sắc: <span>Mau red</span></p>
-                                        </td>
-
-
-                                        <td>
-                                            x2
-                                        </td>
-
-                                        <td class="cart-total">
-                                            <p id="sub-total">100đ</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="cart-row">
-                                        <td> <img
-                                                src="./assets/img/4ac928b9e8c84c94b45c5a9c8f5dcad8_optimized_original_image.jpg"
-                                                width=" 50px"> </td>
-
-                                        <td class="cart-name">
-                                            <p>Quan ao</p>
-                                            <p>Kích Thước: <span>M</span></p>
-                                            <p>Màu Sắc: <span>Mau red</span></p>
-                                        </td>
-
-
-                                        <td>
-                                            x1
-                                        </td>
-
-                                        <td class="cart-total">
-                                            <p id="sub-total">100d</p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-
-                                <tfoot>
-                                    <td colspan="4" style="text-align: right;">
-                                        Thành tiền: 300đ
-                                    </td>
-                                </tfoot>
-                            </table>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th style="color: var(--primary-color);">Mã đơn hàng: #1237821</th>
-                                        <th style="width: 40%;"></th>
-                                        <th colspan="2" style="color: #26AA99; text-align: right;">
-                                            Trạng thái: Đang giao</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <!-- <?= $html_cart ?> -->
-                                    <tr class="cart-row">
-                                        <td> <img
-                                                src="./assets/img/4ac928b9e8c84c94b45c5a9c8f5dcad8_optimized_original_image.jpg"
-                                                width=" 50px"> </td>
-
-                                        <td class="cart-name">
-                                            <p>Quan ao</p>
-                                            <p>Kích Thước: <span>M</span></p>
-                                            <p>Màu Sắc: <span>Mau red</span></p>
-                                        </td>
-
-
-                                        <td>
-                                            x2
-                                        </td>
-
-                                        <td class="cart-total">
-                                            <p id="sub-total">100đ</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="cart-row">
-                                        <td> <img
-                                                src="./assets/img/4ac928b9e8c84c94b45c5a9c8f5dcad8_optimized_original_image.jpg"
-                                                width=" 50px"> </td>
-
-                                        <td class="cart-name">
-                                            <p>Quan ao</p>
-                                            <p>Kích Thước: <span>M</span></p>
-                                            <p>Màu Sắc: <span>Mau red</span></p>
-                                        </td>
-
-
-                                        <td>
-                                            x1
-                                        </td>
-
-                                        <td class="cart-total">
-                                            <p id="sub-total">100d</p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-
-                                <tfoot>
-                                    <td colspan="4" style="text-align: right;">
-                                        Thành tiền: 300đ
-                                    </td>
-                                </tfoot>
-                            </table>
-
+                            <?= $html_bill ?>
                         </div>
                     </div>
-
-
-
                 </div>
-
             </div>
         </div>
-
     </section>
-
-
 </main>

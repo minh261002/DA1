@@ -236,6 +236,7 @@ if (isset($_GET['page'])) {
                 }
                 move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
                 updateuser($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+                header('Location: index.php?page=user');
             }
 
             // load all danh mục 
@@ -243,7 +244,9 @@ if (isset($_GET['page'])) {
             // load all sp
             $user = render_alluser();
             require_once 'views/users/update-user.php';
+            
             break;
+            
         case 'del-user':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
@@ -294,12 +297,8 @@ if (isset($_GET['page'])) {
                 $img2 = $_FILES['img2']['name'];
                 $img3 = $_FILES['img3']['name'];
                 $img4 = $_FILES['img4']['name'];
-                $gallery = array(
-                    'img1' => $img1,
-                    'img2' => $img2,
-                    'img3' => $img3,
-                    'img4' => $img4,
-                );
+                $gallery = array( $img1, $img2, $img3, $img4);
+                
                 $target_dir = "../Uploads/";
 
                 $target_file = $target_dir . basename($_FILES['img']['name']);
@@ -353,6 +352,7 @@ if (isset($_GET['page'])) {
                 $imgFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                 move_uploaded_file($_FILES['img']['tmp_name'], $target_file);
                 update_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot);
+                header('location: index.php?page=product');
             }
             $list_category = get_category();
             $product = render_allproduct();
@@ -427,14 +427,14 @@ if (isset($_GET['page'])) {
             require_once 'views/bill/show_bill.php';
             break;
 
-        case 'bill_details':
-            if (isset($_GET['id'])) {
-                $id_bill = $_GET['id'];
-                $bill_details = bill_details($id_bill);
-            }
+        // case 'bill_details':
+        //     if (isset($_GET['id'])) {
+        //         $id_bill = $_GET['id'];
+        //         $bill_details = bill_details($id_bill);
+        //     }
 
-            require_once 'views/bill/bill_details.php';
-            break;
+        //     require_once 'views/bill/bill_details.php';
+        //     break;
 
         default:
             // http_response_code(404);

@@ -49,7 +49,7 @@ if (count($get_bill_unconfirm) > 0) {
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=product">
                 <i class='bx bxs-window-alt'></i>
                 <span class="text">Sản Phẩm</span>
             </a>
@@ -61,13 +61,13 @@ if (count($get_bill_unconfirm) > 0) {
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=respon">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=user">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
@@ -196,27 +196,26 @@ if (count($get_bill_unconfirm) > 0) {
 <!-- CONTENT -->
 
 <script>
-    const product = document.querySelector(".c-product h3");
-    const user = document.querySelector(".c-user h3");
-    const bill = document.querySelector(".c-bill h3");
+const product = document.querySelector(".c-product h3");
+const user = document.querySelector(".c-user h3");
+const bill = document.querySelector(".c-bill h3");
 
-    function counterUp(el, to) {
-        let speed = 300;
-        let from = 0;
-        let step = to / speed;
-        const counter = setInterval(function () {
-            from += step;
-            if (from > to) {
-                clearInterval(counter);
-                el.innerText = to;
-            } else {
-                el.innerText = Math.ceil(from);
-            }
-        }, 0.5);
-    }
+function counterUp(el, to) {
+    let speed = 300;
+    let from = 0;
+    let step = to / speed;
+    const counter = setInterval(function() {
+        from += step;
+        if (from > to) {
+            clearInterval(counter);
+            el.innerText = to;
+        } else {
+            el.innerText = Math.ceil(from);
+        }
+    }, 0.5);
+}
 
-    counterUp(product, <?php echo (int) $sum_product; ?>);
-    counterUp(user, <?php echo (int) $sum_account; ?>);
-    counterUp(bill, <?php echo (int) $sum_bill; ?>);
-
+counterUp(product, <?php echo (int) $sum_product; ?>);
+counterUp(user, <?php echo (int) $sum_account; ?>);
+counterUp(bill, <?php echo (int) $sum_bill; ?>);
 </script>

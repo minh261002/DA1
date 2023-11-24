@@ -16,7 +16,7 @@ function  create_user($id,$avatar,$username, $password, $fullname,$dateOfBirth, 
 function updateuser($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role) {
     try {
         $sql = "UPDATE user SET avatar=?, username=?, password=?, fullname=?, dateOfBirth=?, gender=?, email=?, phone=?, address=?, ban=?, role=?, created_at=NOW() WHERE id=?";
-        pdo_execute($sql, $avatar, $username, md5($password), $fullname, $dateOfBirth, $gender, $email, $phone, json_encode($address), $ban, $role, $id);
+        pdo_execute($sql, $avatar, $username, ($password), $fullname, $dateOfBirth, $gender, $email, $phone, json_encode($address), $ban, $role, $id);
         echo "Update user thành công";
     } catch (PDOException $e) {
         echo "Update thất bại! " . $e->getMessage();

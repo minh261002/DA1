@@ -7,54 +7,60 @@ if (isset($_GET['id'])) {
 ?>
 <!-- SIDEBAR -->
 <section id="sidebar">
-    <a href="#" class="brand">
+    <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li>
+        <li class="active">
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li class="active">
+        <li>
             <a href="index.php?page=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=product">
                 <i class='bx bxs-window-alt'></i>
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=bill">
+                <i class='bx bxs-calendar-check'></i>
+                <span class="text">Đơn Hàng</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?page=respon">
                 <i class='bx bxs-chat'></i>
                 <span class="text">Phản Hồi</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=user">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-offer'></i>
                 <span class="text">Mã Giảm Giá</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>

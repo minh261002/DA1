@@ -1,10 +1,10 @@
-<?php 
+<?php
 require_once "./pdo.php";
 require_once "./product.php";
 
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
-    
+
     $results = search($search);
 
     if ($results !== false) {
@@ -25,10 +25,10 @@ if (isset($_GET["search"])) {
                 extract($result);
                 echo '
                     <tr>
-                        <td>'.$id.'</td>
-                        <td>'.$name.'</td>
-                        <td><img src="' . $img . '" width="30px"></td>
-                        <td><a href="index.php?page=details&id='.$id.'">Xem chi tiết</a></td>
+                        <td>' . $id . '</td>
+                        <td>' . $name . '</td>
+                        <td><img src="Uploads/' . $img . '" width="30px"></td>
+                        <td><a href="index.php?page=details&id=' . $id . '">Xem chi tiết</a></td>
                     </tr>
                 ';
             }

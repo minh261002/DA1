@@ -156,7 +156,7 @@ foreach ($list_category as $ct) {
         <ul class="header__menu">
             <div class="container">
                 <div class="menu flex">
-                    <li><a href="">Trang Chủ</a></li>
+                    <li><a href="index.php">Trang Chủ</a></li>
                     <li class="parent_menu">
                         <a href="index.php?page=product">Sản Phẩm</a>
                         <ul class="sub-menu">
@@ -223,7 +223,6 @@ foreach ($list_category as $ct) {
         <div class="side__bar-top">
             <div class="logo">
                 <div></div>
-                <img src="https://tokyolife.vn/_next/static/media/LogoMenuMobile.0bf1ee6a.svg" alt="">
                 <svg class="close-btn" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseIcon">
                     <path
                         d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
@@ -234,10 +233,10 @@ foreach ($list_category as $ct) {
             </div>
             <div class="log_reg">
                 <a href="#" class="logo_user">
-                    <img src="https://tokyolife.vn/_next/static/media/AvatarNoLogin.328c4abc.svg" alt="">
+                    <img src="uploads/logo_owenstore_ft.svg" width="130px">
                 </a>
                 <div class="right">
-                    <a href="">Đăng nhập</a> | <a href="">Đăng ký</a>
+                    <a href="index.php?page=login">Đăng nhập</a> | <a href="index.php?page=register">Đăng ký</a>
                 </div>
 
                 <div></div>
@@ -260,62 +259,21 @@ foreach ($list_category as $ct) {
         <div class="side__bar-bottom">
 
             <div class="cate-item">
-                <div class="cate-item_left">
-                    <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16963486069795189_512.png&w=640&q=75"
-                        alt="" width="24ppx">
-                    <p>HÀNG MỚI VỀ</p>
-                </div>
-                <div class="cate-item_right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
-                        <path
-                            d="M7.49844 15.2248C7.3401 15.2248 7.18177 15.1664 7.05677 15.0414L1.62344 9.60811C0.740104 8.72477 0.740104 7.27477 1.62344 6.39144L7.05677 0.958105C7.29844 0.716439 7.69844 0.716439 7.9401 0.958105C8.18177 1.19977 8.18177 1.59977 7.9401 1.84144L2.50677 7.27477C2.10677 7.67477 2.10677 8.32477 2.50677 8.72477L7.9401 14.1581C8.18177 14.3998 8.18177 14.7998 7.9401 15.0414C7.8151 15.1581 7.65677 15.2248 7.49844 15.2248Z"
-                            fill="#292D32"></path>
-                    </svg>
-
-
-                </div>
+                <a href="index.php">Trang Chủ</a>
+            </div>
+            <div class="cate-item dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sản Phẩm
+            </div>
+            <ul class="dropdown-menu p-3">
+                <?= $html_menu ?>
+            </ul>
+            <div class="cate-item">
+                <a href="">Giới Thiệu</a>
             </div>
             <div class="cate-item">
-                <div class="cate-item_left">
-                    <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16963486069795189_512.png&w=640&q=75"
-                        alt="" width="24ppx">
-                    <p>GIẢM GIÁ</p>
-                </div>
-                <div class="cate-item_right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
-                        <path
-                            d="M7.49844 15.2248C7.3401 15.2248 7.18177 15.1664 7.05677 15.0414L1.62344 9.60811C0.740104 8.72477 0.740104 7.27477 1.62344 6.39144L7.05677 0.958105C7.29844 0.716439 7.69844 0.716439 7.9401 0.958105C8.18177 1.19977 8.18177 1.59977 7.9401 1.84144L2.50677 7.27477C2.10677 7.67477 2.10677 8.32477 2.50677 8.72477L7.9401 14.1581C8.18177 14.3998 8.18177 14.7998 7.9401 15.0414C7.8151 15.1581 7.65677 15.2248 7.49844 15.2248Z"
-                            fill="#292D32"></path>
-                    </svg>
-                </div>
+                <a href="">Cửa Hàng</a>
             </div>
             <div class="cate-item">
-                <div class="cate-item_left">
-                    <!-- <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16963486069795189_512.png&w=640&q=75"
-                    alt="" width="24ppx"> -->
-                    <p>Nữ</p>
-                </div>
-                <div class="cate-item_right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
-                        <path
-                            d="M7.49844 15.2248C7.3401 15.2248 7.18177 15.1664 7.05677 15.0414L1.62344 9.60811C0.740104 8.72477 0.740104 7.27477 1.62344 6.39144L7.05677 0.958105C7.29844 0.716439 7.69844 0.716439 7.9401 0.958105C8.18177 1.19977 8.18177 1.59977 7.9401 1.84144L2.50677 7.27477C2.10677 7.67477 2.10677 8.32477 2.50677 8.72477L7.9401 14.1581C8.18177 14.3998 8.18177 14.7998 7.9401 15.0414C7.8151 15.1581 7.65677 15.2248 7.49844 15.2248Z"
-                            fill="#292D32"></path>
-                    </svg>
-                </div>
+                <a href="">Tuyển Dụng</a>
             </div>
-            <div class="cate-item">
-                <div class="cate-item_left">
-                    <!-- <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16963486069795189_512.png&w=640&q=75"
-                    alt="" width="24ppx"> -->
-                    <p>Nam</p>
-                </div>
-                <div class="cate-item_right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" fill="none">
-                        <path
-                            d="M7.49844 15.2248C7.3401 15.2248 7.18177 15.1664 7.05677 15.0414L1.62344 9.60811C0.740104 8.72477 0.740104 7.27477 1.62344 6.39144L7.05677 0.958105C7.29844 0.716439 7.69844 0.716439 7.9401 0.958105C8.18177 1.19977 8.18177 1.59977 7.9401 1.84144L2.50677 7.27477C2.10677 7.67477 2.10677 8.32477 2.50677 8.72477L7.9401 14.1581C8.18177 14.3998 8.18177 14.7998 7.9401 15.0414C7.8151 15.1581 7.65677 15.2248 7.49844 15.2248Z"
-                            fill="#292D32"></path>
-                    </svg>
-                </div>
-            </div>
-        </div>
     </section>

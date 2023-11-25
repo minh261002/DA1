@@ -3,19 +3,19 @@
 
 function get_category()
 {
-    $sql = "SELECT * FROM category WHERE home !=2";
+    $sql = "SELECT * FROM category WHERE home !=2 AND hide = 0";
     return pdo_query($sql);
 }
 
 function get_category_by_id($category_id)
 {
-    $sql = "SELECT * FROM category WHERE id=?";
+    $sql = "SELECT * FROM category WHERE id=? AND hide = 0";
     return pdo_query_one($sql, $category_id);
 }
 
 function set_home_category()
 {
-    $sql = "SELECT * FROM category WHERE home = 1";
+    $sql = "SELECT * FROM category WHERE home = 1 AND hide = 0";
     return pdo_query($sql);
 }
 

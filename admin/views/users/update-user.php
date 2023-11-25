@@ -1,10 +1,22 @@
 <?php
 if (isset($one[0]['address'])) {
     $address = json_decode($one[0]['address'], true);
-    $ward = $address['ward'];
-    $district = $address['district'];
-    $province = $address['province'];
-    $detail = $address['detail'];
+
+    if (isset($address['ward'])) {
+        $ward = $address['ward'];
+    }
+
+    if (isset($address['district'])) {
+        $district = $address['district'];
+    }
+
+    if (isset($address['province'])) {
+        $province = $address['province'];
+    }
+
+    if (isset($address['detail'])) {
+        $detail = $address['detail'];
+    }
 }
 
 if (isset($one[0]['created_at'])) {

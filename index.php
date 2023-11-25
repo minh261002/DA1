@@ -114,7 +114,7 @@ if (isset($_GET['page'])) {
         //đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
-                session_destroy();
+                unset($_SESSION["user"]);
             }
             header('Location: index.php?page=login');
             break;

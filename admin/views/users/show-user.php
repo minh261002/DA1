@@ -152,7 +152,7 @@ foreach ($user as $acc) {
                 </tbody>
             </table>
 
-            <a href="index.php?page=add-user">Thêm Tài Khoản Mới</a>
+            <a href="index.php?page=create-user">Thêm Tài Khoản Mới</a>
         </div>
     </main>
 </section>

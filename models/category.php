@@ -42,11 +42,6 @@ function show_category_home()
     return $html_category;
 }
 
-function get_all_category()
-{
-    $sql = "SELECT * FROM category";
-    return pdo_query($sql);
-}
 
 function admin_hide_category($category_id)
 {

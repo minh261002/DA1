@@ -2,19 +2,17 @@
 // require_once 'pdo.php';
 function render_alluser()
 {
-    $sql = "SELECT * FROM user";
+    $sql = "SELECT * FROM user ORDER BY id DESC";
     return pdo_query($sql);
 }
-function create_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role)
+
+function create_user($avatar, $username, $password, $fullname, $email, $phone, $address, $role, $created_at)
 {
-    try {
-        $sql = "INSERT INTO user( avatar,username, password, fullname,dateOfBirth, gender,email,phone,address, ban, role, created_at) VALUES (?,?,?,?, ?, ?, ?, ?,?,?,?, NOW())";
-        pdo_execute($sql, $avatar, $username, md5($password), $fullname, $dateOfBirth, $gender, $email, $phone, json_encode($address), $ban, $role);
-        echo "Thêm user mới thành công";
-    } catch (PDOException $e) {
-        echo "Thêm thất bại! " . $e->getMessage();
-    }
+    $sql = "INSERT INTO user(avatar, username, password, fullname, email, phone, address, role, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    pdo_execute($sql, $avatar, $username, $password, $fullname, $email, $phone, json_encode($address), $role, $created_at);
 }
+
+
 function admin_update_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role)
 {
     $sql = "UPDATE user SET avatar=?, username=?, password=?, fullname=?, dateOfBirth=?, gender=?, email=?, phone=?, address=?, ban=?, role=?, updated_at=NOW() WHERE id=?";

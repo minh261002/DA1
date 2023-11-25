@@ -163,53 +163,67 @@ if (isset($_GET['page'])) {
             require_once 'views/users/show-user.php';
             break;
 
-        case 'add-user':
-            if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
+        case 'create-user':
+            if (isset($_POST['create-user'])) {
 
-                $id = $_POST['id'];
+                if (isset($_FILES['avatar']['name']) && ($_FILES['avatar']['name'] != null)) {
+                    $avatar = $_FILES['avatar']['name'];
+                } else {
+                    $avatar = "default_user.png";
+                }
+
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-                $fullname = $_POST['fullname'];
-                $dateOfBirth = $_POST['dateOfBirth'];
-                $gender = $_POST['gender'];
-                $email = $_POST['email'];
-                $phone = $_POST['phone'];
-                $city = $_POST['city'];
-                $district = $_POST['district'];
-                $ward = $_POST['ward'];
-                $fulladdress = $_POST['fulladdress'];
-                $address = array(
-                    'city' => $city,
-                    'district' => $district,
-                    'ward' => $ward,
-                    'fulladdress' => $fulladdress
-                );
 
-                $ban = $_POST['ban'];
+                if (isset($_POST['fullname'])) {
+                    $fullname = $_POST['fullname'];
+                } else {
+                    $fullname = NULL;
+                }
+                $email = $_POST['email'];
+
+                if (isset($_POST['phone'])) {
+                    $phone = $_POST['phone'];
+                } else {
+                    $phone = NULL;
+                }
+
+                if (empty($_POST['province']) && empty($_POST['district']) && empty($_POST['ward']) && empty($_POST['detail'])) {
+                    $address = NULL;
+
+                } else {
+                    $province = $_POST['province'];
+                    $district = $_POST['district'];
+                    $ward = $_POST['ward'];
+                    $detail = $_POST['detail'];
+
+                    $address = array(
+                        'province' => $province,
+                        'district' => $district,
+                        'ward' => $ward,
+                        'detail' => $detail
+                    );
+                }
+
+
                 $role = $_POST['role'];
 
-                // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $created_at = date('Y-m-d H:i:s');
+
                 $target_dir = "../Uploads/";
+                $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 
-                $target_file = $target_dir . basename($_FILES['avatar']['name']);
+                create_user($avatar, $username, $password, $fullname, $email, $phone, $address, $role, $created_at);
 
-                $avatar = $target_file;
-                $uploadOk = 1;
-                $avatarFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                if (
-                    $avatarFileType != "jpg" && $avatarFileType != "png" && $avatarFileType != "jpeg"
-                    && $avatarFileType != "gif"
-                ) {
-                    $uploadOk = 0;
-                }
-                move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-                create_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+                $message = "Thêm tài khoản thành công!";
+                $_SESSION['message'] = $message;
+                header('Location: index.php?page=user');
             }
 
-            // load all sp
-            $user = render_alluser();
             require_once 'views/users/create-user.php';
             break;
+
 
         case 'update-user':
             if (isset($_GET['id'])) {

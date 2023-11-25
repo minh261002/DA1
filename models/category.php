@@ -48,6 +48,18 @@ function get_all_category()
     return pdo_query($sql);
 }
 
+function admin_hide_category($category_id)
+{
+    $sql = "UPDATE category SET hide = 1 WHERE id=?";
+    pdo_execute($sql, $category_id);
+}
+
+function admin_show_cattegory($category_id)
+{
+    $sql = "UPDATE category SET hide = 0 WHERE id=?";
+    pdo_execute($sql, $category_id);
+}
+
 // /**
 //  * Thêm loại mới
 //  * @param String $ten_loai là tên loại

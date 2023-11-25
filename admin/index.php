@@ -129,6 +129,34 @@ if (isset($_GET['page'])) {
             }
             break;
 
+        case 'hideCategory':
+            if (isset($_GET["id"])) {
+                $category_id = $_GET["id"];
+
+                admin_hide_category($category_id);
+                admin_hide_product_by_category($category_id);
+
+                $message = "Danh mục sản phẩm đã ngừng kinh doanh";
+                $_SESSION["message"] = $message;
+                header('location: index.php?page=category');
+                exit;
+            }
+            break;
+
+        case 'showCategory':
+            if (isset($_GET["id"])) {
+                $category_id = $_GET["id"];
+
+                admin_show_cattegory($category_id);
+                admin_show_product_by_category($category_id);
+
+                $message = "Danh mục sản phẩm đã được kinh doanh";
+                $_SESSION["message"] = $message;
+                header('location: index.php?page=category');
+                exit;
+            }
+            break;
+
 
         case 'user':
             $user = render_alluser();

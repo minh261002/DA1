@@ -280,7 +280,7 @@ function product_select_page()
 
     $offset = $_SESSION['page_no'] * 10;
 
-    $sql = "SELECT * FROM product ORDER BY id LIMIT " . $offset . ", 10";
+    $sql = "SELECT * FROM product WHERE hide=0 ORDER BY id LIMIT " . $offset . ", 10";
 
     return pdo_query($sql);
 }

@@ -11,13 +11,13 @@ if (isset($_GET['id'])) {
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>

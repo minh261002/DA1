@@ -58,8 +58,14 @@ if (isset($_GET['page'])) {
                 $result = checkUser($username, $password);
 
                 if (is_array($result) && count($result) > 0) {
-                    $_SESSION["user"] = $result;
-                    header("Location: index.php");
+                    if ($result['ban'] == 1) {
+                        $error_message = "Tài khoản của bạn đã bị khóa";
+                        $_SESSION["message"] = $error_message;
+                        header('Location: index.php?page=login');
+                    } else {
+                        $_SESSION["user"] = $result;
+                        header("Location: index.php");
+                    }
                 } else {
                     // Đăng nhập không thành công, đặt thông báo lỗi
                     $error_message = "Tên đăng nhập hoặc mật khẩu không đúng.";
@@ -160,21 +166,6 @@ if (isset($_GET['page'])) {
                 }
             }
             require_once 'views/product.php';
-            break;
-
-
-
-
-        case 'option_product':
-            if (isset($_GET['act']) && $_GET['act'] == 'new') {
-                $new_product = get_new_product();
-            }
-
-            if (isset($_GET['act']) && $_GET['act'] == 'hot') {
-                $hot_product = get_hot_product();
-            }
-
-            require_once "views/option_product.php";
             break;
 
         case 'profile':

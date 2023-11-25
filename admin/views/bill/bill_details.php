@@ -19,7 +19,7 @@ foreach ($bill_details as $bill_detail) {
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -37,7 +37,7 @@ foreach ($bill_details as $bill_detail) {
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>

@@ -413,6 +413,17 @@ footer>.container {
 
 
 /*form*/
+.form-eye{
+  position: relative;
+}
+
+#showPassword,#hidePassword{
+  position: absolute;
+  top: 75%;
+  right: 10px;
+  transform: translateY(-75%);
+  cursor: pointer;
+}
 
 .btn-form {
   width: 100%;

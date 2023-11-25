@@ -1,14 +1,14 @@
 <style>
-.file {
-    display: block !important;
-}
+    .file {
+        display: block !important;
+    }
 </style>
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -38,7 +38,7 @@
                 <span class="text">Phản Hồi</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=user">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
@@ -125,12 +125,12 @@
                         <select class="form-select" name="city" id="city">
                             <option selected disabled hidden>
                                 <?php
-                                            if (isset($province)) {
-                                                echo $province;
-                                            } else {
-                                                echo 'Tỉnh / Thành Phố';
-                                            }
-                                            ?>
+                                if (isset($province)) {
+                                    echo $province;
+                                } else {
+                                    echo 'Tỉnh / Thành Phố';
+                                }
+                                ?>
                             </option>
                         </select>
                     </div>
@@ -143,12 +143,12 @@
                         <select class="form-select" name="district" id="district">
                             <option selected disabled hidden>
                                 <?php
-                                            if (isset($district)) {
-                                                echo $district;
-                                            } else {
-                                                echo 'Quận / Huyện';
-                                            }
-                                            ?>
+                                if (isset($district)) {
+                                    echo $district;
+                                } else {
+                                    echo 'Quận / Huyện';
+                                }
+                                ?>
                             </option>
                         </select>
                     </div>
@@ -161,12 +161,12 @@
                         <select class="form-select" name="ward" id="ward">
                             <option selected disabled hidden>
                                 <?php
-                                            if (isset($ward)) {
-                                                echo $ward;
-                                            } else {
-                                                echo 'Quận / Huyện';
-                                            }
-                                            ?>
+                                if (isset($ward)) {
+                                    echo $ward;
+                                } else {
+                                    echo 'Quận / Huyện';
+                                }
+                                ?>
                             </option>
                         </select>
                         <label for="">Địa chỉ</label>
@@ -191,7 +191,7 @@
                     </select>
                 </div>
 
-                <input class="btn btn-primary" type="hidden" name="id" value="<?=$one[0]['id'] ?>">
+                <input class="btn btn-primary" type="hidden" name="id" value="<?= $one[0]['id'] ?>">
                 <button type="submit" class="btn btn-primary" name="themmoi" value=" Thêm Mới ">Sign in</button>
             </form>
         </div>
@@ -199,87 +199,87 @@
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
-var citis = document.getElementById("city");
-var districts = document.getElementById("district");
-var wards = document.getElementById("ward");
-var Parameter = {
-    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-    method: "GET",
-    responseType: "application/json",
-};
-var promise = axios(Parameter);
-promise.then(function(result) {
-    renderCity(result.data);
-});
-
-function renderCity(data) {
-    for (const x of data) {
-        var opt = document.createElement('option');
-        opt.value = x.Name;
-        opt.text = x.Name;
-        opt.setAttribute('data-id', x.Id);
-        citis.options.add(opt);
-    }
-    citis.onchange = function() {
-        district.length = 1;
-        ward.length = 1;
-        if (this.options[this.selectedIndex].dataset.id != "") {
-            const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
-
-            for (const k of result[0].Districts) {
-                var opt = document.createElement('option');
-                opt.value = k.Name;
-                opt.text = k.Name;
-                opt.setAttribute('data-id', k.Id);
-                district.options.add(opt);
-            }
-        }
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
     };
-    district.onchange = function() {
-        ward.length = 1;
-        const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
-        if (this.options[this.selectedIndex].dataset.id != "") {
-            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex].dataset
-                .id)[0].Wards;
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+        renderCity(result.data);
+    });
 
-            for (const w of dataWards) {
-                var opt = document.createElement('option');
-                opt.value = w.Name;
-                opt.text = w.Name;
-                opt.setAttribute('data-id', w.Id);
-                wards.options.add(opt);
-            }
+    function renderCity(data) {
+        for (const x of data) {
+            var opt = document.createElement('option');
+            opt.value = x.Name;
+            opt.text = x.Name;
+            opt.setAttribute('data-id', x.Id);
+            citis.options.add(opt);
         }
-    };
-}
+        citis.onchange = function () {
+            district.length = 1;
+            ward.length = 1;
+            if (this.options[this.selectedIndex].dataset.id != "") {
+                const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
 
-function validateForm() {
-    var avatar = document.getElementById("avatar").value;
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var fullname = document.getElementById("fullname").value;
-    var email = document.getElementById("email").value;
+                for (const k of result[0].Districts) {
+                    var opt = document.createElement('option');
+                    opt.value = k.Name;
+                    opt.text = k.Name;
+                    opt.setAttribute('data-id', k.Id);
+                    district.options.add(opt);
+                }
+            }
+        };
+        district.onchange = function () {
+            ward.length = 1;
+            const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+            if (this.options[this.selectedIndex].dataset.id != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex].dataset
+                    .id)[0].Wards;
 
-    if (avatar === "" || username === "" || password === "" || fullname === "" || email === "") {
-        alert("Vui lòng điền đầy đủ thông tin");
-        return false;
+                for (const w of dataWards) {
+                    var opt = document.createElement('option');
+                    opt.value = w.Name;
+                    opt.text = w.Name;
+                    opt.setAttribute('data-id', w.Id);
+                    wards.options.add(opt);
+                }
+            }
+        };
     }
 
-    // Kiểm tra mật khẩu ít nhất 6 kí tự
-    if (password.length < 6) {
-        alert("Mật khẩu phải có ít nhất 6 kí tự");
-        return false;
+    function validateForm() {
+        var avatar = document.getElementById("avatar").value;
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var fullname = document.getElementById("fullname").value;
+        var email = document.getElementById("email").value;
+
+        if (avatar === "" || username === "" || password === "" || fullname === "" || email === "") {
+            alert("Vui lòng điền đầy đủ thông tin");
+            return false;
+        }
+
+        // Kiểm tra mật khẩu ít nhất 6 kí tự
+        if (password.length < 6) {
+            alert("Mật khẩu phải có ít nhất 6 kí tự");
+            return false;
+        }
+
+
+
+
+        // Kiểm tra email có ký tự "@"
+        if (email.indexOf("@") === -1) {
+            alert("Email phải có ký tự '@'");
+            return false;
+        }
+
+        return true;
     }
-
-
-
-
-    // Kiểm tra email có ký tự "@"
-    if (email.indexOf("@") === -1) {
-        alert("Email phải có ký tự '@'");
-        return false;
-    }
-
-    return true;
-}
 </script>

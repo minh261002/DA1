@@ -52,7 +52,7 @@ if (isset($_POST["admin-login"]) && ($_POST["admin-login"])) {
     <main>
         <div class="container login-admin" style="width:500px; margin:0 auto;">
             <img class="d-block my-3" src="../assets/img/logo_owenstore.svg" width="100%">
-            <h2 class="text-center">Đăng Nhập</h2>
+            <h2 class="text-center mb-5">Quản Trị Viên</h2>
             <?php
             if (isset($message) && ($message != "")) {
                 echo '<p class="err"> ' . $message . ' </p>';

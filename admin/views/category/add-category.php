@@ -3,13 +3,13 @@
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>
@@ -147,28 +147,28 @@
 </section>
 <!-- CONTENT -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Lấy các phần tử cần thiết
-    var form = document.querySelector("form");
-    var category_name = document.getElementById("category_name");
-    var category_img = document.getElementById("category_img");
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy các phần tử cần thiết
+        var form = document.querySelector("form");
+        var category_name = document.getElementById("category_name");
+        var category_img = document.getElementById("category_img");
 
-    // Xử lý sự kiện khi form được submit
-    form.addEventListener("submit", function(event) {
-        // Kiểm tra rỗng và hiển thị thông báo
-        if (category_name.value.trim() === "") {
-            document.getElementById("ctnameErr").textContent = "Vui lòng nhập tên danh mục.";
-            event.preventDefault(); // Ngừng submit nếu có lỗi
-        } else {
-            document.getElementById("ctnameErr").textContent = "";
-        }
+        // Xử lý sự kiện khi form được submit
+        form.addEventListener("submit", function (event) {
+            // Kiểm tra rỗng và hiển thị thông báo
+            if (category_name.value.trim() === "") {
+                document.getElementById("ctnameErr").textContent = "Vui lòng nhập tên danh mục.";
+                event.preventDefault(); // Ngừng submit nếu có lỗi
+            } else {
+                document.getElementById("ctnameErr").textContent = "";
+            }
 
-        if (category_img.value.trim() === "") {
-            document.getElementById("ctimgErr").textContent = "Vui lòng chọn ảnh.";
-            event.preventDefault();
-        } else {
-            document.getElementById("ctimgErr").textContent = "";
-        }
+            if (category_img.value.trim() === "") {
+                document.getElementById("ctimgErr").textContent = "Vui lòng chọn ảnh.";
+                event.preventDefault();
+            } else {
+                document.getElementById("ctimgErr").textContent = "";
+            }
+        });
     });
-});
 </script>

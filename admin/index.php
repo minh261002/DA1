@@ -135,9 +135,7 @@ if (isset($_GET['page'])) {
             require_once 'views/users/show-user.php';
             break;
 
-
-
-        case 'create-user':
+        case 'add-user':
             if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
 
                 $id = $_POST['id'];
@@ -180,8 +178,6 @@ if (isset($_GET['page'])) {
                 create_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
             }
 
-            // load all danh mục 
-
             // load all sp
             $user = render_alluser();
             require_once 'views/users/create-user.php';
@@ -191,71 +187,72 @@ if (isset($_GET['page'])) {
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $one = getoneuser($id);
-                // echo $id;
-                // print_r($one);
             }
-            if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
 
+            if (isset($_POST['update_user'])) {
                 $id = $_POST['id'];
+
+                // Lấy các giá trị từ biểu mẫu
+                $avatar = $_FILES['avatar']['name'];
+                $avatar_old = $_POST['avatar-old'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-
-
                 $fullname = $_POST['fullname'];
                 $dateOfBirth = $_POST['dateOfBirth'];
                 $gender = $_POST['gender'];
                 $email = $_POST['email'];
                 $phone = $_POST['phone'];
-                $city = $_POST['city'];
+                $role = $_POST['role'];
+                $ban = $_POST['ban'];
+
+                // Địa chỉ được lấy từ các trường select trong biểu mẫu
+                $province = $_POST['province'];
                 $district = $_POST['district'];
                 $ward = $_POST['ward'];
-                $fulladdress = $_POST['fulladdress'];
+                $detail = $_POST['detail'];
+
                 $address = array(
-                    'city' => $city,
+                    'province' => $province,
                     'district' => $district,
                     'ward' => $ward,
-                    'fulladdress' => $fulladdress
+                    'detail' => $detail
                 );
 
-                $ban = $_POST['ban'];
-                $role = $_POST['role'];
-
-                // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
                 $target_dir = "../Uploads/";
+                $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 
-                $target_file = $target_dir . basename($_FILES['avatar']['name']);
-
-                $avatar = $target_file;
-                $uploadOk = 1;
-                $avatarFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                if (
-                    $avatarFileType != "jpg" && $avatarFileType != "png" && $avatarFileType != "jpeg"
-                    && $avatarFileType != "gif"
-                ) {
-                    $uploadOk = 0;
+                if ($avatar != null) {
+                    move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
+                    admin_update_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+                } else {
+                    admin_update_user($id, $avatar_old, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
                 }
-                move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-                updateuser($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+
+                $message = "Cập nhật thông tin thành công!";
+                $_SESSION['message'] = $message;
+                header('Location: index.php?page=update-user&id=' . $id);
+            }
+
+            require_once 'views/users/update-user.php';
+            break;
+
+        case 'block-user':
+            if (isset($_GET['id'])) {
+                $id_user = $_GET['id'];
+                block_user($id_user);
+
                 header('Location: index.php?page=user');
             }
-
-            // load all danh mục 
-
-            // load all sp
-            $user = render_alluser();
-            require_once 'views/users/update-user.php';
-            
+            require_once 'views/users/show-user.php';
             break;
-            
-        case 'del-user':
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                deluser($id);
-            }
 
-            // load all sp
-            $user = render_alluser();
-            // $user=getall_user();
+        case 'unblock-user':
+            if (isset($_GET['id'])) {
+                $id_user = $_GET['id'];
+                unblock_user($id_user);
+
+                header('Location: index.php?page=user');
+            }
             require_once 'views/users/show-user.php';
             break;
 
@@ -297,8 +294,8 @@ if (isset($_GET['page'])) {
                 $img2 = $_FILES['img2']['name'];
                 $img3 = $_FILES['img3']['name'];
                 $img4 = $_FILES['img4']['name'];
-                $gallery = array( $img1, $img2, $img3, $img4);
-                
+                $gallery = array($img1, $img2, $img3, $img4);
+
                 $target_dir = "../Uploads/";
 
                 $target_file = $target_dir . basename($_FILES['img']['name']);

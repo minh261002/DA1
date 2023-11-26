@@ -33,7 +33,7 @@ if (isset($sale) && $sale !== 0) {
                     if (is_array($images)) {
                         
                         foreach ($images as $image) {
-                            echo '<img src="uploads/img1/'. $image.'" width="100%" onclick="changeImage(this)" />';
+                            echo '<img src="Uploads/'. $image.'" width="100%" onclick="changeImage(this)" />';
                         }
                     }
                     ?>

@@ -102,11 +102,9 @@
                 </div>
 
                 <div class="form-group mb-3">
-                    <label for="gallery">Hình Ảnh Chi Tiết</label>
-                    <?php foreach (json_decode($one[0]['gallery']) as $key => $gallery) { ?>
-                    <input type="file" name="<?php echo ($key) ?>" value="<?php echo $gallery  ?>"
-                        id="<?php echo $key ?>" class="form-control d-block">
-                    <?php } ?>
+                    <label for="gallery">Bộ sưu tập</label>
+                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
+                        value="<?= $one[0]['gallery'] ?>">
                 </div>
 
                 <div class="form-group mb-3">
@@ -137,7 +135,77 @@
                     </select>
                 </div>
 
+                <div class="form-group mb-3">
+                    <div class="group-checkout">
+                        <label for="hot">Hot</label>
 
+                        <select class="form-control" name="hot" id="hot">
+                            <option value="0">Bình Thường</option>
+                            <option value="1">Sản Phẩm Hot</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <div class="group-checkout">
+                        <label for="size">
+                            Size
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="size" id="size">
+                            <option selected disabled hidden>
+                            <option value="0"><?= $variant[0]['size'] ?></option>
+                            <?php
+                                                  if(isset( $variant )){
+                                                    foreach($variant  as $size){
+                                                        echo '<option value="'.$size['id'].'">'.$size['size'].'</option>';
+                                                        
+                                                    }
+                                                }       
+                                            ?>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="group-checkout">
+                        <label for="size">
+                            Màu
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="color" id="color">
+                            <option selected disabled hidden>
+                            <option value="0"><?= $variant[0]['color'] ?></option>
+                            <?php
+                                        if(isset( $variant )){
+                                            foreach($variant  as $color){
+                                                echo '<option value="'.$color['id'].'">'.$color['color'].'</option>';
+                                                
+                                            }
+                                        }       
+                                ?>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="group-checkout">
+                        <label for="size">
+                            Số Lượng
+                            <span>*</span>
+                        </label>
+                        <select class="form-select" name="color" id="color">
+                            <option selected disabled hidden>
+                            <option value="0"><?= $variant[0]['quantity'] ?></option>
+                            <?php
+                                        if(isset( $variant )){
+                                            foreach($variant  as $quantity){
+                                                echo '<option value="'.$quantity['id'].'">'.$quantity['quantity'].'</option>';
+                                            }
+                                        }       
+                                ?>
+                            </option>
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group mb-3">
                     <input type="submit" name="capnhat" value="Chỉnh Sửa Sản Phẩm" class="btn btn-dark px-5">

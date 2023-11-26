@@ -25,6 +25,10 @@ function getone_product($id)
     $sql = "SELECT * FROM product WHERE id=?";
     return pdo_query($sql, $id);
 }
+function get_allvariant(){
+    $sql = "SELECT * FROM variant";
+    return pdo_query($sql);
+}
 
 function admin_show_product_by_category($category_id)
 {
@@ -83,6 +87,7 @@ function get_product_by_variant($id)
 
     return pdo_query($sql, $id);
 }
+
 
 function get_product_flash_sale()
 {

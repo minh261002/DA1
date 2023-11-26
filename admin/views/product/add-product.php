@@ -1,3 +1,8 @@
+<style>
+#file-info {
+    display: none;
+}
+</style>
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
@@ -98,13 +103,9 @@
                     <label for="img">Hình Ảnh</label>
                     <input type="file" name="img" id="img" class="form-control d-block">
                 </div>
-
                 <div class="form-group mb-3">
-                    <label for="gallery">Hình Ảnh Chi Tiết</label>
-                    <input type="file" name="img1" id="img1" class="form-control d-block">
-                    <input type="file" name="img2" id="img2" class="form-control d-block">
-                    <input type="file" name="img3" id="img3" class="form-control d-block">
-                    <input type="file" name="img4" id="img4" class="form-control d-block">
+                    <label for="gallery">Bộ sưu tập</label>
+                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
                 </div>
 
                 <div class="form-group mb-3">
@@ -127,13 +128,30 @@
                     <input type="text" name="view" id="view" class="form-control">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="hot">Hot</label>
+                    <div class="group-checkout">
+                        <label for="hot">Hot</label>
 
-                    <select class="form-control" name="hot" id="hot">
-                        <option value="0">Bình Thường</option>
-                        <option value="1">Sản Phẩm Hot</option>
-                    </select>
+                        <select class="form-control" name="hot" id="hot">
+                            <option value="0">Bình Thường</option>
+                            <option value="1">Sản Phẩm Hot</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="form-group mb-3">
+                    <label for="size">Size</label>
+                    <input type="text" name="size" id="size" class="form-control">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="color">Màu Sắc</label>
+                    <input type="text" name="color" id="color" class="form-control">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="quantity">Số Lượng</label>
+                    <input type="text" name="quantity" id="quantity" class="form-control">
+                </div>
+
 
 
                 <div class="form-group mb-3">
@@ -144,50 +162,4 @@
     </main>
 
 
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Tên Danh Mục </th>
-                <th scope="col">Tên Sản Phẩm </th>
-                <th scope="col">Hình Ảnh</th>
-                <th scope="col">Ảnh phụ</th>
-                <th scope="col">Mô Tả</th>
-                <th scope="col">Giá</th>
-                <th scope="col">Sale</th>
-                <th scope="col">View</th>
-                <th scope="col">Hot</th>
-                <th scope="col">Ngày Nhập</th>
-                <th scope="col">Thao Tác</th>
-            </tr>
-        </thead>
-        <?php
-        $i = 1;
-     
-        foreach ($product as $key => $product){
-           
-    ?>
-        <tbody>
-            <tr>
-                <td><?php echo $i?></td>
-                <td><?php echo $product['id_category'] ?></td>
-
-                <td><?php echo $product['name'] ?></td>
-                <td><img src="../Uploads/<?php echo $product['img']?>" alt="" width="50px"></td>
-                <td><?php echo $product['gallery'] ?></td>
-                <td><?php echo $product['info'] ?></td>
-                <td><?php echo $product['price'] ?></td>
-                <td><?php echo $product['sale'] ?></td>
-                <td><?php echo $product['view'] ?></td>
-                <td><?php echo $product['hot'] ?></td>
-                <td><?php echo $product['created_at'] ?></td>
-                <td><a href="index.php?page=update-product&id=<?php echo $product['id']?>">sửa</a> | <a
-                        href="index.php?page=del-product&id=<?php echo $product['id']?>">Xóa</a></td>
-            </tr>
-            <?php  $i++; ?>
-            <?php  }?>
-        </tbody>
-
-    </table>
 </section>

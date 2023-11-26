@@ -17,12 +17,36 @@
 
             </div>
 
-            <div class="form-group mb-3">
+            <div class="form-group form-eye mb-3">
                 <label for="password">Mật Khẩu</label>
-                <input type="password" name="password" class="form-control py-2" id="password"
-                    autocomplete="current-password">
+                <input type="password" name="password" class="form-control py-2" id="password">
                 <span class="err" id="passwordErr"></span>
+                <i class="fa-solid fa-eye" id="showPassword" style="cursor: pointer;"></i>
+                <i class="fa-solid fa-eye-slash" id="hidePassword" style="cursor: pointer; display: none;"></i>
             </div>
+
+            <script>
+                document.getElementById('showPassword').addEventListener('click', function () {
+                    var passwordInput = document.getElementById('password');
+                    var showIcon = document.getElementById('showPassword');
+                    var hideIcon = document.getElementById('hidePassword');
+
+                    passwordInput.type = 'text'; // Hiển thị mật khẩu
+                    showIcon.style.display = 'none'; // Ẩn biểu tượng hiển thị mật khẩu
+                    hideIcon.style.display = 'inline'; // Hiển thị biểu tượng ẩn mật khẩu
+                });
+
+                document.getElementById('hidePassword').addEventListener('click', function () {
+                    var passwordInput = document.getElementById('password');
+                    var showIcon = document.getElementById('showPassword');
+                    var hideIcon = document.getElementById('hidePassword');
+
+                    passwordInput.type = 'password'; // Ẩn mật khẩu
+                    showIcon.style.display = 'inline'; // Hiển thị biểu tượng hiển thị mật khẩu
+                    hideIcon.style.display = 'none'; // Ẩn biểu tượng ẩn mật khẩu
+                });
+
+            </script>
 
             <div class="form-floating mb-3">
                 <input class="btn-form" type="submit" value="Đăng Nhập" name="btn-login">
@@ -75,16 +99,20 @@
             usernameErr.innerHTML = "";
             passwordErr.innerHTML = "";
 
+            var isValid = true;
+
             if (username.trim() === "") {
                 usernameErr.innerHTML = "Vui lòng nhập tên đăng nhập.";
-                return false;
+                isValid = false;
             }
 
             if (password.trim() === "") {
                 passwordErr.innerHTML = "Vui lòng nhập mật khẩu.";
-                return false;
+                isValid = false;
             }
-            return true;
+
+            return isValid;
         }
+
     </script>
 </main>

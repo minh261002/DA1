@@ -1,9 +1,39 @@
+<?php
+$html_admin_acc = "";
+
+foreach ($user as $acc) {
+
+    $acc['ban'] = ($acc['ban'] == 0) ? "Đang Hoạt Động" : "Đã Bị Khóa";
+
+    $link = '';
+
+    if ($acc['ban'] == "Đang Hoạt Động") {
+        $link = '<a href="index.php?page=block-user&id=' . $acc['id'] . '"><i class="bx bx-lock danger"></i></a>';
+    } elseif ($acc['ban'] == "Đã Bị Khóa") {
+        $link = '<a href="index.php?page=unblock-user&id=' . $acc['id'] . '"><i class="bx bx-lock-open success"></i></a>';
+    }
+
+    $html_admin_acc .= '
+        <tr>
+            <td>' . $acc['username'] . '</td>
+            <td>' . $acc['email'] . '</td>
+            <td>' . $acc['ban'] . '</td>
+            <td>
+                <a href="index.php?page=update-user&id=' . $acc['id'] . '" ><i class="bx bx-edit"></i></a>
+                ' . $link . '
+            </td>
+        </tr>
+    ';
+}
+
+?>
+
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -33,7 +63,7 @@
                 <span class="text">Phản Hồi</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=user">
                 <i class='bx bxs-group'></i>
                 <span class="text">Tài Khoản</span>
@@ -46,13 +76,13 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="#">
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="#">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -67,53 +97,62 @@
         </li>
     </ul>
 </section>
+
+<!-- CONTENT -->
 <section id="content">
-    <a href="index.php?page=create-user">Thêm Người Dùng Mới</a>
-    <h3 class="text-center">Danh Sách Người Dùng</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Ảnh Đại Diện</th>
-                <th scope="col">Tên Đăng Nhập</th>
-                <th scope="col">Mật Khẩu</th>
-                <th scope="col">Họ Và Tên</th>
-                <th scope="col">Email</th>
-                <th scope="col">Số Điện Thoại</th>
-                <th scope="col">Địa Chỉ</th>
-                <th scope="col">Vai Trò</th>
-                <th scope="col">Thao Tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $i=1; foreach($user as $key => $user) {  
-            ?>
+    <!-- NAVBAR -->
+    <nav>
+        <i class='bx bx-menu'></i>
+        <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Tìm Kiếm...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+            </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden>
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="notification">
+            <i class='bx bxs-bell'></i>
+            <span class="num">8</span>
+        </a>
+        <a href="#" class="profile">
+            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+        </a>
+    </nav>
+    <!-- NAVBAR -->
 
-            <tr>
+    <!-- MAIN -->
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>Quản Lý Tài Khoản</h1>
+            </div>
+        </div>
 
-                <td><?php echo $i?></td>
-                <td><img src="../Uploads/<?php echo $user['avatar']?>" alt="" width="50px"></td>
-                <td><?php echo $user['username']?></td>
-                <td><?php echo $user['password']?></td>
-                <td><?php echo $user['fullname']?></td>
-                <td><?php echo $user['email']?></td>
-                <td><?php echo $user['phone']?></td>
-                <td><?php echo $user['address']?></td>
-                <td><?php 
-            if($user['role'] == 0){
-                echo 'Người Dùng';
-            }else{
-                echo 'Admin';
-            }
-        ?></td>
-                <td><a href="index.php?page=update-user&id=<?php echo $user['id']?>">sửa</a> | <a
-                        href="index.php?page=del-user&id=<?php echo $user['id']?>">Xóa</a></td>
+        <div class="admin_user">
+            <p class="err">
+                <?php
+                if (isset($_SESSION["message"])) {
+                    echo $_SESSION['message'];
+                    unset($_SESSION['message']);
+                }
+                ?>
+            </p>
+            <table class="table">
+                <thead>
+                    <th>Tài Khoản</th>
+                    <th>Email</th>
+                    <th>Trạng Thái</th>
+                    <th>Thao Tác</th>
+                </thead>
 
+                <tbody>
+                    <?= $html_admin_acc ?>
+                </tbody>
+            </table>
 
-            </tr>
-            <?php  $i++;?>
-            <?php  }?>
-
-        </tbody>
-    </table>
+            <a href="index.php?page=create-user">Thêm Tài Khoản Mới</a>
+        </div>
+    </main>
 </section>

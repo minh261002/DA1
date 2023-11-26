@@ -33,7 +33,7 @@ foreach ($bills as $bill) {
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -51,7 +51,7 @@ foreach ($bills as $bill) {
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>

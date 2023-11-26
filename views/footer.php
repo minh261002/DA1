@@ -1,7 +1,7 @@
 <script src="./assets/js/main.js"></script>
 <footer>
     <div class="container plr-16">
-        <ul class="footer-item">VỀ TOKYOLIFE
+        <ul class="footer-item">VỀ OWENSHOP
             <li><a href="">Chúng Tôi Là Ai</a></li>
             <li><a href="">Cam Kết Của Chúng Tôi</a></li>
             <li><a href="">Hệ Thống Cửa Hàng</a></li>
@@ -24,17 +24,17 @@
         <ul class="footer-item">Liên Hệ
             <li><a href=""><strong>Hỗ Trợ Tư Vấn Mua Online</strong></a></li>
             <li><a href="">Hotline: 0247 308 2882</a></li>
-            <li><a href="">Email: contact@tokyolife.vn</a></li>
+            <li><a href="">Email: contact@owenshop.vn</a></li>
             <li><a href="">Giờ làm việc: 8:30 - 22:00 hằng ngày.</a></li>
             <br><br>
             <li><a href=""><strong>Hỗ trợ khiếu nại và bảo hành sản phẩm:</strong></a></li>
             <li><a href="">Hotline: 024 7300 6999 </a></li>
-            <li><a href="">Email: cskh@tokyolife.vn </a></li>
+            <li><a href="">Email: cskh@owenshop.vn </a></li>
             <li><a href="">Giờ làm việc: 8:30 - 22:00 hằng ngày. </a></li>
         </ul>
 
         <div class="footer-item">
-            <p>Đăng Ký Nhận Tin Từ TOKYOLIFE</p>
+            <p>Đăng Ký Nhận Tin Từ OWENSHOP</p>
             <form action="" class="flex">
                 <input type="email" name="email-footer" id="email-footer" placeholder="Nhập địa chỉ email...">
                 <button type="submit">Đăng ký</button>
@@ -53,7 +53,7 @@
 
     <div class="container">
         <div class="social-icon plr-16">
-            <p>Kết Nối Với TOKYOLIFE</p>
+            <p>Kết Nối Với OWENSHOP</p>
             <div class="icon flex" style="gap: 16px;">
                 <div>
                     <a href="https://www.tiktok.com/@tokyolife.channel">
@@ -199,11 +199,6 @@
                             </defs>
                         </svg>
                     </div>
-                </div>
-                <div>
-                    <a href="/blog" class="flex" style="gap: 12px;">
-                        <img src="assets/img/news.gif" width="30px" style="border-radius: 50%;">
-                        <div style="font-size: 13px;"><span>TokyoLife News</span></div>
                 </div>
                 </a>
             </div>

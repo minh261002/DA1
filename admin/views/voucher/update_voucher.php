@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -47,7 +47,7 @@ if (isset($_GET['id'])) {
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=voucher">
                 <i class='bx bxs-offer'></i>
                 <span class="text">Mã Giảm Giá</span>

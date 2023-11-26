@@ -129,133 +129,172 @@ if (isset($_GET['page'])) {
             }
             break;
 
+        case 'hideCategory':
+            if (isset($_GET["id"])) {
+                $category_id = $_GET["id"];
+
+                admin_hide_category($category_id);
+                admin_hide_product_by_category($category_id);
+
+                $message = "Danh mục sản phẩm đã ngừng kinh doanh";
+                $_SESSION["message"] = $message;
+                header('location: index.php?page=category');
+                exit;
+            }
+            break;
+
+        case 'showCategory':
+            if (isset($_GET["id"])) {
+                $category_id = $_GET["id"];
+
+                admin_show_cattegory($category_id);
+                admin_show_product_by_category($category_id);
+
+                $message = "Danh mục sản phẩm đã được kinh doanh";
+                $_SESSION["message"] = $message;
+                header('location: index.php?page=category');
+                exit;
+            }
+            break;
+
 
         case 'user':
             $user = render_alluser();
             require_once 'views/users/show-user.php';
             break;
 
-
-
         case 'create-user':
-            if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
+            if (isset($_POST['create-user'])) {
 
-                $id = $_POST['id'];
+                if (isset($_FILES['avatar']['name']) && ($_FILES['avatar']['name'] != null)) {
+                    $avatar = $_FILES['avatar']['name'];
+                } else {
+                    $avatar = "default_user.png";
+                }
+
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-                $fullname = $_POST['fullname'];
-                $dateOfBirth = $_POST['dateOfBirth'];
-                $gender = $_POST['gender'];
-                $email = $_POST['email'];
-                $phone = $_POST['phone'];
-                $city = $_POST['city'];
-                $district = $_POST['district'];
-                $ward = $_POST['ward'];
-                $fulladdress = $_POST['fulladdress'];
-                $address = array(
-                    'city' => $city,
-                    'district' => $district,
-                    'ward' => $ward,
-                    'fulladdress' => $fulladdress
-                );
 
-                $ban = $_POST['ban'];
+                if (isset($_POST['fullname'])) {
+                    $fullname = $_POST['fullname'];
+                } else {
+                    $fullname = NULL;
+                }
+                $email = $_POST['email'];
+
+                if (isset($_POST['phone'])) {
+                    $phone = $_POST['phone'];
+                } else {
+                    $phone = NULL;
+                }
+
+                if (empty($_POST['province']) && empty($_POST['district']) && empty($_POST['ward']) && empty($_POST['detail'])) {
+                    $address = NULL;
+
+                } else {
+                    $province = $_POST['province'];
+                    $district = $_POST['district'];
+                    $ward = $_POST['ward'];
+                    $detail = $_POST['detail'];
+
+                    $address = array(
+                        'province' => $province,
+                        'district' => $district,
+                        'ward' => $ward,
+                        'detail' => $detail
+                    );
+                }
+
+
                 $role = $_POST['role'];
 
-                // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                $created_at = date('Y-m-d H:i:s');
+
                 $target_dir = "../Uploads/";
+                $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 
-                $target_file = $target_dir . basename($_FILES['avatar']['name']);
+                create_user($avatar, $username, $password, $fullname, $email, $phone, $address, $role, $created_at);
 
-                $avatar = $target_file;
-                $uploadOk = 1;
-                $avatarFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                if (
-                    $avatarFileType != "jpg" && $avatarFileType != "png" && $avatarFileType != "jpeg"
-                    && $avatarFileType != "gif"
-                ) {
-                    $uploadOk = 0;
-                }
-                move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-                create_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+                $message = "Thêm tài khoản thành công!";
+                $_SESSION['message'] = $message;
+                header('Location: index.php?page=user');
             }
 
-            // load all danh mục 
-
-            // load all sp
-            $user = render_alluser();
             require_once 'views/users/create-user.php';
             break;
+
 
         case 'update-user':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $one = getoneuser($id);
-                // echo $id;
-                // print_r($one);
             }
-            if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
 
+            if (isset($_POST['update_user'])) {
                 $id = $_POST['id'];
+
+                // Lấy các giá trị từ biểu mẫu
+                $avatar = $_FILES['avatar']['name'];
+                $avatar_old = $_POST['avatar-old'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-
-
                 $fullname = $_POST['fullname'];
                 $dateOfBirth = $_POST['dateOfBirth'];
                 $gender = $_POST['gender'];
                 $email = $_POST['email'];
                 $phone = $_POST['phone'];
-                $city = $_POST['city'];
+                $role = $_POST['role'];
+                $ban = $_POST['ban'];
+
+                // Địa chỉ được lấy từ các trường select trong biểu mẫu
+                $province = $_POST['province'];
                 $district = $_POST['district'];
                 $ward = $_POST['ward'];
-                $fulladdress = $_POST['fulladdress'];
+                $detail = $_POST['detail'];
+
                 $address = array(
-                    'city' => $city,
+                    'province' => $province,
                     'district' => $district,
                     'ward' => $ward,
-                    'fulladdress' => $fulladdress
+                    'detail' => $detail
                 );
 
-                $ban = $_POST['ban'];
-                $role = $_POST['role'];
-
-                // if($_FILES['image']['name']!="") $image=$_FILES['image']['name']; else $image="";
                 $target_dir = "../Uploads/";
+                $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 
-                $target_file = $target_dir . basename($_FILES['avatar']['name']);
-
-                $avatar = $target_file;
-                $uploadOk = 1;
-                $avatarFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                if (
-                    $avatarFileType != "jpg" && $avatarFileType != "png" && $avatarFileType != "jpeg"
-                    && $avatarFileType != "gif"
-                ) {
-                    $uploadOk = 0;
+                if ($avatar != null) {
+                    move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
+                    admin_update_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+                } else {
+                    admin_update_user($id, $avatar_old, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
                 }
-                move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-                updateuser($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
+
+                $message = "Cập nhật thông tin thành công!";
+                $_SESSION['message'] = $message;
+                header('Location: index.php?page=update-user&id=' . $id);
+            }
+
+            require_once 'views/users/update-user.php';
+            break;
+
+        case 'block-user':
+            if (isset($_GET['id'])) {
+                $id_user = $_GET['id'];
+                block_user($id_user);
+
                 header('Location: index.php?page=user');
             }
-
-            // load all danh mục 
-
-            // load all sp
-            $user = render_alluser();
-            require_once 'views/users/update-user.php';
-            
+            require_once 'views/users/show-user.php';
             break;
-            
-        case 'del-user':
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                deluser($id);
-            }
 
-            // load all sp
-            $user = render_alluser();
-            // $user=getall_user();
+        case 'unblock-user':
+            if (isset($_GET['id'])) {
+                $id_user = $_GET['id'];
+                unblock_user($id_user);
+
+                header('Location: index.php?page=user');
+            }
             require_once 'views/users/show-user.php';
             break;
 
@@ -289,6 +328,7 @@ if (isset($_GET['page'])) {
                 $sale = $_POST['sale'];
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
+<<<<<<< HEAD
         
                 // Xử lý tải lên ảnh chính
                 $img_path = "";
@@ -304,6 +344,14 @@ if (isset($_GET['page'])) {
         
                 $gallery_images = [];
                 // $target_dir_gallery = "../Uploads";
+=======
+                $img1 = $_FILES['img1']['name'];
+                $img2 = $_FILES['img2']['name'];
+                $img3 = $_FILES['img3']['name'];
+                $img4 = $_FILES['img4']['name'];
+                $gallery = array($img1, $img2, $img3, $img4);
+
+>>>>>>> 261928ae6e0868d2f7d4c604adcc0f42ef6f757f
                 $target_dir = "../Uploads/";
                 if (isset($_FILES["gallery"])) {
                     foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {

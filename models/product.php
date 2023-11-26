@@ -75,9 +75,13 @@ function get_new_product()
 
 function get_product_by_id($id)
 {
-    $sql = "SELECT * FROM product WHERE hide = 0 AND id=?";
+    $sql = "SELECT p.*, c.name AS category_name,c.id AS id_category
+            FROM product AS p
+            JOIN category AS c ON p.id_category = c.id
+            WHERE p.hide = 0 AND p.id=?";
     return pdo_query_one($sql, $id);
 }
+
 
 function get_product_by_variant($id)
 {
@@ -285,7 +289,7 @@ function product_select_page()
 
     $offset = $_SESSION['page_no'] * 10;
 
-    $sql = "SELECT * FROM product ORDER BY id LIMIT " . $offset . ", 10";
+    $sql = "SELECT * FROM product WHERE hide=0 ORDER BY id LIMIT " . $offset . ", 10";
 
     return pdo_query($sql);
 }

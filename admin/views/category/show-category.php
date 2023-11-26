@@ -4,6 +4,12 @@ $show_category = '';
 foreach ($list_category as $ct) {
     extract($ct);
 
+    if ($ct['hide'] == 0) {
+        $link = '<a href="index.php?page=hideCategory&id=' . $id . '"><i class="bx bx-x"></i></a>';
+    } else {
+        $link = '<a href="index.php?page=showCategory&id=' . $id . '"><i class="bx bx-check"></i></a>';
+    }
+
     $show_category .= '
         <tr>
             <td>' . $id . '</td>
@@ -14,6 +20,7 @@ foreach ($list_category as $ct) {
             <td>
                 <a href="index.php?page=updateCategory&id=' . $id . '"><i class="bx bx-edit"></i></a>
                 <a href="index.php?page=delCategory&id=' . $id . '"><i class="bx bx-trash"></i></a>
+                ' . $link . '
             </td>
         </tr>
     ';
@@ -26,13 +33,13 @@ foreach ($list_category as $ct) {
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=category">
                 <i class='bx bxs-category-alt'></i>
                 <span class="text">Danh Mục</span>

@@ -1,44 +1,42 @@
 <?php
 // require_once 'pdo.php';
-function render_alluser(){
-    $sql = "SELECT * FROM user";
-    return  pdo_query($sql);
+function render_alluser()
+{
+    $sql = "SELECT * FROM user ORDER BY id DESC";
+    return pdo_query($sql);
 }
-function  create_user($id,$avatar,$username, $password, $fullname,$dateOfBirth, $gender, $email,$phone,$address, $ban, $role){
-    try{
-        $sql = "INSERT INTO user( avatar,username, password, fullname,dateOfBirth, gender,email,phone,address, ban, role, created_at) VALUES (?,?,?,?, ?, ?, ?, ?,?,?,?, NOW())";
-        pdo_execute($sql,$avatar,$username, md5($password), $fullname,$dateOfBirth, $gender,$email,$phone,json_encode($address), $ban, $role);
-        echo "Thêm user mới thành công";
-    }catch (PDOException $e) {
-        echo "Thêm thất bại! " . $e->getMessage();
-    }
+
+function create_user($avatar, $username, $password, $fullname, $email, $phone, $address, $role, $created_at)
+{
+    $sql = "INSERT INTO user(avatar, username, password, fullname, email, phone, address, role, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    pdo_execute($sql, $avatar, $username, $password, $fullname, $email, $phone, json_encode($address), $role, $created_at);
 }
-function updateuser($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role) {
-    try {
-        $sql = "UPDATE user SET avatar=?, username=?, password=?, fullname=?, dateOfBirth=?, gender=?, email=?, phone=?, address=?, ban=?, role=?, created_at=NOW() WHERE id=?";
-        pdo_execute($sql, $avatar, $username, ($password), $fullname, $dateOfBirth, $gender, $email, $phone, json_encode($address), $ban, $role, $id);
-        echo "Update user thành công";
-    } catch (PDOException $e) {
-        echo "Update thất bại! " . $e->getMessage();
-    }
-}   
-function deluser($id){
+
+
+function admin_update_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role)
+{
+    $sql = "UPDATE user SET avatar=?, username=?, password=?, fullname=?, dateOfBirth=?, gender=?, email=?, phone=?, address=?, ban=?, role=?, updated_at=NOW() WHERE id=?";
+    pdo_execute($sql, $avatar, $username, ($password), $fullname, $dateOfBirth, $gender, $email, $phone, json_encode($address), $ban, $role, $id);
+}
+
+function deluser($id)
+{
     $sql = "DELETE FROM user  WHERE id=?";
-    if(is_array($id)){
+    if (is_array($id)) {
         foreach ($id as $ma) {
             pdo_execute($sql, $ma);
         }
-    }
-    else{
+    } else {
         pdo_execute($sql, $id);
     }
-} 
-function getoneuser($id){
+}
+function getoneuser($id)
+{
     $sql = "SELECT * FROM user WHERE  id=?";
-    return  pdo_query($sql, $id);
+    return pdo_query($sql, $id);
 }
 
-function checkUser($username, $password)
+function checkUser($username, $password, )
 {
     $sql = "SELECT * FROM user WHERE  username = ? AND password = ?";
     return pdo_query_one($sql, $username, $password);
@@ -55,6 +53,13 @@ function emailExists($email)
 {
     $sql = "SELECT * FROM user WHERE email = ?";
     $user = pdo_query_one($sql, $email);
+    return $user ? true : false;
+}
+
+function banExists($ban)
+{
+    $sql = "SELECT * FROM user WHERE ban = ?";
+    $user = pdo_query_one($sql, $ban);
     return $user ? true : false;
 }
 
@@ -82,7 +87,17 @@ function getUpdatedUserInfo($id)
     return pdo_query_one($sql, $id);
 }
 
+function block_user($id_user)
+{
+    $sql = "UPDATE user SET ban=1 WHERE id=?";
+    pdo_execute($sql, $id_user);
+}
 
+function unblock_user($id_user)
+{
+    $sql = "UPDATE user SET ban=0 WHERE id=?";
+    pdo_execute($sql, $id_user);
+}
 
 function user_change_password($id, $password_new)
 {

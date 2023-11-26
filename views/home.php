@@ -606,7 +606,9 @@ $html_view_product = show_product($view_product);
 
     <div class="overlay">
         <div class="banner_ads_img">
-            <img src="uploads/ads_1.png" alt="">
+            <a href="index.php?page=product&id=2">
+                <img src="uploads/ads_1.png" alt="">
+            </a>
 
             <div class="close-ads">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

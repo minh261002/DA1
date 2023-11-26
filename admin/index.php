@@ -315,7 +315,8 @@ if (isset($_GET['page'])) {
         // CRUD sản phẩm 
         // show sản phẩm
         case 'product':
-
+            $variant = get_allvariant();
+            $list_category = get_category();
             $product = render_allproduct();
             require_once 'views/product/show-product.php';
             break;
@@ -390,6 +391,7 @@ if (isset($_GET['page'])) {
                     }
 
                 }
+                header('Location: index.php?page=product');
             }
 
             $variant = get_allvariant();
@@ -408,38 +410,35 @@ if (isset($_GET['page'])) {
                 // print_r($one);
             }
             if ((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
-
-
                 $id_category = $_POST['id_category'];
                 $name = $_POST['name'];
-
                 $info = $_POST['info'];
                 $price = $_POST['price'];
                 $sale = $_POST['sale'];
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
-                // Xử lý tải lên ảnh chính
-                $img_path = "";
-
+        
+                // Kiểm tra nếu người dùng đã chọn ảnh mới
                 if ($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
                     $target_dir = "../Uploads/";
                     $target_file = $target_dir . basename($_FILES["img"]["name"]);
-
                     if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
                         $img_path = $target_file;
                     } else {
                         $message = "Lỗi khi tải lên ảnh.";
                     }
+                } else {
+                    // Người dùng không chọn ảnh mới, giữ nguyên ảnh cũ
+                    $img_path = $one['img'];
                 }
-
+        
+                // Kiểm tra nếu người dùng đã chọn ảnh mới trong gallery
                 $gallery_images = [];
-                $target_dir_gallery = "";
-
+                $target_dir = "../Uploads/";
                 if (isset($_FILES["gallery"])) {
                     foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
                         $gallery_image_name = $_FILES["gallery"]["name"][$key];
-                        $gallery_target_file = $target_dir_gallery . basename($gallery_image_name);
-
+                        $gallery_target_file = $target_dir . basename($gallery_image_name);
                         // Chỉ xử lý ảnh nếu người dùng đã tải lên
                         if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
                             if (move_uploaded_file($tmp_name, $gallery_target_file)) {
@@ -451,28 +450,33 @@ if (isset($_GET['page'])) {
                         }
                     }
                 }
+        
+                // Người dùng không chọn ảnh mới trong gallery, giữ nguyên gallery cũ
+                if (empty($gallery_images)) {
+                    $gallery_images = json_decode($one['gallery'], true);
+                }
+        
                 if (empty($message)) {
-                    $galleryData = ["images" => $gallery_images];
                     $jsonGallery = json_encode($gallery_images);
-
+        
+                    // Insert product data
                     try {
                         $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-
                         pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
-
                         echo "Chỉnh sửa thành công";
                     } catch (PDOException $e) {
-                        error_log("Error adding product: " . $e->getMessage());
                         echo "Chỉnh Sửa thất bại! " . $e->getMessage();
                     }
-
                 }
+                header('Location: index.php?page=product');
             }
+        
             $variant = get_allvariant();
             $list_category = get_category();
             $product = render_allproduct();
             require_once 'views/product/update-product.php';
             break;
+        
         // Xóa sản phẩm
         case 'del-product':
             if (isset($_GET['id'])) {

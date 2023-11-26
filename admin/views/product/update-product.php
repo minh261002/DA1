@@ -68,6 +68,26 @@
     </ul>
 </section>>
 <section id="content">
+    <nav>
+        <i class='bx bx-menu'></i>
+        <a href="#index.php?page=home" class="nav-link">Trang Chủ</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Tìm Kiếm...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+            </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden>
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="notification">
+            <i class='bx bxs-bell'></i>
+            <span class="num">8</span>
+        </a>
+        <a href="#" class="profile">
+            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
+        </a>
+    </nav>
+
     <main class="my-5">
         <div class="container">
             <h3 class="text-center"> Chỉnh Sửa Sản Phẩm</h3>
@@ -99,11 +119,14 @@
                 <div class="form-group mb-3">
                     <label for="img">Hình Ảnh</label>
                     <input type="file" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
+                    <input type="hidden" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
+                        value="<?= $one[0]['gallery'] ?>">
+                    <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
                 </div>
 

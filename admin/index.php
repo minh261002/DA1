@@ -328,7 +328,6 @@ if (isset($_GET['page'])) {
                 $sale = $_POST['sale'];
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
-<<<<<<< HEAD
         
                 // Xử lý tải lên ảnh chính
                 $img_path = "";
@@ -344,14 +343,6 @@ if (isset($_GET['page'])) {
         
                 $gallery_images = [];
                 // $target_dir_gallery = "../Uploads";
-=======
-                $img1 = $_FILES['img1']['name'];
-                $img2 = $_FILES['img2']['name'];
-                $img3 = $_FILES['img3']['name'];
-                $img4 = $_FILES['img4']['name'];
-                $gallery = array($img1, $img2, $img3, $img4);
-
->>>>>>> 261928ae6e0868d2f7d4c604adcc0f42ef6f757f
                 $target_dir = "../Uploads/";
                 if (isset($_FILES["gallery"])) {
                     foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {

@@ -41,11 +41,7 @@ if (isset($sale) && $sale !== 0) {
                     if (is_array($images)) {
 
                         foreach ($images as $image) {
-<<<<<<< HEAD
                             echo '<img src="Uploads/'. $image.'" width="100%" onclick="changeImage(this)" />';
-=======
-                            echo '<img src="uploads/img1/' . $image . '" width="100%" onclick="changeImage(this)" />';
->>>>>>> 261928ae6e0868d2f7d4c604adcc0f42ef6f757f
                         }
                     }
                     ?>
@@ -56,10 +52,10 @@ if (isset($sale) && $sale !== 0) {
                 </div>
 
                 <script>
-                    function changeImage(thumbnail) {
-                        var largeImage = document.getElementById("largeImage");
-                        largeImage.src = thumbnail.src;
-                    }
+                function changeImage(thumbnail) {
+                    var largeImage = document.getElementById("largeImage");
+                    largeImage.src = thumbnail.src;
+                }
                 </script>
             </div>
 
@@ -67,7 +63,7 @@ if (isset($sale) && $sale !== 0) {
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <?php foreach ($images as $key => $image) { ?>
-                        <div class="swiper-slide"><img src="Uploads/<?php echo $image ?>" alt=""></div>
+                    <div class="swiper-slide"><img src="Uploads/<?php echo $image ?>" alt=""></div>
                     <?php } ?>
                 </div>
                 <div class="swiper-pagination"></div>
@@ -181,23 +177,23 @@ if (isset($sale) && $sale !== 0) {
                         </div>
 
                         <script>
-                            var decrementButton = document.getElementById("decrement");
-                            var incrementButton = document.getElementById("increment");
-                            var quantityInput = document.getElementById("quantity");
+                        var decrementButton = document.getElementById("decrement");
+                        var incrementButton = document.getElementById("increment");
+                        var quantityInput = document.getElementById("quantity");
 
-                            decrementButton.addEventListener("click", function (e) {
-                                e.preventDefault();
-                                var currentQuantity = parseInt(quantityInput.value);
-                                if (currentQuantity > 1) {
-                                    quantityInput.value = currentQuantity - 1;
-                                }
-                            });
+                        decrementButton.addEventListener("click", function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt(quantityInput.value);
+                            if (currentQuantity > 1) {
+                                quantityInput.value = currentQuantity - 1;
+                            }
+                        });
 
-                            incrementButton.addEventListener("click", function (e) {
-                                e.preventDefault();
-                                var currentQuantity = parseInt(quantityInput.value);
-                                quantityInput.value = currentQuantity + 1;
-                            });
+                        incrementButton.addEventListener("click", function(e) {
+                            e.preventDefault();
+                            var currentQuantity = parseInt(quantityInput.value);
+                            quantityInput.value = currentQuantity + 1;
+                        });
                         </script>
                     </div>
 
@@ -426,11 +422,11 @@ if (isset($sale) && $sale !== 0) {
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        var swiper = new Swiper(".mySwiper", {
-            pagination: {
-                el: ".swiper-pagination",
-                type: "fraction"
-            }
-        });
+    var swiper = new Swiper(".mySwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+            type: "fraction"
+        }
+    });
     </script>
 </main>

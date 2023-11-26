@@ -25,7 +25,9 @@ function getone_product($id)
     $sql = "SELECT * FROM product WHERE id=?";
     return pdo_query($sql, $id);
 }
-function get_allvariant(){
+
+function get_allvariant()
+{
     $sql = "SELECT * FROM variant";
     return pdo_query($sql);
 }
@@ -121,6 +123,7 @@ function sum_product()
     $sql = "SELECT SUM(quantity) AS sum_product FROM variant";
     return pdo_query_value($sql);
 }
+
 function product_view($id)
 {
     $sql = "UPDATE product SET view = view + 1 WHERE hide = 0 AND id=?";
@@ -234,7 +237,7 @@ function show_product($list_product)
 
 function category_has_products($category_id)
 {
-    $sql = "SELECT COUNT(*) FROM product WHERE hide = 0 AND id_category = ?";
+    $sql = "SELECT COUNT(*) FROM product WHERE id_category = ?";
     return pdo_query($sql, $category_id);
 }
 
@@ -260,13 +263,6 @@ function get_products_by_category($categoryId)
     $sql = "SELECT * FROM product WHERE hide = 0 AND id_category=?";
     return pdo_query($sql, $categoryId);
 }
-
-// function hang_hoa_select_keyword($keyword){
-//     $sql = "SELECT * FROM hang_hoa hh "
-//             . " JOIN loai lo ON lo.ma_loai=hh.ma_loai "
-//             . " WHERE ten_hh LIKE ? OR ten_loai LIKE ?";
-//     return pdo_query($sql, '%'.$keyword.'%', '%'.$keyword.'%');
-// }
 
 function product_select_page()
 {

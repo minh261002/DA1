@@ -7,6 +7,12 @@ function get_category()
     return pdo_query($sql);
 }
 
+function admin_get_category()
+{
+    $sql = "SELECT * FROM category";
+    return pdo_query($sql);
+}
+
 function get_category_by_id($category_id)
 {
     $sql = "SELECT * FROM category WHERE id=? AND hide = 0";
@@ -95,17 +101,12 @@ function get_name_category($id_category)
 //  * @param mix $ma_loai là mã loại hoặc mảng mã loại
 //  * @throws PDOException lỗi xóa
 //  */
-function category_delete($id)
+function category_delete($id_category)
 {
     $sql = "DELETE FROM category WHERE id=?";
-    if (is_array($id)) {
-        foreach ($id as $ma) {
-            pdo_execute($sql, $ma);
-        }
-    } else {
-        pdo_execute($sql, $id);
-    }
+    pdo_execute($sql, $id_category);
 }
+
 // /**
 //  * Truy vấn tất cả các loại
 //  * @return array mảng loại truy vấn được

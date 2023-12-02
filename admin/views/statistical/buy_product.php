@@ -1,3 +1,26 @@
+<?php
+if (isset($buy_product_admin)) {
+
+    $html_buy_pd_admin = '';
+    $keys = array_keys($buy_product_admin); // Lấy danh sách các key trong mảng
+
+    foreach ($keys as $index => $key) {
+        $buy_pd = $buy_product_admin[$key];
+        $position = $index + 1;
+        $html_buy_pd_admin .= '
+            <tr>
+                <td>' . $position . '</td>
+                <td><img src="../uploads/' . $buy_pd['img'] . '" width="50px" /></td>
+                <td>' . $buy_pd['name'] . '</td>
+                <td>' . $buy_pd['category_name'] . '</td>
+                <td>' . $buy_pd['total_quantity'] . '</td>
+            </tr>
+        ';
+    }
+}
+
+?>
+
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
@@ -108,8 +131,21 @@
                 <li class="active"><a href="index.php?page=buy_product">Sản Phẩm Nhiều Lượt Mua</a></li>
             </ul>
 
-            <div class="content_statistical">
-
+            <div class="content_statistical px-5">
+                <table class="table my-5">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Ảnh</th>
+                            <th>Sản Phẩm</th>
+                            <th>Danh Mục</th>
+                            <th>Đã Bán</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?= $html_buy_pd_admin ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>

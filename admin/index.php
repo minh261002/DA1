@@ -555,8 +555,8 @@ if (isset($_GET['page'])) {
             break;
 
         case 'view_product':
-
             $view_product_admin = view_product_admin();
+
             require_once 'views/statistical/view_product.php';
             break;
 
@@ -566,6 +566,7 @@ if (isset($_GET['page'])) {
             break;
 
         case 'buy_product':
+            $buy_product_admin = buy_product_admin();
 
             require_once 'views/statistical/buy_product.php';
             break;

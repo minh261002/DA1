@@ -61,6 +61,12 @@ function admin_show_cattegory($category_id)
     pdo_execute($sql, $category_id);
 }
 
+function category_exist($category_name)
+{
+    $sql = "SELECT name FROM category";
+    $category = pdo_query($sql);
+    return $category ? true : false;
+}
 // /**
 //  * Thêm loại mới
 //  * @param String $ten_loai là tên loại

@@ -105,8 +105,9 @@
                 onsubmit="return validateForm()">
 
                 <p class="err">
-                    <?php if (isset($message)) {
-                        echo $message;
+                    <?php if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {
+                        echo $_SESSION["message"];
+                        unset($_SESSION["message"]);
                     } ?>
                 </p>
 

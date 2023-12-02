@@ -65,8 +65,15 @@ if (isset($_GET['page'])) {
 
                 move_uploaded_file($_FILES['category_img']['tmp_name'], $target_file);
 
-                category_insert($category_name, $category_img, $category_home);
 
+                if (category_exist($category_name)) {
+                    $message = "Danh mục đã tồn tại!";
+                    $_SESSION["message"] = $message;
+                    header('Location: index.php?page=addCategory');
+                    exit;
+                } else {
+                    category_insert($category_name, $category_img, $category_home);
+                }
                 $message = "Thêm danh mục thành công!";
                 header('Location: index.php?page=category');
             }

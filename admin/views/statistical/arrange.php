@@ -1,11 +1,3 @@
-<?php
-if (isset($_GET['id'])) {
-    $id_voucher = $_GET['id'];
-    $get_voucher_id = get_voucher_id($id_voucher);
-}
-?>
-
-<!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
@@ -47,19 +39,19 @@ if (isset($_GET['id'])) {
                 <span class="text">Tài Khoản</span>
             </a>
         </li>
-        <li class="active">
+        <li>
             <a href="index.php?page=voucher">
                 <i class='bx bxs-offer'></i>
                 <span class="text">Mã Giảm Giá</span>
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="#">
                 <i class='bx bxs-slideshow'></i>
                 <span class="text">Slider Shows</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=statistical">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
@@ -74,7 +66,9 @@ if (isset($_GET['id'])) {
             </a>
         </li>
     </ul>
-</section>>
+</section>
+
+<!-- CONTENT -->
 <section id="content">
     <!-- NAVBAR -->
     <nav>
@@ -93,7 +87,7 @@ if (isset($_GET['id'])) {
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="img/people.png">
+            <img src="../uploads/<?= $_SESSION['admin']['avatar'] ?>">
         </a>
     </nav>
     <!-- NAVBAR -->
@@ -102,52 +96,22 @@ if (isset($_GET['id'])) {
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Mã Giảm Giá</h1>
+                <h1>Thống Kê</h1>
             </div>
         </div>
 
-        <div class="voucher-container">
-            <form action="index.php?page=update_voucher" method="POST">
-                <div class="form-group mb-3">
-                    <label for="id_voucher_disable">ID</label>
-                    <input type="text" name="id_voucher_disable" id="id_voucher_disable" class="form-control"
-                        value="<?= $get_voucher_id['id'] ?>" disabled>
-                    <span class="err">Không cần nhập ID</span>
-                </div>
+        <div class="admin_statistical">
+            <ul class="nav_statistical">
+                <li><a href="index.php?page=statistical">Tổng Quan</a></li>
+                <li class="active"><a href="index.php?page=arrange">Doanh Thu</a></li>
+                <li><a href="index.php?page=view_product">Sản Phẩm Nhiều Lượt Xem</a></li>
+                <li><a href="index.php?page=buy_product">Sản Phẩm Nhiều Lượt Mua</a></li>
+            </ul>
 
-                <div class="form-group mb-3">
-                    <label for="name">Mã Giảm Giá</label>
-                    <input type="text" name="name_voucher" id="name_voucher" class="form-control"
-                        value="<?= $get_voucher_id['name'] ?>">
-                </div>
+            <div class="content_statistical">
 
-                <div class="form-group mb-3">
-                    <label for="value_voucher">Giảm (%)</label>
-                    <input type="text" name="value_voucher" id="value_voucher" class="form-control"
-                        value="<?= $get_voucher_id['value'] ?>">
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="start_voucher">Ngày bắt đầu</label>
-                    <input type="date" name="start_voucher" id="start_voucher" class="form-control"
-                        value="<?= $get_voucher_id['start'] ?>">
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="end_voucher">Ngày kết thúc</label>
-                    <input type="date" name="end_voucher" id="end_voucher" class="form-control"
-                        value="<?= $get_voucher_id['end'] ?>">
-                </div>
-
-                <div class="form-group mb-3">
-                    <input type="hidden" name="id_voucher" value="<?= $get_voucher_id['id'] ?>">
-                    <input type="submit" value="Lưu Thay Đổi" class="btn btn-dark px-5" name="btn-update-voucher">
-                </div>
-            </form>
-
-            <a href="index.php?page=voucher">Quay Lại</a>
+            </div>
         </div>
-
     </main>
     <!-- MAIN -->
 </section>

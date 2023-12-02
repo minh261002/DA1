@@ -54,7 +54,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="index.php?page=statistical">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -72,93 +72,116 @@
 
 <!-- CONTENT -->
 <section id="content">
-    <div class="admin-category">
-        <form action="index.php?page=addCategory" method="POST" enctype="multipart/form-data"
-            onsubmit="return validateForm()">
 
-            <p class="err">
-                <?php if (isset($message)) {
-                echo $message;
-            } ?>
-            </p>
-
-            <div class="form-group mb-3">
-                <label for="category_id">ID Danh Mục</label>
-                <input type="text" name="category_id" id="category_id" class="form-control" disabled>
-                <span class="err">Không Cần Nhập ID Danh Mục</span>
+    <nav>
+        <i class='bx bx-menu'></i>
+        <a href="#index.php?page=category" class="nav-link">Danh Mục Sản Phẩm</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Tìm Kiếm...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
             </div>
-
-            <div class="form-group mb-3">
-                <label for="category_name">Tên Danh Mục</label>
-                <input type="text" name="category_name" id="category_name" class="form-control">
-                <span class="err" id="ctnameErr"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="category_img">Ảnh</label>
-                <input type="file" name="category_img" id="category_img" class="form-control d-block">
-                <span class="err" id="ctimgErr"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="home">Tùy Chọn</label>
-                <select name="home" id="home" class="form-control">
-                    <option value="0">Mặc Định</option>
-                    <option value="1">Hiện Danh Mục Lên Trang Chủ</option>
-                    <option value="2">Ẩn Danh Mục</option>
-                </select>
-            </div>
-
-            <div class="form-group mb-3">
-                <input type="submit" name="addCategory" value="Thêm Danh Mục Mới" class="btn btn-dark px-5">
-            </div>
-
-            <a href="index.php?page=category">Quay Lại</a>
         </form>
-    </div>
+        <input type="checkbox" id="switch-mode" hidden>
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="notification">
+            <i class='bx bxs-bell'></i>
+            <span class="num">8</span>
+        </a>
+        <a href="#" class="profile">
+            <img src="img/people.png">
+        </a>
+    </nav>
+
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>Danh Mục Sản Phẩm</h1>
+            </div>
+        </div>
+
+        <div class="admin-category">
+            <form action="index.php?page=addCategory" method="POST" enctype="multipart/form-data"
+                onsubmit="return validateForm()">
+
+                <p class="err">
+                    <?php if (isset($message)) {
+                        echo $message;
+                    } ?>
+                </p>
+
+                <div class="form-group mb-3">
+                    <label for="category_name">Tên Danh Mục</label>
+                    <input type="text" name="category_name" id="category_name" class="form-control">
+                    <span class="err" id="ctnameErr"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="category_img">Ảnh</label>
+                    <input type="file" name="category_img" id="category_img" class="form-control d-block">
+                    <span class="err" id="ctimgErr"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="home">Tùy Chọn</label>
+                    <select name="home" id="home" class="form-control">
+                        <option value="0">Mặc Định</option>
+                        <option value="1">Hiện Danh Mục Lên Trang Chủ</option>
+                        <option value="2">Ẩn Danh Mục</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <input type="submit" name="addCategory" value="Thêm Danh Mục Mới" class="btn btn-dark px-5">
+                </div>
+
+                <a href="index.php?page=category">Quay Lại</a>
+            </form>
+        </div>
+    </main>
 </section>
 <!-- ... your HTML code ... -->
 <!-- ... your HTML code ... -->
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Lấy các phần tử cần thiết
-    var form = document.querySelector("form");
-    var category_name = document.getElementById("category_name");
-    var category_img = document.getElementById("category_img");
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy các phần tử cần thiết
+        var form = document.querySelector("form");
+        var category_name = document.getElementById("category_name");
+        var category_img = document.getElementById("category_img");
 
-    // Xử lý sự kiện khi form được submit
-    form.addEventListener("submit", function(event) {
-        var isValid = true; // Variable to track overall form validity
+        // Xử lý sự kiện khi form được submit
+        form.addEventListener("submit", function (event) {
+            var isValid = true; // Variable to track overall form validity
 
-        // Reset error messages
-        document.getElementById("ctnameErr").textContent = "";
-        document.getElementById("ctimgErr").textContent = "";
+            // Reset error messages
+            document.getElementById("ctnameErr").textContent = "";
+            document.getElementById("ctimgErr").textContent = "";
 
-        // Kiểm tra rỗng và hiển thị thông báo
-        if (category_name.value.trim() === "") {
-            document.getElementById("ctnameErr").textContent = "Vui lòng nhập tên danh mục.";
-            isValid = false;
-        }
+            // Kiểm tra rỗng và hiển thị thông báo
+            if (category_name.value.trim() === "") {
+                document.getElementById("ctnameErr").textContent = "Vui lòng nhập tên danh mục.";
+                isValid = false;
+            }
 
-        if (category_img.value.trim() === "") {
-            document.getElementById("ctimgErr").textContent = "Vui lòng chọn ảnh.";
-            isValid = false;
-        }
+            if (category_img.value.trim() === "") {
+                document.getElementById("ctimgErr").textContent = "Vui lòng chọn ảnh.";
+                isValid = false;
+            }
 
-        // Ngừng submit nếu có lỗi
-        if (!isValid) {
-            event.preventDefault();
-        }
+            // Ngừng submit nếu có lỗi
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Add a function to reset error messages on input change
+        category_name.addEventListener("input", function () {
+            document.getElementById("ctnameErr").textContent = "";
+        });
+
+        category_img.addEventListener("input", function () {
+            document.getElementById("ctimgErr").textContent = "";
+        });
     });
-
-    // Add a function to reset error messages on input change
-    category_name.addEventListener("input", function() {
-        document.getElementById("ctnameErr").textContent = "";
-    });
-
-    category_img.addEventListener("input", function() {
-        document.getElementById("ctimgErr").textContent = "";
-    });
-});
 </script>

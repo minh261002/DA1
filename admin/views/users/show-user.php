@@ -82,7 +82,7 @@ foreach ($user as $acc) {
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="index.php?page=statistical">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>

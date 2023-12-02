@@ -48,7 +48,8 @@ body {
 
 .admin-category,
 .voucher-container,
-.admin_user{
+.admin_user, 
+.admin_statistical{
 	margin-top: 32px;
 	background: #fff;
 	padding: 12px;
@@ -79,6 +80,45 @@ i.success{
 	object-fit: cover;
 }
 
+.nav_statistical li.active{
+	background: #333;
+	color: #fff;
+}
+
+.nav_statistical li.active a{
+	color: #fff;
+}
+
+.nav_statistical{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin-bottom: 0 !important;
+	border-bottom: 2px solid #333;
+}
+
+.nav_statistical li{
+	width: 100%;
+	text-align: center;
+	padding: 12px 0;
+	cursor: pointer;
+	transition: .3s all ease;
+}
+
+.nav_statistical li:hover{
+	background: #333;
+}
+
+.nav_statistical li a{
+	color: #333;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.nav_statistical li:hover a{
+	color: #fff;
+}
 .chs-img{
 	border: 1px solid #333;
 	padding:4px 12px;

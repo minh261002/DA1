@@ -52,7 +52,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="index.php?page=statistical">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -100,14 +100,16 @@
                     <label for="id_category">Tên Danh Mục</label>
 
                     <select class="form-control" name="id_category" id="id_category">
-                        <option value="0"><?= $list_category[0]['name'] ?></option>
+                        <option value="0">
+                            <?= $list_category[0]['name'] ?>
+                        </option>
                         <?php
-                    if (isset($list_category)) {
-                        foreach ($list_category  as $dm) {
-                            echo '<option value="' . $dm['id'] . '">' . $dm['name'] . '</option>';
+                        if (isset($list_category)) {
+                            foreach ($list_category as $dm) {
+                                echo '<option value="' . $dm['id'] . '">' . $dm['name'] . '</option>';
+                            }
                         }
-                    }
-                    ?>
+                        ?>
                     </select>
                 </div>
 
@@ -177,15 +179,17 @@
                         </label>
                         <select class="form-select" name="size" id="size">
                             <option selected disabled hidden>
-                            <option value="0"><?= $variant[0]['size'] ?></option>
+                            <option value="0">
+                                <?= $variant[0]['size'] ?>
+                            </option>
                             <?php
-                                                  if(isset( $variant )){
-                                                    foreach($variant  as $size){
-                                                        echo '<option value="'.$size['id'].'">'.$size['size'].'</option>';
-                                                        
-                                                    }
-                                                }       
-                                            ?>
+                            if (isset($variant)) {
+                                foreach ($variant as $size) {
+                                    echo '<option value="' . $size['id'] . '">' . $size['size'] . '</option>';
+
+                                }
+                            }
+                            ?>
                             </option>
                         </select>
                     </div>
@@ -197,15 +201,17 @@
                         </label>
                         <select class="form-select" name="color" id="color">
                             <option selected disabled hidden>
-                            <option value="0"><?= $variant[0]['color'] ?></option>
+                            <option value="0">
+                                <?= $variant[0]['color'] ?>
+                            </option>
                             <?php
-                                        if(isset( $variant )){
-                                            foreach($variant  as $color){
-                                                echo '<option value="'.$color['id'].'">'.$color['color'].'</option>';
-                                                
-                                            }
-                                        }       
-                                ?>
+                            if (isset($variant)) {
+                                foreach ($variant as $color) {
+                                    echo '<option value="' . $color['id'] . '">' . $color['color'] . '</option>';
+
+                                }
+                            }
+                            ?>
                             </option>
                         </select>
                     </div>
@@ -217,14 +223,16 @@
                         </label>
                         <select class="form-select" name="color" id="color">
                             <option selected disabled hidden>
-                            <option value="0"><?= $variant[0]['quantity'] ?></option>
+                            <option value="0">
+                                <?= $variant[0]['quantity'] ?>
+                            </option>
                             <?php
-                                        if(isset( $variant )){
-                                            foreach($variant  as $quantity){
-                                                echo '<option value="'.$quantity['id'].'">'.$quantity['quantity'].'</option>';
-                                            }
-                                        }       
-                                ?>
+                            if (isset($variant)) {
+                                foreach ($variant as $quantity) {
+                                    echo '<option value="' . $quantity['id'] . '">' . $quantity['quantity'] . '</option>';
+                                }
+                            }
+                            ?>
                             </option>
                         </select>
                     </div>

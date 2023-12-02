@@ -51,6 +51,10 @@ function get_bill_user($id_user, $st)
     }
 }
 
-
+function acp_bill($id_bill)
+{
+    $sql = "UPDATE bill SET status = 5 WHERE id = ?";
+    pdo_execute($sql, $id_bill);
+}
 
 ?>

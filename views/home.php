@@ -95,22 +95,16 @@ $html_view_product = show_product($view_product);
         <div class="owl-carousel owl-theme wrap-content slide-home ">
 
             <div class="item" style="width:100%">
-                <img src="https://theme.hstatic.net/200000537721/1000888604/14/slideshow_2.jpg?v=324">
+                <img src="assets/img/bn1.jpg">
             </div>
             <div class="item" style="width:100%">
-                <img src="https://theme.hstatic.net/200000537721/1000888604/14/slideshow_1.jpg?v=324">
+                <img src="assets/img/bn2.jpg">
             </div>
             <div class="item" style="width:100%">
-                <img src="assets/img/bn3.webp">
+                <img src="assets/img/bn3.jpg">
             </div>
             <div class="item" style="width:100%">
-                <img src="assets/img/bn4.webp">
-            </div>
-            <div class="item" style="width:100%">
-                <img src="assets/img/bn5.webp" width="100%">
-            </div>
-            <div class="item" style="width:100%">
-                <img src="assets/img/bn6.webp" width="100%">
+                <img src="assets/img/bn4.jpg">
             </div>
         </div>
     </section>

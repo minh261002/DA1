@@ -21,6 +21,9 @@ require_once "models/cart.php";
 require_once "models/bill.php";
 // checkout
 require_once "models/checkout.php";
+//feedback
+require_once "models/feedback.php";
+//vnpay
 require_once "models/config_vnpay.php";
 
 
@@ -175,12 +178,13 @@ if (isset($_GET['page'])) {
         //trang chi tiết sản phẩm
         case 'details':
             if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                product_view($id);
-                $details = get_product_by_id($id);
-                $variant = get_product_by_variant($id);
-            }
+                $id_product = $_GET['id'];
+                product_view($id_product);
+                $details = get_product_by_id($id_product);
+                $variant = get_product_by_variant($id_product);
 
+                $feedback = show_feedback_by_id_product($id_product);
+            }
             require_once 'views/details.php';
             break;
 
@@ -470,6 +474,7 @@ if (isset($_GET['page'])) {
             break;
 
         case "search":
+
             require_once 'views/search.php';
             break;
 
@@ -488,6 +493,48 @@ if (isset($_GET['page'])) {
             require_once 'views/search_bill.php';
             break;
 
+        case 'acp_bill':
+            if (isset($_GET['id'])) {
+                $id_bill = $_GET['id'];
+                acp_bill($id_bill);
+
+                header('location: index.php?page=order');
+            }
+            break;
+
+        case 'vote':
+
+            if (isset($_POST['btn-form-rating'])) {
+                $id_bill = $_POST['id_bill'];
+                $id_product = $_POST['id_product'];
+                $name_product = $_POST['name_product'];
+                $img_product = $_POST['img_product'];
+                $size = $_POST['size'];
+                $color = $_POST['color'];
+                $quantity = $_POST['quantity'];
+                $id_bill_details = $_POST['id_bill_details'];
+            }
+
+            if (isset($_POST['btn-send-rating'])) {
+                $rating = $_POST['rating'];
+                $content = $_POST['content'];
+                $id_user = $_SESSION['user']['id'];
+                $id_product = $_POST['id_product'];
+                $id_bill_details = $_POST['id_bill_details'];
+
+                user_inser_feddback($id_user, $id_product, $rating, $content);
+
+                feedback_confirm($id_bill_details);
+
+                echo '<script>
+                    alert("Cảm ơn bạn đã đánh giá sản phẩm");
+
+                    window.location.href = "index.php?page=order";
+                </script>';
+            }
+
+            require_once 'views/vote.php';
+            break;
         default:
             // http_response_code(404);
             // require_once "views/404page.php";

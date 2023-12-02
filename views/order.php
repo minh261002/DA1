@@ -7,15 +7,24 @@ foreach ($bill_user as $bill) {
 
     $status = $bill['status'];
     if ($status == 0) {
-        $status = '<span class="text-warning fs-5 fw-bold">Chưa Xác Nhận</span>';
+        $status = '<span class="text-warning ">Chưa Xác Nhận</span>';
     } else if ($status == 1) {
-        $status = '<span class="text-info fs-5 fw-bold">Đã Xác Nhận</span>';
+        $status = '<span class="text-info ">Đã Xác Nhận</span>';
     } else if ($status == 2) {
-        $status = '<span class="text-secondary fs-5 fw-bold">Đang Giao Hàng</span>';
+        $status = '<span class="text-secondary ">Đang Giao Hàng</span>';
     } else if ($status == 3) {
-        $status = '<span class="text-success fs-5 fw-bold">Đã Giao Hàng</span>';
+        $status = '<span class="text-success ">Đã Giao Hàng</span>';
     } else if ($status == 4) {
-        $status = '<span class="text-danger fs-5 fw-bold">Đã Hủy</span>';
+        $status = '<span class="text-danger ">Đã Hủy</span>';
+    } else if ($status == 5) {
+        $status = '<span style="color:green">Thành Công</span>';
+    }
+
+    $bill_success = '';
+    if ($bill['status'] === 3) {
+        $bill_success = '<a href="index.php?page=acp_bill&id=' . $bill['id'] . '">Đã Nhận Hàng</a>';
+    } else {
+        $bill_success = '';
     }
 
     $transport = $bill['transport'];
@@ -31,33 +40,63 @@ foreach ($bill_user as $bill) {
 
     $id_bill = $bill['id'];
 
+
     $product_bill = bill_detail_search($id_bill);
     $html_product_bill = '';
+
     foreach ($product_bill as $pd_b) {
+        $product_vote = '';
+
+        if ($bill['status'] === 5 && $pd_b['feedback'] == 0) {
+            $product_vote = '
+                <form action ="index.php?page=vote" method="POST">
+                    <input type= "hidden" name="id_bill" value="' . $id_bill . '">
+                    <input type= "hidden" name="id_bill_details" value="' . $pd_b['id'] . '">
+                    <input type= "hidden" name="id_product" value="' . $pd_b['id_product'] . '">
+                    <input type= "hidden" name="name_product" value="' . $pd_b['name'] . '">
+                    <input type= "hidden" name="img_product" value="' . $pd_b['img'] . '">
+                    <input type= "hidden" name="size" value=" ' . $pd_b['size'] . ' ">
+                    <input type= "hidden" name="color" value=" ' . $pd_b['color'] . ' ">
+                    <input type= "hidden" name="quantity" value=" ' . $pd_b['quantity'] . ' ">
+
+                    <button class="btn-rating" name="btn-form-rating">
+                        <img src="assets/img/rating.png" width="30px"/>
+                    </button>
+                </form>
+            ';
+        } else if ($pd_b['feedback'] == 1) {
+            $product_vote = '
+                <img src="assets/img/checked.png" width="30px" title="Đã đánh giá sản phẩm" style="cursor:pointer"/>
+            ';
+        } else {
+            $product_vote = '';
+        }
         $subtotal = $pd_b['price'] * $pd_b['quantity'];
         $total_price += $subtotal;
         $html_product_bill .= '
-        <tr class="cart-row">
-            <td> <img src="uploads/' . $pd_b['img'] . '" width="50px"> </td>
+            <tr class="cart-row">
+                <td> <img src="uploads/' . $pd_b['img'] . '" width="50px"> </td>
 
-            <td class="cart-name">
-                <p>' . $pd_b['name'] . '</p>
-                <p>Kích Thước: <span>' . $pd_b['size'] . '</span></p>
-                <p>Màu Sắc: <span>' . $pd_b['color'] . '</span></p>
-            </td>
+                <td class="cart-name">
+                    <p>' . $pd_b['name'] . '</p>
+                    <p>Kích Thước: <span>' . $pd_b['size'] . '</span></p>
+                    <p>Màu Sắc: <span>' . $pd_b['color'] . '</span></p>
+                </td>
 
-            <td>' . $pd_b['quantity'] . '</td>
+                <td>' . $pd_b['quantity'] . '</td>
 
-            <td class="cart-total">
-                <p id="sub-total">' . number_format($subtotal, 0, ',', '.') . 'đ</p>
-            </td>
-        </tr>
+                <td class="cart-total">
+                    <p id="sub-total">' . number_format($subtotal, 0, ',', '.') . 'đ</p>
+                </td>
+
+                <td>' . $product_vote . '</td>
+            </tr>
         ';
     }
 
     $foot_table = '
     <tfoot>
-        <td colspan="4" style="text-align: right;">
+        <td colspan="5" style="text-align: right;">
             <p>Giảm Giá: <span style="color:red">' . number_format((float) $voucher, 0, ',', '.') . 'đ</span></p>
             <p>Phí Vận Chuyển: <span style="color:red">' . number_format($transport_price, 0, ',', '.') . 'đ</span></p>
             <p>Thành tiền: <span style="color:red">' . number_format($total_price - $voucher + $transport_price, 0, ',', '.') . 'đ</span></p>
@@ -67,9 +106,10 @@ foreach ($bill_user as $bill) {
 
     $html_bill .= '
     <div class="info-bill-user flex">
-        <h4>Đơn Hàng #' . $id_bill . '</h4>
+        <h5>Đơn Hàng #' . $id_bill . '</h5>
         <p>' . $status . '</p>
     </div>
+   
     <table class="table">
         <thead>
             <th>Ảnh</th>
@@ -82,6 +122,9 @@ foreach ($bill_user as $bill) {
         </tbody>
         ' . $foot_table . '
     </table>
+    ' . $bill_success . '
+
+    <div class="line"></div>
     ';
 }
 
@@ -141,12 +184,13 @@ foreach ($bill_user as $bill) {
                 <div class="profile-content">
                     <div class="content-header">
                         <h4>TẤT CẢ ĐƠN HÀNG</h4>
+
                     </div>
 
 
                     <div class="profile-order">
                         <div class="order-bar">
-                            <button class="order-tab order-bar_active"><a href="index.php?page=order">Tất cả đơn
+                            <button class="order-tab"><a href="index.php?page=order">Tất cả đơn
                                     hàng</a></button>
                             <button class="order-tab"><a href="index.php?page=order&st=0">Chưa Xác Nhận</a></button>
                             <button class="order-tab"><a href="index.php?page=order&st=1">Đã Xác Nhận</a></button>
@@ -331,7 +375,6 @@ foreach ($bill_user as $bill) {
                             </div>
 
                             <!-- desktop -->
-
                             <?= $html_bill ?>
                         </div>
                     </div>
@@ -340,3 +383,22 @@ foreach ($bill_user as $bill) {
         </div>
     </section>
 </main>
+
+<!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Đánh Giá</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div> -->

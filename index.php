@@ -7,6 +7,8 @@ if (!isset($_SESSION["cart"])) {
     $_SESSION["total_order"] = 0;
 }
 
+
+
 //connect db
 require_once "models/pdo.php";
 //user
@@ -49,14 +51,17 @@ if (isset($_GET['page'])) {
 
         //trang đăng nhập
         case 'login':
+
             require_once 'views/login.php';
             break;
 
         //chức năng đăng nhập
         case 'login-function':
+
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
                 $password = $_POST["password"];
+                $bill = $_POST["bill"];
 
                 $result = checkUser($username, $password);
 
@@ -67,15 +72,24 @@ if (isset($_GET['page'])) {
                         header('Location: index.php?page=login');
                     } else {
                         $_SESSION["user"] = $result;
-                        header("Location: index.php");
+
+                        if (isset($bill) && $bill == 1) {
+                            header('Location: index.php?page=checkout');
+                        } else {
+                            header('Location: index.php?page=home');
+                        }
                     }
                 } else {
-                    // Đăng nhập không thành công, đặt thông báo lỗi
                     $error_message = "Tên đăng nhập hoặc mật khẩu không đúng.";
                     $_SESSION["message"] = $error_message;
+
                     header('Location: index.php?page=login');
                 }
             }
+
+            break;
+
+        case 'login-bill':
 
             break;
 

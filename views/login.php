@@ -1,3 +1,9 @@
+<?php
+if (isset($_GET['bill']) && $_GET['bill'] == 1) {
+    $bill = $_GET['bill'];
+}
+?>
+
 <main>
     <h2 class="text-center mt-5 mb-3 fw-bold">Đăng Nhập</h2>
     <div class="container form">
@@ -49,6 +55,7 @@
             </script>
 
             <div class="form-floating mb-3">
+                <input type="hidden" name="bill" value="<?= $bill ?>">
                 <input class="btn-form" type="submit" value="Đăng Nhập" name="btn-login">
             </div>
         </form>

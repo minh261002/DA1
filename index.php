@@ -43,19 +43,19 @@ $list_category = get_category();
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-        //trang chủ
+            //trang chủ
         case 'home':
 
             require_once 'views/home.php';
             break;
 
-        //trang đăng nhập
+            //trang đăng nhập
         case 'login':
 
             require_once 'views/login.php';
             break;
 
-        //chức năng đăng nhập
+            //chức năng đăng nhập
         case 'login-function':
 
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
@@ -93,12 +93,12 @@ if (isset($_GET['page'])) {
 
             break;
 
-        //trang đằng ký
+            //trang đằng ký
         case 'register':
             require_once 'views/register.php';
             break;
 
-        //chức năng đăng ký
+            //chức năng đăng ký
         case 'register-function':
 
             // kiểm tra tồn tại nút đăng kí và nút đăng ký đc nhấn
@@ -128,7 +128,7 @@ if (isset($_GET['page'])) {
 
             break;
 
-        //đăng xuất
+            //đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
                 unset($_SESSION["user"]);
@@ -136,12 +136,12 @@ if (isset($_GET['page'])) {
             header('Location: index.php?page=login');
             break;
 
-        //trang đổi mật khẩu
+            //trang đổi mật khẩu
         case 'changePassword':
             require_once "views/changePassword.php";
             break;
 
-        //chức năng đổi mật khẩu
+            //chức năng đổi mật khẩu
         case 'change-function':
             if (isset($_POST["btn-change"]) && $_POST["btn-change"]) {
                 $password = $_POST["password"];
@@ -164,7 +164,7 @@ if (isset($_GET['page'])) {
             }
             break;
 
-        //trang sản phẩm
+            //trang sản phẩm
         case 'product':
             $list_category = get_category();
             $all_product = [];
@@ -189,7 +189,7 @@ if (isset($_GET['page'])) {
             require_once 'views/profile.php';
             break;
 
-        //trang chi tiết sản phẩm
+            //trang chi tiết sản phẩm
         case 'details':
             if (isset($_GET['id'])) {
                 $id_product = $_GET['id'];
@@ -348,6 +348,73 @@ if (isset($_GET['page'])) {
                     } else {
                         echo json_encode($returnData);
                     }
+                } else if ($payMethod == 3) {
+
+                    function execPostRequest($url, $data)
+                    {
+                        $ch = curl_init($url);
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt(
+                            $ch,
+                            CURLOPT_HTTPHEADER,
+                            array(
+                                'Content-Type: application/json',
+                                'Content-Length: ' . strlen($data)
+                            )
+                        );
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+                        //execute post
+                        $result = curl_exec($ch);
+                        //close connection
+                        curl_close($ch);
+                        return $result;
+                    }
+
+                    $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+
+                    $partnerCode = 'MOMOBKUN20180529';
+                    $accessKey = 'klm05TvNBzhg7h7j';
+                    $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+                    $orderInfo = "Thanh toán qua MoMo";
+                    $amount = round($total_price);
+                    $orderId = time() . "";
+                    $redirectUrl = "http://localhost/DA1/index.php?page=momo&iduser=" . $idUser . "&fullname=" . $fullname . "&email=" . $email . "&phone=" . $phone . "&address=" . json_encode($address) . "&notes=" . $notes . "&paymethod=" . $payMethod . "&transport=" . $transport . "";
+                    $ipnUrl = "http://localhost/DA1/index.php?page=momo";
+                    $extraData = "";
+
+                    if (!empty($_POST)) {
+
+                        $requestId = time() . "";
+                        $requestType = "payWithATM";
+                        //before sign HMAC SHA256 signature
+                        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+                        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+                        $data = array(
+                            'partnerCode' => $partnerCode,
+                            'partnerName' => "Test",
+                            "storeId" => "MomoTestStore",
+                            'requestId' => $requestId,
+                            'amount' => $amount,
+                            'orderId' => $orderId,
+                            'orderInfo' => $orderInfo,
+                            'redirectUrl' => $redirectUrl,
+                            'ipnUrl' => $ipnUrl,
+                            'lang' => 'vi',
+                            'extraData' => $extraData,
+                            'requestType' => $requestType,
+                            'signature' => $signature
+                        );
+                        $result = execPostRequest($endpoint, json_encode($data));
+                        $jsonResult = json_decode($result, true);  // decode json
+
+                        //Just a example, please check more in there
+
+                        header('Location: ' . $jsonResult['payUrl']);
+                    }
                 }
             }
 
@@ -370,7 +437,10 @@ if (isset($_GET['page'])) {
             require_once 'views/order_success.php';
             break;
 
-        //thêm vào giỏ hàng
+        case 'momo':
+            require_once 'views/momo.php';
+            break;
+            //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {
                 $product_id = $_POST['product-id'];

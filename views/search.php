@@ -82,7 +82,7 @@
                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                         </span>
                         <span class="percent-discount">
-                            <?php echo $pro['sale'] ?>%
+                            <?php echo $pro['sale'] ?>
                         </span>
                     </div>
                 </div>

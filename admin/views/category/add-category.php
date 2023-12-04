@@ -74,6 +74,7 @@
 <section id="content">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             <p class="err">
                 <?php if (isset($message)) {
                 echo $message;
@@ -109,6 +110,8 @@
 
             <a href="index.php?page=category">Quay Lại</a>
 =======
+=======
+>>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
     <nav>
         <i class='bx bx-menu'></i>
         <a href="#index.php?page=category" class="nav-link">Danh Mục Sản Phẩm</a>
@@ -117,6 +120,9 @@
                 <input type="search" placeholder="Tìm Kiếm...">
                 <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
             </div>
+<<<<<<< HEAD
+>>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
+=======
 >>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
         </form>
         <input type="checkbox" id="switch-mode" hidden>

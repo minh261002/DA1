@@ -79,7 +79,7 @@ foreach ($list_voucher as $vc) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -124,8 +124,6 @@ foreach ($list_voucher as $vc) {
                 <h1>Danh Sách Mã Giảm Giá</h1>
             </div>
         </div>
-        <a href="index.php?page=add_voucher">Thêm mã giảm giá mới</a>
-
         <div class="voucher-container">
             <p class="err">
                 <?php if (isset($_SESSION['message'])) {
@@ -134,6 +132,8 @@ foreach ($list_voucher as $vc) {
                 } ?>
             </p>
             <table class="table">
+                <a href="index.php?page=add_voucher">Thêm mã giảm giá mới</a>
+
                 <thead>
                     <th>ID</th>
                     <th>Mã Voucher</th>

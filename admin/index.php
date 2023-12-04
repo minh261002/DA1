@@ -559,11 +559,6 @@ if (isset($_GET['page'])) {
             require_once 'views/bill/show_bill.php';
             break;
 
-        case 'statistical':
-
-            require_once 'views/statistical/statistical.php';
-            break;
-
         case 'view_product':
             $view_product_admin = view_product_admin();
 
@@ -572,8 +567,19 @@ if (isset($_GET['page'])) {
 
         case 'arrange':
 
+            if (isset($_POST['btn-arrange']) && $_POST['btn-arrange']) {
+                $selectedMonth = $_POST['selectedMonth'];
+            } else {
+                $selectedMonth = date('m');
+            }
+
+            $arrange = arrange($selectedMonth);
+            $arrange_not_success = arrange_not_success($selectedMonth);
+            $arrange_cancel = arrange_cancel($selectedMonth);
+
             require_once 'views/statistical/arrange.php';
             break;
+
 
         case 'buy_product':
             $buy_product_admin = buy_product_admin();

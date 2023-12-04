@@ -125,7 +125,6 @@ if (isset($view_product_admin)) {
 
         <div class="admin_statistical">
             <ul class="nav_statistical">
-                <li><a href="index.php?page=statistical">Tổng Quan</a></li>
                 <li><a href="index.php?page=arrange">Doanh Thu</a></li>
                 <li class="active"><a href="index.php?page=view_product">Sản Phẩm Nhiều Lượt Xem</a></li>
                 <li><a href="index.php?page=buy_product">Sản Phẩm Nhiều Lượt Mua</a></li>

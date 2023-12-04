@@ -110,6 +110,38 @@ i.success{
 	background: #333;
 }
 
+.grid-chart > .container{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	align-items: center;
+}
+
+.form-select-month{
+	margin: 32px 0;
+	align-items: center;
+	justify-content: start;
+	padding: 18px ;
+}
+
+.form-select-month select{
+	width: 200px;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 5px 24px;
+	border: 1px solid #797979;
+	outline: none;
+}
+
+.btn-arrange{
+	font-size: 16px;
+	font-weight: 600;
+	padding: 5px;
+	border: 1px solid #797979;
+	border-left: none;
+	background-color: transparent;
+}
+
 .nav_statistical li a{
 	color: #333;
 	font-size: 16px;
@@ -132,6 +164,16 @@ i.success{
 .chs-img:hover{
 	background: #333;
 	color: #fff;
+}
+
+.gr-arrange{
+	gap: 12px;
+	margin: 6px 0;
+}
+
+.info_arrange_item p{
+	font-size: 22px;
+	font-weight: 500;
 }
 
 .info_content{

@@ -330,6 +330,7 @@ if (isset($_GET['page'])) {
             $product = render_allproduct();
             require_once 'views/product/show-product.php';
             break;
+
         // thêm sản phẩm
         case 'add-product':
             if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
@@ -382,22 +383,22 @@ if (isset($_GET['page'])) {
                     $jsonGallery = json_encode($gallery_images);
 
                     // Insert product data
-                  
-                        $sql = "INSERT INTO product (id_category, name, img, gallery, info, price, sale, view, hot, created_at)
+
+                    $sql = "INSERT INTO product (id_category, name, img, gallery, info, price, sale, view, hot, created_at)
                             VALUES (?,?,?,?,?,?,?,?,?,NOW())";
 
-                        pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
-                       
-                        $id_product =  insert_product($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
-                        // $product_id = pdo_get_connection()->lastInsertId();
+                    pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
 
-                        // foreach ($_POST['size'] as $key => $size) {
-                        //     $color = $_POST['color'][$key];
-                        //     $quantity = $_POST['quantity'][$key];
-                        // $sqlVariant = "INSERT INTO variant (id_product, size, color, quantity) VALUES (?, ?, ?, ?)";
-                        // pdo_execute($sqlVariant, $product_id, $size, $color, $quantity);
-                           
-                        // }
+                    $id_product = insert_product($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
+                    // $product_id = pdo_get_connection()->lastInsertId();
+
+                    // foreach ($_POST['size'] as $key => $size) {
+                    //     $color = $_POST['color'][$key];
+                    //     $quantity = $_POST['quantity'][$key];
+                    // $sqlVariant = "INSERT INTO variant (id_product, size, color, quantity) VALUES (?, ?, ?, ?)";
+                    // pdo_execute($sqlVariant, $product_id, $size, $color, $quantity);
+
+                    // }
 
                 }
                 header('Location: index.php?page=product');
@@ -426,90 +427,30 @@ if (isset($_GET['page'])) {
                 $sale = $_POST['sale'];
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
-<<<<<<< HEAD
-        
-             // Xử lý tải lên ảnh chính
-             $img_path = "";
-             if ($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
-                 $target_dir = "../Uploads/";
-                 $target_file = $target_dir . basename($_FILES["image"]["name"]);
-                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                     $img_path = $target_file;
-                 } else {
-                     $message = "Lỗi khi tải lên ảnh.";
-                 }
-             }
-     
-             $gallery_img = [];
-             // $target_dir_gallery = "../Uploads";
-             $target_dir = "../uploads/";
-             if (isset($_FILES["gallery"])) {
-                 foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
-                     $gallery_img_name = $_FILES["gallery"]["name"][$key];
-                     $gallery_target_file = $target_dir . basename($gallery_img_name);
-                     // Chỉ xử lý ảnh nếu người dùng đã tải lên
-                     if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
-                         if (move_uploaded_file($tmp_name, $gallery_target_file)) {
-                             $gallery_img[] = $gallery_target_file;
-                         } else {
-                             $message = "Lỗi khi tải lên ảnh trong gallery.";
-                             break;
-                         }
-                     }
-                 }
-             }
-     
-             if (empty($message)) {
-                 $galleryData = ["img" => $gallery_img];
-                 $jsonGallery = json_encode($gallery_img);
-                 if ($img_path!="" &&  $jsonGallery!=""){
-                     try {
-                        $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-                        pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
-                         echo "Chỉnh sửa thành công";
-                     } catch (PDOException $e) {
-                         echo "Chỉnh Sửa thất bại! " . $e->getMessage();
-                     }
-                 }else {
-                     try {
-                        $sql = "UPDATE product SET id_category=?, name=?,  info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-                        pdo_execute($sql, $id_category, $name, $info, $price, $sale, $view, $hot, $id);
-                         echo "Chỉnh sửa thành công";
-                     } catch (PDOException $e) {
-                         echo "Chỉnh Sửa thất bại! " . $e->getMessage();
-                     }
-                 }
-               
-                             }
-                             header('Location: index.php?page=product');
-                         }
-=======
 
-                // Kiểm tra nếu người dùng đã chọn ảnh mới
+                // Xử lý tải lên ảnh chính
+                $img_path = "";
                 if ($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
                     $target_dir = "../Uploads/";
-                    $target_file = $target_dir . basename($_FILES["img"]["name"]);
-                    if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
+                    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                         $img_path = $target_file;
                     } else {
                         $message = "Lỗi khi tải lên ảnh.";
                     }
-                } else {
-                    // Người dùng không chọn ảnh mới, giữ nguyên ảnh cũ
-                    $img_path = $one['img'];
                 }
 
-                // Kiểm tra nếu người dùng đã chọn ảnh mới trong gallery
-                $gallery_images = [];
-                $target_dir = "../Uploads/";
+                $gallery_img = [];
+                // $target_dir_gallery = "../Uploads";
+                $target_dir = "../uploads/";
                 if (isset($_FILES["gallery"])) {
                     foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
-                        $gallery_image_name = $_FILES["gallery"]["name"][$key];
-                        $gallery_target_file = $target_dir . basename($gallery_image_name);
+                        $gallery_img_name = $_FILES["gallery"]["name"][$key];
+                        $gallery_target_file = $target_dir . basename($gallery_img_name);
                         // Chỉ xử lý ảnh nếu người dùng đã tải lên
                         if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
                             if (move_uploaded_file($tmp_name, $gallery_target_file)) {
-                                $gallery_images[] = $gallery_target_file;
+                                $gallery_img[] = $gallery_target_file;
                             } else {
                                 $message = "Lỗi khi tải lên ảnh trong gallery.";
                                 break;
@@ -518,27 +459,30 @@ if (isset($_GET['page'])) {
                     }
                 }
 
-                // Người dùng không chọn ảnh mới trong gallery, giữ nguyên gallery cũ
-                if (empty($gallery_images)) {
-                    $gallery_images = json_decode($one['gallery'], true);
-                }
-
                 if (empty($message)) {
-                    $jsonGallery = json_encode($gallery_images);
-
-                    // Insert product data
-                    try {
-                        $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-                        pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
-                        echo "Chỉnh sửa thành công";
-                    } catch (PDOException $e) {
-                        echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+                    $galleryData = ["img" => $gallery_img];
+                    $jsonGallery = json_encode($gallery_img);
+                    if ($img_path != "" && $jsonGallery != "") {
+                        try {
+                            $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
+                            pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
+                            echo "Chỉnh sửa thành công";
+                        } catch (PDOException $e) {
+                            echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+                        }
+                    } else {
+                        try {
+                            $sql = "UPDATE product SET id_category=?, name=?,  info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
+                            pdo_execute($sql, $id_category, $name, $info, $price, $sale, $view, $hot, $id);
+                            echo "Chỉnh sửa thành công";
+                        } catch (PDOException $e) {
+                            echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+                        }
                     }
+
                 }
                 header('Location: index.php?page=product');
             }
-
->>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
             $variant = get_allvariant();
             $list_category = get_category();
             $product = render_allproduct();

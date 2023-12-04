@@ -433,7 +433,7 @@ footer>.container {
   width: 100%;
   border: none;
   outline: none;
-  background: #c92027;
+  background: var(--primary-color);
   color: #fff;
   font-weight: 600;
   padding: 10px;
@@ -1006,8 +1006,8 @@ input[type="radio"]:checked+label {
 }
 
 .form-voucher input:last-child {
-  background: #c92027;
-  border: 1px solid #c92027;
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
   color: #f5f5f5;
   font-weight: 600;
 }

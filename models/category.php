@@ -9,7 +9,7 @@ function get_category()
 
 function admin_get_category()
 {
-    $sql = "SELECT * FROM category";
+    $sql = "SELECT * FROM category ORDER BY id DESC";
     return pdo_query($sql);
 }
 
@@ -63,10 +63,14 @@ function admin_show_cattegory($category_id)
 
 function category_exist($category_name)
 {
-    $sql = "SELECT name FROM category";
-    $category = pdo_query($sql);
+    $sql = "SELECT name FROM category WHERE name = ?";
+
+    $params = array($category_name);
+    $category = pdo_query($sql, $params);
     return $category ? true : false;
 }
+
+
 // /**
 //  * Thêm loại mới
 //  * @param String $ten_loai là tên loại

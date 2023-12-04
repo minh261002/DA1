@@ -80,6 +80,7 @@ if (isset($_GET['page'])) {
 
             require_once 'views/category/add-category.php';
             break;
+
         //sửa danh mục
         case 'updateCategory':
             if (isset($_POST['updateCategory']) && $_POST['updateCategory']) {

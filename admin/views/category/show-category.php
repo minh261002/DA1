@@ -129,9 +129,7 @@ foreach ($list_category as $ct) {
                 <h1>Danh Mục Sản Phẩm</h1>
             </div>
         </div>
-        <a href="index.php?page=addCategory">Thêm Danh Mục Mới</a>
         <div class="admin-category">
-
             <p class="err">
                 <?php
                 if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {
@@ -156,14 +154,6 @@ foreach ($list_category as $ct) {
                     <?= $show_category ?>
                 </tbody>
             </table>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
-=======
->>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
         </div>
     </main>
     <!-- MAIN -->

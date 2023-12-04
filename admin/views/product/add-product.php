@@ -136,7 +136,7 @@ input {
                 </div>
                 <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
-                    <!-- <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple> -->
+                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
                     <span class="err" id="gelleryErr"></span>
                 </div>
 

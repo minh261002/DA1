@@ -100,7 +100,7 @@
                     <label for="id_category">Tên Danh Mục</label>
 
                     <select class="form-control" name="id_category" id="id_category">
-                        <option value="0"><?= $list_category[0]['name'] ?></option>
+
                         <?php
                     if (isset($list_category)) {
                         foreach ($list_category  as $dm) {
@@ -119,6 +119,7 @@
                 <div class="form-group mb-3">
                     <label for="img">Hình Ảnh</label>
                     <input type="file" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
+                    <img src="../Uploads/<?= $one[0]['img'] ?>" width="50px" alt="">
                     <input type="hidden" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
                 </div>
 
@@ -126,6 +127,7 @@
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
+
                     <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
                 </div>

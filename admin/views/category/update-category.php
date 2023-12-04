@@ -112,12 +112,6 @@ if (isset($_GET['id'])) {
 
             <form action="index.php?page=updateCategory" method="POST" enctype="multipart/form-data">
 
-                <div class="form-group mb-3">
-                    <label for="id">ID Danh Mục</label>
-                    <input type="text" name="category_id" id="category_id" class="form-control" value="<?= $id ?>"
-                        disabled>
-                    <span class="err">Không Cần Nhập ID Danh Mục</span>
-                </div>
 
                 <div class="form-group mb-3">
                     <label for="id">Tên Danh Mục</label>

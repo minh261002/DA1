@@ -129,7 +129,7 @@ foreach ($list_category as $ct) {
                 <h1>Danh Mục Sản Phẩm</h1>
             </div>
         </div>
-
+        <a href="index.php?page=addCategory">Thêm Danh Mục Mới</a>
         <div class="admin-category">
 
             <p class="err">
@@ -155,7 +155,7 @@ foreach ($list_category as $ct) {
                 </tbody>
             </table>
 
-            <a href="index.php?page=addCategory">Thêm Danh Mục Mói</a>
+
         </div>
     </main>
     <!-- MAIN -->

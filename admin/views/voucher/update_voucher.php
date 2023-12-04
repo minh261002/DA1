@@ -102,18 +102,13 @@ if (isset($_GET['id'])) {
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Mã Giảm Giá</h1>
+                <h1>Chỉnh Sửa Mã Giảm Giá</h1>
             </div>
         </div>
 
         <div class="voucher-container">
             <form action="index.php?page=update_voucher" method="POST">
-                <div class="form-group mb-3">
-                    <label for="id_voucher_disable">ID</label>
-                    <input type="text" name="id_voucher_disable" id="id_voucher_disable" class="form-control"
-                        value="<?= $get_voucher_id['id'] ?>" disabled>
-                    <span class="err">Không cần nhập ID</span>
-                </div>
+
 
                 <div class="form-group mb-3">
                     <label for="name">Mã Giảm Giá</label>

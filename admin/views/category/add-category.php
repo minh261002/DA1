@@ -82,11 +82,7 @@
             } ?>
             </p>
 
-            <div class="form-group mb-3">
-                <label for="category_id">ID Danh Mục</label>
-                <input type="text" name="category_id" id="category_id" class="form-control" disabled>
-                <span class="err">Không Cần Nhập ID Danh Mục</span>
-            </div>
+
 
             <div class="form-group mb-3">
                 <label for="category_name">Tên Danh Mục</label>

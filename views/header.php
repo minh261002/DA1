@@ -81,10 +81,9 @@ foreach ($list_category as $ct) {
                 </div>
 
                 <div class="header__box-search">
-                    <form action="" method="GET" class="flex form-search" id="search-form">
-                        <input type="search" name="search" id="search" placeholder="Tìm Kiếm ..." autocomplete="off">
+                    <form action="index.php?page=search" method="POST" class="flex form-search" id="search-form">
+                        <input type="text" name="search" id="search" placeholder="Tìm Kiếm ..." autocomplete="off">
                         <button type="submit" class="icon_search">
-
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
 

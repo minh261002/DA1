@@ -7,6 +7,8 @@ if (!isset($_SESSION["cart"])) {
     $_SESSION["total_order"] = 0;
 }
 
+
+
 //connect db
 require_once "models/pdo.php";
 //user
@@ -21,6 +23,9 @@ require_once "models/cart.php";
 require_once "models/bill.php";
 // checkout
 require_once "models/checkout.php";
+//feedback
+require_once "models/feedback.php";
+//vnpay
 require_once "models/config_vnpay.php";
 
 
@@ -38,22 +43,25 @@ $list_category = get_category();
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-        //trang chủ
+            //trang chủ
         case 'home':
 
             require_once 'views/home.php';
             break;
 
-        //trang đăng nhập
+            //trang đăng nhập
         case 'login':
+
             require_once 'views/login.php';
             break;
 
-        //chức năng đăng nhập
+            //chức năng đăng nhập
         case 'login-function':
+
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
                 $username = $_POST["username"];
                 $password = $_POST["password"];
+                $bill = $_POST["bill"];
 
                 $result = checkUser($username, $password);
 
@@ -64,24 +72,33 @@ if (isset($_GET['page'])) {
                         header('Location: index.php?page=login');
                     } else {
                         $_SESSION["user"] = $result;
-                        header("Location: index.php");
+
+                        if (isset($bill) && $bill == 1) {
+                            header('Location: index.php?page=checkout');
+                        } else {
+                            header('Location: index.php?page=home');
+                        }
                     }
                 } else {
-                    // Đăng nhập không thành công, đặt thông báo lỗi
                     $error_message = "Tên đăng nhập hoặc mật khẩu không đúng.";
                     $_SESSION["message"] = $error_message;
+
                     header('Location: index.php?page=login');
                 }
             }
 
             break;
 
-        //trang đằng ký
+        case 'login-bill':
+
+            break;
+
+            //trang đằng ký
         case 'register':
             require_once 'views/register.php';
             break;
 
-        //chức năng đăng ký
+            //chức năng đăng ký
         case 'register-function':
 
             // kiểm tra tồn tại nút đăng kí và nút đăng ký đc nhấn
@@ -111,7 +128,7 @@ if (isset($_GET['page'])) {
 
             break;
 
-        //đăng xuất
+            //đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
                 unset($_SESSION["user"]);
@@ -119,12 +136,12 @@ if (isset($_GET['page'])) {
             header('Location: index.php?page=login');
             break;
 
-        //trang đổi mật khẩu
+            //trang đổi mật khẩu
         case 'changePassword':
             require_once "views/changePassword.php";
             break;
 
-        //chức năng đổi mật khẩu
+            //chức năng đổi mật khẩu
         case 'change-function':
             if (isset($_POST["btn-change"]) && $_POST["btn-change"]) {
                 $password = $_POST["password"];
@@ -147,7 +164,7 @@ if (isset($_GET['page'])) {
             }
             break;
 
-        //trang sản phẩm
+            //trang sản phẩm
         case 'product':
             $list_category = get_category();
             $all_product = [];
@@ -172,15 +189,16 @@ if (isset($_GET['page'])) {
             require_once 'views/profile.php';
             break;
 
-        //trang chi tiết sản phẩm
+            //trang chi tiết sản phẩm
         case 'details':
             if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                product_view($id);
-                $details = get_product_by_id($id);
-                $variant = get_product_by_variant($id);
-            }
+                $id_product = $_GET['id'];
+                product_view($id_product);
+                $details = get_product_by_id($id_product);
+                $variant = get_product_by_variant($id_product);
 
+                $feedback = show_feedback_by_id_product($id_product);
+            }
             require_once 'views/details.php';
             break;
 
@@ -330,6 +348,73 @@ if (isset($_GET['page'])) {
                     } else {
                         echo json_encode($returnData);
                     }
+                } else if ($payMethod == 3) {
+
+                    function execPostRequest($url, $data)
+                    {
+                        $ch = curl_init($url);
+                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt(
+                            $ch,
+                            CURLOPT_HTTPHEADER,
+                            array(
+                                'Content-Type: application/json',
+                                'Content-Length: ' . strlen($data)
+                            )
+                        );
+                        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+                        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+                        //execute post
+                        $result = curl_exec($ch);
+                        //close connection
+                        curl_close($ch);
+                        return $result;
+                    }
+
+                    $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+
+
+                    $partnerCode = 'MOMOBKUN20180529';
+                    $accessKey = 'klm05TvNBzhg7h7j';
+                    $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+                    $orderInfo = "Thanh toán qua MoMo";
+                    $amount = round($total_price);
+                    $orderId = time() . "";
+                    $redirectUrl = "http://localhost/DA1/index.php?page=momo&iduser=" . $idUser . "&fullname=" . $fullname . "&email=" . $email . "&phone=" . $phone . "&address=" . json_encode($address) . "&notes=" . $notes . "&paymethod=" . $payMethod . "&transport=" . $transport . "";
+                    $ipnUrl = "http://localhost/DA1/index.php?page=momo";
+                    $extraData = "";
+
+                    if (!empty($_POST)) {
+
+                        $requestId = time() . "";
+                        $requestType = "payWithATM";
+                        //before sign HMAC SHA256 signature
+                        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+                        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+                        $data = array(
+                            'partnerCode' => $partnerCode,
+                            'partnerName' => "Test",
+                            "storeId" => "MomoTestStore",
+                            'requestId' => $requestId,
+                            'amount' => $amount,
+                            'orderId' => $orderId,
+                            'orderInfo' => $orderInfo,
+                            'redirectUrl' => $redirectUrl,
+                            'ipnUrl' => $ipnUrl,
+                            'lang' => 'vi',
+                            'extraData' => $extraData,
+                            'requestType' => $requestType,
+                            'signature' => $signature
+                        );
+                        $result = execPostRequest($endpoint, json_encode($data));
+                        $jsonResult = json_decode($result, true);  // decode json
+
+                        //Just a example, please check more in there
+
+                        header('Location: ' . $jsonResult['payUrl']);
+                    }
                 }
             }
 
@@ -352,7 +437,10 @@ if (isset($_GET['page'])) {
             require_once 'views/order_success.php';
             break;
 
-        //thêm vào giỏ hàng
+        case 'momo':
+            require_once 'views/momo.php';
+            break;
+            //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {
                 $product_id = $_POST['product-id'];
@@ -470,6 +558,7 @@ if (isset($_GET['page'])) {
             break;
 
         case "search":
+
             require_once 'views/search.php';
             break;
 
@@ -488,6 +577,48 @@ if (isset($_GET['page'])) {
             require_once 'views/search_bill.php';
             break;
 
+        case 'acp_bill':
+            if (isset($_GET['id'])) {
+                $id_bill = $_GET['id'];
+                acp_bill($id_bill);
+
+                header('location: index.php?page=order');
+            }
+            break;
+
+        case 'vote':
+
+            if (isset($_POST['btn-form-rating'])) {
+                $id_bill = $_POST['id_bill'];
+                $id_product = $_POST['id_product'];
+                $name_product = $_POST['name_product'];
+                $img_product = $_POST['img_product'];
+                $size = $_POST['size'];
+                $color = $_POST['color'];
+                $quantity = $_POST['quantity'];
+                $id_bill_details = $_POST['id_bill_details'];
+            }
+
+            if (isset($_POST['btn-send-rating'])) {
+                $rating = $_POST['rating'];
+                $content = $_POST['content'];
+                $id_user = $_SESSION['user']['id'];
+                $id_product = $_POST['id_product'];
+                $id_bill_details = $_POST['id_bill_details'];
+
+                user_inser_feddback($id_user, $id_product, $rating, $content);
+
+                feedback_confirm($id_bill_details);
+
+                echo '<script>
+                    alert("Cảm ơn bạn đã đánh giá sản phẩm");
+
+                    window.location.href = "index.php?page=order";
+                </script>';
+            }
+
+            require_once 'views/vote.php';
+            break;
         default:
             // http_response_code(404);
             // require_once "views/404page.php";

@@ -10,8 +10,87 @@ if (isset($sale) && $sale !== 0) {
     $discountedPrice = $price;
 }
 
+$html_feedback = '';
 
+if (isset($feedback) && is_array($feedback)) {
+
+    foreach ($feedback as $userFeedback) {
+        $id_user = $userFeedback['id_user'];
+        $user = show_user_feedback($id_user);
+        $userFeedback['created_at'] = date('H:i:s / d-m-Y ', strtotime($userFeedback['created_at']));
+
+        $star = '';
+        if ($userFeedback['star'] == 1) {
+            $star .= '
+                <div class="star flex">
+                    <p>&#10025;</p>
+                </div>
+            ';
+        } else if ($userFeedback['star'] == 2) {
+            $star .= '
+                <div class="star flex">
+                    <p>&#10025;</p>
+                    <p>&#10025;</p>
+                </div>
+            ';
+        } else if ($userFeedback['star'] == 3) {
+            $star .= '
+                <div class="star flex">
+                    <p>&#10025;</p>
+                    <p>&#10025;</p>
+                    <p>&#10025;</p>
+                </div>
+            ';
+        } else if ($userFeedback['star'] == 4) {
+            $star .= '
+                <div class="star flex">
+                    <p>&#10025;</p>
+                    <p>&#10025;</p>
+                    <p>&#10025;</p>
+                    <p>&#10025;</p>
+                </div>
+            ';
+        } else if ($userFeedback['star'] == 5) {
+            $star .= '
+                <div class="star flex">
+                    <p>&#10025</p>
+                    <p>&#10025</p>
+                    <p>&#10025</p>
+                    <p>&#10025</p>
+                    <p>&#10025</p>
+                </div>
+            ';
+        }
+
+
+        $html_feedback .= '
+            <tr>
+                <td class="flex user_feedback">
+                    <img class="user_fb_avatar" src="uploads/' . $user[0]['avatar'] . '" />
+                    <div class="if_user">
+                        <p>' . $user[0]['username'] . '</p>
+                        <p>' . $userFeedback['created_at'] . '</p>
+                    </div>
+                </td>
+                <td>
+                    <p>' . $userFeedback['content'] . '</p>
+                </td>
+                <td>
+                    ' . $star . '
+                </td>
+            </tr>
+        ';
+    }
+
+} else {
+    $html_feedback .= '
+        <tr>
+            <td colspan="3" class="text-center">Chưa có đánh giá nào</td>
+        </tr>
+    ';
+}
 ?>
+
 <main>
     <section class="breadcrumb my-3">
         <div class="container flex justify-content-start">
@@ -41,7 +120,7 @@ if (isset($sale) && $sale !== 0) {
                     if (is_array($images)) {
 
                         foreach ($images as $image) {
-                            echo '<img src="Uploads/'. $image.'" width="100%" onclick="changeImage(this)" />';
+                            echo '<img src="Uploads/' . $image . '" width="100%" onclick="changeImage(this)" />';
                         }
                     }
                     ?>
@@ -52,10 +131,10 @@ if (isset($sale) && $sale !== 0) {
                 </div>
 
                 <script>
-                function changeImage(thumbnail) {
-                    var largeImage = document.getElementById("largeImage");
-                    largeImage.src = thumbnail.src;
-                }
+                    function changeImage(thumbnail) {
+                        var largeImage = document.getElementById("largeImage");
+                        largeImage.src = thumbnail.src;
+                    }
                 </script>
             </div>
 
@@ -63,7 +142,7 @@ if (isset($sale) && $sale !== 0) {
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <?php foreach ($images as $key => $image) { ?>
-                    <div class="swiper-slide"><img src="Uploads/<?php echo $image ?>" alt=""></div>
+                        <div class="swiper-slide"><img src="Uploads/<?php echo $image ?>" alt=""></div>
                     <?php } ?>
                 </div>
                 <div class="swiper-pagination"></div>
@@ -177,23 +256,23 @@ if (isset($sale) && $sale !== 0) {
                         </div>
 
                         <script>
-                        var decrementButton = document.getElementById("decrement");
-                        var incrementButton = document.getElementById("increment");
-                        var quantityInput = document.getElementById("quantity");
+                            var decrementButton = document.getElementById("decrement");
+                            var incrementButton = document.getElementById("increment");
+                            var quantityInput = document.getElementById("quantity");
 
-                        decrementButton.addEventListener("click", function(e) {
-                            e.preventDefault();
-                            var currentQuantity = parseInt(quantityInput.value);
-                            if (currentQuantity > 1) {
-                                quantityInput.value = currentQuantity - 1;
-                            }
-                        });
+                            decrementButton.addEventListener("click", function (e) {
+                                e.preventDefault();
+                                var currentQuantity = parseInt(quantityInput.value);
+                                if (currentQuantity > 1) {
+                                    quantityInput.value = currentQuantity - 1;
+                                }
+                            });
 
-                        incrementButton.addEventListener("click", function(e) {
-                            e.preventDefault();
-                            var currentQuantity = parseInt(quantityInput.value);
-                            quantityInput.value = currentQuantity + 1;
-                        });
+                            incrementButton.addEventListener("click", function (e) {
+                                e.preventDefault();
+                                var currentQuantity = parseInt(quantityInput.value);
+                                quantityInput.value = currentQuantity + 1;
+                            });
                         </script>
                     </div>
 
@@ -412,21 +491,33 @@ if (isset($sale) && $sale !== 0) {
     <section class="comment my-5">
         <div class="container">
             <p class="title-pd">Phản Hồi Từ Khách Hàng</p>
+            <?php if (isset($feedback) && !empty($feedback)) {
+                echo '
+                    <table class="table">
+                        <tbody>
+                            ' . $html_feedback . '
+                        </tbody>
+                    </table>
+                ';
+            } else {
+                echo '
+                    <div class="comment-empty text-center">
+                     <img src="assets/img/fb.jpg" width="50%">
+                    </div>
+                ';
+            }
+            ?>
 
-            <div class="comment-ct text-center">
-                <img src="assets/img/EmtyReview.86be870e.svg">
-                <p>Sản phẩm này chưa có phản hồi</p>
-            </div>
         </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-    var swiper = new Swiper(".mySwiper", {
-        pagination: {
-            el: ".swiper-pagination",
-            type: "fraction"
-        }
-    });
+        var swiper = new Swiper(".mySwiper", {
+            pagination: {
+                el: ".swiper-pagination",
+                type: "fraction"
+            }
+        });
     </script>
 </main>

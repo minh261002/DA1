@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="index.php?page=statistical">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>

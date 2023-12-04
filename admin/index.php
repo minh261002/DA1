@@ -15,6 +15,8 @@ require_once "../models/bill.php";
 
 require_once "../models/voucher_admin.php";
 
+require_once "../models/statistical.php";
+
 
 $bill_unconfirmed = get_bill_unconfimred();
 
@@ -63,9 +65,17 @@ if (isset($_GET['page'])) {
 
                 move_uploaded_file($_FILES['category_img']['tmp_name'], $target_file);
 
-                category_insert($category_name, $category_img, $category_home);
 
+                if (category_exist($category_name)) {
+                    $message = "Danh mục đã tồn tại!";
+                    $_SESSION["message"] = $message;
+                    header('Location: index.php?page=addCategory');
+                    exit;
+                } else {
+                    category_insert($category_name, $category_img, $category_home);
+                }
                 $message = "Thêm danh mục thành công!";
+                header('Location: index.php?page=category');
             }
 
             require_once 'views/category/add-category.php';
@@ -477,7 +487,7 @@ if (isset($_GET['page'])) {
             $product = render_allproduct();
             require_once 'views/product/update-product.php';
             break;
-        
+
         // Xóa sản phẩm
         case 'del-product':
             if (isset($_GET['id'])) {
@@ -547,14 +557,27 @@ if (isset($_GET['page'])) {
             require_once 'views/bill/show_bill.php';
             break;
 
-        // case 'bill_details':
-        //     if (isset($_GET['id'])) {
-        //         $id_bill = $_GET['id'];
-        //         $bill_details = bill_details($id_bill);
-        //     }
+        case 'statistical':
 
-        //     require_once 'views/bill/bill_details.php';
-        //     break;
+            require_once 'views/statistical/statistical.php';
+            break;
+
+        case 'view_product':
+            $view_product_admin = view_product_admin();
+
+            require_once 'views/statistical/view_product.php';
+            break;
+
+        case 'arrange':
+
+            require_once 'views/statistical/arrange.php';
+            break;
+
+        case 'buy_product':
+            $buy_product_admin = buy_product_admin();
+
+            require_once 'views/statistical/buy_product.php';
+            break;
 
         default:
             // http_response_code(404);

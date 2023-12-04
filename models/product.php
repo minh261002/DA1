@@ -117,7 +117,7 @@ function get_hot_product()
 
 function search($search)
 {
-    $sql = "SELECT * FROM product WHERE  hide = 0 AND name LIKE '%$search%'";
+    $sql = "SELECT * FROM product WHERE hide = 0 AND name LIKE '%$search%'";
     return pdo_query($sql);
 }
 

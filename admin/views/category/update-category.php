@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="index.php?page=statistical">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -159,44 +159,44 @@ if (isset($_GET['id'])) {
 </section>
 <!-- CONTENT -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Lấy các phần tử cần thiết
-    var form = document.querySelector("form");
-    var category_name = document.getElementById("category_name");
-    var category_img = document.getElementById("category_img");
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy các phần tử cần thiết
+        var form = document.querySelector("form");
+        var category_name = document.getElementById("category_name");
+        var category_img = document.getElementById("category_img");
 
-    // Xử lý sự kiện khi form được submit
-    form.addEventListener("submit", function(event) {
-        var isValid = true; // Variable to track overall form validity
+        // Xử lý sự kiện khi form được submit
+        form.addEventListener("submit", function (event) {
+            var isValid = true; // Variable to track overall form validity
 
-        // Reset error messages
-        document.getElementById("ctnameErr").textContent = "";
-        document.getElementById("ctimgErr").textContent = "";
+            // Reset error messages
+            document.getElementById("ctnameErr").textContent = "";
+            document.getElementById("ctimgErr").textContent = "";
 
-        // Kiểm tra rỗng và hiển thị thông báo
-        if (category_name.value.trim() === "") {
-            document.getElementById("ctnameErr").textContent = "Vui lòng nhập tên danh mục.";
-            isValid = false;
-        }
+            // Kiểm tra rỗng và hiển thị thông báo
+            if (category_name.value.trim() === "") {
+                document.getElementById("ctnameErr").textContent = "Vui lòng nhập tên danh mục.";
+                isValid = false;
+            }
 
-        if (category_img.value.trim() === "") {
-            document.getElementById("ctimgErr").textContent = "Vui lòng chọn ảnh.";
-            isValid = false;
-        }
+            if (category_img.value.trim() === "") {
+                document.getElementById("ctimgErr").textContent = "Vui lòng chọn ảnh.";
+                isValid = false;
+            }
 
-        // Ngừng submit nếu có lỗi
-        if (!isValid) {
-            event.preventDefault();
-        }
+            // Ngừng submit nếu có lỗi
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Add a function to reset error messages on input change
+        category_name.addEventListener("input", function () {
+            document.getElementById("ctnameErr").textContent = "";
+        });
+
+        category_img.addEventListener("input", function () {
+            document.getElementById("ctimgErr").textContent = "";
+        });
     });
-
-    // Add a function to reset error messages on input change
-    category_name.addEventListener("input", function() {
-        document.getElementById("ctnameErr").textContent = "";
-    });
-
-    category_img.addEventListener("input", function() {
-        document.getElementById("ctimgErr").textContent = "";
-    });
-});
 </script>

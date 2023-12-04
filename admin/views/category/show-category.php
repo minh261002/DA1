@@ -82,7 +82,7 @@ foreach ($list_category as $ct) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=voucher">
+            <a href="index.php?page=statistical">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -140,6 +140,8 @@ foreach ($list_category as $ct) {
                 }
                 ?>
             </p>
+            <a href="index.php?page=addCategory">Thêm Danh Mục Mới</a>
+
             <table class="table table-show-category">
                 <thead>
                     <th>ID</th>
@@ -154,8 +156,11 @@ foreach ($list_category as $ct) {
                     <?= $show_category ?>
                 </tbody>
             </table>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
         </div>
     </main>
     <!-- MAIN -->

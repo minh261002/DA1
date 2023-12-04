@@ -73,6 +73,45 @@
 <!-- CONTENT -->
 <section id="content">
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <p class="err">
+                <?php if (isset($message)) {
+                echo $message;
+            } ?>
+            </p>
+
+
+
+            <div class="form-group mb-3">
+                <label for="category_name">Tên Danh Mục</label>
+                <input type="text" name="category_name" id="category_name" class="form-control">
+                <span class="err" id="ctnameErr"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="category_img">Ảnh</label>
+                <input type="file" name="category_img" id="category_img" class="form-control d-block">
+                <span class="err" id="ctimgErr"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="home">Tùy Chọn</label>
+                <select name="home" id="home" class="form-control">
+                    <option value="0">Mặc Định</option>
+                    <option value="1">Hiện Danh Mục Lên Trang Chủ</option>
+                    <option value="2">Ẩn Danh Mục</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="submit" name="addCategory" value="Thêm Danh Mục Mới" class="btn btn-dark px-5">
+            </div>
+
+            <a href="index.php?page=category">Quay Lại</a>
+=======
+=======
+>>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
     <nav>
         <i class='bx bx-menu'></i>
         <a href="#index.php?page=category" class="nav-link">Danh Mục Sản Phẩm</a>
@@ -81,6 +120,10 @@
                 <input type="search" placeholder="Tìm Kiếm...">
                 <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
             </div>
+<<<<<<< HEAD
+>>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
+=======
+>>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
         </form>
         <input type="checkbox" id="switch-mode" hidden>
         <label for="switch-mode" class="switch-mode"></label>

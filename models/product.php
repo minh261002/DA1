@@ -2,22 +2,30 @@
 
 require_once 'pdo.php';
 
+function insert_product($id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot)
+{
+    
+    $sql = "INSERT INTO product(id_product, size, color, quantity) VALUES ((?, ?, ?, ?)";
+    return pdo_last_insert_id($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
+}
+
+
 function render_allproduct()
 {
     $sql = "SELECT * FROM product";
     return pdo_query($sql);
 }
 
-function add_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot)
-{
-    try {
-        $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
-        pdo_execute($sql, $id_category, $name, $img, json_encode($gallery, JSON_FORCE_OBJECT), $info, $price, $sale, $view, $hot);
-        echo "Thêm thành công !";
-    } catch (PDOException $e) {
-        echo "Thêm thất bại: " . $e->getMessage();
-    }
-}
+// function add_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot)
+// {
+//     try {
+//         $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
+//         pdo_execute($sql, $id_category, $name, $img, json_encode($gallery, JSON_FORCE_OBJECT), $info, $price, $sale, $view, $hot);
+//         echo "Thêm thành công !";
+//     } catch (PDOException $e) {
+//         echo "Thêm thất bại: " . $e->getMessage();
+//     }
+// }
 
 
 function getone_product($id)

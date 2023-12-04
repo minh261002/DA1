@@ -121,9 +121,10 @@ foreach ($list_voucher as $vc) {
     <main>
         <div class="head-title">
             <div class="left">
-                <h1>Mã Giảm Giá</h1>
+                <h1>Danh Sách Mã Giảm Giá</h1>
             </div>
         </div>
+        <a href="index.php?page=add_voucher">Thêm mã giảm giá mới</a>
 
         <div class="voucher-container">
             <p class="err">
@@ -146,7 +147,6 @@ foreach ($list_voucher as $vc) {
                 </tbody>
             </table>
 
-            <a href="index.php?page=add_voucher">Thêm mã giảm giá mới</a>
 
         </div>
 

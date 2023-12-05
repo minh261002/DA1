@@ -559,6 +559,29 @@ if (isset($_GET['page'])) {
             require_once 'views/bill/show_bill.php';
             break;
 
+        case 'set_bill':
+            if (isset($_GET['id_bill'])) {
+                $id_bill = $_GET['id_bill'];
+
+                if (isset($_GET['bill']) && $_GET['bill'] == 1) {
+                    set_bill_1($id_bill);
+                } elseif (isset($_GET['bill']) && $_GET['bill'] == 2) {
+                    set_bill_2($id_bill);
+                } elseif (isset($_GET['bill']) && $_GET['bill'] == 3) {
+                    set_bill_3($id_bill);
+                } elseif (isset($_GET['bill']) && $_GET['bill'] == 4) {
+                    set_bill_4($id_bill);
+                } elseif (isset($_GET['bill']) && $_GET['bill'] == 5) {
+                    acp_bill($id_bill);
+                    pay_bill($id_bill);
+                }
+
+                $message = "Cập nhật trạng thái đơn hàng thành công!";
+                $_SESSION["message_success"] = $message;
+                header('Location: index.php?page=bill');
+            }
+            break;
+
         case 'view_product':
             $view_product_admin = view_product_admin();
 

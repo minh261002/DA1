@@ -181,10 +181,8 @@
                         </label>
                         <select class="form-select" name="size" id="size">
                             <option selected disabled hidden>
-                            <option value="0">
-                                <?= $variant[0]['size'] ?>
-                            </option>
-                            <?php
+
+                                <?php
                             if (isset($variant)) {
                                 foreach ($variant as $size) {
                                     echo '<option value="' . $size['id'] . '">' . $size['size'] . '</option>';
@@ -202,10 +200,7 @@
                             <span>*</span>
                         </label>
                         <select class="form-select" name="color" id="color">
-                            <option selected disabled hidden>
-                            <option value="0">
-                                <?= $variant[0]['color'] ?>
-                            </option>
+
                             <?php
                             if (isset($variant)) {
                                 foreach ($variant as $color) {
@@ -224,10 +219,7 @@
                             <span>*</span>
                         </label>
                         <select class="form-select" name="color" id="color">
-                            <option selected disabled hidden>
-                            <option value="0">
-                                <?= $variant[0]['quantity'] ?>
-                            </option>
+
                             <?php
                             if (isset($variant)) {
                                 foreach ($variant as $quantity) {

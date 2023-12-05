@@ -2973,7 +2973,7 @@ input[type="email"]:disabled {
 
 .search-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(214px, 2fr));
   gap: 32px;
 }
 

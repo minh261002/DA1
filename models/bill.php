@@ -11,6 +11,17 @@ function get_all_bill()
     return pdo_query($sql);
 }
 
+function get_bill_by_id($id_bill)
+{
+    $sql = "SELECT bill.*, bill_details.* 
+    FROM bill 
+    INNER JOIN bill_details ON bill.id = bill_details.id_bill 
+    WHERE bill.id = ?";
+    return pdo_query($sql, $id_bill);
+}
+
+
+
 function confirm_bill($bill_id)
 {
     $sql = "UPDATE bill SET status = 1 WHERE id = ?";

@@ -552,6 +552,18 @@ if (isset($_GET['page'])) {
             require_once 'views/bill/show_bill.php';
             break;
 
+        case 'bill_details':
+            if (isset($_GET['id'])) {
+                $id_bill = $_GET['id'];
+            }
+
+            $id_user = $_SESSION['admin']['id'];
+
+            $bill_details = get_bill_by_id($id_bill);
+
+            require_once 'views/bill/bill_details.php';
+            break;
+
         case 'set_bill':
             if (isset($_GET['id_bill'])) {
                 $id_bill = $_GET['id_bill'];

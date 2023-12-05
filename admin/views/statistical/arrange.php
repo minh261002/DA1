@@ -188,7 +188,7 @@
 
                         <div class="info_arrange_item flex">
                             <div class="gr-arrange flex">
-                                <i style="color: blue;" class='bx bxs-circle'></i>
+                                <i style="color: rgba(255, 255, 0, 0.5);" class='bx bxs-circle'></i>
                                 <span class="text">Đơn hàng chưa hoàn thành</span>
                             </div>
                             <p>
@@ -204,7 +204,7 @@
 
                         <div class="info_arrange_item flex">
                             <div class="gr-arrange flex">
-                                <i style="color: red;" class='bx bxs-circle'></i>
+                                <i style="color: rgba(255, 0, 0, 0.5);" class='bx bxs-circle'></i>
                                 <span class="text">Đơn hàng bị hủy</span>
                             </div>
                             <p>
@@ -243,21 +243,21 @@
                 var ctx = document.getElementById('revenueChart').getContext('2d');
 
                 var chart = new Chart(ctx, {
-                    type: 'doughnut',
+                    type: 'pie',
                     data: {
                         labels: ['Đã hoàn thành', 'Chưa hoàn thành', 'Hủy'],
                         datasets: [{
                             label: 'Doanh thu',
                             data: [<?= $total_revenue ?>, <?= $total_revenue_not_success ?>, <?= $total_revenue_cancel ?>],
                             backgroundColor: [
-                                'greenyellow',
-                                'blue',
-                                'red'
+                                'rgba(0, 255, 0, 0.5)',
+                                'rgba(255, 255, 0, 0.5)',
+                                'rgba(255, 0, 0, 0.5)'
                             ],
                             borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(255, 99, 132, 1)'
+                                'rgba(0, 255, 0, 1)',
+                                'rgba(255, 255, 0, 1)',
+                                'rgba(255, 0, 0, 1)'
                             ],
                             borderWidth: 1
                         }]
@@ -277,7 +277,7 @@
                                     return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
                                 }
                             }
-                        }
+                        },
                     }
                 });
             </script>

@@ -43,19 +43,19 @@ $list_category = get_category();
 //router
 if (isset($_GET['page'])) {
     switch ($_GET['page']) {
-            //trang chủ
+        //trang chủ
         case 'home':
 
             require_once 'views/home.php';
             break;
 
-            //trang đăng nhập
+        //trang đăng nhập
         case 'login':
 
             require_once 'views/login.php';
             break;
 
-            //chức năng đăng nhập
+        //chức năng đăng nhập
         case 'login-function':
 
             if (isset($_POST["btn-login"]) && $_POST["btn-login"]) {
@@ -93,12 +93,12 @@ if (isset($_GET['page'])) {
 
             break;
 
-            //trang đằng ký
+        //trang đằng ký
         case 'register':
             require_once 'views/register.php';
             break;
 
-            //chức năng đăng ký
+        //chức năng đăng ký
         case 'register-function':
 
             // kiểm tra tồn tại nút đăng kí và nút đăng ký đc nhấn
@@ -128,7 +128,7 @@ if (isset($_GET['page'])) {
 
             break;
 
-            //đăng xuất
+        //đăng xuất
         case 'logout':
             if (isset($_SESSION["user"]) && count($_SESSION["user"]) > 0) {
                 unset($_SESSION["user"]);
@@ -136,12 +136,12 @@ if (isset($_GET['page'])) {
             header('Location: index.php?page=login');
             break;
 
-            //trang đổi mật khẩu
+        //trang đổi mật khẩu
         case 'changePassword':
             require_once "views/changePassword.php";
             break;
 
-            //chức năng đổi mật khẩu
+        //chức năng đổi mật khẩu
         case 'change-function':
             if (isset($_POST["btn-change"]) && $_POST["btn-change"]) {
                 $password = $_POST["password"];
@@ -164,7 +164,7 @@ if (isset($_GET['page'])) {
             }
             break;
 
-            //trang sản phẩm
+        //trang sản phẩm
         case 'product':
             $list_category = get_category();
             $all_product = [];
@@ -189,7 +189,7 @@ if (isset($_GET['page'])) {
             require_once 'views/profile.php';
             break;
 
-            //trang chi tiết sản phẩm
+        //trang chi tiết sản phẩm
         case 'details':
             if (isset($_GET['id'])) {
                 $id_product = $_GET['id'];
@@ -440,7 +440,7 @@ if (isset($_GET['page'])) {
         case 'momo':
             require_once 'views/momo.php';
             break;
-            //thêm vào giỏ hàng
+        //thêm vào giỏ hàng
         case 'addToCart':
             if (isset($_POST['btn-addToCart'])) {
                 $product_id = $_POST['product-id'];
@@ -581,6 +581,7 @@ if (isset($_GET['page'])) {
             if (isset($_GET['id'])) {
                 $id_bill = $_GET['id'];
                 acp_bill($id_bill);
+                pay_bill($id_bill);
 
                 header('location: index.php?page=order');
             }

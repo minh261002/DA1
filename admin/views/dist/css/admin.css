@@ -112,7 +112,7 @@ i.success{
 
 .grid-chart > .container{
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1.3fr 1fr;
 	gap: 24px;
 	align-items: center;
 }
@@ -220,11 +220,31 @@ i.success{
 .info_content_ad{
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
+	justify-content: start;
 	gap: 24px;
 }
 
 .form-password{
 	position: relative;
+}
+
+.bill_st{
+	display: inline-flex;
+	align-self: center;
+	gap: 12px ;
+	width: 100%;
+}
+
+.bill_st a{
+	font-weight: 600;
+}
+
+.success{
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	margin: 8px 0;
+	color: #28a745;
 }
 
 #showPassword,

@@ -54,8 +54,6 @@ if (isset($_GET['id'])) {
                     <tbody>
                         <tr>
                             <td>
-                                <?= $id_bill_details ?>
-                            <td>
                                 <?= $name_product ?>
                             </td>
                             <td>

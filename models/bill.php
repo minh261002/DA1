@@ -20,8 +20,6 @@ function get_bill_by_id($id_bill)
     return pdo_query($sql, $id_bill);
 }
 
-
-
 function confirm_bill($bill_id)
 {
     $sql = "UPDATE bill SET status = 1 WHERE id = ?";
@@ -57,7 +55,7 @@ function get_bill_user($id_user, $st)
         }
         return pdo_query($sql, $id_user, $st);
     } else {
-        $sql = "SELECT * FROM bill WHERE id_user = ?";
+        $sql = "SELECT * FROM bill WHERE id_user = ? ORDER BY id DESC";
         return pdo_query($sql, $id_user);
     }
 }

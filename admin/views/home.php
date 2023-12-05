@@ -13,7 +13,7 @@ if (count($get_bill_unconfirm) > 0) {
             <tr>
                 <td>' . $bill_unconfirm['fullname'] . '</td>
                 <td>' . $bill_unconfirm['created_at'] . '</td>
-                <td><span class="status pending">Chưa Xác Nhận</span></td>
+                <td><span class="bill_st" style="color:orange"><i class="bx bxs-hourglass-top"></i>Chưa Xác Nhận</span></td>                
                 <td><a href="index.php?page=confirm_bill&id=' . $bill_unconfirm['id'] . '">Xác Nhận Đơn Hàng</a></td>
             </tr>
         ';

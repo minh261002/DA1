@@ -120,9 +120,9 @@ if (isset($_GET['page'])) {
                     header('Location: index.php?page=register');
                 } else {
                     user_insert($username, $email, $password);
-                    $re_message = "Đăng Ký Thành Công! <a href='index.php?page=login'>Đăng Nhập Ngay</a>";
-                    $_SESSION["message_re"] = $re_message;
-                    header('Location: index.php?page=register');
+                    $re_message = "Đăng Ký Thành Công! <a>Đăng Nhập Ngay</a>";
+                    $_SESSION["message_success"] = $re_message;
+                    header('Location: index.php?page=login');
                 }
             }
 

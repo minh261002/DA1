@@ -206,7 +206,7 @@ function show_product($list_product)
         $createdDate = strtotime($created_at);
 
         $currentDate = strtotime($currentDateTime);
-        $newProduct = strtotime('-3 days', $currentDate);
+        $newProduct = strtotime('-15 days', $currentDate);
 
         if ($createdDate >= $newProduct) {
             $new = '

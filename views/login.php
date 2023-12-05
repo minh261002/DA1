@@ -15,6 +15,15 @@ if (isset($_GET['bill']) && $_GET['bill'] == 1) {
             }
             ?>
         </p>
+
+        <p class="sucess">
+            <?php
+            if (isset($_SESSION["message_success"]) && $_SESSION["message_success"] != "") {
+                echo $_SESSION["message_success"];
+                unset($_SESSION["message_success"]);
+            }
+            ?>
+        </p>
         <form action="index.php?page=login-function" method="POST" id="loginForm" onsubmit="return validateForm()">
             <div class="form-group mb-3">
                 <label for="username">Tên Đăng Nhập</label>

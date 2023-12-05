@@ -5,17 +5,17 @@ foreach ($bills as $bill) {
     $status = $bill['status'];
 
     if ($status == 0) {
-        $status = '<span class="bill_st"><i class="bx bxs-hourglass-top"></i>Chờ Xác Nhận <a href = "index.php?page=set_bill&bill=1&id_bill=' . $bill['id'] . '">(Xác Nhận)</a></span>';
+        $status = '<span class="bill_st" style="color: orange;"><i class="bx bxs-hourglass-top"></i><span class="status-pending"> Chưa Xác Nhận <a href="index.php?page=set_bill&bill=1&id_bill=' . $bill['id'] . '">(Xác Nhận)</a></span></span>';
     } else if ($status == 1) {
-        $status = '<span class="bill_st"><i class="bx bxs-check-circle"></i>Đã Xác Nhận <a href = "index.php?page=set_bill&bill=2&id_bill=' . $bill['id'] . '">(Giao Hàng)</a></span>';
+        $status = '<span class="bill_st" style="color: green;"><i class="bx bxs-check-circle"></i><span class="status-confirmed">Đã Xác Nhận <a href="index.php?page=set_bill&bill=2&id_bill=' . $bill['id'] . '">(Giao Hàng)</a></span></span>';
     } else if ($status == 2) {
-        $status = '<span class="bill_st"><i class="bx bxs-truck"></i>Đang Giao Hàng <a href = "index.php?page=set_bill&bill=3&id_bill=' . $bill['id'] . '">(Đã Giao)</a></span>';
+        $status = '<span class="bill_st" style="color: blue;"><i class="bx bxs-truck"></i><span class="status-in-progress" >Đang Giao Hàng <a href="index.php?page=set_bill&bill=3&id_bill=' . $bill['id'] . '">(Đã Giao)</a></span></span>';
     } else if ($status == 3) {
-        $status = '<span class="bill_st"><i class="bx bxs-user-check"></i>Đã Giao Hàng<a href = "index.php?page=set_bill&bill=5&id_bill=' . $bill['id'] . '">(Thành Công)</a></span>';
+        $status = '<span class="bill_st" style="color: purple;"><i class="bx bxs-user-check"></i><span class="status-delivered" >Đã Giao Hàng <a href="index.php?page=set_bill&bill=5&id_bill=' . $bill['id'] . '">(Thành Công)</a></span></span>';
     } else if ($status == 4) {
-        $status = '<span class="bill_st"><i class="bx bx-calendar-x"></i>Đã Hủy</span>';
+        $status = '<span class="bill_st" style="color: red;"><i class="bx bx-calendar-x"></i><span class="status-cancelled" >Đã Hủy</span></span>';
     } else if ($status == 5) {
-        $status = '<span class="bill_st"><i class="bx bxs-calendar-check"></i>Thành Công</span>';
+        $status = '<span class="bill_st" style="color: green;"><i class="bx bxs-calendar-check"></i><span class="status-success" >Thành Công</span></span>';
     }
 
     $payment = $bill['payment'];

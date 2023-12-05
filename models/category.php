@@ -37,7 +37,7 @@ function show_category_home()
             $html_category .= '
                 <div class="category-item">
                     <a href="index.php?page=product&id=' . $id . '">
-                        <img src="assets/img/' . $avatar . '">
+                        <img src="uploads/' . $avatar . '">
                         <p>' . $name . '</p>
                     </a>
                 </div>

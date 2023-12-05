@@ -6,18 +6,18 @@ foreach ($bill_user as $bill) {
     $voucher = 0; // Đặt lại giảm giá cho mỗi đơn hàng
 
     $status = $bill['status'];
+
     if ($status == 0) {
-        $status = '<span class="text-warning ">Chưa Xác Nhận</span>';
-    } else if ($status == 1) {
-        $status = '<span class="text-info ">Đã Xác Nhận</span>';
+        $status = '<span class="bill_st" style="color: orange;"><i class="bx bxs-hourglass-top"></i><span class="status-pending" Chờ Xác Nhận </span></span>';
+        $status = '<span class="bill_st" style="color: green;"><i class="bx bxs-check-circle"></i><span class="status-confirmed">Đã Xác Nhận </span></span>';
     } else if ($status == 2) {
-        $status = '<span class="text-secondary ">Đang Giao Hàng</span>';
+        $status = '<span class="bill_st" style="color: blue;"><i class="bx bxs-truck"></i><span class="status-in-progress" >Đang Giao Hàng </span></span>';
     } else if ($status == 3) {
-        $status = '<span class="text-success ">Đã Giao Hàng</span>';
+        $status = '<span class="bill_st" style="color: purple;"><i class="bx bxs-user-check"></i><span class="status-delivered" >Đã Giao Hàng </span></span>';
     } else if ($status == 4) {
-        $status = '<span class="text-danger ">Đã Hủy</span>';
+        $status = '<span class="bill_st" style="color: red;"><i class="bx bx-calendar-x"></i><span class="status-cancelled" >Đã Hủy</span></span>';
     } else if ($status == 5) {
-        $status = '<span style="color:green">Thành Công</span>';
+        $status = '<span class="bill_st" style="color: green;"><i class="bx bxs-calendar-check"></i><span class="status-success" >Thành Công</span></span>';
     }
 
     $bill_success = '';

@@ -100,16 +100,10 @@
                     <label for="id_category">Tên Danh Mục</label>
 
                     <select class="form-control" name="id_category" id="id_category">
-                        <<<<<<< HEAD <<<<<<< HEAD=======<option value="0">
-                            <?= $list_category[0]['name'] ?>
-                            </option>
-                            >>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
-                            =======
-                            <option value="0">
-                                <?= $list_category[0]['name'] ?>
-                            </option>
-                            >>>>>>> 85056f60f152e057e8cc812e806b13275e2cb812
-                            <?php
+
+
+
+                        <?php
                             if (isset($list_category)) {
                                 foreach ($list_category as $dm) {
                                     echo '<option value="' . $dm['id'] . '">' . $dm['name'] . '</option>';

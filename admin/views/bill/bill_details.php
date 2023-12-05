@@ -1,13 +1,70 @@
 <?php
 $html_bill_details = '';
+$total = 0;
+
 foreach ($bill_details as $bill_detail) {
+
+    $subtotal = $bill_detail['price'] * $bill_detail['quantity'];
+    $total += $subtotal;
+
+    $status = $bill_detail['status'];
+    if ($status == 0) {
+        $status = '<span class="bill_st"><i class="bx bxs-hourglass-top"></i>Chờ Xác Nhận <a href = "index.php?page=set_bill&bill=1&id_bill=' . $bill['id'] . '">(Xác Nhận)</a></span>';
+    } else if ($status == 1) {
+        $status = '<span class="bill_st"><i class="bx bxs-check-circle"></i>Đã Xác Nhận <a href = "index.php?page=set_bill&bill=2&id_bill=' . $bill['id'] . '">(Giao Hàng)</a></span>';
+    } else if ($status == 2) {
+        $status = '<span class="bill_st"><i class="bx bxs-truck"></i>Đang Giao Hàng <a href = "index.php?page=set_bill&bill=3&id_bill=' . $bill['id'] . '">(Đã Giao)</a></span>';
+    } else if ($status == 3) {
+        $status = '<span class="bill_st"><i class="bx bxs-user-check"></i>Đã Giao Hàng<a href = "index.php?page=set_bill&bill=5&id_bill=' . $bill['id'] . '">(Thành Công)</a></span>';
+    } else if ($status == 4) {
+        $status = '<span class="bill_st"><i class="bx bx-calendar-x"></i>Đã Hủy</span>';
+    } else if ($status == 5) {
+        $status = '<span class="bill_st"><i class="bx bxs-calendar-check"></i>Thành Công</span>';
+    }
+
+
+    $payment = $bill_detail['payment'];
+    if ($payment == 1) {
+        $payment = 'Chưa Thanh Toán';
+    } elseif ($payment == 2) {
+        $payment = 'Đã Thanh Toán Qua VNPAY';
+    } elseif ($payment == 3) {
+        $payment = 'Đã Thanh Toán Qua Momo';
+    } elseif ($payment == 4) {
+        $payment = 'Đã thanh toán COD';
+    }
+
+    $transport_fee = 0;
+    if ($bill_detail['transport'] == 1) {
+        $transport_fee = 5000;
+        $transport = 'Giao Hàng Tiết Kiệm';
+    } elseif ($bill_detail['transport'] == 2) {
+        $transport_fee = 10000;
+        $transport = 'Giao Hàng Nhanh';
+    } elseif ($bill_detail['transport'] == 3) {
+        $transport_fee = 15000;
+        $transport = 'Giao Hàng Hỏa Tốc';
+    }
+
+    $address_db = $bill_detail['address'];
+    $address_string = json_decode($address_db, true);
+    $address = $address_string['detail'] . ', ' . $address_string['ward'] . ', ' . $address_string['district'] . ', ' . $address_string['city'];
+
+    $voucher = $bill_detail['voucher'];
+
     $html_bill_details .= '
         <tr>
-            <td>' . $bill_detail['name'] . '</td>
-            <td><img class="bill_img" src="../uploads/' . $bill_detail['img'] . '"/></td>
+            <td>
+                <div class="bill_name">
+                <p class="display:block">' . $bill_detail['name'] . '</p> 
+                <p>Kích Thước: ' . $bill_detail['size'] . '</p>
+                <p>Màu: ' . $bill_detail['color'] . '</p>
+                </div>
+            </td>
+            <td><img class="bill_img" src="../uploads/' . $bill_detail['img'] . '"  /></td>
             <td>' . $bill_detail['quantity'] . '</td>
             <td>' . number_format($bill_detail['price'], 0, ',', '.') . 'đ</td>
-            <td>' . number_format($bill_detail['price'] * $bill_detail['quantity'], 0, ',', '.') . 'đ</td>
+            <td>' . number_format($subtotal, 0, ',', '.') . 'đ</td>
         </tr>
     ';
 }
@@ -82,7 +139,7 @@ foreach ($bill_details as $bill_detail) {
             </a>
         </li>
     </ul>
-</section>>
+</section>
 <section id="content">
     <!-- NAVBAR -->
     <nav>
@@ -123,6 +180,34 @@ foreach ($bill_details as $bill_detail) {
                     <i class='bx bx-search'></i>
                     <i class='bx bx-filter'></i>
                 </div>
+                <div class="info-customer ">
+                    <div class="info-customer-left">
+                        <p>Khách Hàng : <span>
+                                <?= $bill_detail['fullname'] ?>
+                            </span></p>
+                        <p>Địa Chỉ : <span>
+                                <?= $address ?>
+                            </span></p>
+                        <p>Số Điện Thoại : <span>
+                                <?= $bill_detail['phone'] ?>
+                            </span></p>
+                    </div>
+                    <div class="info-customer-right">
+
+                        <p>Phương Thức Thanh Toán : <span>
+                                <?= $payment ?>
+                            </span></p>
+                        <p>Phương Thức Vận Chuyển : <span>
+                                <?= $transport ?>
+                            </span></p>
+                        <p class="flex" style="justify-content: start;">Trạng Thái : <span>
+                                <?= $status ?>
+                            </span></p>
+                        <p>Ngày Đặt Hàng : <span>
+                                <?= $bill_detail['created_at'] ?>
+                            </span></p>
+                    </div>
+                </div>
                 <p class="err">
                     <?php if (isset($_SESSION['message'])) {
                         echo $_SESSION['message'];
@@ -143,9 +228,31 @@ foreach ($bill_details as $bill_detail) {
                         <?= $html_bill_details ?>
                     </tbody>
                 </table>
-            </div>
 
-        </div>
+                <div class="total flex">
+                    <div class="left">
+                        <p>Tổng Tiền:</p>
+                        <p>Phí Vận Chuyển:</p>
+                        <p>Giảm Giá:</p>
+                        <p>Tổng Cộng:</p>
+                    </div>
+                    <div class="right">
+                        <p>
+                            <?= number_format($total, 0, ',', '.') ?>đ
+                        </p>
+                        <p>
+                            <?= number_format($transport_fee, 0, ',', '.') ?>đ
+                        </p>
+                        <p>
+                            <?= number_format($voucher, 0, ',', '.') ?>đ
+                        </p>
+                        <p>
+                            <?= number_format($total + $transport_fee, 0, ',', '.') ?>đ
+                        </p>
+                    </div>
+                </div>
+                <a href="index.php?page=bill" class="btn ">Quay Lại</a>
+            </div>
 
     </main>
     <!-- MAIN -->

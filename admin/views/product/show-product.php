@@ -110,8 +110,8 @@
             ?>
                 <tbody>
                     <tr>
-                        <td>
-                            <?php echo $i ?>
+                        <td></td>
+                        <?php echo $i ?>
                         </td>
                         <td>
                             <?php echo $product['name'] ?>

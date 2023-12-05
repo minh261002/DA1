@@ -36,7 +36,7 @@ function getoneuser($id)
     return pdo_query($sql, $id);
 }
 
-function checkUser($username, $password, )
+function checkUser($username, $password)
 {
     $sql = "SELECT * FROM user WHERE  username = ? AND password = ?";
     return pdo_query_one($sql, $username, $password);

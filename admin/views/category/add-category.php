@@ -54,7 +54,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -73,6 +73,12 @@
 <!-- CONTENT -->
 <section id="content">
 
+
+    <p class="err">
+        <?php if (isset($message)) {
+            echo $message;
+        } ?>
+    </p>
     <nav>
         <i class='bx bx-menu'></i>
         <a href="#index.php?page=category" class="nav-link">Danh Mục Sản Phẩm</a>
@@ -141,48 +147,40 @@
         </div>
     </main>
 </section>
-<!-- ... your HTML code ... -->
-<!-- ... your HTML code ... -->
-
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Lấy các phần tử cần thiết
-        var form = document.querySelector("form");
-        var category_name = document.getElementById("category_name");
-        var category_img = document.getElementById("category_img");
+    function validateForm() {
+        var category_name = document.getElementById("category_name").value;
+        var category_img = document.getElementById("category_img").value;
+        var home = document.getElementById("home").value;
+        var ctnameErr = document.getElementById("ctnameErr");
+        var ctimgErr = document.getElementById("ctimgErr");
 
-        // Xử lý sự kiện khi form được submit
-        form.addEventListener("submit", function (event) {
-            var isValid = true; // Variable to track overall form validity
+        // Thiết lập biến để theo dõi việc xác thực
+        var isValid = true;
 
-            // Reset error messages
-            document.getElementById("ctnameErr").textContent = "";
-            document.getElementById("ctimgErr").textContent = "";
+        // Kiểm tra tên danh mục
+        if (category_name.trim() === "") {
+            ctnameErr.textContent = "Vui lòng nhập tên danh mục.";
+            isValid = false;
+        } else {
+            ctnameErr.textContent = "";
+        }
 
-            // Kiểm tra rỗng và hiển thị thông báo
-            if (category_name.value.trim() === "") {
-                document.getElementById("ctnameErr").textContent = "Vui lòng nhập tên danh mục.";
-                isValid = false;
-            }
+        // Kiểm tra ảnh
+        if (category_img.trim() === "") {
+            ctimgErr.textContent = "Vui lòng chọn ảnh.";
+            isValid = false;
+        } else {
+            ctimgErr.textContent = "";
+        }
 
-            if (category_img.value.trim() === "") {
-                document.getElementById("ctimgErr").textContent = "Vui lòng chọn ảnh.";
-                isValid = false;
-            }
+        // Kiểm tra giá trị của trường "Tùy Chọn"
+        if (home !== "0" && home !== "1" && home !== "2") {
+            // Nếu không phải là 0, 1 hoặc 2, thì hiển thị lỗi
+            alert("Giá trị không hợp lệ cho trường 'Tùy Chọn'.");
+            isValid = false;
+        }
 
-            // Ngừng submit nếu có lỗi
-            if (!isValid) {
-                event.preventDefault();
-            }
-        });
-
-        // Add a function to reset error messages on input change
-        category_name.addEventListener("input", function () {
-            document.getElementById("ctnameErr").textContent = "";
-        });
-
-        category_img.addEventListener("input", function () {
-            document.getElementById("ctimgErr").textContent = "";
-        });
-    });
+        return isValid; // Trả về true nếu tất cả kiểm tra đều đúng, ngược lại trả về false
+    }
 </script>

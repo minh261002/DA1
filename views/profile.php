@@ -89,7 +89,7 @@ if (isset($address)) {
                         <form class="upload-profile" action="index.php?page=update_user" enctype="multipart/form-data"
                             method="POST">
                             <div class="avatar">
-                                <img src="Uploads/<?= $avatar ?>" id="previewAvatar" class="d-block my-3">
+                                <img src="uploads/<?= $avatar ?>" id="previewAvatar" class="d-block my-3">
                                 <input type="hidden" value="<?= $avatar ?>" name="avatar_old">
                                 <label for="fileAvatar" class="custom-file-upload">
                                     Chọn tệp

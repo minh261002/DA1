@@ -7,7 +7,7 @@ function get_bill_unconfimred()
 
 function get_all_bill()
 {
-    $sql = 'SELECT * FROM bill';
+    $sql = 'SELECT * FROM bill ORDER BY id DESC';
     return pdo_query($sql);
 }
 
@@ -51,9 +51,39 @@ function get_bill_user($id_user, $st)
     }
 }
 
+function pay_bill($id_bill)
+{
+    $sql = "UPDATE bill set payment = 4 WHERE payment = 1 AND id = ? ";
+    pdo_execute($sql, $id_bill);
+}
+
 function acp_bill($id_bill)
 {
     $sql = "UPDATE bill SET status = 5 WHERE id = ?";
+    pdo_execute($sql, $id_bill);
+}
+
+function set_bill_1($id_bill)
+{
+    $sql = "UPDATE bill SET status = 1 WHERE id = ?";
+    pdo_execute($sql, $id_bill);
+}
+
+function set_bill_2($id_bill)
+{
+    $sql = "UPDATE bill SET status = 2 WHERE id = ?";
+    pdo_execute($sql, $id_bill);
+}
+
+function set_bill_3($id_bill)
+{
+    $sql = "UPDATE bill SET status = 3 WHERE id = ?";
+    pdo_execute($sql, $id_bill);
+}
+
+function set_bill_4($id_bill)
+{
+    $sql = "UPDATE bill SET status = 4 WHERE id = ?";
     pdo_execute($sql, $id_bill);
 }
 

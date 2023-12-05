@@ -46,7 +46,7 @@
 
                             <div class="product-item">
                                 <a href="index.php?page=details&id=<?php echo $pro['id'] ?>">
-                                    <img class="product-image" src="Uploads/<?php echo $pro['img'] ?>" alt="" width="100%">
+                                    <img class="product-image" src="uploads/<?php echo $pro['img'] ?>" alt="" width="100%">
                                 </a>
                                 <?php if ($pro['hot'] == 1) { ?>
                                     <div class="selling">
@@ -82,7 +82,7 @@
                                             style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
                                     </span>
                                     <span class="percent-discount">
-                                        <?php echo $pro['sale'] ?>%
+                                        <?php echo $pro['sale'] ?>
                                     </span>
                                 </div>
                             </div>

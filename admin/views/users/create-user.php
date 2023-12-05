@@ -71,7 +71,7 @@ if (isset($one[0]['updated_at'])) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -121,7 +121,7 @@ if (isset($one[0]['updated_at'])) {
             <h5 class="m-4">Thêm Tài Khoản Mới</h5>
             <form action="index.php?page=create-user" method="POST" class="form-update" enctype="multipart/form-data">
                 <div class="update_avatar">
-                    <img src="../Uploads/default_user.png" width="80px" id="previewAvatar">
+                    <img src="../uploads/default_user.png" width="80px" id="previewAvatar">
                     <br> <label for="avatar" class="chs-img">Chọn Ảnh</label>
                     <input type="file" name="avatar" id="avatar">
 
@@ -333,4 +333,46 @@ if (isset($one[0]['updated_at'])) {
             }
         };
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function (event) {
+            var errors = [];
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var fullname = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var address = document.getElementById('detail').value; // Updated to use 'detail' for address
+
+            // Check if fields are empty
+            if (username === '' || password === '' || fullname === '' || email === '' || phone === '' ||
+                address === '') {
+                errors.push('Vui lòng điền đầy đủ thông tin.');
+            }
+
+            // Check password length
+            if (password.length < 6) {
+                errors.push('Mật khẩu phải có ít nhất 6 ký tự.');
+            }
+
+            // Check email format
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errors.push('Địa chỉ email không hợp lệ.');
+            }
+
+            // Check phone number format (10 digits)
+            var phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phone)) {
+                errors.push('Số điện thoại phải có 10 chữ số.');
+            }
+
+            // Display errors or submit the form
+            if (errors.length > 0) {
+                event.preventDefault(); // Prevent form submission
+                alert(errors.join('\n')); // Display all errors
+            }
+        });
+    });
 </script>

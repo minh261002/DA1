@@ -1,9 +1,10 @@
+<!-- SIDEBAR -->
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -21,7 +22,7 @@
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
@@ -52,7 +53,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=voucher">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -66,9 +67,7 @@
             </a>
         </li>
     </ul>
-</section>
-
-
+</section>>
 <!-- NAVBAR -->
 <section id="content">
     <nav>
@@ -92,67 +91,74 @@
     </nav>
     <main>
         <h3 class="text-center">Quản Lý Sản Phẩm</h3>
-        <table class="table table-striped">
+        <a href="index.php?page=add-product">Thêm sản phẩm mới</a>
+        <table class="table table-show-category">
             <thead>
                 <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Tên Danh Mục </th>
-                    <th scope="col">Tên Sản Phẩm </th>
-                    <th scope="col">Hình Ảnh</th>
-                    <th scope="col">Ảnh phụ</th>
-                    <!-- <th scope="col">Mô Tả</th> -->
-                    <th scope="col">Giá</th>
-                    <th scope="col">Sale</th>
-                    <th scope="col">View</th>
-                    <th scope="col">Hot</th>
-                    <th scope="col">Ngày Nhập</th>
-                    <th scope="col">Thao Tác</th>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Hình Ảnh</th>
+                    <th>Giá</th>
+                    <th>Ngày Nhập</th>
+
+                    <th>Thao Tác</th>
                 </tr>
             </thead>
             <?php
             $i = 1;
             foreach ($product as $key => $product) {
                 ?>
+<<<<<<< HEAD
                 <tbody>
                     <tr>
                         <td>
                             <?php echo $i ?>
                         </td>
                         <td>
-                            <?php echo $product['id_category'] ?>
-                        </td>
-                        <td>
                             <?php echo $product['name'] ?>
                         </td>
-                        <td><img src="../Uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
-                        <td>
-                            <?php echo $product['gallery'] ?>
-                        </td>
-
-                        <!-- <td><?php echo $product['info'] ?></td> -->
+                        <td><img src="../uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
                         <td>
                             <?php echo $product['price'] ?>
                         </td>
                         <td>
-                            <?php echo $product['sale'] ?>
-                        </td>
-                        <td>
-                            <?php echo $product['view'] ?>
-                        </td>
-                        <td>
-                            <?php echo $product['hot'] ?>
+                            <?php echo $product['gallery'] ?>
                         </td>
                         <td>
                             <?php echo $product['created_at'] ?>
                         </td>
-                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>">sửa</a> | <a
-                                href="index.php?page=del-product&id=<?php echo $product['id'] ?>">Xóa</a></td>
+                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i
+                                    class="bx bx-edit"></i></a><a
+                                href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i
+                                    class="bx bx-trash"></i></a></td>
                     </tr>
+                </tbody>
+                <?php
+=======
+            <tbody>
+                <tr>
+                    <td>
+                        <?php echo $i ?>
+                    </td>
+                    <td>
+                        <?php echo $product['name'] ?>
+                    </td>
+                    <td><img src="../Uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
+                    <td>
+                        <?php echo $product['price'] ?>
+                    </td>
 
-                    <?php $i++;
-            } ?>
+                    <td>
+                        <?php echo $product['created_at'] ?>
+                    </td>
+                    <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i
+                                class="bx bx-edit"></i></a><a
+                            href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i
+                                class="bx bx-trash"></i></a></td>
+                </tr>
             </tbody>
-            <a href="index.php?page=add-product" style="color:red; text-decoration:underline;">Thêm Sản Phẩm Mới</a>
-        </table>
-    </main>
-</section>
+            <?php
+>>>>>>> 6d8fca59b8a462c6ea91ff0e9001f4aafd748e3b
+                $i++;
+            }
+            ?>

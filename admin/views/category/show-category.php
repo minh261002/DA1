@@ -13,7 +13,7 @@ foreach ($list_category as $ct) {
     $show_category .= '
         <tr>
             <td>' . $id . '</td>
-            <td><img src="../Uploads/' . $avatar . '" width="50px"></td>
+            <td><img src="../uploads/' . $avatar . '" width="50px"></td>
             <td>' . $name . '</td>
             <td>' . (($home == 0) ? "Mặc Định" : "Hiển Thị Trang Chủ") . '</td>
             <td>' . (($hide == 0) ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh") . '</td>
@@ -82,7 +82,7 @@ foreach ($list_category as $ct) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -129,9 +129,7 @@ foreach ($list_category as $ct) {
                 <h1>Danh Mục Sản Phẩm</h1>
             </div>
         </div>
-
         <div class="admin-category">
-
             <p class="err">
                 <?php
                 if (isset($_SESSION["message"]) && $_SESSION["message"] != "") {

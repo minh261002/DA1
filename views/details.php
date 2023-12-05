@@ -120,7 +120,7 @@ if (isset($feedback) && is_array($feedback)) {
                     if (is_array($images)) {
 
                         foreach ($images as $image) {
-                            echo '<img src="Uploads/' . $image . '" width="100%" onclick="changeImage(this)" />';
+                            echo '<img src="uploads/' . $image . '" width="100%" onclick="changeImage(this)" />';
                         }
                     }
                     ?>
@@ -142,7 +142,7 @@ if (isset($feedback) && is_array($feedback)) {
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <?php foreach ($images as $key => $image) { ?>
-                        <div class="swiper-slide"><img src="Uploads/<?php echo $image ?>" alt=""></div>
+                        <div class="swiper-slide"><img src="uploads/<?php echo $image ?>" alt=""></div>
                     <?php } ?>
                 </div>
                 <div class="swiper-pagination"></div>

@@ -52,7 +52,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -100,9 +100,9 @@
                     <label for="id_category">Tên Danh Mục</label>
 
                     <select class="form-control" name="id_category" id="id_category">
-                        <option value="0">
-                            <?= $list_category[0]['name'] ?>
-                        </option>
+
+
+
                         <?php
                         if (isset($list_category)) {
                             foreach ($list_category as $dm) {
@@ -121,6 +121,7 @@
                 <div class="form-group mb-3">
                     <label for="img">Hình Ảnh</label>
                     <input type="file" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
+                    <img src="../uploads/<?= $one[0]['img'] ?>" width="50px" alt="">
                     <input type="hidden" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
                 </div>
 
@@ -128,6 +129,7 @@
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
+
                     <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
                 </div>
@@ -179,10 +181,8 @@
                         </label>
                         <select class="form-select" name="size" id="size">
                             <option selected disabled hidden>
-                            <option value="0">
-                                <?= $variant[0]['size'] ?>
-                            </option>
-                            <?php
+
+                                <?php
                             if (isset($variant)) {
                                 foreach ($variant as $size) {
                                     echo '<option value="' . $size['id'] . '">' . $size['size'] . '</option>';
@@ -200,10 +200,7 @@
                             <span>*</span>
                         </label>
                         <select class="form-select" name="color" id="color">
-                            <option selected disabled hidden>
-                            <option value="0">
-                                <?= $variant[0]['color'] ?>
-                            </option>
+
                             <?php
                             if (isset($variant)) {
                                 foreach ($variant as $color) {
@@ -222,10 +219,7 @@
                             <span>*</span>
                         </label>
                         <select class="form-select" name="color" id="color">
-                            <option selected disabled hidden>
-                            <option value="0">
-                                <?= $variant[0]['quantity'] ?>
-                            </option>
+
                             <?php
                             if (isset($variant)) {
                                 foreach ($variant as $quantity) {

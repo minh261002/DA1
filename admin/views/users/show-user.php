@@ -82,7 +82,7 @@ foreach ($user as $acc) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -100,6 +100,7 @@ foreach ($user as $acc) {
 
 <!-- CONTENT -->
 <section id="content">
+
     <!-- NAVBAR -->
     <nav>
         <i class='bx bx-menu'></i>
@@ -131,6 +132,7 @@ foreach ($user as $acc) {
         </div>
 
         <div class="admin_user">
+            <a href="index.php?page=create-user">Thêm Tài Khoản Mới</a>
             <p class="err">
                 <?php
                 if (isset($_SESSION["message"])) {
@@ -152,7 +154,7 @@ foreach ($user as $acc) {
                 </tbody>
             </table>
 
-            <a href="index.php?page=create-user">Thêm Tài Khoản Mới</a>
+
         </div>
     </main>
 </section>

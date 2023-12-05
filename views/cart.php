@@ -8,7 +8,7 @@ $temporary = $_SESSION['temporary'] ?? 0;
 
 ?>
 
-<main class="pb-60 background-bottom">
+<main class="pb-60">
     <section class="box-cart">
         <div class="container flex">
             <div class="muibox-cart flex">
@@ -93,17 +93,17 @@ $temporary = $_SESSION['temporary'] ?? 0;
                     </tbody>
                 </table>
 
-                <a href="index.php?page=cart&act=del_all" class="d-block my-5 btn btn-dark">Xóa Tất Cả Sản Phẩm</a>
+                <a href="index.php?page=cart&act=del_all" class="d-block my-5 btn btn-outline-dark">Xóa Tất Cả Sản
+                    Phẩm</a>
                 <a href="index.php?pahe=home">Quay Lại Trang Chủ</a>
             </div>
-
             <!-- mobile -->
             <div class="cart-container-mobile">
 
                 <?php foreach ($_SESSION["cart"] as $key => $cart) { ?>
 
                     <div class="cart-item-mb">
-                        <img src="Uploads/<?php echo $cart['img'] ?>" alt="" class="img-item">
+                        <img src="uploads/<?php echo $cart['img'] ?>" alt="" class="img-item">
                         <div class="cart-item-content">
                             <div class="title-box">
                                 <a class="title-item" href="">

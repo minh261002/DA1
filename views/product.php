@@ -38,20 +38,22 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <?php
-                $total_pages = $_SESSION['page_count'];
-                $current_page = $_SESSION['page_no'];
+                if (isset($_SESSION['page_count']) && isset($_SESSION['page_no'])) {
+                    $total_pages = $_SESSION['page_count'];
+                    $current_page = $_SESSION['page_no'];
 
-                if ($showPagination) {
-                    echo '<div class="pagination">';
-                    for ($page = 0; $page < $total_pages; $page++) {
-                        $page_number = $page + 1;
-                        if ($page == $current_page) {
-                            echo '<a class="active" href="index.php?page=product&page_no=' . $page . '">' . $page_number . '</a>';
-                        } else {
-                            echo '<a href="index.php?page=product&page_no=' . $page . '">' . $page_number . '</a>';
+                    if ($showPagination) {
+                        echo '<div class="pagination">';
+                        for ($page = 0; $page < $total_pages; $page++) {
+                            $page_number = $page + 1;
+                            if ($page == $current_page) {
+                                echo '<a class="active" href="index.php?page=product&page_no=' . $page . '">' . $page_number . '</a>';
+                            } else {
+                                echo '<a href="index.php?page=product&page_no=' . $page . '">' . $page_number . '</a>';
+                            }
                         }
+                        echo '</div>';
                     }
-                    echo '</div>';
                 }
                 ?>
             </div>

@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -112,12 +112,6 @@ if (isset($_GET['id'])) {
 
             <form action="index.php?page=updateCategory" method="POST" enctype="multipart/form-data">
 
-                <div class="form-group mb-3">
-                    <label for="id">ID Danh Mục</label>
-                    <input type="text" name="category_id" id="category_id" class="form-control" value="<?= $id ?>"
-                        disabled>
-                    <span class="err">Không Cần Nhập ID Danh Mục</span>
-                </div>
 
                 <div class="form-group mb-3">
                     <label for="id">Tên Danh Mục</label>
@@ -127,7 +121,7 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <div class="form-group mb-3">
-                    <img src="../Uploads/<?= $avatar ?>" width='50px'>
+                    <img src="../uploads/<?= $avatar ?>" width='50px'>
                     <input type="file" name="category_img" id="category_img" class="form-control d-block">
                     <input type="hidden" name="avatar_old" value="<?= $avatar ?>">
                     <span class="err" id="ctimgErr"></span>

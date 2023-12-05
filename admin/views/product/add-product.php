@@ -63,7 +63,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?page=statistical">
+            <a href="index.php?page=arrange">
                 <i class='bx bxs-analyse'></i>
                 <span class="text">Thống Kê</span>
             </a>
@@ -136,7 +136,7 @@
                 </div>
                 <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
-                    <!-- <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple> -->
+                    <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
                     <span class="err" id="gelleryErr"></span>
                 </div>
 

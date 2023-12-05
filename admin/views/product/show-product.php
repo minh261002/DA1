@@ -120,9 +120,7 @@
                     <td>
                         <?php echo $product['price'] ?>
                     </td>
-                    <td>
-                        <?php echo $product['gallery'] ?>
-                    </td>
+
                     <td>
                         <?php echo $product['created_at'] ?>
                     </td>

@@ -74,7 +74,7 @@ if (isset($_GET['page'])) {
                 } else {
                     category_insert($category_name, $category_img, $category_home);
                 }
-                $message = "Thêm danh mục thành công!";
+                $message = "";
                 header('Location: index.php?page=category');
             }
 
@@ -107,7 +107,7 @@ if (isset($_GET['page'])) {
                     update_category($category_id, $category_img_old, $category_name, $category_home, $category_hide);
                 }
 
-                $message = "Cập nhật danh mục thành công!";
+                $message = "";
                 $_SESSION["message"] = $message;
                 header('Location: index.php?page=category');
             }
@@ -126,12 +126,12 @@ if (isset($_GET['page'])) {
                     $product_count = $product_count_result[0]["COUNT(*)"];
 
                     if ($product_count > 0) {
-                        $message = "Danh mục có sản phẩm, không thể xóa.";
+                        $message = "";
                         $_SESSION["message"] = $message;
                         header('location: index.php?page=category');
                     } else {
                         category_delete($category_id);
-                        $message = "Xóa danh mục sản phẩm thành công ";
+                        $message = " ";
                         $_SESSION["message"] = $message;
                         header('location: index.php?page=category');
                         exit;
@@ -161,7 +161,7 @@ if (isset($_GET['page'])) {
                 admin_show_cattegory($category_id);
                 admin_show_product_by_category($category_id);
 
-                $message = "Danh mục sản phẩm đã được kinh doanh";
+                $message = "";
                 $_SESSION["message"] = $message;
                 header('location: index.php?page=category');
                 exit;

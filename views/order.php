@@ -214,7 +214,7 @@ foreach ($bill_user as $bill) {
                             <div class="cart-container-mobile">
                                 <p class="id-order">#0189237</p>
                                 <div class="cart-item-mb">
-                                    <img src="Uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
+                                    <img src="uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
                                         alt="" class="img-item">
                                     <div class="cart-item-content">
                                         <div class="title-box">
@@ -247,7 +247,7 @@ foreach ($bill_user as $bill) {
                                     </div>
                                 </div>
                                 <div class="cart-item-mb">
-                                    <img src="Uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
+                                    <img src="uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
                                         alt="" class="img-item">
                                     <div class="cart-item-content">
                                         <div class="title-box">
@@ -295,7 +295,7 @@ foreach ($bill_user as $bill) {
                             <div class="cart-container-mobile">
                                 <p class="id-order">#0189237</p>
                                 <div class="cart-item-mb">
-                                    <img src="Uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
+                                    <img src="uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
                                         alt="" class="img-item">
                                     <div class="cart-item-content">
                                         <div class="title-box">
@@ -328,7 +328,7 @@ foreach ($bill_user as $bill) {
                                     </div>
                                 </div>
                                 <div class="cart-item-mb">
-                                    <img src="Uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
+                                    <img src="uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg"
                                         alt="" class="img-item">
                                     <div class="cart-item-content">
                                         <div class="title-box">

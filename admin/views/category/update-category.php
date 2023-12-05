@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
                 </div>
 
                 <div class="form-group mb-3">
-                    <img src="../Uploads/<?= $avatar ?>" width='50px'>
+                    <img src="../uploads/<?= $avatar ?>" width='50px'>
                     <input type="file" name="category_img" id="category_img" class="form-control d-block">
                     <input type="hidden" name="avatar_old" value="<?= $avatar ?>">
                     <span class="err" id="ctimgErr"></span>

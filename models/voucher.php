@@ -25,6 +25,7 @@ if (isset($_POST['voucher'])) {
 
             $discountAmount = ($discountValue / 100) * $totalPrice;
             $_SESSION['discounted'] = $discountAmount;
+            unset($_SESSION['discounted']);
 
             $totalPrice -= $discountAmount;
             $_SESSION['total_price'] = $totalPrice;

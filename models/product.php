@@ -4,7 +4,7 @@ require_once 'pdo.php';
 
 function insert_product($id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot)
 {
-    
+
     $sql = "INSERT INTO product(id_product, size, color, quantity) VALUES ((?, ?, ?, ?)";
     return pdo_last_insert_id($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
 }

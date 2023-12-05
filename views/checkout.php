@@ -317,7 +317,7 @@ $temporary = $_SESSION['temporary'] ?? 0;
                             <!-- <?php foreach ($_SESSION["cart"] as $key => $cart) { ?> -->
 
                                 <div class="cart-item-mb">
-                                    <img src="Uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg" alt=""
+                                    <img src="uploads/28ffeb35667a46f1a2d3a525e604ccb0_optimized_original_image.jpg" alt=""
                                         class="img-item">
                                     <div class="cart-item-content">
                                         <div class="title-box">

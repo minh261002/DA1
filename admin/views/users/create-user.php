@@ -121,7 +121,7 @@ if (isset($one[0]['updated_at'])) {
             <h5 class="m-4">Thêm Tài Khoản Mới</h5>
             <form action="index.php?page=create-user" method="POST" class="form-update" enctype="multipart/form-data">
                 <div class="update_avatar">
-                    <img src="../Uploads/default_user.png" width="80px" id="previewAvatar">
+                    <img src="../uploads/default_user.png" width="80px" id="previewAvatar">
                     <br> <label for="avatar" class="chs-img">Chọn Ảnh</label>
                     <input type="file" name="avatar" id="avatar">
 

@@ -13,7 +13,7 @@ foreach ($list_category as $ct) {
     $show_category .= '
         <tr>
             <td>' . $id . '</td>
-            <td><img src="../Uploads/' . $avatar . '" width="50px"></td>
+            <td><img src="../uploads/' . $avatar . '" width="50px"></td>
             <td>' . $name . '</td>
             <td>' . (($home == 0) ? "Mặc Định" : "Hiển Thị Trang Chủ") . '</td>
             <td>' . (($hide == 0) ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh") . '</td>

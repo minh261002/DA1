@@ -104,12 +104,12 @@
 
 
                         <?php
-                            if (isset($list_category)) {
-                                foreach ($list_category as $dm) {
-                                    echo '<option value="' . $dm['id'] . '">' . $dm['name'] . '</option>';
-                                }
+                        if (isset($list_category)) {
+                            foreach ($list_category as $dm) {
+                                echo '<option value="' . $dm['id'] . '">' . $dm['name'] . '</option>';
                             }
-                            ?>
+                        }
+                        ?>
                     </select>
                 </div>
 
@@ -121,7 +121,7 @@
                 <div class="form-group mb-3">
                     <label for="img">Hình Ảnh</label>
                     <input type="file" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
-                    <img src="../Uploads/<?= $one[0]['img'] ?>" width="50px" alt="">
+                    <img src="../uploads/<?= $one[0]['img'] ?>" width="50px" alt="">
                     <input type="hidden" name="img" id="img" class="form-control d-block" value="<?= $one[0]['img'] ?>">
                 </div>
 

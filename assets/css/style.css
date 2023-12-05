@@ -825,8 +825,8 @@ input[type="radio"]:checked+label {
   background-color: #f5f5f5;
 }
 
-.cart-item{
-  padding:12px 32px;
+.cart-item {
+  padding: 12px 32px;
   background-color: #f5f5f5;
 }
 
@@ -1262,13 +1262,13 @@ header.header__mobile {
   background: #c92027;
 }
 
-.method-group{
+.method-group {
   text-align: left;
 }
 
-.method-group input[type="radio"] + label {
+.method-group input[type="radio"]+label {
   padding: 6px 0 !important;
-} 
+}
 
 /*reakpoint cho điện thoại  */
 @media screen and (max-width: 767px) {
@@ -2093,7 +2093,7 @@ header.header__mobile {
 
 .about_us {
   padding: 56px 16px;
-  background: rgb(172, 0, 7);
+  background: #131313;
 }
 
 .about-content {
@@ -3203,7 +3203,7 @@ input[type="email"]:disabled {
     display: none;
   }
 
-  .line-hoz{
+  .line-hoz {
     width: 1px;
     height: 100%;
     background: #333;

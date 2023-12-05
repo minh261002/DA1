@@ -107,8 +107,7 @@
             <?php
             $i = 1;
             foreach ($product as $key => $product) {
-                ?>
-<<<<<<< HEAD
+            ?>
                 <tbody>
                     <tr>
                         <td>
@@ -117,48 +116,18 @@
                         <td>
                             <?php echo $product['name'] ?>
                         </td>
-                        <td><img src="../uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
+                        <td><img src="../Uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
                         <td>
                             <?php echo $product['price'] ?>
                         </td>
-                        <td>
-                            <?php echo $product['gallery'] ?>
-                        </td>
+
                         <td>
                             <?php echo $product['created_at'] ?>
                         </td>
-                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i
-                                    class="bx bx-edit"></i></a><a
-                                href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i
-                                    class="bx bx-trash"></i></a></td>
+                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i class="bx bx-edit"></i></a><a href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i class="bx bx-trash"></i></a></td>
                     </tr>
                 </tbody>
-                <?php
-=======
-            <tbody>
-                <tr>
-                    <td>
-                        <?php echo $i ?>
-                    </td>
-                    <td>
-                        <?php echo $product['name'] ?>
-                    </td>
-                    <td><img src="../Uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
-                    <td>
-                        <?php echo $product['price'] ?>
-                    </td>
-
-                    <td>
-                        <?php echo $product['created_at'] ?>
-                    </td>
-                    <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i
-                                class="bx bx-edit"></i></a><a
-                            href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i
-                                class="bx bx-trash"></i></a></td>
-                </tr>
-            </tbody>
             <?php
->>>>>>> 6d8fca59b8a462c6ea91ff0e9001f4aafd748e3b
                 $i++;
             }
             ?>

@@ -80,7 +80,6 @@ if (isset($_GET['page'])) {
 
             require_once 'views/category/add-category.php';
             break;
-
         //sửa danh mục
         case 'updateCategory':
             if (isset($_POST['updateCategory']) && $_POST['updateCategory']) {
@@ -331,7 +330,6 @@ if (isset($_GET['page'])) {
             $product = render_allproduct();
             require_once 'views/product/show-product.php';
             break;
-
         // thêm sản phẩm
         case 'add-product':
             if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
@@ -346,13 +344,13 @@ if (isset($_GET['page'])) {
                 $size = $_POST['size'];
                 $color = $_POST['color'];
                 $quantity = $_POST['quantity'];
-
-
                 // Xử lý tải lên ảnh chính
                 $img_path = "";
+
                 if ($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
                     $target_dir = "../Uploads/";
                     $target_file = $target_dir . basename($_FILES["img"]["name"]);
+
                     if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
                         $img_path = $target_file;
                     } else {
@@ -360,13 +358,15 @@ if (isset($_GET['page'])) {
                     }
                 }
 
-                $gallery_s = [];
-                // $target_dir_gallery = "../Uploads";
-                $target_dir = "../Uploads/";
+                // Xử lý việc tải nhiều ảnh
+                $gallery_images = [];
+                $target_dir_gallery = "../Uploads/";
+
                 if (isset($_FILES["gallery"])) {
                     foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
                         $gallery_image_name = $_FILES["gallery"]["name"][$key];
-                        $gallery_target_file = $target_dir . basename($gallery_image_name);
+                        $gallery_target_file = $target_dir_gallery . basename($gallery_image_name);
+
                         // Chỉ xử lý ảnh nếu người dùng đã tải lên
                         if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
                             if (move_uploaded_file($tmp_name, $gallery_target_file)) {
@@ -382,34 +382,23 @@ if (isset($_GET['page'])) {
                 if (empty($message)) {
                     $galleryData = ["images" => $gallery_images];
                     $jsonGallery = json_encode($gallery_images);
-
-                    // Insert product data
-
-                    $sql = "INSERT INTO product (id_category, name, img, gallery, info, price, sale, view, hot, created_at)
-                            VALUES (?,?,?,?,?,?,?,?,?,NOW())";
-
+                    
+                // Insert product data
+                try {
+                    $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
                     pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
-
-                    $id_product = insert_product($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
-                    // $product_id = pdo_get_connection()->lastInsertId();
-
-                    // foreach ($_POST['size'] as $key => $size) {
-                    //     $color = $_POST['color'][$key];
-                    //     $quantity = $_POST['quantity'][$key];
-                    // $sqlVariant = "INSERT INTO variant (id_product, size, color, quantity) VALUES (?, ?, ?, ?)";
-                    // pdo_execute($sqlVariant, $product_id, $size, $color, $quantity);
-
-                    // }
-
+                    echo "Thêm thành công!";
+                }catch (PDOException $e) {
+                    echo "Thêm thất bại: " . $e->getMessage();
                 }
-                header('Location: index.php?page=product');
-            }
-
-            $variant = get_allvariant();
-            $list_category = get_category();
-            $product = render_allproduct();
-            require_once 'views/product/add-product.php';
-            break;
+                    }
+                    header('Location: index.php?page=product');
+                }
+                $variant = get_allvariant();
+                $list_category = get_category();
+                $product = render_allproduct();
+                require_once 'views/product/add-product.php';
+                break;
 
 
         // Sửa Sản Phẩm
@@ -417,8 +406,6 @@ if (isset($_GET['page'])) {
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $one = getone_product($id);
-                // echo $id;
-                // print_r($one);
             }
             if ((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
                 $id_category = $_POST['id_category'];
@@ -428,30 +415,36 @@ if (isset($_GET['page'])) {
                 $sale = $_POST['sale'];
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
-
-                // Xử lý tải lên ảnh chính
+                $size = $_POST['size'];
+                $color = $_POST['color'];
+                $quantity = $_POST['quantity'];
+                   // Xử lý tải lên ảnh chính
                 $img_path = "";
+
                 if ($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
                     $target_dir = "../Uploads/";
-                    $target_file = $target_dir . basename($_FILES["image"]["name"]);
-                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                    $target_file = $target_dir . basename($_FILES["img"]["name"]);
+
+                    if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
                         $img_path = $target_file;
                     } else {
                         $message = "Lỗi khi tải lên ảnh.";
                     }
                 }
 
-                $gallery_img = [];
-                // $target_dir_gallery = "../Uploads";
-                $target_dir = "../uploads/";
+                // Xử lý việc tải nhiều ảnh
+                $gallery_images = [];
+                $target_dir_gallery = "../Uploads/";
+
                 if (isset($_FILES["gallery"])) {
                     foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
-                        $gallery_img_name = $_FILES["gallery"]["name"][$key];
-                        $gallery_target_file = $target_dir . basename($gallery_img_name);
+                        $gallery_image_name = $_FILES["gallery"]["name"][$key];
+                        $gallery_target_file = $target_dir_gallery . basename($gallery_image_name);
+
                         // Chỉ xử lý ảnh nếu người dùng đã tải lên
                         if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
                             if (move_uploaded_file($tmp_name, $gallery_target_file)) {
-                                $gallery_img[] = $gallery_target_file;
+                                $gallery_images[] = $gallery_target_file;
                             } else {
                                 $message = "Lỗi khi tải lên ảnh trong gallery.";
                                 break;
@@ -461,9 +454,9 @@ if (isset($_GET['page'])) {
                 }
 
                 if (empty($message)) {
-                    $galleryData = ["img" => $gallery_img];
-                    $jsonGallery = json_encode($gallery_img);
-                    if ($img_path != "" && $jsonGallery != "") {
+                    $galleryData = ["images" => $gallery_images];
+                    $jsonGallery = json_encode($gallery_images);
+                    if ($image_path!="" &&  $jsonGallery!=""){
                         try {
                             $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
                             pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
@@ -471,19 +464,19 @@ if (isset($_GET['page'])) {
                         } catch (PDOException $e) {
                             echo "Chỉnh Sửa thất bại! " . $e->getMessage();
                         }
-                    } else {
+                    }else {
                         try {
-                            $sql = "UPDATE product SET id_category=?, name=?,  info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-                            pdo_execute($sql, $id_category, $name, $info, $price, $sale, $view, $hot, $id);
+                            $sql = "UPDATE product SET id_category=?, name=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
+                            pdo_execute($sql, $id_category, $name,  $info, $price, $sale, $view, $hot, $id);
                             echo "Chỉnh sửa thành công";
                         } catch (PDOException $e) {
                             echo "Chỉnh Sửa thất bại! " . $e->getMessage();
                         }
                     }
-
+                    }
+                    header('Location: index.php?page=product');
                 }
-                header('Location: index.php?page=product');
-            }
+
             $variant = get_allvariant();
             $list_category = get_category();
             $product = render_allproduct();
@@ -559,6 +552,11 @@ if (isset($_GET['page'])) {
             require_once 'views/bill/show_bill.php';
             break;
 
+        case 'statistical':
+
+            require_once 'views/statistical/statistical.php';
+            break;
+
         case 'view_product':
             $view_product_admin = view_product_admin();
 
@@ -567,19 +565,8 @@ if (isset($_GET['page'])) {
 
         case 'arrange':
 
-            if (isset($_POST['btn-arrange']) && $_POST['btn-arrange']) {
-                $selectedMonth = $_POST['selectedMonth'];
-            } else {
-                $selectedMonth = date('m');
-            }
-
-            $arrange = arrange($selectedMonth);
-            $arrange_not_success = arrange_not_success($selectedMonth);
-            $arrange_cancel = arrange_cancel($selectedMonth);
-
             require_once 'views/statistical/arrange.php';
             break;
-
 
         case 'buy_product':
             $buy_product_admin = buy_product_admin();

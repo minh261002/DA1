@@ -302,11 +302,12 @@ $html_view_product = show_product($view_product);
                 </div>
                 <div class="news-right">
                     <div class="news-item">
-                        <a href="#">
+                        <a href="index.php?page=tin-tuc">
                             <img src="uploads/tt3.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">QUIETLUXURY: KHI SỰ KHIÊM NHƯỜNG ẨN CHỨA NÉT CAO SANG</a>
+                            <a href="index.php?page=tin-tuc" class="news-title">QUIETLUXURY: KHI SỰ KHIÊM NHƯỜNG ẨN CHỨA
+                                NÉT CAO SANG</a>
                             <p class="news-desc">
                                 TQuietluxury của IVY moda mang đến vẻ đẹp riêng biệt một cách thầm lặng. Giống như người
                                 phụ nữ an tĩnh và sâu sắc, họ vẫn luôn dùng trái tim yêu để đối diện với khó khăn, theo
@@ -316,11 +317,12 @@ $html_view_product = show_product($view_product);
                         </div>
                     </div>
                     <div class="news-item">
-                        <a href="#">
+                        <a href="index.php?page=tin-tuc">
                             <img src="uploads/tt1.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">Những mẫu váy dạ hội giúp phái đẹp nổi bật vào dịp cuối
+                            <a href="index.php?page=tin-tuc" class="news-title">Những mẫu váy dạ hội giúp phái đẹp nổi
+                                bật vào dịp cuối
                                 năm</a>
                             <p class="news-desc">
                                 Với BST Artisanal Delicate, mỗi kiệt tác đều được thực hiện thủ công 100% trong vòng ít
@@ -331,11 +333,12 @@ $html_view_product = show_product($view_product);
                         </div>
                     </div>
                     <div class="news-item">
-                        <a href="#">
+                        <a href="index.php?page=tin-tuc">
                             <img src="uploads/tt4.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">BLOSSOMS DELIGHT: KHU VƯỜN TÂM HỒN NGẬP TRÀN NHỮNG ĐÓA HOA NỞ
+                            <a href="index.php?page=tin-tuc" class="news-title">BLOSSOMS DELIGHT: KHU VƯỜN TÂM HỒN NGẬP
+                                TRÀN NHỮNG ĐÓA HOA NỞ
                                 RỘ</a>
                             <p class="news-desc">
                                 Nếu tâm trí bạn được ví như một khu vườn thì những bông hoa tươi thắm là sự bày tỏ rõ
@@ -345,11 +348,12 @@ $html_view_product = show_product($view_product);
                         </div>
                     </div>
                     <div class="news-item">
-                        <a href="#">
+                        <a href="index.php?page=tin-tuc">
                             <img src="uploads/tt5.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">SCENT OF THE SEA | HÃY ĐỂ HƯƠNG VỊ CỦA BIỂN ĐÁNH THỨC THANH
+                            <a href="index.php?page=tin-tuc" class="news-title">SCENT OF THE SEA | HÃY ĐỂ HƯƠNG VỊ CỦA
+                                BIỂN ĐÁNH THỨC THANH
                                 ÂM TRONG BẠN</a>
                             <p class="news-desc">
                                 Sự êm ái của những con sóng được tái hiện qua đường xếp ly bay bổng cùng với chất liệu
@@ -415,7 +419,7 @@ $html_view_product = show_product($view_product);
                         nhập
                         khẩu chính hãng từ các nhà phân phối nhằm đưa tới sự trải nghiệm sản phẩm tốt nhất dành cho
                         khách hàng thân yêu của Owen Shop.</p>
-                    <a href="#" class="showall-btn">Xem thêm</a>
+                    <a href="index.php?page=chung-nhan-chinh-hang" class="showall-btn">Xem thêm</a>
                 </div>
             </div>
         </div>

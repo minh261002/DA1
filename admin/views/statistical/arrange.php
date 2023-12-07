@@ -156,13 +156,11 @@
                 $total_revenue = isset($arrange[0]['total_revenue']) ? $arrange[0]['total_revenue'] : 0;
                 $total_revenue_not_success = isset($arrange_not_success[0]['total_revenue']) ? $arrange_not_success[0]['total_revenue'] : 0;
                 $total_revenue_cancel = isset($arrange_cancel[0]['total_revenue']) ? $arrange_cancel[0]['total_revenue'] : 0;
-                $total = $total_revenue + $total_revenue_not_success - $total_revenue_cancel;
+                $total = $total_revenue;
             } else {
                 echo "Không có dữ liệu.";
             }
             ?>
-
-
 
             <div class="grid-chart">
                 <div class="container">

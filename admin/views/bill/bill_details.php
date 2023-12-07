@@ -9,13 +9,13 @@ foreach ($bill_details as $bill_detail) {
 
     $status = $bill_detail['status'];
     if ($status == 0) {
-        $status = '<span class="bill_st"><i class="bx bxs-hourglass-top"></i>Chờ Xác Nhận <a href = "index.php?page=set_bill&bill=1&id_bill=' . $bill['id'] . '">(Xác Nhận)</a></span>';
+        $status = '<span class="bill_st"><i class="bx bxs-hourglass-top"></i>Chờ Xác Nhận</span>';
     } else if ($status == 1) {
-        $status = '<span class="bill_st"><i class="bx bxs-check-circle"></i>Đã Xác Nhận <a href = "index.php?page=set_bill&bill=2&id_bill=' . $bill['id'] . '">(Giao Hàng)</a></span>';
+        $status = '<span class="bill_st"><i class="bx bxs-check-circle"></i>Đã Xác Nhận </span>';
     } else if ($status == 2) {
-        $status = '<span class="bill_st"><i class="bx bxs-truck"></i>Đang Giao Hàng <a href = "index.php?page=set_bill&bill=3&id_bill=' . $bill['id'] . '">(Đã Giao)</a></span>';
+        $status = '<span class="bill_st"><i class="bx bxs-truck"></i>Đang Giao Hàng</span>';
     } else if ($status == 3) {
-        $status = '<span class="bill_st"><i class="bx bxs-user-check"></i>Đã Giao Hàng<a href = "index.php?page=set_bill&bill=5&id_bill=' . $bill['id'] . '">(Thành Công)</a></span>';
+        $status = '<span class="bill_st"><i class="bx bxs-user-check"></i>Đã Giao Hàng</span>';
     } else if ($status == 4) {
         $status = '<span class="bill_st"><i class="bx bx-calendar-x"></i>Đã Hủy</span>';
     } else if ($status == 5) {
@@ -247,7 +247,7 @@ foreach ($bill_details as $bill_detail) {
                             <?= number_format($voucher, 0, ',', '.') ?>đ
                         </p>
                         <p>
-                            <?= number_format($total + $transport_fee, 0, ',', '.') ?>đ
+                            <?= number_format(($total + $transport_fee) - $voucher, 0, ',', '.') ?>đ
                         </p>
                     </div>
                 </div>

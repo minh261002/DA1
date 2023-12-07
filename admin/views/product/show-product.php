@@ -16,13 +16,13 @@
                 <span class="text">Danh Mục</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=product">
                 <i class='bx bxs-window-alt'></i>
                 <span class="text">Sản Phẩm</span>
             </a>
         </li>
-        <li class="active">
+        <li>
             <a href="index.php?page=bill">
                 <i class='bx bxs-calendar-check'></i>
                 <span class="text">Đơn Hàng</span>
@@ -106,28 +106,31 @@
             </thead>
             <?php
             $i = 1;
-            foreach ($product as $key => $product) {
-            ?>
+            foreach($product as $key => $product) {
+                ?>
                 <tbody>
                     <tr>
-                        <td></td>
-                        <?php echo $i ?>
+                        <td>
+                            <?php echo $i ?>
                         </td>
                         <td>
                             <?php echo $product['name'] ?>
                         </td>
                         <td><img src="../Uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
                         <td>
-                            <?php echo $product['price'] ?>
+                            <?php echo number_format($product['price'], 0, ',', '.').'đ' ?>
                         </td>
 
                         <td>
                             <?php echo $product['created_at'] ?>
                         </td>
-                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i class="bx bx-edit"></i></a><a href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i class="bx bx-trash"></i></a></td>
+                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i
+                                    class="bx bx-edit"></i></a><a
+                                href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i
+                                    class="bx bx-trash"></i></a></td>
                     </tr>
                 </tbody>
-            <?php
+                <?php
                 $i++;
             }
             ?>

@@ -21,7 +21,7 @@ require_once "../models/statistical.php";
 $bill_unconfirmed = get_bill_unconfimred();
 
 //kiêm tra phiên đăng nhập admin
-if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSION["admin"]) > 0)) {
+if(isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSION["admin"]) > 0)) {
     $admin = $_SESSION["admin"];
     extract($admin);
 } else {
@@ -30,11 +30,11 @@ if (isset($_SESSION["admin"]) && is_array($_SESSION["admin"]) && (count($_SESSIO
 
 require_once 'views/font-end/header.php';
 
-if (isset($_GET['page'])) {
-    switch ($_GET['page']) {
+if(isset($_GET['page'])) {
+    switch($_GET['page']) {
         //dăng xuất
         case 'logout':
-            if (isset($_SESSION["admin"]) && count($_SESSION["admin"]) > 0) {
+            if(isset($_SESSION["admin"]) && count($_SESSION["admin"]) > 0) {
                 session_destroy();
             }
             header('Location: index.php');
@@ -50,23 +50,23 @@ if (isset($_GET['page'])) {
 
         //Thêm danh mục mới
         case 'addCategory':
-            if (isset($_POST['addCategory']) && $_POST['addCategory']) {
+            if(isset($_POST['addCategory']) && $_POST['addCategory']) {
                 $category_name = $_POST['category_name'];
                 $category_home = $_POST['home'];
 
-                if (!empty($_FILES['category_img']['name'])) {
+                if(!empty($_FILES['category_img']['name'])) {
                     $category_img = $_FILES['category_img']['name'];
                 } else {
                     $category_img = "default_pd.png";
                 }
 
                 $target_dir = "../Uploads/";
-                $target_file = $target_dir . basename($_FILES['category_img']['name']);
+                $target_file = $target_dir.basename($_FILES['category_img']['name']);
 
                 move_uploaded_file($_FILES['category_img']['tmp_name'], $target_file);
 
 
-                if (category_exist($category_name)) {
+                if(category_exist($category_name)) {
                     $message = "Danh mục đã tồn tại!";
                     $_SESSION["message"] = $message;
                     header('Location: index.php?page=addCategory');
@@ -82,7 +82,7 @@ if (isset($_GET['page'])) {
             break;
         //sửa danh mục
         case 'updateCategory':
-            if (isset($_POST['updateCategory']) && $_POST['updateCategory']) {
+            if(isset($_POST['updateCategory']) && $_POST['updateCategory']) {
                 $category_id = $_POST['category_id'];
                 $category_name = $_POST['category_name'];
                 $category_home = $_POST['home'];
@@ -90,17 +90,17 @@ if (isset($_GET['page'])) {
                 $category_img_old = $_POST['avatar_old'];
                 $category_hide = $_POST['hide'];
 
-                if ($category_hide == 1) {
+                if($category_hide == 1) {
                     admin_hide_product_by_category($category_id);
                 }
-                if ($category_hide == 0) {
+                if($category_hide == 0) {
                     admin_show_product_by_category($category_id);
                 }
 
                 $target_dir = "../uploads/";
-                $target_file = $target_dir . basename($_FILES["category_img"]["name"]);
+                $target_file = $target_dir.basename($_FILES["category_img"]["name"]);
 
-                if (!empty($category_img)) {
+                if(!empty($category_img)) {
                     move_uploaded_file($_FILES["category_img"]["tmp_name"], $target_file);
                     update_category($category_id, $category_img, $category_name, $category_home, $category_hide);
                 } else {
@@ -117,15 +117,15 @@ if (isset($_GET['page'])) {
 
         //xóa danh mục
         case 'delCategory':
-            if (isset($_GET["id"])) {
+            if(isset($_GET["id"])) {
                 $category_id = $_GET["id"];
 
                 $product_count_result = category_has_products($category_id);
 
-                if ($product_count_result !== null) {
+                if($product_count_result !== null) {
                     $product_count = $product_count_result[0]["COUNT(*)"];
 
-                    if ($product_count > 0) {
+                    if($product_count > 0) {
                         $message = "";
                         $_SESSION["message"] = $message;
                         header('location: index.php?page=category');
@@ -141,7 +141,7 @@ if (isset($_GET['page'])) {
             break;
 
         case 'hideCategory':
-            if (isset($_GET["id"])) {
+            if(isset($_GET["id"])) {
                 $category_id = $_GET["id"];
 
                 admin_hide_category($category_id);
@@ -155,7 +155,7 @@ if (isset($_GET['page'])) {
             break;
 
         case 'showCategory':
-            if (isset($_GET["id"])) {
+            if(isset($_GET["id"])) {
                 $category_id = $_GET["id"];
 
                 admin_show_cattegory($category_id);
@@ -175,9 +175,9 @@ if (isset($_GET['page'])) {
             break;
 
         case 'create-user':
-            if (isset($_POST['create-user'])) {
+            if(isset($_POST['create-user'])) {
 
-                if (isset($_FILES['avatar']['name']) && ($_FILES['avatar']['name'] != null)) {
+                if(isset($_FILES['avatar']['name']) && ($_FILES['avatar']['name'] != null)) {
                     $avatar = $_FILES['avatar']['name'];
                 } else {
                     $avatar = "default_user.png";
@@ -186,20 +186,20 @@ if (isset($_GET['page'])) {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
 
-                if (isset($_POST['fullname'])) {
+                if(isset($_POST['fullname'])) {
                     $fullname = $_POST['fullname'];
                 } else {
                     $fullname = NULL;
                 }
                 $email = $_POST['email'];
 
-                if (isset($_POST['phone'])) {
+                if(isset($_POST['phone'])) {
                     $phone = $_POST['phone'];
                 } else {
                     $phone = NULL;
                 }
 
-                if (empty($_POST['province']) && empty($_POST['district']) && empty($_POST['ward']) && empty($_POST['detail'])) {
+                if(empty($_POST['province']) && empty($_POST['district']) && empty($_POST['ward']) && empty($_POST['detail'])) {
                     $address = NULL;
 
                 } else {
@@ -223,7 +223,7 @@ if (isset($_GET['page'])) {
                 $created_at = date('Y-m-d H:i:s');
 
                 $target_dir = "../Uploads/";
-                $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+                $target_file = $target_dir.basename($_FILES["avatar"]["name"]);
 
                 create_user($avatar, $username, $password, $fullname, $email, $phone, $address, $role, $created_at);
 
@@ -237,12 +237,12 @@ if (isset($_GET['page'])) {
 
 
         case 'update-user':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $one = getoneuser($id);
             }
 
-            if (isset($_POST['update_user'])) {
+            if(isset($_POST['update_user'])) {
                 $id = $_POST['id'];
 
                 // Lấy các giá trị từ biểu mẫu
@@ -272,9 +272,9 @@ if (isset($_GET['page'])) {
                 );
 
                 $target_dir = "../Uploads/";
-                $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
+                $target_file = $target_dir.basename($_FILES["avatar"]["name"]);
 
-                if ($avatar != null) {
+                if($avatar != null) {
                     move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
                     admin_update_user($id, $avatar, $username, $password, $fullname, $dateOfBirth, $gender, $email, $phone, $address, $ban, $role);
                 } else {
@@ -283,14 +283,14 @@ if (isset($_GET['page'])) {
 
                 $message = "Cập nhật thông tin thành công!";
                 $_SESSION['message'] = $message;
-                header('Location: index.php?page=update-user&id=' . $id);
+                header('Location: index.php?page=update-user&id='.$id);
             }
 
             require_once 'views/users/update-user.php';
             break;
 
         case 'block-user':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $id_user = $_GET['id'];
                 block_user($id_user);
 
@@ -300,7 +300,7 @@ if (isset($_GET['page'])) {
             break;
 
         case 'unblock-user':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $id_user = $_GET['id'];
                 unblock_user($id_user);
 
@@ -311,7 +311,7 @@ if (isset($_GET['page'])) {
 
         //xác nhận đơn hàng
         case 'confirm_bill':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $bill_id = $_GET['id'];
 
                 confirm_bill($bill_id);
@@ -332,7 +332,7 @@ if (isset($_GET['page'])) {
             break;
         // thêm sản phẩm
         case 'add-product':
-            if ((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
+            if((isset($_POST['themmoi'])) && ($_POST['themmoi'])) {
 
                 $id_category = $_POST['id_category'];
                 $name = $_POST['name'];
@@ -347,11 +347,11 @@ if (isset($_GET['page'])) {
                 // Xử lý tải lên ảnh chính
                 $img_path = "";
 
-                if ($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
+                if($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
                     $target_dir = "../Uploads/";
-                    $target_file = $target_dir . basename($_FILES["img"]["name"]);
+                    $target_file = $target_dir.basename($_FILES["img"]["name"]);
 
-                    if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
+                    if(move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
                         $img_path = $target_file;
                     } else {
                         $message = "Lỗi khi tải lên ảnh.";
@@ -362,14 +362,14 @@ if (isset($_GET['page'])) {
                 $gallery_images = [];
                 $target_dir_gallery = "../Uploads/";
 
-                if (isset($_FILES["gallery"])) {
-                    foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
+                if(isset($_FILES["gallery"])) {
+                    foreach($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
                         $gallery_image_name = $_FILES["gallery"]["name"][$key];
-                        $gallery_target_file = $target_dir_gallery . basename($gallery_image_name);
+                        $gallery_target_file = $target_dir_gallery.basename($gallery_image_name);
 
                         // Chỉ xử lý ảnh nếu người dùng đã tải lên
-                        if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
-                            if (move_uploaded_file($tmp_name, $gallery_target_file)) {
+                        if($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
+                            if(move_uploaded_file($tmp_name, $gallery_target_file)) {
                                 $gallery_images[] = $gallery_target_file;
                             } else {
                                 $message = "Lỗi khi tải lên ảnh trong gallery.";
@@ -379,7 +379,7 @@ if (isset($_GET['page'])) {
                     }
                 }
 
-                if (empty($message)) {
+                if(empty($message)) {
                     $galleryData = ["images" => $gallery_images];
                     $jsonGallery = json_encode($gallery_images);
 
@@ -389,7 +389,7 @@ if (isset($_GET['page'])) {
                         pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
                         echo "Thêm thành công!";
                     } catch (PDOException $e) {
-                        echo "Thêm thất bại: " . $e->getMessage();
+                        echo "Thêm thất bại: ".$e->getMessage();
                     }
                 }
                 header('Location: index.php?page=product');
@@ -403,11 +403,11 @@ if (isset($_GET['page'])) {
 
         // Sửa Sản Phẩm
         case 'update-product':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $one = getone_product($id);
             }
-            if ((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
+            if((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
                 $id_category = $_POST['id_category'];
                 $name = $_POST['name'];
                 $info = $_POST['info'];
@@ -421,11 +421,11 @@ if (isset($_GET['page'])) {
                 // Xử lý tải lên ảnh chính
                 $img_path = "";
 
-                if ($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
+                if($_FILES["img"]["error"] == UPLOAD_ERR_OK) {
                     $target_dir = "../Uploads/";
-                    $target_file = $target_dir . basename($_FILES["img"]["name"]);
+                    $target_file = $target_dir.basename($_FILES["img"]["name"]);
 
-                    if (move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
+                    if(move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
                         $img_path = $target_file;
                     } else {
                         $message = "Lỗi khi tải lên ảnh.";
@@ -436,14 +436,14 @@ if (isset($_GET['page'])) {
                 $gallery_images = [];
                 $target_dir_gallery = "../Uploads/";
 
-                if (isset($_FILES["gallery"])) {
-                    foreach ($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
+                if(isset($_FILES["gallery"])) {
+                    foreach($_FILES["gallery"]["tmp_name"] as $key => $tmp_name) {
                         $gallery_image_name = $_FILES["gallery"]["name"][$key];
-                        $gallery_target_file = $target_dir_gallery . basename($gallery_image_name);
+                        $gallery_target_file = $target_dir_gallery.basename($gallery_image_name);
 
                         // Chỉ xử lý ảnh nếu người dùng đã tải lên
-                        if ($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
-                            if (move_uploaded_file($tmp_name, $gallery_target_file)) {
+                        if($_FILES["gallery"]["error"][$key] == UPLOAD_ERR_OK) {
+                            if(move_uploaded_file($tmp_name, $gallery_target_file)) {
                                 $gallery_images[] = $gallery_target_file;
                             } else {
                                 $message = "Lỗi khi tải lên ảnh trong gallery.";
@@ -453,16 +453,16 @@ if (isset($_GET['page'])) {
                     }
                 }
 
-                if (empty($message)) {
+                if(empty($message)) {
                     $galleryData = ["images" => $gallery_images];
                     $jsonGallery = json_encode($gallery_images);
-                    if ($image_path != "" && $jsonGallery != "") {
+                    if($image_path != "" && $jsonGallery != "") {
                         try {
                             $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
                             pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
                             echo "Chỉnh sửa thành công";
                         } catch (PDOException $e) {
-                            echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+                            echo "Chỉnh Sửa thất bại! ".$e->getMessage();
                         }
                     } else {
                         try {
@@ -470,7 +470,7 @@ if (isset($_GET['page'])) {
                             pdo_execute($sql, $id_category, $name, $info, $price, $sale, $view, $hot, $id);
                             echo "Chỉnh sửa thành công";
                         } catch (PDOException $e) {
-                            echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+                            echo "Chỉnh Sửa thất bại! ".$e->getMessage();
                         }
                     }
                 }
@@ -485,7 +485,7 @@ if (isset($_GET['page'])) {
 
         // Xóa sản phẩm
         case 'del-product':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 del_sp($id);
             }
@@ -500,7 +500,7 @@ if (isset($_GET['page'])) {
 
         case 'update_voucher':
 
-            if (isset($_POST['btn-update-voucher']) && $_POST['btn-update-voucher']) {
+            if(isset($_POST['btn-update-voucher']) && $_POST['btn-update-voucher']) {
                 $id_voucher = $_POST['id_voucher'];
                 $name_voucher = $_POST['name_voucher'];
                 $value_voucher = $_POST['value_voucher'];
@@ -518,7 +518,7 @@ if (isset($_GET['page'])) {
             break;
 
         case 'delete_voucher':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $id_voucher = $_GET['id'];
 
                 delete_voucher($id_voucher);
@@ -531,7 +531,7 @@ if (isset($_GET['page'])) {
 
         case 'add_voucher':
 
-            if (isset($_POST['btn-add-voucher']) && $_POST['btn-add-voucher']) {
+            if(isset($_POST['btn-add-voucher']) && $_POST['btn-add-voucher']) {
                 $name_voucher = $_POST['name_voucher'];
                 $value_voucher = $_POST['value_voucher'];
                 $start_voucher = $_POST['start_voucher'];
@@ -553,7 +553,7 @@ if (isset($_GET['page'])) {
             break;
 
         case 'bill_details':
-            if (isset($_GET['id'])) {
+            if(isset($_GET['id'])) {
                 $id_bill = $_GET['id'];
             }
 
@@ -565,18 +565,18 @@ if (isset($_GET['page'])) {
             break;
 
         case 'set_bill':
-            if (isset($_GET['id_bill'])) {
+            if(isset($_GET['id_bill'])) {
                 $id_bill = $_GET['id_bill'];
 
-                if (isset($_GET['bill']) && $_GET['bill'] == 1) {
+                if(isset($_GET['bill']) && $_GET['bill'] == 1) {
                     set_bill_1($id_bill);
-                } elseif (isset($_GET['bill']) && $_GET['bill'] == 2) {
+                } elseif(isset($_GET['bill']) && $_GET['bill'] == 2) {
                     set_bill_2($id_bill);
-                } elseif (isset($_GET['bill']) && $_GET['bill'] == 3) {
+                } elseif(isset($_GET['bill']) && $_GET['bill'] == 3) {
                     set_bill_3($id_bill);
-                } elseif (isset($_GET['bill']) && $_GET['bill'] == 4) {
+                } elseif(isset($_GET['bill']) && $_GET['bill'] == 4) {
                     set_bill_4($id_bill);
-                } elseif (isset($_GET['bill']) && $_GET['bill'] == 5) {
+                } elseif(isset($_GET['bill']) && $_GET['bill'] == 5) {
                     acp_bill($id_bill);
                     pay_bill($id_bill);
                 }
@@ -594,7 +594,7 @@ if (isset($_GET['page'])) {
             break;
 
         case 'arrange':
-            if (isset($_POS['btn-arrange'])) {
+            if(isset($_POST['btn-arrange'])) {
                 $selectedMonth = $_POST['selectedMonth'];
             } else {
                 $selectedMonth = date('m');

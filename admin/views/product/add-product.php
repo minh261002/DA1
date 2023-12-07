@@ -14,7 +14,7 @@
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -26,7 +26,7 @@
                 <span class="text">Danh Mục</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=product">
                 <i class='bx bxs-window-alt'></i>
                 <span class="text">Sản Phẩm</span>
@@ -111,9 +111,9 @@
                     <select class="form-control" name="id_category" id="id_category">
                         <option value="0">Chọn Danh Mục</option>
                         <?php
-                        if (isset($list_category)) {
-                            foreach ($list_category as $dm) {
-                                echo '<option value="' . $dm['id'] . '">' . $dm['name'] . '</option>';
+                        if(isset($list_category)) {
+                            foreach($list_category as $dm) {
+                                echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
                             }
                         }
                         ?>

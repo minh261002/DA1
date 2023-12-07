@@ -7,7 +7,26 @@ function get_bill_unconfimred()
 
 function get_all_bill()
 {
-    $sql = 'SELECT * FROM bill ORDER BY id DESC';
+    $sql = 'SELECT * FROM bill WHERE 1';
+    if (isset($_GET['bill']) && $_GET['bill'] == 0) {
+        $sql .= ' AND status = 0';
+    }
+    if (isset($_GET['bill']) && $_GET['bill'] == 1) {
+        $sql .= ' AND status = 1';
+    }
+    if (isset($_GET['bill']) && $_GET['bill'] == 2) {
+        $sql .= ' AND status = 2';
+    }
+    if (isset($_GET['bill']) && $_GET['bill'] == 3) {
+        $sql .= ' AND status = 3';
+    }
+    if (isset($_GET['bill']) && $_GET['bill'] == 4) {
+        $sql .= ' AND status = 4';
+    }
+    if (isset($_GET['bill']) && $_GET['bill'] == 5) {
+        $sql .= ' AND status = 5';
+    }
+    $sql .= ' ORDER BY id DESC';
     return pdo_query($sql);
 }
 
@@ -38,22 +57,25 @@ function bill_search($id_bill)
     return pdo_query_one($sql, $id_bill);
 }
 
-function get_bill_user($id_user, $st)
+function get_bill_user($id_user, $order)
 {
-    if ($st !== null) {
+    if ($order !== null) {
         $sql = "SELECT * FROM bill WHERE 1";
-        if ($st == 0) {
+        if ($order == 0) {
             $sql .= " AND id_user = ? AND status = ?";
-        } elseif ($st == 1) {
+        } elseif ($order == 1) {
             $sql .= " AND id_user = ? AND status = ?";
-        } else if ($st == 2) {
+        } else if ($order == 2) {
             $sql .= " AND id_user = ? AND status = ?";
-        } elseif ($st == 3) {
+        } elseif ($order == 3) {
             $sql .= " AND id_user = ? AND status = ?";
-        } elseif ($st == 4) {
+        } elseif ($order == 4) {
+            $sql .= " AND id_user = ? AND status = ?";
+        } elseif ($order == 5) {
             $sql .= " AND id_user = ? AND status = ?";
         }
-        return pdo_query($sql, $id_user, $st);
+        $sql .= " ORDER BY id DESC";
+        return pdo_query($sql, $id_user, $order);
     } else {
         $sql = "SELECT * FROM bill WHERE id_user = ? ORDER BY id DESC";
         return pdo_query($sql, $id_user);

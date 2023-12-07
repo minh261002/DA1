@@ -8,7 +8,8 @@ foreach ($bill_user as $bill) {
     $status = $bill['status'];
 
     if ($status == 0) {
-        $status = '<span class="bill_st" style="color: orange;"><i class="bx bxs-hourglass-top"></i><span class="status-pending" Chờ Xác Nhận </span></span>';
+        $status = '<span class="bill_st" style="color: orange;"><i class="bx bxs-hourglass-top"></i><span class="status-pending"> Chờ Xác Nhận </span></span>';
+    } else if ($status == 1) {
         $status = '<span class="bill_st" style="color: green;"><i class="bx bxs-check-circle"></i><span class="status-confirmed">Đã Xác Nhận </span></span>';
     } else if ($status == 2) {
         $status = '<span class="bill_st" style="color: blue;"><i class="bx bxs-truck"></i><span class="status-in-progress" >Đang Giao Hàng </span></span>';
@@ -182,21 +183,57 @@ foreach ($bill_user as $bill) {
                 </div>
 
                 <div class="profile-content">
-                    <div class="content-header">
-                        <h4>TẤT CẢ ĐƠN HÀNG</h4>
-
-                    </div>
-
-
                     <div class="profile-order">
                         <div class="order-bar">
-                            <button class="order-tab"><a href="index.php?page=order">Tất cả đơn
-                                    hàng</a></button>
-                            <button class="order-tab"><a href="index.php?page=order&st=0">Chưa Xác Nhận</a></button>
+                            <?php if (!isset($_GET['order'])) {
+                                echo '<button class="order-tab"><a class="active" href="index.php?page=order">Tất Cả</a></button>';
+                            } else {
+                                echo '<button class="order-tab"><a href="index.php?page=order">Tất Cả</a></button>';
+                            }
+                            ?>
+
+                            <?php if (isset($_GET['order']) && $_GET['order'] == 0) {
+                                echo '<button class="order-tab"><a class="active" href="index.php?page=order&order=0">Chưa Xác Nhận</a></button>';
+                            } else {
+                                echo '<button class="order-tab"><a href="index.php?page=order&order=0">Chưa Xác Nhận</a></button>';
+                            } ?>
+
+                            <?php if (isset($_GET['order']) && $_GET['order'] == 1) {
+                                echo '<button class="order-tab"><a class="active" href="index.php?page=order&order=1">Đã Xác Nhận</a></button>';
+                            } else {
+                                echo '<button class="order-tab"><a href="index.php?page=order&order=1">Đã Xác Nhận</a></button>';
+                            } ?>
+
+
+                            <?php if (isset($_GET['order']) && $_GET['order'] == 2) {
+                                echo '<button class="order-tab"><a class="active" href="index.php?page=order&order=2">Đang Giao Hàng</a></button>';
+                            } else {
+                                echo '<button class="order-tab"><a href="index.php?page=order&order=2">Đang Giao Hàng</a></button>';
+                            } ?>
+
+                            <?php if (isset($_GET['order']) && $_GET['order'] == 3) {
+                                echo '<button class="order-tab"><a class="active" href="index.php?page=order&order=3">Đã Giao Hàng</a></button>';
+                            } else {
+                                echo '<button class="order-tab"><a href="index.php?page=order&order=3">Đã Giao Hàng</a></button>';
+                            } ?>
+
+                            <?php if (isset($_GET['order']) && $_GET['order'] == 4) {
+                                echo '<button class="order-tab"><a class="active" href="index.php?page=order&order=4">Đã Hủy</a></button>';
+                            } else {
+                                echo '<button class="order-tab"><a href="index.php?page=order&order=4">Đã Hủy</a></button>';
+                            } ?>
+
+                            <?php if (isset($_GET['order']) && $_GET['order'] == 5) {
+                                echo '<button class="order-tab"><a class="active" href="index.php?page=order&order=5">Thành Công</a></button>';
+                            } else {
+                                echo '<button class="order-tab"><a href="index.php?page=order&order=5">Thành Công</a></button>';
+                            } ?>
+
+                            <!-- <button class="order-tab"><a href="index.php?page=order&st=0">Chưa Xác Nhận</a></button>
                             <button class="order-tab"><a href="index.php?page=order&st=1">Đã Xác Nhận</a></button>
                             <button class="order-tab"><a href="index.php?page=order&st=2">Đang Giao Hàng</a></button>
                             <button class="order-tab"><a href="index.php?page=order&st=3">Đã Giao Hàng</a></button>
-                            <button class="order-tab"><a href="index.php?page=order&st=4">Đã Hủy</a></button>
+                            <button class="order-tab"><a href="index.php?page=order&st=4">Đã Hủy</a></button> -->
                         </div>
 
                         <!-- Sử lý đơn hàng trống bằng php -->

@@ -1,9 +1,21 @@
+<?php
+$gallery_db = json_decode($one[0]['gallery'], true);
+$gallery = [];
+$html_gallery = '';
+foreach($gallery_db as $img_gallery) {
+    $gallery[] = $img_gallery;
+    $html_gallery .= '<img src="../uploads/'.$img_gallery.'" width="50px" alt="">';
+}
+
+
+?>
+
 <section id="sidebar">
     <a href="index.php" class="brand">
         <img src="../uploads/logo_owenstore.svg" alt="">
     </a>
     <ul class="side-menu top">
-        <li class="active">
+        <li>
             <a href="index.php?page=home">
                 <i class='bx bxs-home'></i>
                 <span class="text">Trang Chủ</span>
@@ -15,7 +27,7 @@
                 <span class="text">Danh Mục</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="index.php?page=product">
                 <i class='bx bxs-window-alt'></i>
                 <span class="text">Sản Phẩm</span>
@@ -100,13 +112,10 @@
                     <label for="id_category">Tên Danh Mục</label>
 
                     <select class="form-control" name="id_category" id="id_category">
-
-
-
                         <?php
-                        if (isset($list_category)) {
-                            foreach ($list_category as $dm) {
-                                echo '<option value="' . $dm['id'] . '">' . $dm['name'] . '</option>';
+                        if(isset($list_category)) {
+                            foreach($list_category as $dm) {
+                                echo '<option value="'.$dm['id'].'">'.$dm['name'].'</option>';
                             }
                         }
                         ?>
@@ -129,17 +138,19 @@
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
-
+                    <?= $html_gallery ?>
                     <input type="hidden" name="gallery[]" id="gallery" class="form-control d-block" multiple
                         value="<?= $one[0]['gallery'] ?>">
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="info"> Mô Tả</label>
-                    <input type="text" name="info" id="info" class="form-control" value="<?= $one[0]['info'] ?>">
+                    <!-- <input type="text" name="info" id="info" class="form-control" value="<?= $one[0]['info'] ?>"> -->
+                    <textarea name="info" id="info" cols="30" rows="10"
+                        class="form-control"><?= $one[0]['info'] ?></textarea>
                 </div>
 
-                <div class="form-group mb-3">
+                <div class=" form-group mb-3">
                     <label for="price">Giá</label>
                     <input type="text" name="price" id="price" class="form-control" value="<?= $one[0]['price'] ?>">
                 </div>
@@ -181,15 +192,14 @@
                         </label>
                         <select class="form-select" name="size" id="size">
                             <option selected disabled hidden>
-
                                 <?php
-                            if (isset($variant)) {
-                                foreach ($variant as $size) {
-                                    echo '<option value="' . $size['id'] . '">' . $size['size'] . '</option>';
+                                if(isset($variant)) {
+                                    foreach($variant as $size) {
+                                        echo '<option value="'.$size['id'].'">'.$size['size'].'</option>';
 
+                                    }
                                 }
-                            }
-                            ?>
+                                ?>
                             </option>
                         </select>
                     </div>
@@ -202,9 +212,9 @@
                         <select class="form-select" name="color" id="color">
 
                             <?php
-                            if (isset($variant)) {
-                                foreach ($variant as $color) {
-                                    echo '<option value="' . $color['id'] . '">' . $color['color'] . '</option>';
+                            if(isset($variant)) {
+                                foreach($variant as $color) {
+                                    echo '<option value="'.$color['id'].'">'.$color['color'].'</option>';
 
                                 }
                             }
@@ -221,9 +231,9 @@
                         <select class="form-select" name="color" id="color">
 
                             <?php
-                            if (isset($variant)) {
-                                foreach ($variant as $quantity) {
-                                    echo '<option value="' . $quantity['id'] . '">' . $quantity['quantity'] . '</option>';
+                            if(isset($variant)) {
+                                foreach($variant as $quantity) {
+                                    echo '<option value="'.$quantity['id'].'">'.$quantity['quantity'].'</option>';
                                 }
                             }
                             ?>

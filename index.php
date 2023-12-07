@@ -215,6 +215,11 @@ if (isset($_GET['page'])) {
                 $detailAddress = $_POST['detailAddress'];
                 $transport = $_POST['transport'];
                 $total_cart = $_SESSION['total_price'];
+                if (isset($_SESSION['discounted'])) {
+                    $voucher = $_SESSION['discounted'];
+                } else {
+                    $voucher = 0;
+                }
 
                 if ($transport == 1) {
                     $total_price = $total_cart + 15000;
@@ -247,7 +252,7 @@ if (isset($_GET['page'])) {
                 if ($payMethod == 1) {
 
                     // insert and get id last insert
-                    $idBill = insert_bill($idUser, $fullname, $email, $phone, $address, $notes, $payMethod, $transport);
+                    $idBill = insert_bill($idUser, $fullname, $email, $phone, $address, $notes, $voucher, $payMethod, $transport);
 
                     if ($_SESSION['cart']) {
                         $carts = $_SESSION['cart'];
@@ -262,11 +267,14 @@ if (isset($_GET['page'])) {
                             insert_bill_detail($idProduct, $idBill, $name, $img, $price, $quantity, $size, $color);
 
                             unset($_SESSION['cart']);
+                            unset($_SESSION['subtotal']);
+                            unset($_SESSION['total_price']);
+                            unset($_SESSION['discounted']);
                             header('location: index.php?page=order-success&idbill=' . $idBill . '');
                         }
                     }
                 } else if ($payMethod == 2) {
-                    $idBill = insert_bill($idUser, $fullname, $email, $phone, $address, $notes, $payMethod, $transport);
+                    $idBill = insert_bill($idUser, $fullname, $email, $phone, $address, $notes, $voucher, $payMethod, $transport);
                     if ($_SESSION['cart']) {
                         $carts = $_SESSION['cart'];
                         foreach ($carts as $product) {
@@ -280,6 +288,9 @@ if (isset($_GET['page'])) {
                             insert_bill_detail($idProduct, $idBill, $name, $img, $price, $quantity, $size, $color);
 
                             unset($_SESSION['cart']);
+                            unset($_SESSION['subtotal']);
+                            unset($_SESSION['total_price']);
+                            unset($_SESSION['discounted']);
                             header('location: index.php?page=order-success&idbill=' . $idBill . '');
                         }
                     }
@@ -382,7 +393,7 @@ if (isset($_GET['page'])) {
                     $orderInfo = "Thanh toán qua MoMo";
                     $amount = round($total_price);
                     $orderId = time() . "";
-                    $redirectUrl = "http://localhost/DA1/index.php?page=momo&iduser=" . $idUser . "&fullname=" . $fullname . "&email=" . $email . "&phone=" . $phone . "&address=" . json_encode($address) . "&notes=" . $notes . "&paymethod=" . $payMethod . "&transport=" . $transport . "";
+                    $redirectUrl = "http://localhost/DA1/index.php?page=momo&iduser=" . $idUser . "&fullname=" . $fullname . "&email=" . $email . "&phone=" . $phone . "&address=" . json_encode($address) . "&notes=" . $notes . "&voucher=" . $voucher . "&paymethod=" . $payMethod . "&transport=" . $transport . "";
                     $ipnUrl = "http://localhost/DA1/index.php?page=momo";
                     $extraData = "";
 
@@ -425,11 +436,12 @@ if (isset($_GET['page'])) {
             //check session user
             if (isset($_SESSION['user'])) {
 
-                $st = isset($_GET['st']) ? $_GET['st'] : null;
+                $order = isset($_GET['order']) ? $_GET['order'] : null;
                 $id_user = $_SESSION['user']['id'];
 
-                $bill_user = get_bill_user($id_user, $st);
+                $bill_user = get_bill_user($id_user, $order);
             }
+
             require_once 'views/order.php';
             break;
 

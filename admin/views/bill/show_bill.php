@@ -1,7 +1,7 @@
 <?php
 $html_all_bill = '';
 foreach ($bills as $bill) {
-
+    $title_bill = 'Tất Cả Đơn Hàng';
     $status = $bill['status'];
 
     if ($status == 0) {
@@ -30,7 +30,8 @@ foreach ($bills as $bill) {
         $payment = 'Đã thanh toán COD';
     }
 
-    $html_all_bill .= '
+    if (!empty($bill)) {
+        $html_all_bill .= '
         <tr>
             <td>' . $bill['fullname'] . '</td>
             <td>' . $bill['created_at'] . '</td>
@@ -39,6 +40,12 @@ foreach ($bills as $bill) {
             <td><a href="index.php?page=bill_details&id=' . $bill['id'] . '">Xem</a></td>
         </tr>
     ';
+    } else {
+        $html_all_bill .= '
+        <tr>
+            <td colspan="5" style="text-align: center;">Không có đơn hàng nào</td>
+        </tr>';
+    }
 }
 ?>
 
@@ -145,10 +152,68 @@ foreach ($bills as $bill) {
 
         <div class="table-data">
             <div class="order">
-                <div class="head">
-                    <h3>Tất Cả Đơn Hàng</h3>
-                    <i class='bx bx-search'></i>
-                    <i class='bx bx-filter'></i>
+                <div class="tab_bill">
+                    <div class="tab_bill_item">
+                        <?php if (!isset($_GET['bill'])) {
+                            echo '<a href="index.php?page=bill" class="active">Tất Cả</a>';
+                        } else {
+                            echo '<a href="index.php?page=bill">Tất Cả</a>';
+                        }
+                        ?>
+                    </div>
+                    <div class="tab_bill_item">
+                        <?php if (isset($_GET['bill']) && $_GET['bill'] == 0) {
+                            echo '<a href="index.php?page=bill&bill=0" class="active">Chưa Xác Nhận</a>';
+                        } else {
+                            echo '<a href="index.php?page=bill&bill=0">Chưa Xác Nhận</a>';
+                        }
+                        ?>
+                    </div>
+                    <div class="tab_bill_item">
+                        <?php
+                        if (isset($_GET['bill']) && $_GET['bill'] == 1) {
+                            echo '<a href="index.php?page=bill&bill=1" class="active">Đã Xác Nhận</a>';
+                        } else {
+                            echo '<a href="index.php?page=bill&bill=1">Đã Xác Nhận</a>';
+                        }
+                        ?>
+                    </div>
+                    <div class="tab_bill_item">
+                        <?php
+                        if (isset($_GET['bill']) && $_GET['bill'] == 2) {
+                            echo '<a href="index.php?page=bill&bill=2" class="active">Đang Giao Hàng</a>';
+                        } else {
+                            echo '<a href="index.php?page=bill&bill=2">Đang Giao Hàng</a>';
+                        }
+                        ?>
+                    </div>
+                    <div class="tab_bill_item">
+                        <?php
+                        if (isset($_GET['bill']) && $_GET['bill'] == 3) {
+                            echo '<a href="index.php?page=bill&bill=3" class="active">Đã Giao Hàng</a>';
+                        } else {
+                            echo '<a href="index.php?page=bill&bill=3">Đã Giao Hàng</a>';
+                        }
+                        ?>
+                    </div>
+                    <div class="tab_bill_item">
+                        <?php
+                        if (isset($_GET['bill']) && $_GET['bill'] == 4) {
+                            echo '<a href="index.php?page=bill&bill=4" class="active">Đã Hủy</a>';
+                        } else {
+                            echo '<a href="index.php?page=bill&bill=4">Đang Hủy</a>';
+                        }
+                        ?>
+                    </div>
+                    <div class="tab_bill_item">
+                        <?php
+                        if (isset($_GET['bill']) && $_GET['bill'] == 5) {
+                            echo '<a href="index.php?page=bill&bill=5" class="active">Thành Công</a>';
+                        } else {
+                            echo '<a href="index.php?page=bill&bill=5">Thành Công</a>';
+                        }
+                        ?>
+                    </div>
                 </div>
                 <p class="err">
                     <?php if (isset($_SESSION['message'])) {

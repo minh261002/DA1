@@ -3,6 +3,7 @@ const sideBar = document.querySelector('.side__bar');
 const overlay = document.querySelector('#overlay');
 const btnCloseSideBar = document.querySelector('.close-btn');
 
+console.log(btnCloseSideBar);
 
 btnOpenSideBar.addEventListener('click', function (e) {
     sideBar.classList.toggle("active");

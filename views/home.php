@@ -291,92 +291,72 @@ $html_view_product = show_product($view_product);
             <div class="list-news">
                 <div class="news-left">
                     <a href="#">
-                        <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16988279259578500.jpg&w=1920&q=75"
-                            alt="">
+                        <img src="uploads/tt2.jpg" alt="">
                     </a>
-                    <a href="#" class="news-title_left">Điểm đặc biệt tại "Ngôi nhà Thiên thần" của Owen Shop</a>
+                    <a href="#" class="news-title_left">Xu hướng áo dài Tết 2024 qua Diễm Thư: Hơi thở truyền thống quý
+                        giá tôn lên nét kiều diễm trong tà áo dài </a>
                     <p class="news-desc">
-                        Trong hành trình 7 năm phát triển, Owen Shop luôn hoạt động trên tiêu chí
-                        “Phụng sự xã hội xuất
-                        sắc”, mang lại những giá trị tốt đẹp đến cộng đồng, tiên phong trong việc xây dựng mô hình việc
-                        làm bền vững cho người khuyết tật và tích cực trong các hoạt động bảo vệ môi trường tại Việt
-                        Nam.
+                        BST áo dài mang theo tinh hoa xưa cùng vẻ đẹp yêu kiều mềm mại, trở thành nguồn cảm
+                        hứng tôn lên cốt cách mỹ nhân cùng phong thái tinh tế.
                     </p>
                 </div>
                 <div class="news-right">
                     <div class="news-item">
                         <a href="#">
-                            <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16988279259578500.jpg&w=1920&q=75"
-                                alt="">
+                            <img src="uploads/tt3.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">Điểm đặc biệt tại "Ngôi nhà Thiên thần" của Owen Shop</a>
+                            <a href="#" class="news-title">QUIETLUXURY: KHI SỰ KHIÊM NHƯỜNG ẨN CHỨA NÉT CAO SANG</a>
                             <p class="news-desc">
-                                Trong hành trình 7 năm phát triển, Owen Shop luôn hoạt động trên tiêu chí
-                                “Phụng sự xã hội xuất
-                                sắc”, mang lại những giá trị tốt đẹp đến cộng đồng, tiên phong trong việc xây dựng mô
-                                hình
-                                việc
-                                làm bền vững cho người khuyết tật và tích cực trong các hoạt động bảo vệ môi trường tại
-                                Việt
-                                Nam.
+                                TQuietluxury của IVY moda mang đến vẻ đẹp riêng biệt một cách thầm lặng. Giống như người
+                                phụ nữ an tĩnh và sâu sắc, họ vẫn luôn dùng trái tim yêu để đối diện với khó khăn, theo
+                                đuổi lối sống tinh tế, tao nhã và chẳng cần chưng diện những họa tiết logo để khẳng định
+                                mình là ai.
                             </p>
                         </div>
                     </div>
                     <div class="news-item">
                         <a href="#">
-                            <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16988279259578500.jpg&w=1920&q=75"
-                                alt="">
+                            <img src="uploads/tt1.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">Điểm đặc biệt tại "Ngôi nhà Thiên thần" của Owen Shop</a>
+                            <a href="#" class="news-title">Những mẫu váy dạ hội giúp phái đẹp nổi bật vào dịp cuối
+                                năm</a>
                             <p class="news-desc">
-                                Trong hành trình 7 năm phát triển, Owen Shop luôn hoạt động trên tiêu chí
-                                “Phụng sự xã hội xuất
-                                sắc”, mang lại những giá trị tốt đẹp đến cộng đồng, tiên phong trong việc xây dựng mô
-                                hình
-                                việc
-                                làm bền vững cho người khuyết tật và tích cực trong các hoạt động bảo vệ môi trường tại
-                                Việt
-                                Nam.
+                                Với BST Artisanal Delicate, mỗi kiệt tác đều được thực hiện thủ công 100% trong vòng ít
+                                nhất 12h - 20h liên tục với những kỹ thuật thêu nổi, cắt tỉa hoa 3D và ước tính có tới
+                                hơn 10.000 viên pha lê, kim sa, hạt cườm siêu nhỏ được đính kết trên mỗi thiết kế để
+                                mang đến sản phẩm thủ công vô cùng hiện đại.
                             </p>
                         </div>
                     </div>
                     <div class="news-item">
                         <a href="#">
-                            <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16988279259578500.jpg&w=1920&q=75"
-                                alt="">
+                            <img src="uploads/tt4.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">Điểm đặc biệt tại "Ngôi nhà Thiên thần" của Owen Shop</a>
+                            <a href="#" class="news-title">BLOSSOMS DELIGHT: KHU VƯỜN TÂM HỒN NGẬP TRÀN NHỮNG ĐÓA HOA NỞ
+                                RỘ</a>
                             <p class="news-desc">
-                                Trong hành trình 7 năm phát triển, Owen Shop luôn hoạt động trên tiêu chí
-                                “Phụng sự xã hội xuất
-                                sắc”, mang lại những giá trị tốt đẹp đến cộng đồng, tiên phong trong việc xây dựng mô
-                                hình
-                                việc
-                                làm bền vững cho người khuyết tật và tích cực trong các hoạt động bảo vệ môi trường tại
-                                Việt
-                                Nam.
+                                Nếu tâm trí bạn được ví như một khu vườn thì những bông hoa tươi thắm là sự bày tỏ rõ
+                                nhất cảm xúc tràn đầy, tích cực bên trong mỗi người. BST mang đến năng lượng tươi mới,
+                                rực rỡ khoe sắc giữa chốn đô thị tấp nập thông qua những thiết kế xu hướng nhất.
                             </p>
                         </div>
                     </div>
                     <div class="news-item">
                         <a href="#">
-                            <img src="https://tokyolife.vn/_next/image?url=https%3A%2F%2Fpm2ec.s3.ap-southeast-1.amazonaws.com%2Fcms%2F16988279259578500.jpg&w=1920&q=75"
-                                alt="">
+                            <img src="uploads/tt5.jpg" alt="">
                         </a>
                         <div class="news-item_content">
-                            <a href="#" class="news-title">Điểm đặc biệt tại "Ngôi nhà Thiên thần" của Owen Shop</a>
+                            <a href="#" class="news-title">SCENT OF THE SEA | HÃY ĐỂ HƯƠNG VỊ CỦA BIỂN ĐÁNH THỨC THANH
+                                ÂM TRONG BẠN</a>
                             <p class="news-desc">
-                                Trong hành trình 7 năm phát triển, Owen Shop luôn hoạt động trên tiêu chí
-                                “Phụng sự xã hội xuất
-                                sắc”, mang lại những giá trị tốt đẹp đến cộng đồng, tiên phong trong việc xây dựng mô
-                                hình
-                                việc
-                                làm bền vững cho người khuyết tật và tích cực trong các hoạt động bảo vệ môi trường tại
-                                Việt
-                                Nam.
+                                Sự êm ái của những con sóng được tái hiện qua đường xếp ly bay bổng cùng với chất liệu
+                                lụa mềm mại. Những đóa hoa rực rỡ hay chi tiết dệt lưới cũng trở thành nguồn cảm hứng
+                                bất tận cho nhà thiết kế. Hương vị mùa hè hiện ra trước mắt, đánh thức mọi giác quan và
+                                mang đến cảm giác thoải mái, tươi mới. Kỳ nghỉ lễ đang đến gần, hãy cùng IVY moda thả
+                                mình vào từng thiết kế, để tìm thấy sự tự do cho tâm hồn!
                             </p>
                         </div>
                     </div>
@@ -413,7 +393,7 @@ $html_view_product = show_product($view_product);
         <div class="certify-content">
             <div class="heading">CHỨNG NHẬN CHÍNH HÃNG</div>
             <div class="certify-container_content">
-                <img src="https://tokyolife.vn/chung-nhan-chinh-hang.png" alt="" class="certify-image">
+                <img src="uploads/chung-nhan-chinh-hang.png" alt="" class="certify-image">
                 <div class="certify-content_right">
                     <h3 class="certify-title">
                         <span>

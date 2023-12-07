@@ -1,11 +1,11 @@
 <style>
-    #file-info {
-        display: none;
-    }
+#file-info {
+    display: none;
+}
 
-    input {
-        display: none;
-    }
+input {
+    display: none;
+}
 </style>
 
 
@@ -105,7 +105,7 @@
             <h3 class="text-center">Thêm Sản Phẩm</h3>
             <form action="index.php?page=add-product" method="post" style="width:500px; margin:0 auto;"
                 class="mt-3 mb-5" enctype="multipart/form-data" onsubmit="return validateForm()">
-                <div class="form-group mb-3">
+                <div class=" form-group mb-3">
                     <label for="id_category">Tên Danh Mục</label>
 
                     <select class="form-control" name="id_category" id="id_category">
@@ -137,7 +137,7 @@
                 <div class="form-group mb-3">
                     <label for="gallery">Bộ sưu tập</label>
                     <input type="file" name="gallery[]" id="gallery" class="form-control d-block" multiple>
-                    <span class="err" id="gelleryErr"></span>
+                    <span class="err" id="galleryErr"></span>
                 </div>
 
                 <div class="form-group mb-3">
@@ -204,87 +204,109 @@
 
 </section>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Lấy các phần tử cần thiết
-        var form = document.querySelector("form");
-        var id_category = document.getElementById("id_category");
-        var name = document.getElementById("name");
-        var img = document.getElementById("img");
-        var gallery = document.getElementById("gallery");
-        var info = document.getElementById("info");
-        var price = document.getElementById("price");
-        var sale = document.getElementById("sale");
-        var view = document.getElementById("view");
-        var hot = document.getElementById("hot");
-        var size = document.getElementById("size");
-        var color = document.getElementById("color");
-        var quantity = document.getElementById("quantity");
+function validateForm() {
+    // Reset errors
+    resetErrors();
 
-        // Xử lý sự kiện khi form được submit
-        form.addEventListener("submit", function (event) {
-            var isValid = true; // Variable to track overall form validity
+    // Validate category
+    var category = document.getElementById('id_category');
+    if (category.value.trim() === '0') {
+        displayError('categoryErr', 'Vui lòng chọn danh mục');
+        category.focus();
+        return false;
+    }
 
-            // Reset error messages
-            resetErrorMessages();
+    // Validate name
+    var name = document.getElementById('name');
+    if (name.value.trim() === '') {
+        displayError('nameErr', 'Vui lòng nhập tên sản phẩm');
+        name.focus();
+        return false;
+    }
+    // Validate image
+    var img = document.getElementById('img');
+    if (img.files.length === 0) {
+        displayError('imgErr', 'Vui lòng chọn hình ảnh');
+        img.focus();
+        return false;
+    }
+    var gallery = document.getElementById('gallery');
+    if (gallery.value.trim() === '') {
+        displayError('galleryErr', 'Vui lòng chọn 4 ảnh chi tiết');
+        gallery.focus();
+        return false;
+    }
 
-            // Kiểm tra rỗng và hiển thị thông báo
-            isValid = validateField(id_category, "Vui lòng chọn danh mục.") && isValid;
-            isValid = validateField(name, "Vui lòng nhập tên sản phẩm.") && isValid;
-            isValid = validateFile(img, "Vui lòng chọn ảnh.") && isValid;
-            isValid = validateFile(gallery, "Vui lòng chọn ảnh cho bộ sưu tập.") && isValid;
-            isValid = validateField(info, "Vui lòng nhập mô tả.") && isValid;
-            isValid = validateField(price, "Vui lòng nhập giá.") && isValid;
-            isValid = validateField(sale, "Vui lòng nhập giảm giá.") && isValid;
-            isValid = validateField(view, "Vui lòng nhập số lượt xem.") && isValid;
-            isValid = validateField(hot, "Vui lòng chọn trạng thái hot.") && isValid;
-            isValid = validateField(size, "Vui lòng nhập size.") && isValid;
-            isValid = validateField(color, "Vui lòng nhập màu sắc.") && isValid;
-            isValid = validateField(quantity, "Vui lòng nhập số lượng.") && isValid;
 
-            // Check if any field is empty and display a general error
-            if (!isValid) {
-                document.getElementById("generalErr").textContent = "Vui lòng điền đầy đủ thông tin.";
-                event.preventDefault(); // Stop the form submission
-            }
-        });
+    var info = document.getElementById('info');
+    if (info.files.length === 0) {
+        displayError('infoErr', 'Vui lòng chọn hình ảnh');
+        info.focus();
+        return false;
+    }
+    // Validate image
+    var price = document.getElementById('price');
+    if (price.files.length === 0) {
+        displayError('priceErr', 'Vui lòng chọn hình ảnh');
+        price.focus();
+        return false;
+    }
+    // Validate image
+    var sale = document.getElementById('sale');
+    if (sale.files.length === 0) {
+        displayError('saleErr', 'Vui lòng chọn hình ảnh');
+        sale.focus();
+        return false;
+    }
+    // Validate image
+    var view = document.getElementById('view');
+    if (view.files.length === 0) {
+        displayError('viewErr', 'Vui lòng chọn hình ảnh');
+        view.focus();
+        return false;
+    }
+    // Validate image
+    var size = document.getElementById('size');
+    if (size.files.length === 0) {
+        displayError('sizeErr', 'Vui lòng chọn hình ảnh');
+        size.focus();
+        return false;
+    }
+    // Validate image
+    var color = document.getElementById('color');
+    if (color.files.length === 0) {
+        displayError('colorErr', 'Vui lòng chọn hình ảnh');
+        color.focus();
+        return false;
+    }
+    // Validate image
+    var quantity = document.getElementById('quantity');
+    if (quantity.files.length === 0) {
+        displayError('quantityErr', 'Vui lòng chọn hình ảnh');
+        quantity.focus();
+        return false;
+    }
+    // Add more validations as needed
 
-        // Add a function to reset error messages on input change
-        function resetErrorMessages() {
-            document.getElementById("categoryErr").textContent = "";
-            document.getElementById("nameErr").textContent = "";
-            document.getElementById("imgErr").textContent = "";
-            document.getElementById("galleryErr").textContent = "";
-            document.getElementById("infoErr").textContent = "";
-            document.getElementById("priceErr").textContent = "";
-            document.getElementById("saleErr").textContent = "";
-            document.getElementById("viewErr").textContent = "";
-            document.getElementById("hotErr").textContent = "";
-            document.getElementById("sizeErr").textContent = "";
-            document.getElementById("colorErr").textContent = "";
-            document.getElementById("quantityErr").textContent = "";
-            document.getElementById("generalErr").textContent = ""; // Clear general error message
-        }
+    // If all validations pass, return true to allow form submission
+    return true;
+}
 
-        // Function to validate a field and display an error message
-        function validateField(field, errorMessage) {
-            if (field.value.trim() === "") {
-                var errorId = field.id + "Err";
-                document.getElementById(errorId).textContent = errorMessage;
-                return false;
-            }
-            return true;
-        }
+// Function to reset error messages
+function resetErrors() {
+    var errorElements = document.getElementsByClassName('err');
+    for (var i = 0; i < errorElements.length; i++) {
+        errorElements[i].innerText = '';
+    }
+}
 
-        // Function to validate a file input and display an error message
-        function validateFile(field, errorMessage) {
-            if (field.files.length === 0) {
-                var errorId = field.id + "Err";
-                document.getElementById(errorId).textContent = errorMessage;
-                return false;
-            }
-            return true;
-        }
-
-        // Other event listeners...
-    });
+// Function to display error message
+function displayError(elementId, message) {
+    var errorElement = document.getElementById(elementId);
+    errorElement.innerText = message;
+}
 </script>
+
+<!-- ... Your existing HTML code ... -->
+
+<!-- ... Your existing HTML code ... -->

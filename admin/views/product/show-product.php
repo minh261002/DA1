@@ -106,7 +106,7 @@
             </thead>
             <?php
             $i = 1;
-            foreach($product as $key => $product) {
+            foreach ($product as $key => $product) {
                 ?>
                 <tbody>
                     <tr>
@@ -116,9 +116,9 @@
                         <td>
                             <?php echo $product['name'] ?>
                         </td>
-                        <td><img src="../Uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
+                        <td><img src="../uploads/<?php echo $product['img'] ?>" alt="" width="50px"></td>
                         <td>
-                            <?php echo number_format($product['price'], 0, ',', '.').'đ' ?>
+                            <?php echo number_format($product['price'], 0, ',', '.') . 'đ' ?>
                         </td>
 
                         <td>

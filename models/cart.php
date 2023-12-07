@@ -71,7 +71,7 @@ function show_Cart()
             $quantity = $pdCart["quantity"];
 
             $html_cart .= "<tr class='cart-row'>
-                <td> <img src='Uploads/{$img}' width='50px'> </td>
+                <td> <img src='uploads/{$img}' width='50px'> </td>
                 <td class='cart-name'>
                     <p>{$name}</p>
                     <p>Kích Thước: <span>{$size}</span></p>

@@ -26,10 +26,12 @@
 
             <div class="form-group form-eye mb-3">
                 <label for="password">Mật Khẩu</label>
-                <input type="password" name="password" class="form-control py-2" id="password">
+                <div class="form-eye">
+                    <input type="password" name="password" class="form-control py-2" id="password">
+                    <i class="fa-solid fa-eye" id="showPassword" style="cursor: pointer;"></i>
+                    <i class="fa-solid fa-eye-slash" id="hidePassword" style="cursor: pointer; display: none;"></i>
+                </div>
                 <span class="err" id="passwordErr"></span>
-                <i class="fa-solid fa-eye" id="showPassword" style="cursor: pointer;"></i>
-                <i class="fa-solid fa-eye-slash" id="hidePassword" style="cursor: pointer; display: none;"></i>
             </div>
 
             <script>

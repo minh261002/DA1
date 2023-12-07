@@ -423,9 +423,9 @@ footer>.container {
 #showPassword,
 #hidePassword {
   position: absolute;
-  top: 75%;
+  top: 50%;
   right: 10px;
-  transform: translateY(-75%);
+  transform: translateY(-50%);
   cursor: pointer;
 }
 

@@ -429,6 +429,42 @@ footer>.container {
   cursor: pointer;
 }
 
+.sticky{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  background-color: #fff;
+  width: 100%;
+  animation: down 0.5s ease-in-out;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.click-top{
+  font-size: 2rem;
+  border: none;
+  outline: none;
+  background: var(--primary-color);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  display: none;
+}
+
+@keyframes down {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
 .btn-form {
   width: 100%;
   border: none;
@@ -2365,6 +2401,7 @@ pre {
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 500;
+  white-space: normal;
 }
 
 .flash-end {

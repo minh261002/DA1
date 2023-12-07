@@ -210,7 +210,22 @@
         Copyright © 2014-2023 owenshop.vn All Rights Reserved.
     </div>
 </footer>
-
+<button class="click-top" id="scrollToTop">
+    <i class='bx bxs-chevrons-up'></i>
+</button>
+<script>
+    window.addEventListener("scroll", function () {
+        if (document.documentElement.scrollTop > 100 || document.body.scrollTop > 100) {
+            document.getElementById("scrollToTop").style.display = "block";
+        } else {
+            document.getElementById("scrollToTop").style.display = "none";
+        }
+    });
+    document.getElementById("scrollToTop").addEventListener("click", function () {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>

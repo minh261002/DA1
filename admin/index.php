@@ -341,9 +341,7 @@ if(isset($_GET['page'])) {
                 $sale = $_POST['sale'];
                 $view = $_POST['view'];
                 $hot = $_POST['hot'];
-                $size = $_POST['size'];
-                $color = $_POST['color'];
-                $quantity = $_POST['quantity'];
+               
                 // Xử lý tải lên ảnh chính
                 $img_path = "";
 
@@ -382,17 +380,17 @@ if(isset($_GET['page'])) {
                 if(empty($message)) {
                     $galleryData = ["images" => $gallery_images];
                     $jsonGallery = json_encode($gallery_images);
-
-                    // Insert product data
-                    try {
-                        $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
-                        pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
-                        echo "Thêm thành công!";
-                    } catch (PDOException $e) {
-                        echo "Thêm thất bại: ".$e->getMessage();
-                    }
-                }
-                header('Location: index.php?page=product');
+                    $id_product = insert_product($id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
+                   
+                    $size = $_POST['size'];
+                    $color = $_POST['color'];
+                    $quantity = $_POST['quantity'];
+                    // Insert data into the 'variant' table
+                    insert_variant($id_product, $size, $color, $quantity);
+                    
+                 }
+                // header('Location: index.php?page=product');
+               
             }
             $variant = get_allvariant();
             $list_category = get_category();
@@ -406,6 +404,7 @@ if(isset($_GET['page'])) {
             if(isset($_GET['id'])) {
                 $id = $_GET['id'];
                 $one = getone_product($id);
+                
             }
             if((isset($_POST['capnhat'])) && ($_POST['capnhat'])) {
                 $id_category = $_POST['id_category'];
@@ -457,21 +456,9 @@ if(isset($_GET['page'])) {
                     $galleryData = ["images" => $gallery_images];
                     $jsonGallery = json_encode($gallery_images);
                     if($image_path != "" && $jsonGallery != "") {
-                        try {
-                            $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-                            pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
-                            echo "Chỉnh sửa thành công";
-                        } catch (PDOException $e) {
-                            echo "Chỉnh Sửa thất bại! ".$e->getMessage();
-                        }
+                        update_product($id, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
                     } else {
-                        try {
-                            $sql = "UPDATE product SET id_category=?, name=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-                            pdo_execute($sql, $id_category, $name, $info, $price, $sale, $view, $hot, $id);
-                            echo "Chỉnh sửa thành công";
-                        } catch (PDOException $e) {
-                            echo "Chỉnh Sửa thất bại! ".$e->getMessage();
-                        }
+                        update_product_noneimg($id,$id_category, $name, $info, $price, $sale, $view, $hot );
                     }
                 }
                 header('Location: index.php?page=product');

@@ -5,8 +5,19 @@ require_once 'pdo.php';
 function insert_product($id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot)
 {
 
-    $sql = "INSERT INTO product(id_product, size, color, quantity) VALUES ((?, ?, ?, ?)";
-    return pdo_last_insert_id($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
+    try {
+        $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
+        return pdo_last_insert_id($sql,$id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
+        echo "Thêm thành công!";
+    } catch (PDOException $e) {
+        echo "Thêm thất bại: ".$e->getMessage();
+    }
+
+}
+function insert_variant($id_product, $size, $color, $quantity){
+    $sql = "INSERT INTO variant(id_product, size, color, quantity) VALUES (?,?,?,?)";
+    pdo_execute($sql,$id_product, $size, $color, $quantity);
+    echo "Thêm thành công variant!";
 }
 
 
@@ -16,16 +27,7 @@ function render_allproduct()
     return pdo_query($sql);
 }
 
-// function add_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot)
-// {
-//     try {
-//         $sql = "INSERT INTO product(id_category, name, img, gallery, info, price, sale, view, hot, created_at) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
-//         pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot);
-//         echo "Thêm thành công !";
-//     } catch (PDOException $e) {
-//         echo "Thêm thất bại: " . $e->getMessage();
-//     }
-// }
+
 
 
 function getone_product($id)
@@ -52,14 +54,25 @@ function admin_hide_product_by_category($category_id)
     return pdo_query($sql, $category_id);
 }
 
-function update_product($id, $id_category, $name, $img, $gallery, $info, $price, $sale, $view, $hot)
+function update_product($id, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot)
 {
     try {
         $sql = "UPDATE product SET id_category=?, name=?, img=?, gallery=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
-        pdo_execute($sql, $id_category, $name, $img, json_encode($gallery, JSON_FORCE_OBJECT), $info, $price, $sale, $view, $hot, $id);
+        pdo_execute($sql, $id_category, $name, $img_path, $jsonGallery, $info, $price, $sale, $view, $hot, $id);
         echo "Chỉnh sửa thành công";
     } catch (PDOException $e) {
-        echo "Chỉnh Sửa thất bại! " . $e->getMessage();
+        echo "Chỉnh Sửa thất bại! ".$e->getMessage();
+    }
+  
+    
+}
+function update_product_noneimg($id,$id_category, $name, $info, $price, $sale, $view, $hot ){
+    try {
+        $sql = "UPDATE product SET id_category=?, name=?, info=?, price=?, sale=?, view=?, hot=?, created_at=NOW(), updated_at=NOW() WHERE id=?";
+        pdo_execute($sql, $id_category, $name, $info, $price, $sale, $view, $hot, $id);
+        echo "Chỉnh sửa thành công";
+    } catch (PDOException $e) {
+        echo "Chỉnh Sửa thất bại! ".$e->getMessage();
     }
 }
 
@@ -74,6 +87,7 @@ function del_sp($id)
         pdo_execute($sql, $id);
     }
 }
+
 function get_new_product()
 {
     $currentDateTime = date('Y-m-d H:i:s');

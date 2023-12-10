@@ -855,7 +855,15 @@ input[type="radio"]:checked+label {
 
 .product-page .category li {
   padding: 10px 0;
-  border-bottom: 1px solid #f5f5f5;
+}
+
+.category li a {
+  display: inline-block;
+}
+
+.category li a.active {
+  color: #c92027;
+  border-bottom: 2px solid #c92027;
 }
 
 .product-page .category li a:hover {
@@ -2210,72 +2218,6 @@ header.header__mobile {
 
 .info-admin>.sub-menu-user {
   padding: 12px;
-}
-
-.counter {
-  gap: 32px;
-}
-
-
-.counter-product {
-  background: #4caf50;
-  color: #fff;
-  justify-content: center;
-  gap: 24px;
-  border-radius: 8px;
-  padding: 24px;
-}
-
-.counter-category {
-  background: #1976d2;
-  color: #fff;
-  justify-content: center;
-  gap: 24px;
-  border-radius: 8px;
-  padding: 24px;
-
-}
-
-.counter-user {
-  background: #ef0303;
-  color: #fff;
-  justify-content: center;
-  gap: 24px;
-  border-radius: 8px;
-  padding: 24px;
-
-}
-
-.counter-bill {
-  background: rgb(54, 104, 117);
-  color: #fff;
-  justify-content: center;
-  gap: 24px;
-  border-radius: 8px;
-  padding: 24px;
-
-}
-
-.counter-product svg,
-.counter-category svg,
-.counter-user svg,
-.counter-bill svg {
-  width: 30%;
-}
-
-.chart-other {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 24px 0;
-}
-
-.box-counter {
-  text-align: center;
-}
-
-.box-counter p {
-  font-size: 18px;
-  font-weight: 600;
 }
 
 /* swiper detail product */

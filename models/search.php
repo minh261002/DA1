@@ -27,7 +27,7 @@ if (isset($_GET["search"])) {
                     <tr>
                         <td>' . $id . '</td>
                         <td>' . $name . '</td>
-                        <td><img src="Uploads/' . $img . '" width="30px"></td>
+                        <td><img src="uploads/' . $img . '" width="30px"></td>
                         <td><a href="index.php?page=details&id=' . $id . '">Xem chi tiết</a></td>
                     </tr>
                 ';

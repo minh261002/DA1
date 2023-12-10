@@ -1,12 +1,22 @@
 <?php
 $html_category = '';
 
+if (!isset($_GET['id'])) {
+    $html_category .= '<li><a class="active" href="index.php?page=product">Tất Cả Sản Phẩm</a></li>';
+} else {
+    $html_category .= '<li><a href="index.php?page=product">Tất Cả Sản Phẩm</a></li>';
+}
+
 foreach ($list_category as $ct) {
     extract($ct);
-    $html_category .= '
-        <li><a href = "index.php?page=product&id=' . $id . '">' . $name . '</a></li>
-    ';
+
+    if (isset($_GET['id']) && $_GET['id'] == $id) {
+        $html_category .= '<li><a class="active" href="index.php?page=product&id=' . $id . '">' . $name . '</a></li>';
+    } else {
+        $html_category .= '<li><a href="index.php?page=product&id=' . $id . '">' . $name . '</a></li>';
+    }
 }
+
 $html_product = show_product($all_product);
 
 if (isset($_GET['id'])) {
@@ -22,7 +32,6 @@ if (isset($_GET['id'])) {
     <section class="product-page my-5">
         <div class="container">
             <ul class="category">
-                <li><a href="index.php?page=product">Tất cả sản phẩm</a></li>
                 <?= $html_category ?>
             </ul>
 

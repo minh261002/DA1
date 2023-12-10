@@ -18,11 +18,11 @@ li {
 	--poppins: 'Poppins', sans-serif;
 	--lato: 'Lato', sans-serif;
 
-	--light: #F9F9F9;
+	--light: #fff;
 	--blue: #3C91E6;
 	--light-blue: #CFE8FF;
 	--grey: #eee;
-	--dark-grey: #AAAAAA;
+	--dark-grey: #f5f5f5;
 	--dark: #342E37;
 	--red: #DB504A;
 	--yellow: #FFCE26;
@@ -733,7 +733,7 @@ i.success{
 	object-fit: cover;
 }
 #content main .table-data .order table tbody tr:hover {
-	background: var(--grey);
+	background: #fff;
 }
 #content main .table-data .order table tr td .status {
 	font-size: 10px;

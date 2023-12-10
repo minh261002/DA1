@@ -7,8 +7,6 @@ if (!isset($_SESSION["cart"])) {
     $_SESSION["total_order"] = 0;
 }
 
-
-
 //connect db
 require_once "models/pdo.php";
 //user

@@ -57,8 +57,8 @@
 
         to {
             box-shadow: inset -3px 0px 0px transparent;
-        }
-    }
+        }    
+    } 
 </style>
 
 <div id="main">

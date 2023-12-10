@@ -107,7 +107,7 @@
             <?php
             $i = 1;
             foreach ($product as $key => $product) {
-                ?>
+            ?>
                 <tbody>
                     <tr>
                         <td>
@@ -124,13 +124,10 @@
                         <td>
                             <?php echo $product['created_at'] ?>
                         </td>
-                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i
-                                    class="bx bx-edit"></i></a><a
-                                href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i
-                                    class="bx bx-trash"></i></a></td>
+                        <td><a href="index.php?page=update-product&id=<?php echo $product['id'] ?>"><i class="bx bx-edit"></i></a><a href="index.php?page=del-product&id=<?php echo $product['id'] ?>"><i class="bx bx-trash"></i></a></td>
                     </tr>
                 </tbody>
-                <?php
+            <?php
                 $i++;
             }
             ?>

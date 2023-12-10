@@ -119,28 +119,29 @@ if (isset($one[0]['updated_at'])) {
 
         <div class="admin_user">
             <h5 class="m-4">Thêm Tài Khoản Mới</h5>
-            <form action="index.php?page=create-user" method="POST" class="form-update" enctype="multipart/form-data">
+            <form action="index.php?page=create-user" method="POST" class="form-update" enctype="multipart/form-data"
+                onsubmit="return validateForm()">
                 <div class="update_avatar">
                     <img src="../uploads/default_user.png" width="80px" id="previewAvatar">
                     <br> <label for="avatar" class="chs-img">Chọn Ảnh</label>
                     <input type="file" name="avatar" id="avatar">
 
                     <script>
-                        const fileAvatar = document.getElementById('avatar');
-                        const previewAvatar = document.getElementById('previewAvatar');
+                    const fileAvatar = document.getElementById('avatar');
+                    const previewAvatar = document.getElementById('previewAvatar');
 
-                        fileAvatar.addEventListener('change', function () {
-                            const file = fileAvatar.files[0];
+                    fileAvatar.addEventListener('change', function() {
+                        const file = fileAvatar.files[0];
 
-                            if (file) {
-                                const reader = new FileReader();
-                                reader.onload = function (e) {
-                                    previewAvatar.src = e.target.result;
-                                };
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                previewAvatar.src = e.target.result;
+                            };
 
-                                reader.readAsDataURL(file);
-                            }
-                        });
+                            reader.readAsDataURL(file);
+                        }
+                    });
                     </script>
                 </div>
 
@@ -166,21 +167,21 @@ if (isset($one[0]['updated_at'])) {
                         </div>
 
                         <script>
-                            const passwordInput = document.getElementById('password');
-                            const showPasswordIcon = document.getElementById('showPassword');
-                            const hidePasswordIcon = document.getElementById('hidePassword');
+                        const passwordInput = document.getElementById('password');
+                        const showPasswordIcon = document.getElementById('showPassword');
+                        const hidePasswordIcon = document.getElementById('hidePassword');
 
-                            showPasswordIcon.addEventListener('click', function () {
-                                passwordInput.type = 'text';
-                                showPasswordIcon.style.display = 'none';
-                                hidePasswordIcon.style.display = 'inline-block';
-                            });
+                        showPasswordIcon.addEventListener('click', function() {
+                            passwordInput.type = 'text';
+                            showPasswordIcon.style.display = 'none';
+                            hidePasswordIcon.style.display = 'inline-block';
+                        });
 
-                            hidePasswordIcon.addEventListener('click', function () {
-                                passwordInput.type = 'password';
-                                hidePasswordIcon.style.display = 'none';
-                                showPasswordIcon.style.display = 'inline-block';
-                            });
+                        hidePasswordIcon.addEventListener('click', function() {
+                            passwordInput.type = 'password';
+                            hidePasswordIcon.style.display = 'none';
+                            showPasswordIcon.style.display = 'inline-block';
+                        });
                         </script>
                     </div>
 
@@ -279,100 +280,130 @@ if (isset($one[0]['updated_at'])) {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
-    var citis = document.getElementById("city");
-    var districts = document.getElementById("district");
-    var wards = document.getElementById("ward");
-    var Parameter = {
-        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-        method: "GET",
-        responseType: "application/json",
-    };
-    var promise = axios(Parameter);
-    promise.then(function (result) {
-        renderCity(result.data);
-    });
+var citis = document.getElementById("city");
+var districts = document.getElementById("district");
+var wards = document.getElementById("ward");
+var Parameter = {
+    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+    method: "GET",
+    responseType: "application/json",
+};
+var promise = axios(Parameter);
+promise.then(function(result) {
+    renderCity(result.data);
+});
 
-    function renderCity(data) {
-        for (const x of data) {
-            var opt = document.createElement('option');
-            opt.value = x.Name;
-            opt.text = x.Name;
-            opt.setAttribute('data-id', x.Id);
-            citis.options.add(opt);
-        }
-        citis.onchange = function () {
-            district.length = 1;
-            ward.length = 1;
-            if (this.options[this.selectedIndex].dataset.id != "") {
-                const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
-
-                for (const k of result[0].Districts) {
-                    var opt = document.createElement('option');
-                    opt.value = k.Name;
-                    opt.text = k.Name;
-                    opt.setAttribute('data-id', k.Id);
-                    district.options.add(opt);
-                }
-            }
-        };
-        district.onchange = function () {
-            ward.length = 1;
-            const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
-            if (this.options[this.selectedIndex].dataset.id != "") {
-                const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex]
-                    .dataset
-                    .id)[0].Wards;
-
-                for (const w of dataWards) {
-                    var opt = document.createElement('option');
-                    opt.value = w.Name;
-                    opt.text = w.Name;
-                    opt.setAttribute('data-id', w.Id);
-                    wards.options.add(opt);
-                }
-            }
-        };
+function renderCity(data) {
+    for (const x of data) {
+        var opt = document.createElement('option');
+        opt.value = x.Name;
+        opt.text = x.Name;
+        opt.setAttribute('data-id', x.Id);
+        citis.options.add(opt);
     }
-    document.addEventListener('DOMContentLoaded', function () {
-        var form = document.querySelector('form');
-        form.addEventListener('submit', function (event) {
-            var errors = [];
+    citis.onchange = function() {
+        district.length = 1;
+        ward.length = 1;
+        if (this.options[this.selectedIndex].dataset.id != "") {
+            const result = data.filter(n => n.Id === this.options[this.selectedIndex].dataset.id);
 
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            var fullname = document.getElementById('fullname').value;
-            var email = document.getElementById('email').value;
-            var phone = document.getElementById('phone').value;
-            var address = document.getElementById('detail').value; // Updated to use 'detail' for address
-
-            // Check if fields are empty
-            if (username === '' || password === '' || fullname === '' || email === '' || phone === '' ||
-                address === '') {
-                errors.push('Vui lòng điền đầy đủ thông tin.');
+            for (const k of result[0].Districts) {
+                var opt = document.createElement('option');
+                opt.value = k.Name;
+                opt.text = k.Name;
+                opt.setAttribute('data-id', k.Id);
+                district.options.add(opt);
             }
+        }
+    };
+    district.onchange = function() {
+        ward.length = 1;
+        const dataCity = data.filter((n) => n.Id === citis.options[citis.selectedIndex].dataset.id);
+        if (this.options[this.selectedIndex].dataset.id != "") {
+            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.options[this.selectedIndex]
+                .dataset
+                .id)[0].Wards;
 
-            // Check password length
-            if (password.length < 6) {
-                errors.push('Mật khẩu phải có ít nhất 6 ký tự.');
+            for (const w of dataWards) {
+                var opt = document.createElement('option');
+                opt.value = w.Name;
+                opt.text = w.Name;
+                opt.setAttribute('data-id', w.Id);
+                wards.options.add(opt);
             }
+        }
+    };
+}
 
-            // Check email format
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                errors.push('Địa chỉ email không hợp lệ.');
-            }
+function validateForm() {
+    // Validate username
+    var username = document.getElementById('username');
+    if (username.value.trim() === '') {
+        alert('Vui lòng nhập tên đăng nhập');
+        username.focus();
+        return false;
+    }
 
-            // Check phone number format (10 digits)
-            var phoneRegex = /^\d{10}$/;
-            if (!phoneRegex.test(phone)) {
-                errors.push('Số điện thoại phải có 10 chữ số.');
-            }
+    // Validate password
+    var password = document.getElementById('password');
+    if (password.value.trim() === '') {
+        alert('Vui lòng nhập mật khẩu');
+        password.focus();
+        return false;
+    }
 
-            // Display errors or submit the form
-            if (errors.length > 0) {
-                event.preventDefault(); // Prevent form submission
-                alert(errors.join('\n')); // Display all errors
-            }
-        });
-    });
+    // Validate email
+    var email = document.getElementById('email');
+    if (email.value.trim() === '' || !validateEmail(email.value)) {
+        alert('Vui lòng nhập một địa chỉ email hợp lệ');
+        email.focus();
+        return false;
+    }
+
+    // Validate address fields (province, district, ward, detail)
+    var province = document.getElementById('city');
+    var district = document.getElementById('district');
+    var ward = document.getElementById('ward');
+    var detail = document.getElementById('detail');
+    if (province.value.trim() === '' || district.value.trim() === '' || ward.value.trim() === '' || detail.value
+        .trim() === '') {
+        alert('Vui lòng điền đầy đủ thông tin địa chỉ');
+        province.focus();
+        return false;
+    }
+    // Validate date of birth
+    var dateOfBirth = document.getElementById('dateOfBirth');
+    if (dateOfBirth.value.trim() === '') {
+        alert('Vui lòng chọn ngày sinh');
+        dateOfBirth.focus();
+        return false;
+    }
+
+    // Validate gender
+    var gender = document.getElementById('gender');
+    if (gender.value.trim() === '0') {
+        alert('Vui lòng chọn giới tính');
+        gender.focus();
+        return false;
+    }
+
+    // Validate gender
+    var gender = document.getElementById('gender');
+    if (gender.value.trim() === '0') {
+        alert('Vui lòng chọn giới tính');
+        gender.focus();
+        return false;
+    }
+
+    // Add more validations as needed
+
+    // If all validations pass, return true to allow form submission
+    return true;
+}
+
+// Function to validate email format
+function validateEmail(email) {
+    var regex = /^\S+@\S+\.\S+$/;
+    return regex.test(email);
+}
 </script>
